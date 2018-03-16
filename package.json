@@ -24,7 +24,7 @@
       },
       {
         "permissionName": "module.vendors.all",
-        "displayName": "All module-vendors perms",
+        "displayName": "Vendors: all permissions",
         "description": "All permissions for the vendors module",
         "subPermissions": [
           "module.vendors.enabled"
