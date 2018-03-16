@@ -21,6 +21,15 @@
       {
         "permissionName": "module.vendors.enabled",
         "displayName": "UI: Vendors module is enabled"
+      },
+      {
+        "permissionName": "module.vendors.all",
+        "displayName": "Vendors: all permissions",
+        "description": "All permissions for the vendors module",
+        "subPermissions": [
+          "module.vendors.enabled"
+        ],
+        "visible": true
       }
     ]
   },
