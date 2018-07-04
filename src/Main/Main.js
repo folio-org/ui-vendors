@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import moment from 'moment-timezone';
+import FormatTime from '../Utils/FormatTime';
 // Folio
 import SearchAndSort from '@folio/stripes-smart-components/lib/SearchAndSort';
 import { filters2cql } from '@folio/stripes-components/lib/FilterGroups';
@@ -26,6 +28,7 @@ class Main extends Component {
   }
 
   static manifest = Object.freeze({
+    initializedFilterConfig: { initialValue: false },
     query: {
       initialValue: {
         query: '',
@@ -110,13 +113,13 @@ class Main extends Component {
       initialValue: {
         paymentMethodDD: [
           { label: '-- Select --', value: '' },
-          { label: 'Cash', value: 'cash' },
-          { label: 'Credit Card/P-Card', value: 'credit_card_p_card' },
-          { label: 'EFT', value: 'eft' },
-          { label: 'Deposit Account', value: 'deposit_account' },
-          { label: 'Physical Check', value: 'physical_check' },
-          { label: 'Bank Draft', value: 'bank_draft' },
-          { label: 'Internal Transfer', value: 'internal transfer' },
+          { label: 'Cash', value: 'Cash' },
+          { label: 'Credit Card/P-Card', value: 'Credit Card P Card' },
+          { label: 'EFT', value: 'EFT' },
+          { label: 'Deposit Account', value: 'Deposit Account' },
+          { label: 'Physical Check', value: 'Physical_check' },
+          { label: 'Bank Draft', value: 'Bank Draft' },
+          { label: 'Internal Transfer', value: 'Internal Transfer' },
           { label: 'Other', value: 'other' },
         ],
         vendorEdiCodeDD: [
@@ -202,37 +205,27 @@ class Main extends Component {
         ],
       }
     },
-    CountryList: [],
-    LanguageList: []
+    CountryList: { initialValue: CountryList },
+    LanguageList: { initialValue: LanguageList }
   });
 
   componentWillUpdate() {
-    const fcCountry = filterConfig.find(group => group.name === 'country');
-    const fcLangugage = filterConfig.find(group => group.name === 'language');
-    const fcCountryLength = fcCountry.values.length;
-    const fcLangugageLength = fcLangugage.values.length;
-
-    if (fcCountryLength === 0) {
-      const CL = CountryList.map(item => ({ name: item.label, cql: item.value }));
-      fcCountry.values = CL;
-    }
-    if (fcLangugageLength === 0) {
-      const LL = LanguageList.map(item => ({ name: item.label, cql: item.value }));
-      fcCountry.values = LL;
-    }
-
-    // Update Country List and Language List
-    const propsCL = this.props.resources.CountryList || [];
-    const propsLL = this.props.resources.LanguageList || [];
-    if (!propsCL.length && !propsLL.length) {
-      this.props.mutator.CountryList.replace(CountryList);
-      this.props.mutator.LanguageList.replace(LanguageList);
+    const langFilter = filterConfig.find(group => group.name === 'language');
+    const countryFilter = filterConfig.find(group => group.name === 'country');
+    if (langFilter.values.length === 0 && countryFilter.values.length === 0) {
+      langFilter.values = LanguageList.map(rec => ({ name: rec.label, cql: rec.value }));
+      countryFilter.values = CountryList.map(rec => ({ name: rec.label, cql: rec.value }));
+      this.props.mutator.initializedFilterConfig.replace(true);
     }
   }
 
-  create = (ledgerdata) => {
+  create = (data) => {
     const { mutator } = this.props;
-    mutator.records.POST(ledgerdata).then(newLedger => {
+    // Convert time
+    const time = FormatTime(data, 'post');
+    if (time) { data.edi.edi_job.time = time; }
+
+    mutator.records.POST(data).then(newLedger => {
       mutator.query.update({
         _path: `/vendors/view/${newLedger.id}`,
         layer: null
@@ -277,10 +270,10 @@ class Main extends Component {
             parentMutator={this.props.mutator}
             detailProps={this.props.stripes}
             stripes={this.stripes}
-            searchableIndexes={searchableIndexes}
-            selectedIndex={_.get(this.props.resources.query, 'qindex')}
-            searchableIndexesPlaceholder={null}
-            onChangeIndex={this.onChangeIndex}
+            // searchableIndexes={searchableIndexes}
+            // selectedIndex={_.get(this.props.resources.query, 'qindex')}
+            // searchableIndexesPlaceholder={null}
+            // onChangeIndex={this.onChangeIndex}
           />
         }
       </div>

@@ -13,7 +13,9 @@ class EdiInformationView extends React.Component {
 
   render() {
     const { initialValues } = this.props;
-    const dataVal = initialValues !== null ? initialValues.edi : false;
+    const dataVal = initialValues.edi || false;
+    const ediFtp = initialValues.edi ? initialValues.edi.edi_ftp : null;
+    const ediScheduling = initialValues.edi ? initialValues.edi.edi_job : null;
     if (dataVal) {
       return (
         <div className={css.horizontalLine}>
@@ -72,92 +74,112 @@ class EdiInformationView extends React.Component {
               </Col>
             </Row>
           }
-          {dataVal &&
+          {ediFtp &&
             <Row>
               <Col xs={12}>
                 <h4 className={css.title}>FTP Details</h4>
               </Col>
               <Col xs={3}>
-                <KeyValue label="EDI FTP" value={_.get(dataVal, ['edi_ftp.ftp_format'])} />
+                <KeyValue label="EDI FTP" value={_.get(ediFtp, ['ftp_format'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Server Address" value={_.get(dataVal, ['edi_ftp.server_address'])} />
+                <KeyValue label="Server Address" value={_.get(ediFtp, ['server_address'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Username" value={_.get(dataVal, ['edi_ftp.username'])} />
+                <KeyValue label="Username" value={_.get(ediFtp, ['username'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Password" value={_.get(dataVal, ['edi_ftp.password'])} />
+                <KeyValue label="Password" value={_.get(ediFtp, ['password'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="FTP Mode" value={_.get(dataVal, ['edi_ftp.ftp_mode'])} />
+                <KeyValue label="FTP Mode" value={_.get(ediFtp, ['ftp_mode'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="FTP Connection Mode" value={_.get(dataVal, ['edi_ftp.ftp_conn_mode'])} />
+                <KeyValue label="FTP Connection Mode" value={_.get(ediFtp, ['ftp_conn_mode'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="FTP Port" value={_.toString(_.get(dataVal, ['edi_ftp.ftp_port']))} />
+                <KeyValue label="FTP Port" value={_.toString(_.get(ediFtp, ['ftp_port']))} />
               </Col>
               <Col xs={6}>
-                <KeyValue label="Order Directory" value={_.get(dataVal, ['edi_ftp.order_directory'])} />
+                <KeyValue label="Order Directory" value={_.get(ediFtp, ['order_directory'])} />
               </Col>
               <Col xs={6}>
-                <KeyValue label="Invoice Directory" value={_.get(dataVal, ['edi_ftp.invoice_directory'])} />
+                <KeyValue label="Invoice Directory" value={_.get(ediFtp, ['invoice_directory'])} />
               </Col>
               <Col xs={12}>
-                <KeyValue label="Notes" value={_.get(dataVal, ['edi_ftp.notes'])} />
+                <KeyValue label="Notes" value={_.get(ediFtp, ['notes'])} />
               </Col>
               <Col xs={12}>
                 <hr />
               </Col>
             </Row>
           }
-          {dataVal &&
+          {ediScheduling &&
             <Row>
               <Col xs={12}>
-                <h4 className={css.title}>FTP Details</h4>
+                <h4 className={css.title}>Scheduling</h4>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Schedule EDI" value={_.toString(_.get(dataVal, ['edi_job.schedule_edi']))} />
+                <KeyValue label="Schedule EDI">
+                  <BoolToCheckbox name="Schedule EDI" value={_.toString(_.get(ediScheduling, ['schedule_edi']))} />
+                </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Date" value={_.get(dataVal, ['edi_job.date'], '')} />
+                <KeyValue label="Date" value={_.get(ediScheduling, ['date'], '')} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Time" value={_.get(dataVal, ['edi_job.time'], '')} />
+                <KeyValue label="Time" value={_.get(ediScheduling, ['time'], '')} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Monday" value={_.toString(_.get(dataVal, ['edi_job.is_monday']))} />
+                <KeyValue label="Send to Emails" value={_.get(ediScheduling, ['send_to_emails'], '')} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Tuesday" value={_.toString(_.get(dataVal, ['edi_job.is_tuesday']))} />
+                <KeyValue label="Notify All EDI" value={_.toString(_.get(ediScheduling, ['notify_all_edi']))} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Wednesday" value={_.toString(_.get(dataVal, ['edi_job.is_wednesday']))} />
+                <KeyValue label="Notify Invoice Only">
+                  <BoolToCheckbox name="Notify Invoice Only" value={_.toString(_.get(ediScheduling, ['notify_invoice_only']))} />
+                </KeyValue>
+              </Col>
+              <Col xs={6}>
+                <KeyValue label="Notify Error Only">
+                  <BoolToCheckbox name="Notify Error Only" value={_.toString(_.get(ediScheduling, ['notify_error_only']))} />
+                </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Thursday" value={_.toString(_.get(dataVal, ['edi_job.is_thursday']))} />
+                <KeyValue label="Monday">
+                  <BoolToCheckbox name="Monday" value={_.toString(_.get(ediScheduling, ['is_monday']))} />
+                </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Friday" value={_.toString(_.get(dataVal, ['edi_job.is_friday']))} />
+                <KeyValue label="Tuesday">
+                  <BoolToCheckbox name="Tuesday" value={_.toString(_.get(ediScheduling, ['is_tuesday']))} />
+                </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Saturday" value={_.toString(_.get(dataVal, ['edi_job.is_saturday']))} />
+                <KeyValue label="Wednesday">
+                  <BoolToCheckbox name="Wednesday" value={_.toString(_.get(ediScheduling, ['is_wednesday']))} />
+                </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Sunday" value={_.toString(_.get(dataVal, ['edi_job.is_sunday']))} />
+                <KeyValue label="Thursday">
+                  <BoolToCheckbox name="Thursday" value={_.toString(_.get(ediScheduling, ['is_thursday']))} />
+                </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Send to Emails" value={_.get(dataVal, ['edi_job.send_to_emails'], '')} />
+                <KeyValue label="Friday">
+                  <BoolToCheckbox name="Friday" value={_.toString(_.get(ediScheduling, ['is_friday']))} />
+                </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Notify All EDI" value={_.toString(_.get(dataVal, ['edi_job.notify_all_edi']))} />
+                <KeyValue label="Saturday">
+                  <BoolToCheckbox name="Saturday" value={_.toString(_.get(ediScheduling, ['is_saturday']))} />
+                </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Notify Invoice Only" value={_.toString(_.get(dataVal, ['edi_job.notify_invoice_only']))} />
-              </Col>
-              <Col xs={3}>
-                <KeyValue label="Notify Error Only" value={_.toString(_.get(dataVal, ['edi_job.notify_error_only']))} />
+                <KeyValue label="Sunday">
+                  <BoolToCheckbox name="Sunday" value={_.toString(_.get(ediScheduling, ['is_sunday']))} />
+                </KeyValue>
               </Col>
             </Row>
           }

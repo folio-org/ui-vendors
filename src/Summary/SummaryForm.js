@@ -69,7 +69,7 @@ class SummaryForm extends React.Component {
         </Col>
         <Col xs={12} md={6}>
           <Field label="Code" name="code" id="code" component={TextField} fullWidth />
-          <Field label="ERP Code" name="erp_code" id="erp_code" component={TextField} fullWidth />
+          <Field label="Accounting Code" name="erp_code" id="erp_code" component={TextField} fullWidth />
           <Field label="Status" name="vendor_status" id="vendor_status" component={Select} fullWidth dataOptions={statusOptions} />
           <Field label="Default Language" name="language" id="language" component={Select} fullWidth dataOptions={this.props.dropdownLanguages} />
         </Col>

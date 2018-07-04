@@ -90,7 +90,7 @@ class InterfaceForm extends Component {
                       <Field label="Delivery Method" name={`${elem}.delivery_method`} id={`${elem}.delivery_method`} component={Select} fullWidth dataOptions={deliveryMethodDD} />
                     </Col>
                     <Col xs={12}>
-                      <Field label="Format" name={`${elem}.format`} id={`${elem}.format`} component={Select} fullWidth dataOptions={formatDD} />
+                      <Field label="Stattictics Format" name={`${elem}.statistics_format`} id={`${elem}.statistics_format`} component={Select} fullWidth dataOptions={formatDD} />
                     </Col>
                     <Col xs={12}>
                       <Field label="Locally Stored" name={`${elem}.locally_stored`} id={`${elem}.locally_stored`} component={TextField} fullWidth />

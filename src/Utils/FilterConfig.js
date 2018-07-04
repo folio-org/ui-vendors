@@ -1,4 +1,9 @@
+// import LanguageList from './Languages';
+// import CountryList from './Country';
 const Filters = () => {
+  // const CL = CountryList.map(item => ({ name: item.label, cql: item.value }));
+  // const LL = LanguageList.map(item => ({ name: item.label, cql: item.value }));
+
   return [
     {
       label: 'Address Category',

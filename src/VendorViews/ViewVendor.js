@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import queryString from 'query-string';
+import moment from 'moment-timezone';
 // Folio
 import { AccordionSet, Accordion, ExpandAllButton } from '@folio/stripes-components/lib/Accordion';
 import Pane from '@folio/stripes-components/lib/Pane';
@@ -21,6 +22,7 @@ import { EdiInformationView } from '../EdiInformation';
 import { InterfaceView } from '../Interface';
 import { AccountsView } from '../Accounts';
 import PaneDetails from '../PaneDetails';
+import FormatTime from '../Utils/FormatTime';
 
 class ViewVendor extends Component {
   static propTypes = {
@@ -61,7 +63,12 @@ class ViewVendor extends Component {
     const { parentResources, match: { params: { id } } } = this.props;
     const vendors = (parentResources.records || {}).records || [];
     if (!vendors || vendors.length === 0 || !id) return null;
-    return vendors.find(u => u.id === id);
+    const data = vendors.find(u => u.id === id);
+
+    const time = FormatTime(data, 'get');
+    if (time) { data.edi.edi_job.time = time; }
+
+    return data;
   }
 
   onToggleSection({ id }) {
@@ -85,6 +92,10 @@ class ViewVendor extends Component {
       delete item.address.primaryAddress;
       return item;
     });
+    // Update time
+    const time = FormatTime(data, 'post');
+    if (time) { data.edi.edi_job.time = time; }
+    // Mutate
     this.props.parentMutator.records.PUT(data).then(() => {
       this.props.onCloseEdit();
     });

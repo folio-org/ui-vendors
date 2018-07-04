@@ -6,7 +6,6 @@ import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
 import Button from '@folio/stripes-components/lib/Button';
 import stripesForm from '@folio/stripes-form';
 import { FormVendor } from '../VendorViews';
-import { arrayToObject, convertValueToLabel } from '../Utils/Convert';
 
 class PaneDetails extends React.Component {
   static propTypes = {
@@ -67,8 +66,7 @@ class PaneDetails extends React.Component {
     // const data = (parentResources.vendorCategory || {}).records || [];
     const data = (parentResources.dropdown || {}).categoriesDD || [];
     if (!data || data.length === 0) return null;
-    const newData = convertValueToLabel(data);
-    return newData;
+    return data;
   }
 
   getContactCategory() {
@@ -76,8 +74,7 @@ class PaneDetails extends React.Component {
     // const data = (parentResources.vendorContactCategory || {}).records || [];
     const data = (parentResources.dropdown || {}).categoriesDD || [];
     if (!data || data.length === 0) return null;
-    const newData = convertValueToLabel(data);
-    return newData;
+    return data;
   }
 
   getCountryList() {
@@ -95,9 +92,15 @@ class PaneDetails extends React.Component {
   }
 
   getCurrencies() {
+    const objCur = [];
     const arr = ['USD', 'CAD', 'GBP', 'EUR'];
-    const dropdownDurrencies = arrayToObject(arr);
-    return dropdownDurrencies;
+    for (let i = 0; i < arr.length; ++i) {
+      objCur.push({ label: arr[i], value: arr[i] });
+      if ((arr.length - 1) === i) {
+        return objCur;
+      }
+    }
+    return objCur;
   }
 
   convertValueToLabel(resourcesPath) {

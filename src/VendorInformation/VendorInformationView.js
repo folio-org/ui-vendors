@@ -41,7 +41,7 @@ class VendorInformationView extends React.Component {
             </KeyValue>
           </Col>
           <Col xs={3}>
-            <KeyValue label="vendor_currencies" value={_.toString(_.map(dataVal.vendor_currencies))} />
+            <KeyValue label="Vendor Currencies" value={_.toString(_.map(dataVal.vendor_currencies))} />
           </Col>
           <Col xs={12}>
             <hr />

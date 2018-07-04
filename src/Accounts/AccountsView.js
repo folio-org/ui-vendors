@@ -38,16 +38,16 @@ class AccountsView extends React.Component {
           <KeyValue label="Account Status" value={_.get(val, 'account_status', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="contact_info" value={_.get(val, 'contact_info', '')} />
+          <KeyValue label="Contact Info" value={_.get(val, 'contact_info', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="library_code" value={_.get(val, 'library_code', '')} />
+          <KeyValue label="Library Code" value={_.get(val, 'library_code', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="library_edi_code" value={_.get(val, 'library_edi_code', '')} />
+          <KeyValue label="Library EDI Code" value={_.get(val, 'library_edi_code', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="notes" value={_.get(val, 'notes', '')} />
+          <KeyValue label="Notes" value={_.get(val, 'notes', '')} />
         </Col>
         {rowCount &&
           <div style={{ width: '100%' }}>

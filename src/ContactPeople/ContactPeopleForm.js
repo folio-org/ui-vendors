@@ -11,12 +11,8 @@ import css from './ContactPeopleForm.css';
 
 class ContactPeopleForm extends Component {
   static propTypes = {
-    parentResources: PropTypes.object,
-    dropdownContactCategories: PropTypes.arrayOf(PropTypes.object),
-    dropdown: PropTypes.shape({
-      dropdownCountry: PropTypes.arrayOf(PropTypes.object),
-      dropdownLanguages: PropTypes.arrayOf(PropTypes.object)
-    })
+    dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
+    dropdownCountry: PropTypes.arrayOf(PropTypes.object)
   };
 
   constructor(props) {
@@ -44,9 +40,7 @@ class ContactPeopleForm extends Component {
   }
 
   renderSubCreateContact = (elem, index, fields) => {
-    const dropdownLanguages = (this.props.parentResources.dropdown || {}).dropdownLanguages || [];
-    const dropdownCountry = (this.props.parentResources.dropdown || {}).dropdownCountry || [];
-
+    const { dropdownLanguages, dropdownCountry } = this.props;
     return (
       <Row key={index}>
         <Col xs={12}>
