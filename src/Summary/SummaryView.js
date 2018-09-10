@@ -14,7 +14,7 @@ class SummaryView extends React.Component {
     const dataVal = initialValues || [];
     const columnWidths = { 'value': '50%', 'description': '50%' };
     const columnMapping = {
-      'value': 'name',
+      'value': 'Alias',
       'description': 'description'
     };
 

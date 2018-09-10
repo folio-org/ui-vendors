@@ -169,7 +169,7 @@ class EdiInformationForm extends Component {
                     <p style={{ fontSize: '.8rem', fontWeight: 'bold' }}>NotificationOptions:</p>
                   </Col>
                   <Col xs={12}>
-                    <Field label="Send To" name="edi.edi_job.send_to_emails" id="send_to_emails" component={TextField} fullWidth />
+                    <Field label="Send To" name="edi.edi_job.send_to_emails" id="send_to_emails" placeholder="Enter e-mail address(es)" component={TextField} fullWidth />
                   </Col>
                   <Col xs={12}>
                     <Field label="All EDI Transactions" name="edi.edi_job.notify_all_edi" id="notify_all_edi" component={Checkbox} />

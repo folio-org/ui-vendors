@@ -85,7 +85,7 @@ class FormVendor extends Component {
     const { sectionErrors } = this.state;
     const showDeleteButton = initialValues.id || false;
     // Errors
-    const arrSections = ['name', 'code', 'addresses', 'phone_numbers', 'email', 'urls', 'contacts', 'agreements', 'accounts'];
+    const arrSections = ['name', 'code', 'status', 'addresses', 'phone_numbers', 'email', 'urls', 'contacts', 'agreements', 'accounts'];
     const message = <em className={css.requiredIcon} style={{ color: 'red', display: 'flex', alignItems: 'center' }}><Icon icon="validation-error" size="medium" />Required fields!</em>;
     const summaryErr = sectionErrors.summaryErr ? message : null;
     const contactInfoErr = sectionErrors.contactInfoErr ? message : null;
