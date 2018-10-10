@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { MultiColumnList, Row, Col, KeyValue } from '@folio/stripes-components';
+import { MultiColumnList, Row, Col, KeyValue } from '@folio/stripes/components';
 import css from './SummaryView.css';
 import LanguageLookup from '../Utils/LanguageLookup';
 

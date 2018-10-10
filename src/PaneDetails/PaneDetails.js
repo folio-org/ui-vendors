@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Pane, PaneMenu, Button } from '@folio/stripes-components';
-import stripesForm from '@folio/stripes-form';
+import { Pane, PaneMenu, Button } from '@folio/stripes/components';
+import stripesForm from '@folio/stripes/form';
 import { FormVendor } from '../VendorViews';
 
 class PaneDetails extends React.Component {

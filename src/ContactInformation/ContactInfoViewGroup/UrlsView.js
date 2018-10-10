@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Row, Col, KeyValue } from '@folio/stripes-components';
+import { Row, Col, KeyValue } from '@folio/stripes/components';
 import css from '../ContactInformationView.css';
 import LanguageLookup from '../../Utils/LanguageLookup';
 import parseCategories from '../../Utils/Category';

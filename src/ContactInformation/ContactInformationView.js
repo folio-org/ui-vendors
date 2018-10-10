@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Icon } from '@folio/stripes-components';
+import { Row, Icon } from '@folio/stripes/components';
 import { AddressInfoView, PhoneNumbersView, EmailView, UrlsView } from './ContactInfoViewGroup';
 
 class ContactInformationView extends Component {

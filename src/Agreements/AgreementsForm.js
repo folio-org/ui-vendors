@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Field, FieldArray } from 'redux-form';
-import { Row, Col, Button, TextField, TextArea } from '@folio/stripes-components';
+import { Row, Col, Button, TextField, TextArea } from '@folio/stripes/components';
 import { Required } from '../Utils/Validate';
 import css from './AgreementsForm.css';
 

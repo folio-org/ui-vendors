@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
-import { Row, Col, Button, TextField, TextArea, Select, Checkbox } from '@folio/stripes-components';
+import { Row, Col, Button, TextField, TextArea, Select, Checkbox } from '@folio/stripes/components';
 import TogglePassword from '../Utils/TogglePassword';
 import css from './InterfaceForm.css';
 

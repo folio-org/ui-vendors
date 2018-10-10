@@ -2,7 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Field } from 'redux-form';
-import { Row, Col, Button, TextField, TextArea, Timepicker, Select, Checkbox, Datepicker, AccordionSet, Accordion } from '@folio/stripes-components/';
+import {
+  Row,
+  Col,
+  Button,
+  TextField,
+  TextArea,
+  Timepicker,
+  Select,
+  Checkbox,
+  Datepicker,
+  AccordionSet,
+  Accordion
+} from '@folio/stripes/components';
 import css from './EdiInformationForm.css';
 import TogglePassword from '../Utils/TogglePassword';
 
@@ -33,9 +45,9 @@ class EdiInformationForm extends Component {
 
   render() {
     const { parentResources } = this.props;
-    const vendorEdiCodeDD = (parentResources.dropdown || {}).vendorEdiCodeDD || [];
+    // const vendorEdiCodeDD = (parentResources.dropdown || {}).vendorEdiCodeDD || [];
     const vendorEdiCodeTypeDD = (parentResources.dropdown || {}).vendorEdiCodeTypeDD || [];
-    const libraryEDICodeDD = (parentResources.dropdown || {}).libraryEDICodeDD || [];
+    // const libraryEDICodeDD = (parentResources.dropdown || {}).libraryEDICodeDD || [];
     const libraryEdiCodeTypeDD = (parentResources.dropdown || {}).libraryEdiCodeTypeDD || [];
     const ftpDD = (parentResources.dropdown || {}).ftpDD || [];
     const transmissionModeDD = (parentResources.dropdown || {}).transmissionModeDD || [];

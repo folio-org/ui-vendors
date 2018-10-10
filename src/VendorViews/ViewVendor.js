@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import queryString from 'query-string';
 // Folio
-import { Pane, PaneMenu, Row, Col, Icon, IconButton, IfPermission, Layer, AccordionSet, Accordion, ExpandAllButton } from '@folio/stripes-components';
-import { withTags } from '@folio/stripes-smart-components/lib/Tags';
+import { Pane, PaneMenu, Row, Col, Icon, IconButton, IfPermission, Layer, AccordionSet, Accordion, ExpandAllButton } from '@folio/stripes/components';
+import { withTags } from '@folio/stripes/smart-components';
 // Local Components
 import { SummaryView } from '../Summary';
 import { ContactInformationView } from '../ContactInformation';
@@ -98,7 +98,7 @@ class ViewVendor extends Component {
   }
 
   render() {
-    const { location, tagsEnabled } = this.props;
+    const { location } = this.props;
     const initialValues = this.getData();
     const query = location.search ? queryString.parse(location.search) : {};
     // const tags = ((initialValues && initialValues.tags) || {}).tagList || [];

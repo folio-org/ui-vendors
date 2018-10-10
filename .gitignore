@@ -32,3 +32,6 @@ yarn-error.log*
 # Stripescli
 .stripesclirc
 stripes.config.js.local
+
+# Lockfiles
+yarn.lock

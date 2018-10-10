@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
-import { Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes-components';
+import { Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
 import { Required } from '../Utils/Validate';
 import css from './AccountsForm.css';
 
