@@ -1,6 +1,8 @@
 # Change history for ui-vendors
 
-## 1.1.1 (IN PROGRESS)
+## [1.1.0](https://github.com/folio-org/ui-vendors/tree/v1.1.0) (2018-10-10)
+[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.0.1...v1.1.0)
+
 * Removed tags and notes. ref: UIV-27.
 * Moved Sans code field into summary, UIV-21
 * Converted category dropdown to multi select for contact infomartion and contact people. Ref: UIV-4.
@@ -17,6 +19,7 @@
 * Make status field required, Fixes MODVEND-51.
 * Update label "- Please add vendors -" to "- Please add alternative names -". Fixes MODVEND-52.
 * Ignored stripesclirc and stripes.config.js.local. 
+* Switch to `stripes v1.0.0` for core dependencies. UIV-32
 
 ## [1.0.1](https://github.com/folio-org/ui-vendors/tree/v1.0.1) (2018-09-17)
 * Update stripes-form version. Fixes UIV-8.
