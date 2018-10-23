@@ -84,6 +84,7 @@ class ViewVendor extends Component {
   }
 
   update(data) {
+    data.vendor_currencies = data.vendor_currencies.map(x => x.value) || [];
     data.addresses.map((item) => {
       delete item.address.primaryAddress;
       return item;
