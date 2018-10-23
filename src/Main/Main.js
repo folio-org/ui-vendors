@@ -229,6 +229,13 @@ class Main extends Component {
       countryFilter.values = countryData.map(rec => ({ name: rec.label, cql: rec.value }));
       props.mutator.initializedFilterConfig.replace(true);
     }
+
+    return null;
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
   create = (data) => {
