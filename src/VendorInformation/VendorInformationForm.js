@@ -26,25 +26,6 @@ class VendorInformationForm extends Component {
     this.selectedValues = this.selectedValues.bind(this);
   }
 
-  static getDerivedStateFromProps(props, state) {
-    const { dropdownCurrencies, initialValues, dispatch, change } = props;
-    // Compare vendor_currencies props array and state arra
-    if (initialValues && !_.isEmpty(initialValues.vendor_currencies)) {
-      if (!_.isEqual(initialValues.vendor_currencies, state.vendorCurrencies)) {
-        const data = dropdownCurrencies.filter(x => {
-          const currencies = initialValues.vendor_currencies;
-          for (const i in currencies) {
-            if (currencies[i] === x.value) return true;
-          }
-          return false;
-        });
-        dispatch(change('vendor_currencies', data));
-        return { vendorCurrencies: initialValues.vendor_currencies }; // Used array currency for comparing initial state and props
-      }
-    }
-    return false;
-  }
-
   onChangeSelect = (e, propertyName) => {
     const { dispatch, change } = this.props;
     dispatch(change(`${propertyName}`, e));
@@ -57,10 +38,14 @@ class VendorInformationForm extends Component {
     return currValues;
   }
 
+  // For Multi dropdown
+  toString = (option) => option;
+  formatter = ({ option }) => <div>{option}</div>;
+
   render() {
     const { parentResources, dropdownCurrencies } = this.props;
     const paymentMethodDD = (parentResources.dropdown || {}).paymentMethodDD || [];
-    // console.log(this.state.vendorCurrencies);
+
     return (
       <Row className={css.vendorInfo}>
         <Col xs={12} md={6}>
@@ -81,7 +66,17 @@ class VendorInformationForm extends Component {
               <Field label="Material Supplier" name="material_supplier" id="material_supplier" component={Checkbox} />
             </Col>
             <Col xs={12}>
-              <MultiSelection label="Vendor Currencies" name="vendor_currencies" id="vendor_currencies" dataOptions={dropdownCurrencies} onChange={(e) => this.onChangeSelect(e, 'vendor_currencies')} style={{ height: '80px' }} value={this.selectedValues('vendor_currencies')} />
+              <MultiSelection
+                label="Vendor Currencies"
+                name="vendor_currencies"
+                id="vendor_currencies"
+                dataOptions={dropdownCurrencies}
+                onChange={(e) => this.onChangeSelect(e, 'vendor_currencies')}
+                style={{ height: '80px' }}
+                value={this.selectedValues('vendor_currencies')}
+                itemToString={this.toString}
+                formatter={this.formatter}
+              />
             </Col>
           </Row>
         </Col>

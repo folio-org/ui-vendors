@@ -19,7 +19,7 @@ class ContactInformationView extends React.Component {
 
   getPhoneNumbers(val, key) {
     const rowCount = (this.props.dataVal.length - 1) !== key;
-    const categories = val.categories && this.props.dropdownCategories ? parseCategories(val.categories, this.props.dropdownCategories) : null;
+    const categories = val.categories.join(', ') || null;
     const phonenumber = `${_.get(val, 'phone_number.country_code', '')} ${_.get(val, 'phone_number.area_code', '')} ${_.get(val, 'phone_number.phone_number', '')}`;
     const getLanguage = LanguageLookup(_.get(val, 'language', ''));
 

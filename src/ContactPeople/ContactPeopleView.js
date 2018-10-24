@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
-import parseCategories from '../Utils/Category';
 import css from './ContactPeopleView.css';
 
 class ContactPeopleView extends React.Component {
@@ -22,7 +21,7 @@ class ContactPeopleView extends React.Component {
   getContacts(val, key) {
     const rowCount = (this.props.initialValues.contacts.length - 1) !== key;
     const dropdownCategories = (this.props.parentResources.dropdown || {}).categoriesDD || [];
-    const categories = val.categories && dropdownCategories ? parseCategories(val.categories, dropdownCategories) : null;
+    const categories = val.categories.join(', ') || null;
     const fullName = `${_.get(val, 'contact_person.prefix', '')} ${_.get(val, 'contact_person.first_name', '')} ${_.get(val, 'contact_person.last_name', '')}`;
     const phoneNumber = `${_.get(val, 'contact_person.phone_number.country_code', '')} ${_.get(val, 'contact_person.phone_number.area_code', '')} ${_.get(val, 'contact_person.phone_number.phone_number', '')}`;
     const language = `${_.get(val, 'contact_person.language', '')}`;

@@ -19,7 +19,7 @@ class ContactInformationView extends React.Component {
 
   getEmail(val, key) {
     const rowCount = (this.props.dataVal.length - 1) !== key;
-    const categories = val.categories && this.props.dropdownCategories ? parseCategories(val.categories, this.props.dropdownCategories) : null;
+    const categories = val.categories.join(', ') || null;
     const email = () => {
       const emailDescription = `${_.get(val, 'email.description', '')}`;
       if (emailDescription.trim().length >= 1) {
