@@ -16,13 +16,14 @@ class AgreementsView extends React.Component {
 
   getAgreements(val, key) {
     const rowCount = this.props.initialValues.contacts.length - 1 !== key;
+    const discount = _.get(val, 'discount') + '%';
     return (
       <Row key={key}>
         <Col xs={3}>
           <KeyValue label="Name" value={_.get(val, 'name')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Discount" value={_.get(val, 'discount')} />
+          <KeyValue label="Discount" value={discount} />
         </Col>
         <Col xs={3}>
           <KeyValue label="Reference URL" value={_.get(val, 'reference_url')} />
