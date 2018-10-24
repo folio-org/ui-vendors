@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import { AddressView } from '@folio/stripes/smart-components';
 import css from '../ContactInformationView.css';
-import parseCategories from '../../Utils/Category';
 
 class AddressInfoView extends React.Component {
   static propTypes = {
-    dataVal: PropTypes.arrayOf(PropTypes.object),
-    dropdownCategories: PropTypes.arrayOf(PropTypes.object),
+    dataVal: PropTypes.arrayOf(PropTypes.object)
   };
 
   constructor(props) {
@@ -18,7 +16,7 @@ class AddressInfoView extends React.Component {
 
   getAddress(val, key) {
     const rowCount = (this.props.dataVal.length - 1) !== key;
-    const categories = val.categories && this.props.dropdownCategories ? parseCategories(val.categories, this.props.dropdownCategories) : null;
+    const categories = val.categories.join(', ') || null;
     const addresses = () => {
       if (key >= 1) return val.address;
       val.address.primaryAddress = true;

@@ -91,15 +91,10 @@ class PaneDetails extends React.Component {
   }
 
   getCurrencies() {
-    const objCur = [];
-    const arr = ['USD', 'CAD', 'GBP', 'EUR'];
-    for (let i = 0; i < arr.length; ++i) {
-      objCur.push({ label: arr[i], value: arr[i] });
-      if ((arr.length - 1) === i) {
-        return objCur;
-      }
-    }
-    return objCur;
+    const { parentResources } = this.props;
+    const data = (parentResources.dropdown || {}).currencyDD || [];
+    if (!data || data.length === 0) return null;
+    return data;
   }
 
   convertValueToLabel(resourcesPath) {
@@ -142,6 +137,7 @@ class PaneDetails extends React.Component {
     const lastMenu = initialValues.id ?
       this.getLastMenu('clickable-updatevendor', 'Update vendor') :
       this.getLastMenu('clickable-createnewvendor', 'Create vendor');
+
     return (
       <form id="form-vendor">
         <Pane defaultWidth="100%" firstMenu={firstMenu} lastMenu={lastMenu} paneTitle={paneTitle}>

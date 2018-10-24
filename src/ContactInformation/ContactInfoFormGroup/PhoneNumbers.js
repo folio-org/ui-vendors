@@ -36,6 +36,10 @@ class PhoneNumbers extends Component {
     return currValues;
   }
 
+  // For Multi dropdown
+  toString = (option) => option;
+  formatter = ({ option }) => <div>{option}</div>;
+
   renderSubPhoneNumbers = (elem, index, fields) => {
     const { dropdownCategories, dropdownLanguages } = this.props;
     return (
@@ -53,7 +57,16 @@ class PhoneNumbers extends Component {
           <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
         </Col>
         <Col xs={12} md={3}>
-          <MultiSelection label="Categories" name={`${elem}.categories`} dataOptions={dropdownCategories} onChange={(e) => this.onChangeSelect(e, elem, 'categories')} style={{ height: '80px' }} value={this.selectedValues(index, fields, 'categories')} />
+          <MultiSelection
+            label="Categories"
+            name={`${elem}.categories`}
+            dataOptions={dropdownCategories}
+            onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
+            style={{ height: '80px' }}
+            value={this.selectedValues(index, fields, 'categories')}
+            itemToString={this.toString}
+            formatter={this.formatter}
+          />
         </Col>
         <Col xs={12} md={3} mdOffset={6} style={{ textAlign: 'right' }}>
           <Button onClick={() => fields.remove(index)} buttonStyle="danger">

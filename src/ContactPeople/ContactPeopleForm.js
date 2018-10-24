@@ -53,6 +53,10 @@ class ContactPeopleForm extends Component {
     );
   }
 
+  // For Multi dropdown
+  toString = (option) => option;
+  formatter = ({ option }) => <div>{option}</div>;
+
   renderSubCreateContact = (elem, index, fields) => {
     const { dropdownLanguages, dropdownCountry } = this.props;
     return (
@@ -127,7 +131,16 @@ class ContactPeopleForm extends Component {
             <Field label="Default Language" name={`${elem}.contact_person.language`} id={`${elem}.contact_person.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
           </Col>
           <Col xs={12} md={3}>
-            <MultiSelection label="Categories" name={`${elem}.categories`} dataOptions={this.props.dropdownContactCategories} onChange={(e) => this.onChangeSelect(e, elem, 'categories')} style={{ height: '80px' }} value={this.selectedValues(index, fields, 'categories')} />
+            <MultiSelection
+              label="Categories"
+              name={`${elem}.categories`}
+              dataOptions={this.props.dropdownContactCategories}
+              onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
+              style={{ height: '80px' }}
+              value={this.selectedValues(index, fields, 'categories')}
+              itemToString={this.toString}
+              formatter={this.formatter}
+            />
           </Col>
           <Col xs={12} md={6}>
             <Field label="Notes" name={`${elem}.contact_person.notes`} id={`${elem}.contact_person.notes`} component={TextArea} style={{ height: '79px' }} fullWidth />

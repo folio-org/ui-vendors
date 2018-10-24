@@ -13,6 +13,8 @@ class VendorInformationView extends React.Component {
   render() {
     const { initialValues } = this.props;
     const dataVal = initialValues !== null ? initialValues : false;
+    const vendorCurrencies = dataVal.vendor_currencies.join(', ') || null;
+
     if (dataVal) {
       return (
         <Row className={css.horizontalLine}>
@@ -40,7 +42,7 @@ class VendorInformationView extends React.Component {
             </KeyValue>
           </Col>
           <Col xs={3}>
-            <KeyValue label="Vendor Currencies" value={_.toString(_.map(dataVal.vendor_currencies))} />
+            <KeyValue label="Vendor Currencies" value={vendorCurrencies} />
           </Col>
           <Col xs={12}>
             <hr />

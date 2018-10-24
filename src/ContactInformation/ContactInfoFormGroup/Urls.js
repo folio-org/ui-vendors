@@ -36,6 +36,10 @@ class Url extends Component {
     return currValues;
   }
 
+  // For Multi dropdown
+  toString = (option) => option;
+  formatter = ({ option }) => <div>{option}</div>;
+
   renderSubUrl = (elem, index, fields) => {
     const { dropdownCategories, dropdownLanguages } = this.props;
     return (
@@ -47,7 +51,16 @@ class Url extends Component {
           <Field label="Description" name={`${elem}.url.description`} id={`${elem}.url.description`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <MultiSelection label="Categories" name={`${elem}.categories`} dataOptions={dropdownCategories} onChange={(e) => this.onChangeSelect(e, elem, 'categories')} style={{ height: '80px' }} value={this.selectedValues(index, fields, 'categories')} />
+          <MultiSelection
+            label="Categories"
+            name={`${elem}.categories`}
+            dataOptions={dropdownCategories}
+            onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
+            style={{ height: '80px' }}
+            value={this.selectedValues(index, fields, 'categories')}
+            itemToString={this.toString}
+            formatter={this.formatter}
+          />
         </Col>
         <Col xs={12} md={3}>
           <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
