@@ -7,8 +7,7 @@ import LanguageLookup from '../../Utils/LanguageLookup';
 
 class ContactInformationView extends React.Component {
   static propTypes = {
-    dataVal: PropTypes.arrayOf(PropTypes.object),
-    dropdownCategories: PropTypes.arrayOf(PropTypes.object)
+    dataVal: PropTypes.arrayOf(PropTypes.object)
   };
 
   constructor(props) {

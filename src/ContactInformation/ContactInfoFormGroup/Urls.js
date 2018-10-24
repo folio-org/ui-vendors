@@ -59,7 +59,7 @@ class Url extends Component {
             style={{ height: '80px' }}
             value={this.selectedValues(index, fields, 'categories')}
             itemToString={this.toString}
-            formatter={this.formatter}  
+            formatter={this.formatter}
           />
         </Col>
         <Col xs={12} md={3}>

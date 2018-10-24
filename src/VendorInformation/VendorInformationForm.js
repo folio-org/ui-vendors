@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Field, getFormValues } from 'redux-form';
 import { MultiSelection, Select, Checkbox, TextField, AccordionSet, Accordion, Row, Col } from '@folio/stripes/components';
@@ -13,6 +12,11 @@ class VendorInformationForm extends Component {
       vendorContactCategory: PropTypes.object,
       dropdown: PropTypes.object.isRequired
     }),
+    stripes: PropTypes.shape({
+      store: PropTypes.func
+    }),
+    dispatch: PropTypes.func,
+    change: PropTypes.func,
   }
 
   constructor(props) {
