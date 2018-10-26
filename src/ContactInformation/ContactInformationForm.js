@@ -5,12 +5,6 @@ import { Row, Col } from '@folio/stripes/components';
 import { AddressInfo, PhoneNumbers, EmailAddresses, Urls } from './ContactInfoFormGroup';
 
 class ContactInformationForm extends React.Component {
-  static propTypes = {
-    dropdownCurrencies: PropTypes.arrayOf(PropTypes.object),
-    dropdownCategories: PropTypes.arrayOf(PropTypes.object),
-    dropdownContactCategories: PropTypes.arrayOf(PropTypes.object)
-  };
-
   render() {
     return (
       <Row>

@@ -7,12 +7,12 @@ import { Required } from '../../Utils/Validate';
 
 class AddressInfo extends Component {
   static propTypes = {
-    dropdownCategories: PropTypes.arrayOf(PropTypes.object),
-    dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
-    dropdownCountry: PropTypes.arrayOf(PropTypes.object),
+    dropdownCategories: PropTypes.array,
+    dropdownLanguages: PropTypes.array,
+    dropdownCountry: PropTypes.array,
     fields: PropTypes.object,
     stripes: PropTypes.shape({
-      store: PropTypes.func
+      store: PropTypes.object
     }),
     dispatch: PropTypes.func,
     change: PropTypes.func,
