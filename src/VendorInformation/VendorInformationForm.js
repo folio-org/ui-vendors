@@ -6,14 +6,14 @@ import css from './VendorInformationForm.css';
 
 class VendorInformationForm extends Component {
   static propTypes = {
-    dropdownCurrencies: PropTypes.arrayOf(PropTypes.object),
+    dropdownCurrencies: PropTypes.array,
     parentResources: PropTypes.shape({
       vendorCategory: PropTypes.object,
       vendorContactCategory: PropTypes.object,
       dropdown: PropTypes.object.isRequired
     }),
     stripes: PropTypes.shape({
-      store: PropTypes.func
+      store: PropTypes.object
     }),
     dispatch: PropTypes.func,
     change: PropTypes.func,
