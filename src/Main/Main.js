@@ -198,7 +198,7 @@ class Main extends Component {
         categoriesDD: [
           'Accounting',
           'Books',
-          'Customer',
+          'Customer Service',
           'Databases',
           'Ebooks',
           'Econtent',
@@ -211,6 +211,7 @@ class Main extends Component {
           'Returns',
           'Shipments',
           'Payments',
+          'Techincal Support',
           'Other'
         ],
         currencyDD: ['USD', 'CAD', 'GBP', 'EUR']
