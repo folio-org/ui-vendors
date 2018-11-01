@@ -119,6 +119,24 @@ class Main extends Component {
       records: 'categories',
       path: 'contact_category'
     },
+    queryCustom: {
+      initialValue: {
+        vendorIDQuery: 'query=(name=null)',
+      }
+    },
+    vendorID: {
+      type: 'okapi',
+      records: 'vendors',
+      path: 'vendor',
+      params: {
+        query: (...args) => {
+          // const newData = 'query=(id="d375f933-a093-4348-a594-0c02442946f3*")';
+          const newData = `${args[2].queryCustom.vendorIDQuery}`;
+          const cql = `${newData} sortby id`;
+          return cql;
+        },
+      }
+    },
     dropdown: {
       initialValue: {
         paymentMethodDD: [

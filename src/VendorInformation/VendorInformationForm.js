@@ -6,7 +6,7 @@ import css from './VendorInformationForm.css';
 
 class VendorInformationForm extends Component {
   static propTypes = {
-    dropdownCurrencies: PropTypes.array,
+    dropdownCurrencies: PropTypes.arrayOf(PropTypes.string),
     parentResources: PropTypes.shape({
       vendorCategory: PropTypes.object,
       vendorContactCategory: PropTypes.object,

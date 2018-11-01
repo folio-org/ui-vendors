@@ -7,8 +7,8 @@ import { Required } from '../../Utils/Validate';
 
 class Url extends Component {
   static propTypes = {
-    dropdownCategories: PropTypes.array,
-    dropdownLanguages: PropTypes.array,
+    dropdownCategories: PropTypes.arrayOf(PropTypes.string),
+    dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
     fields: PropTypes.object,
     stripes: PropTypes.shape({
       store: PropTypes.object

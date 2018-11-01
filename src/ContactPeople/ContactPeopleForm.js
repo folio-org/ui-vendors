@@ -7,9 +7,9 @@ import css from './ContactPeopleForm.css';
 
 class ContactPeopleForm extends Component {
   static propTypes = {
-    dropdownContactCategories: PropTypes.array,
-    dropdownLanguages: PropTypes.array,
-    dropdownCountry: PropTypes.array,
+    dropdownContactCategories: PropTypes.arrayOf(PropTypes.string),
+    dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
+    dropdownCountry: PropTypes.arrayOf(PropTypes.object),
     stripes: PropTypes.shape({
       store: PropTypes.object
     }),
