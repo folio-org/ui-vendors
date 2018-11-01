@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 // Folio
-import { makeQueryFunction, SearchAndSort } from '@folio/stripes/smart-components';
+import { SearchAndSort } from '@folio/stripes/smart-components';
 import { filters2cql } from '@folio/stripes/components';
 import FormatTime from '../Utils/FormatTime';
 import packageInfo from '../../package';

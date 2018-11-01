@@ -69,7 +69,7 @@ class ViewVendor extends Component {
     const { parentResources, match: { params: { id } } } = this.props;
     const resourceData = ((parentResources.records || {}).records || []);
     const selectData = (resourceData && resourceData.length > 0) ? resourceData : this.state.vendorData;
-    const vendorData = !_.isEmpty(selectData) ? selectData : [];
+    const vendorData = (!_.isEmpty(selectData)) ? selectData : [];
     //  If no ID return null
     if (!id) return null;
     // Else check if data matches id

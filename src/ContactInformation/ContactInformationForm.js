@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FieldArray } from 'redux-form';
 import { Row, Col } from '@folio/stripes/components';
 import { AddressInfo, PhoneNumbers, EmailAddresses, Urls } from './ContactInfoFormGroup';
