@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 // Folio
-import { SearchAndSort } from '@folio/stripes/smart-components';
+import { makeQueryFunction, SearchAndSort } from '@folio/stripes/smart-components';
 import { filters2cql } from '@folio/stripes/components';
 import FormatTime from '../Utils/FormatTime';
 import packageInfo from '../../package';
@@ -118,6 +118,24 @@ class Main extends Component {
       type: 'okapi',
       records: 'categories',
       path: 'contact_category'
+    },
+    queryCustom: {
+      initialValue: {
+        vendorIDQuery: 'query=(name=null)',
+      }
+    },
+    vendorID: {
+      type: 'okapi',
+      records: 'vendors',
+      path: 'vendor',
+      params: {
+        query: (...args) => {
+          // const newData = 'query=(id="d375f933-a093-4348-a594-0c02442946f3*")';
+          const newData = `${args[2].queryCustom.vendorIDQuery}`;
+          const cql = `${newData} sortby id`;
+          return cql;
+        },
+      }
     },
     dropdown: {
       initialValue: {

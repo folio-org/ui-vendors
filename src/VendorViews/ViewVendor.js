@@ -55,15 +55,27 @@ class ViewVendor extends Component {
     this.onToggleSection = this.onToggleSection.bind(this);
   }
 
+  static getDerivedStateFromProps(props, state) {
+    const { parentMutator, parentResources, match: { params: { id } } } = props;
+    const vendorID = (parentResources.vendorID || {}).records || [];
+    if (!_.isEqual(vendorID, state.vendorData)) {
+      parentMutator.queryCustom.update({ vendorIDQuery: `query=(id=${id})` });
+      return { vendorData: vendorID };
+    }
+    return null;
+  }
+
   getData() {
     const { parentResources, match: { params: { id } } } = this.props;
-    const vendors = (parentResources.records || {}).records || [];
-    if (!vendors || vendors.length === 0 || !id) return null;
-    const data = vendors.find(u => u.id === id);
-
+    const resourceData = ((parentResources.records || {}).records || []);
+    const selectData = (resourceData && resourceData.length > 0) ? resourceData : this.state.vendorData;
+    const vendorData = !_.isEmpty(selectData) ? selectData : [];
+    //  If no ID return null
+    if (!id) return null;
+    // Else check if data matches id
+    const data = vendorData.find(u => u.id === id);
     const time = FormatTime(data, 'get');
     if (time) { data.edi.edi_job.time = time; }
-
     return data;
   }
 
