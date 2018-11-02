@@ -229,7 +229,7 @@ class Main extends Component {
           'Returns',
           'Shipments',
           'Payments',
-          'Techincal Support',
+          'Technical Support',
           'Other'
         ],
         currencyDD: ['USD', 'CAD', 'GBP', 'EUR']
