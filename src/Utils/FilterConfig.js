@@ -59,7 +59,7 @@ const SearchableIndexes = [
   { label: 'Code', value: 'code', makeQuery: term => `(code="${term}*")` },
   { label: 'Language', value: 'language', makeQuery: term => `(language="${term}*")` },
   { label: 'Alias', value: 'aliases', makeQuery: term => `(aliases="${term}*")` },
-  { label: 'ERP Code', value: 'erp_code', makeQuery: term => `(erp_code="${term}*")` },
+  { label: 'Accounting Code', value: 'erp_code', makeQuery: term => `(erp_code="${term}*")` },
   { label: 'Tax ID', value: 'tax_id', makeQuery: term => `(tax_id="${term}*")` },
   { label: 'Interfaces', value: 'interfaces', makeQuery: term => `(interfaces="${term}*")` }
 ];
