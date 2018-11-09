@@ -48,7 +48,7 @@ class PhoneNumbers extends Component {
           <Field label="Phone Number*" name={`${elem}.phone_number.phone_number`} id={`${elem}.phone_number.phone_number`} validate={[Required]} component={TextField} placeholder="ex." fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Type" name={`${elem}.type`} id={`${elem}.type`} component={Select} fullWidth dataOptions={dropdownPhoneType} />
+          <Field label="Type" name={`${elem}.phone_number.type`} id={`${elem}.phone_number.type`} component={Select} fullWidth dataOptions={dropdownPhoneType} disabled />
         </Col>
         <Col xs={12} md={3}>
           <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />

@@ -31,9 +31,6 @@ class ViewVendor extends Component {
     parentMutator: PropTypes.object.isRequired,
     editLink: PropTypes.string,
     paneWidth: PropTypes.string.isRequired,
-    // notesToggle: PropTypes.func,
-    // tagsToggle: PropTypes.func,
-    // tagsEnabled: PropTypes.bool
   }
 
   constructor(props) {
@@ -113,26 +110,8 @@ class ViewVendor extends Component {
     const { location } = this.props;
     const initialValues = this.getData();
     const query = location.search ? queryString.parse(location.search) : {};
-    // const tags = ((initialValues && initialValues.tags) || {}).tagList || [];
     const lastMenu = (
       <PaneMenu>
-        {/* {
-          tagsEnabled &&
-            <IconButton
-              icon="tag"
-              title="showTags"
-              id="clickable-show-tags"
-              onClick={this.props.tagsToggle}
-              badgeCount={tags.length}
-              aria-label="showTags"
-            />
-        }
-        <IconButton
-          icon="comment"
-          id="clickable-show-notes"
-          onClick={this.props.notesToggle}
-          aria-label="showNotes"
-        /> */}
         <IfPermission perm="vendor.item.put">
           <IconButton
             icon="edit"
