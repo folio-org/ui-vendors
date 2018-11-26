@@ -69,7 +69,7 @@ class AddressInfo extends Component {
           <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} dataOptions={dropdownLanguages} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <MultiSelection 
+          <MultiSelection
             label="Categories"
             name={`${elem}.categories`}
             dataOptions={dropdownCategories}
