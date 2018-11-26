@@ -60,7 +60,7 @@ class AddressInfo extends Component {
           <Field label="Region" name={`${elem}.address.stateRegion`} id={`${elem}.address.stateRegion`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Postal Code" name={`${elem}.address.zipCode`} id={`${elem}.address.zipCode`} component={TextField} fullWidth />
+          <Field label="ZIP/Postal Code" name={`${elem}.address.zipCode`} id={`${elem}.address.zipCode`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
           <Field label="Country*" name={`${elem}.address.country`} id={`${elem}.address.country`} component={Select} dataOptions={dropdownCountry} validate={[Required]} fullWidth />
@@ -69,7 +69,7 @@ class AddressInfo extends Component {
           <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} dataOptions={dropdownLanguages} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <MultiSelection
+          <MultiSelection 
             label="Categories"
             name={`${elem}.categories`}
             dataOptions={dropdownCategories}
