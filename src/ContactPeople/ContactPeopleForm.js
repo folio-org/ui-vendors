@@ -91,6 +91,9 @@ class ContactPeopleForm extends Component {
             <Field label="Region" name={`${elem}.contact_person.address.stateRegion`} id={`${elem}.contact_person.address.stateRegion`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
+            <Field label="ZIP/Postal Code" name={`${elem}.contact_person.address.zipCode`} id={`${elem}.address.zipCode`} component={TextField} fullWidth />
+          </Col>
+          <Col xs={12} md={4}>
             <Field label="Country*" name={`${elem}.contact_person.address.country`} id={`${elem}.contact_person.address.country`} validate={[Required]} component={Select} dataOptions={dropdownCountry} fullWidth />
           </Col>
           <Col xs={12}>
