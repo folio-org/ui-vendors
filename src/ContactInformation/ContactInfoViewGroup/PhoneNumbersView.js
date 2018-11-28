@@ -18,7 +18,7 @@ class ContactInformationView extends React.Component {
   getPhoneNumbers(val, key) {
     const rowCount = (this.props.dataVal.length - 1) !== key;
     const categories = val.categories.join(', ') || null;
-    const phonenumber = `${_.get(val, 'phone_number.phone_number', '')}`;
+    const phonenumber = _.get(val, 'phone_number.phone_number', '');
     const type = _.get(val, 'phone_number.type', '');
     const getLanguage = LanguageLookup(_.get(val, 'language', ''));
 
