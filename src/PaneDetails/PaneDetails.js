@@ -100,7 +100,7 @@ class PaneDetails extends React.Component {
   getPhoneType() {
     const { parentResources } = this.props;
     const data = (parentResources.dropdown || {}).phoneTypeDD || [];
-    if (!data || data.length === 0) return null;
+    // if (!data || data.length === 0) return null;
     return data;
   }
 
