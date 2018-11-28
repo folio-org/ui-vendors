@@ -18,15 +18,19 @@ class ContactInformationView extends React.Component {
   getPhoneNumbers(val, key) {
     const rowCount = (this.props.dataVal.length - 1) !== key;
     const categories = val.categories.join(', ') || null;
-    const phonenumber = `${_.get(val, 'phone_number.country_code', '')} ${_.get(val, 'phone_number.area_code', '')} ${_.get(val, 'phone_number.phone_number', '')}`;
+    const phonenumber = _.get(val, 'phone_number.phone_number', '');
+    const type = _.get(val, 'phone_number.type', '');
     const getLanguage = LanguageLookup(_.get(val, 'language', ''));
 
     return (
       <Row key={key}>
-        <Col xs={5}>
+        <Col xs={3}>
           <KeyValue label="Phone Number" value={phonenumber} />
         </Col>
-        <Col xs={4}>
+        <Col xs={3}>
+          <KeyValue label="Type" value={type} />
+        </Col>
+        <Col xs={3}>
           <KeyValue label="Categories" value={categories} />
         </Col>
         <Col xs={3}>

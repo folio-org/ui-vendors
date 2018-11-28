@@ -97,6 +97,13 @@ class PaneDetails extends React.Component {
     return data;
   }
 
+  getPhoneType() {
+    const { parentResources } = this.props;
+    const data = (parentResources.dropdown || {}).phoneTypeDD || [];
+    // if (!data || data.length === 0) return null;
+    return data;
+  }
+
   convertValueToLabel(resourcesPath) {
     const newArray = [];
     const resCat = resourcesPath;
@@ -143,11 +150,11 @@ class PaneDetails extends React.Component {
         <Pane defaultWidth="100%" firstMenu={firstMenu} lastMenu={lastMenu} paneTitle={paneTitle}>
           <FormVendor
             dropdownCurrencies={this.getCurrencies()}
-            // dropdownCategories={this.getCategory()} //Data from database
-            dropdownCategories={this.getCategory()} // Hard coded value
+            dropdownCategories={this.getCategory()}
             dropdownContactCategories={this.getContactCategory()}
             dropdownCountry={this.getCountryList()}
             dropdownLanguages={this.getLanguageList()}
+            dropdownPhoneType={this.getPhoneType()}
             deleteVendor={this.deleteVendor}
             {...this.props}
           />

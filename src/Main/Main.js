@@ -232,7 +232,14 @@ class Main extends Component {
           'Technical Support',
           'Other'
         ],
-        currencyDD: ['USD', 'CAD', 'GBP', 'EUR']
+        currencyDD: ['USD', 'CAD', 'GBP', 'EUR'],
+        phoneTypeDD: [
+          { label: '-- Select Type --', value: '' },
+          { label: 'Office', value: 'Office' },
+          { label: 'Mobile', value: 'Mobile' },
+          { label: 'Fax', value: 'Fax' },
+          { label: 'Other', value: 'Other' },
+        ]
       }
     },
     CountryList: { initialValue: CountryList },

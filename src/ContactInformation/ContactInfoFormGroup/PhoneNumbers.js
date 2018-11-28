@@ -9,6 +9,7 @@ class PhoneNumbers extends Component {
   static propTypes = {
     dropdownCategories: PropTypes.arrayOf(PropTypes.string),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
+    dropdownPhoneType: PropTypes.arrayOf(PropTypes.object),
     fields: PropTypes.object,
     stripes: PropTypes.shape({
       store: PropTypes.object
@@ -41,17 +42,14 @@ class PhoneNumbers extends Component {
   formatter = ({ option }) => <div>{option}</div>;
 
   renderSubPhoneNumbers = (elem, index, fields) => {
-    const { dropdownCategories, dropdownLanguages } = this.props;
+    const { dropdownCategories, dropdownLanguages, dropdownPhoneType } = this.props;
     return (
       <Row key={index} className={css.panels}>
         <Col xs={12} md={3}>
-          <Field label="Country Code" name={`${elem}.phone_number.country_code`} id={`${elem}.phone_number.country_code`} type="number" component={TextField} fullWidth />
+          <Field label="Phone Number*" name={`${elem}.phone_number.phone_number`} id={`${elem}.phone_number.phone_number`} validate={[Required]} component={TextField} placeholder="ex." fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Area Code" name={`${elem}.phone_number.area_code`} id={`${elem}.phone_number.area_code`} component={TextField} fullWidth />
-        </Col>
-        <Col xs={12} md={3}>
-          <Field label="Phone Number*" name={`${elem}.phone_number.phone_number`} id={`${elem}.phone_number.phone_number`} validate={[Required]} component={TextField} fullWidth />
+          <Field label="Type" name={`${elem}.phone_number.type`} id={`${elem}.phone_number.type`} component={Select} fullWidth dataOptions={dropdownPhoneType} />
         </Col>
         <Col xs={12} md={3}>
           <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
