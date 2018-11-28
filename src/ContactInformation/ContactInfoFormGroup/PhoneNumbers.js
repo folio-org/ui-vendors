@@ -9,6 +9,7 @@ class PhoneNumbers extends Component {
   static propTypes = {
     dropdownCategories: PropTypes.arrayOf(PropTypes.string),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
+    dropdownPhoneType: PropTypes.arrayOf(PropTypes.object),
     fields: PropTypes.object,
     stripes: PropTypes.shape({
       store: PropTypes.object
@@ -48,7 +49,7 @@ class PhoneNumbers extends Component {
           <Field label="Phone Number*" name={`${elem}.phone_number.phone_number`} id={`${elem}.phone_number.phone_number`} validate={[Required]} component={TextField} placeholder="ex." fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Type" name={`${elem}.phone_number.type`} id={`${elem}.phone_number.type`} component={Select} fullWidth dataOptions={dropdownPhoneType} disabled />
+          <Field label="Type" name={`${elem}.phone_number.type`} id={`${elem}.phone_number.type`} component={Select} fullWidth dataOptions={dropdownPhoneType} />
         </Col>
         <Col xs={12} md={3}>
           <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />

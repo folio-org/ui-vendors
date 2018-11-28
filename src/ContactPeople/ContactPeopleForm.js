@@ -100,13 +100,7 @@ class ContactPeopleForm extends Component {
             <hr style={{ borderColor: '#f0f0f0' }} />
             <div className={css.subHeadings}>Contacts</div>
           </Col>
-          <Col xs={12} md={2}>
-            <Field label="Country Code" name={`${elem}.contact_person.phone_number.country_code`} id={`${elem}.contact_person.phone_number.country_code`} type="tel" component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={5}>
-            <Field label="Area Code" name={`${elem}.contact_person.phone_number.area_code`} id={`${elem}.contact_person.phone_number.area_code`} type="tel" component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={5}>
+          <Col xs={12}>
             <Field label="Phone Number*" name={`${elem}.contact_person.phone_number.phone_number`} id={`${elem}.contact_person.phone_number.phone_number`} type="tel" validate={[Required]} component={TextField} fullWidth />
           </Col>
           <Col xs={12}>

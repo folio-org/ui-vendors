@@ -22,7 +22,7 @@ class ContactPeopleView extends React.Component {
     const rowCount = (this.props.initialValues.contacts.length - 1) !== key;
     const categories = val.categories.join(', ') || null;
     const fullName = `${_.get(val, 'contact_person.prefix', '')} ${_.get(val, 'contact_person.first_name', '')} ${_.get(val, 'contact_person.last_name', '')}`;
-    const phoneNumber = `${_.get(val, 'contact_person.phone_number.country_code', '')} ${_.get(val, 'contact_person.phone_number.area_code', '')} ${_.get(val, 'contact_person.phone_number.phone_number', '')}`;
+    const phoneNumber = `${_.get(val, 'contact_person.phone_number.phone_number', '')}`;
     const language = `${_.get(val, 'contact_person.language', '')}`;
     const address = `${_.get(val, 'contact_person.address.addressLine1', '')} ${_.get(val, 'contact_person.address.city', '')} ${_.get(val, 'contact_person.address.stateRegion', '')} ${_.get(val, 'contact_person.address.country', '')} ${_.get(val, 'contact_person.address.zipCode', '')} ${_.get(', ' + val, 'contact_person.address.zipCode', '')}`;
     const email = () => {

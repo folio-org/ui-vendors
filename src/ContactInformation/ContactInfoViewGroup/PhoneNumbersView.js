@@ -25,13 +25,13 @@ class ContactInformationView extends React.Component {
 
     return (
       <Row key={key}>
-        <Col xs={5}>
+        <Col xs={3}>
           <KeyValue label="Phone Number" value={phonenumber} />
         </Col>
-        <Col xs={5}>
+        <Col xs={3}>
           <KeyValue label="Type" value={type} />
         </Col>
-        <Col xs={4}>
+        <Col xs={3}>
           <KeyValue label="Categories" value={categories} />
         </Col>
         <Col xs={3}>
