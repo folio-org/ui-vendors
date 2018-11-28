@@ -6,6 +6,12 @@ const Filters = () => {
 
   return [
     {
+      label: 'Vendor Status',
+      name: 'vendor_status',
+      cql: 'vendor_status',
+      values: ['Active', 'Inactive', 'Pending']
+    },
+    {
       label: 'Address Category',
       name: 'category',
       cql: 'addresses',
@@ -43,13 +49,7 @@ const Filters = () => {
         { name: 'Yes', cql: 'true' },
         { name: 'No', cql: 'false' }
       ]
-    },
-    {
-      label: 'Vendor Status',
-      name: 'vendor_status',
-      cql: 'vendor_status',
-      values: ['Active', 'Inactive', 'Pending']
-    },
+    }
   ];
 };
 
