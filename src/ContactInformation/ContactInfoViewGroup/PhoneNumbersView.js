@@ -16,7 +16,6 @@ class ContactInformationView extends React.Component {
   }
 
   getPhoneNumbers(val, key) {
-    console.log(val);
     const rowCount = (this.props.dataVal.length - 1) !== key;
     const categories = val.categories.join(', ') || null;
     const phonenumber = `${_.get(val, 'phone_number.phone_number', '')}`;
