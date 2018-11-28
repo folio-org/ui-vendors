@@ -20,6 +20,7 @@ class AddressInfoView extends React.Component {
     const addresses = () => {
       if (key >= 1) return val.address;
       val.address.primaryAddress = true;
+      val.address.categories = categories;
       return val.address;
     };
 
@@ -30,15 +31,13 @@ class AddressInfoView extends React.Component {
       'stateRegion',
       'zipCode',
       'country',
+      'categories'
     ];
 
     return (
       <Row key={key}>
         <Col xs={12}>
           <AddressView addressObject={addresses()} visibleFields={visibleFields} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Categories" value={categories} />
         </Col>
         {rowCount &&
           <div style={{ width: '100%' }}>
