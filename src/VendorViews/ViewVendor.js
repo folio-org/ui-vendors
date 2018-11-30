@@ -95,6 +95,7 @@ class ViewVendor extends Component {
   update(data) {
     data.addresses.map((item) => {
       delete item.address.primaryAddress;
+      delete item.address.categories;
       return item;
     });
     // Update time
