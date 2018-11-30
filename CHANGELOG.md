@@ -1,8 +1,8 @@
 # Change history for ui-vendors
 
-## [1.1.0](https://github.com/folio-org/ui-vendors/tree/v1.1.0) (2018-10-10)
-[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.0.1...v1.1.0)
-
+## [1.1.0](https://github.com/folio-org/ui-vendors/tree/v1.1.0) (2018-11-30)
+[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.1.0)
+* Moved Sans Code outside address array. ref: UIV-51.
 * Removed tags and notes. ref: UIV-27.
 * Moved Sans code field into summary, UIV-21
 * Converted category dropdown to multi select for contact infomartion and contact people. Ref: UIV-4.
