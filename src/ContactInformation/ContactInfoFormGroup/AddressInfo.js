@@ -40,6 +40,12 @@ class AddressInfo extends Component {
   // For Multi dropdown
   toString = (option) => option;
   formatter = ({ option }) => <div>{option}</div>;
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
+
 
   renderSubAddress = (elem, index, fields) => {
     const { dropdownCategories, dropdownLanguages, dropdownCountry } = this.props;
@@ -69,7 +75,8 @@ class AddressInfo extends Component {
           <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} dataOptions={dropdownLanguages} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <MultiSelection
+          <Field
+            component={MultiSelection}
             label="Categories"
             name={`${elem}.categories`}
             dataOptions={dropdownCategories}
@@ -78,6 +85,8 @@ class AddressInfo extends Component {
             value={this.selectedValues(index, fields, 'categories')}
             itemToString={this.toString}
             formatter={this.formatter}
+            filter={this.filterItems}
+            fullWidth
           />
         </Col>
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
