@@ -39,6 +39,11 @@ class EmailAddresses extends Component {
   // For Multi dropdown
   toString = (option) => option;
   formatter = ({ option }) => <div>{option}</div>;
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
 
   renderSubEmailAddresses = (elem, index, fields) => {
     const { dropdownCategories, dropdownLanguages } = this.props;
@@ -54,7 +59,9 @@ class EmailAddresses extends Component {
           <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
         </Col>
         <Col xs={12} md={3}>
-          <MultiSelection
+          <Field
+            component={MultiSelection}
+            filter={this.filterItems}
             label="Categories"
             name={`${elem}.categories`}
             dataOptions={dropdownCategories}

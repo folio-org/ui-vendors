@@ -39,6 +39,11 @@ class Url extends Component {
   // For Multi dropdown
   toString = (option) => option;
   formatter = ({ option }) => <div>{option}</div>;
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
 
   renderSubUrl = (elem, index, fields) => {
     const { dropdownCategories, dropdownLanguages } = this.props;
@@ -51,7 +56,8 @@ class Url extends Component {
           <Field label="Description" name={`${elem}.url.description`} id={`${elem}.url.description`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <MultiSelection
+          <Field
+            component={MultiSelection}
             label="Categories"
             name={`${elem}.categories`}
             dataOptions={dropdownCategories}
@@ -59,6 +65,7 @@ class Url extends Component {
             style={{ height: '80px' }}
             value={this.selectedValues(index, fields, 'categories')}
             itemToString={this.toString}
+            filter={this.filterItems}
             formatter={this.formatter}
           />
         </Col>

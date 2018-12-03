@@ -45,6 +45,11 @@ class VendorInformationForm extends Component {
   // For Multi dropdown
   toString = (option) => option;
   formatter = ({ option }) => <div>{option}</div>;
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
 
   render() {
     const { parentResources, dropdownCurrencies } = this.props;
@@ -70,7 +75,8 @@ class VendorInformationForm extends Component {
               <Field label="Material Supplier" name="material_supplier" id="material_supplier" component={Checkbox} />
             </Col>
             <Col xs={12}>
-              <MultiSelection
+              <Field
+                component={MultiSelection}
                 label="Vendor Currencies"
                 name="vendor_currencies"
                 id="vendor_currencies"
@@ -80,6 +86,7 @@ class VendorInformationForm extends Component {
                 value={this.selectedValues('vendor_currencies')}
                 itemToString={this.toString}
                 formatter={this.formatter}
+                filter={this.filterItems}
               />
             </Col>
           </Row>

@@ -56,6 +56,11 @@ class ContactPeopleForm extends Component {
   // For Multi dropdown
   toString = (option) => option;
   formatter = ({ option }) => <div>{option}</div>;
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
 
   renderSubCreateContact = (elem, index, fields) => {
     const { dropdownLanguages, dropdownCountry } = this.props;
@@ -128,7 +133,8 @@ class ContactPeopleForm extends Component {
             <Field label="Default Language" name={`${elem}.contact_person.language`} id={`${elem}.contact_person.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
           </Col>
           <Col xs={12} md={3}>
-            <MultiSelection
+            <Field
+              component={MultiSelection}
               label="Categories"
               name={`${elem}.categories`}
               dataOptions={this.props.dropdownContactCategories}
@@ -136,6 +142,7 @@ class ContactPeopleForm extends Component {
               style={{ height: '80px' }}
               value={this.selectedValues(index, fields, 'categories')}
               itemToString={this.toString}
+              filter={this.filterItems}
               formatter={this.formatter}
             />
           </Col>
