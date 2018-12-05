@@ -101,11 +101,9 @@ class AddressInfo extends Component {
     return (
       <Row>
         <Col xs={6}>
+          <div className={css.subHeadings}>Address Info</div>
           {fields.length === 0 &&
             <div><em>- Please add address info -</em></div>
-          }
-          {fields.length !== 0 &&
-            <div className={css.subHeadings}>Address Info</div>
           }
         </Col>
         <Col xs={12}>

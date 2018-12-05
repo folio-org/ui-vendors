@@ -85,12 +85,10 @@ class Url extends Component {
     const { fields } = this.props;
     return (
       <Row>
-        <Col xs={6}>
+        <Col xs={12}>
+          <div className={css.subHeadings}>URL(s)</div>
           {fields.length === 0 &&
             <div><em>- Please add URL -</em></div>
-          }
-          {fields.length !== 0 &&
-            <div className={css.subHeadings}>URL(s)</div>
           }
         </Col>
         <Col xs={12}>
