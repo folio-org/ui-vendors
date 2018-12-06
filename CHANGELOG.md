@@ -1,7 +1,23 @@
 # Change history for ui-vendors
 
+## [1.2.0](https://github.com/folio-org/ui-vendors/tree/v1.2.0) (2018-12-6)
+* Contact people multi options. Ref: UIV-30.
+* Fixed Vendor Form submit error. Ref: UIV-52.
+* Fixed Vendor Form submit error. Ref: UIV-52.
+* Moved categories inside address block. Ref: UIV-21.
+* Move vendor status filter to top. Ref: UIV-35.
+* Change postal code label to ZIP/Postal Code. Ref: UIV-17.
+* Updated phone number type. Ref: UIV-19.
+* Change ERP label. Ref: UIV-41.
+* Update technical support label in Filter and Categories. Ref: UIV-13.
+* On edit layer data, Fixed empty data on load inside edit layer. Ref: UIV-42.
+* Updated categories. Ref: UIV-15.
+* URL not mandatory, removed required field in URL under contact people section. Ref: UIV-14.
+* Added % sign in discount view field. Ref: UIV-3.
+* Fixed form submission, issue due incorrect type value. Ref: UIV-33.
+
 ## [1.1.0](https://github.com/folio-org/ui-vendors/tree/v1.1.0) (2018-10-10)
-[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.0.1...v1.1.0)
+[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.1.0)
 
 * Removed tags and notes. ref: UIV-27.
 * Moved Sans code field into summary, UIV-21
