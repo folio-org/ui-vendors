@@ -3,3 +3,26 @@
   margin-bottom: 13px;
   padding-top: 10px;
 }
+
+.subHeadings {
+  color: var(--subHeading-color);
+  font-size: var(--subHeading-font-size);
+  font-weight: var(--subHeading-font-weight);
+  margin: var(--subHeading-margin);
+}
+
+.sub2Headings {
+  color: var(--sub2Heading-color);
+  font-size: var(--sub2Heading-font-size);
+  font-weight: var(--sub2Heading-font-weight);
+  margin: var(--sub2Heading-margin);
+}
+
+.rptBlocks {
+  background: --rpt-blocks-bg-color;
+  padding: rpt-blocks-padding;
+  border-radius: --rpt-blocks-radius;
+  border-bottom: --rpt-blocks-border-bottoms;
+}
+
+

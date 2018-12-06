@@ -18,6 +18,7 @@ class AddressInfoView extends React.Component {
     const rowCount = (this.props.dataVal.length - 1) !== key;
     const categories = val.categories.join(', ') || null;
     const addresses = () => {
+      
       if (key >= 1) return val.address;
       val.address.primaryAddress = true;
       val.address.categories = categories;

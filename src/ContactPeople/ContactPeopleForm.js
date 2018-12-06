@@ -119,7 +119,7 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />
-            <div className={css.subHeadings}>Primary Email</div>
+            <div className={css.subHeadings}>Email</div>
           </Col>
           <Col xs={12} md={6}>
             <Field label="Email Address*" name={`${elem}.contact_person.primary_email.email.value`} id={`${elem}.contact_person.email.value`} type="email" validate={[Required]} component={TextField} fullWidth />
@@ -129,7 +129,7 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />
-            <div className={css.subHeadings}>Primary Url</div>
+            <div className={css.subHeadings}>URL</div>
           </Col>
           <Col xs={12} md={6}>
             <Field label="URL" name={`${elem}.contact_person.primary_url.url.value`} id={`${elem}.url.value`} component={TextField} fullWidth />
