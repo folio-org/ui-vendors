@@ -63,7 +63,6 @@ class ContactPeopleView extends React.Component {
       }
     };
     const addPhoneNumbers = _.get(val, 'contact_person.phone_numbers', '');
-
     return (
       <Row key={key}>
         <Col xs={4}>
@@ -98,10 +97,10 @@ class ContactPeopleView extends React.Component {
           <KeyValue label="Phone Number" value={phoneNumber} />
         </Col>
         <Col xs={4}>
-          <KeyValue label="Type" value={`${_.get(val, 'contact_person.primary_phone_number.type', '')}`} />
+          <KeyValue label="Type" value={`${_.get(val, 'contact_person.primary_phone_number.phone_number.type', '')}`} />
         </Col>
         <Col xs={4}>
-          <KeyValue label="Category" value={`${_.get(val, 'contact_person.primary_phone_number.category', '')}`} />
+          <KeyValue label="Category" value={`${_.get(val, 'contact_person.primary_phone_number.categories', '')}`} />
         </Col>
         <Col xs={4}>
           <KeyValue label="Language" value={`${_.get(val, 'contact_person.primary_phone_number.Language', '')}`} />

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, Select } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
+import { Required } from '../../Utils/Validate';
 
 class PhoneNumbers extends Component {
   static propTypes = {
@@ -44,7 +45,7 @@ class PhoneNumbers extends Component {
     return (
       <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
         <Col xs={12} md={3}>
-          <Field label="Phone Number*" name={`${elem}.phone_number.phone_number`} id={`${elem}.phone_number.phone_number`} component={TextField} placeholder="ex." fullWidth />
+          <Field label="Phone Number*" name={`${elem}.phone_number.phone_number`} id={`${elem}.phone_number.phone_number`} validate={[Required]} component={TextField} placeholder="ex." fullWidth />
         </Col>
         <Col xs={12} md={3}>
           <Field label="Type" name={`${elem}.phone_number.type`} id={`${elem}.phone_number.type`} component={Select} fullWidth dataOptions={dropdownPhoneType} />

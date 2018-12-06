@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { MultiSelection, Row, Col, TextField, Select } from '@folio/stripes/components';
+import { Required } from '../../Utils/Validate';
 
 class PhoneNumbersCP extends Component {
   static propTypes = {
@@ -41,7 +42,7 @@ class PhoneNumbersCP extends Component {
     return (
       <Row>
         <Col xs={12} md={3}>
-          <Field label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} placeholder="ex." fullWidth />
+          <Field label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} validate={[Required]} placeholder="ex." fullWidth />
         </Col>
         <Col xs={12} md={3}>
           <Field label="Type" name={`${name}.phone_number.type`} id={`${name}.phone_number.type`} component={Select} fullWidth dataOptions={dropdownPhoneType} />
