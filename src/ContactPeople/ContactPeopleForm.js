@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
+import { PhoneNumbers } from '../ContactInformation/ContactInfoFormGroup';
+import PhoneNumbersCP from './ContactPeopleForm/PhoneNumbersCP';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
 
@@ -84,47 +86,56 @@ class ContactPeopleForm extends Component {
             <div className={css.subHeadings}>Address</div>
           </Col>
           <Col xs={12} md={4}>
-            <Field label="Address 1" name={`${elem}.contact_person.address.addressLine1`} id={`${elem}.contact_person.address.addressLine1`} component={TextField} fullWidth />
+            <Field label="Address 1" name={`${elem}.contact_person.primary_address.address.addressLine1`} id={`${elem}.contact_person.primary_address.address.addressLine1`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
-            <Field label="Address 2" name={`${elem}.contact_person.address.addressLine2`} id={`${elem}.contact_person.address.addressLine2`} component={TextField} fullWidth />
+            <Field label="Address 2" name={`${elem}.contact_person.primary_address.address.addressLine2`} id={`${elem}.contact_person.primary_address.address.addressLine2`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
-            <Field label="City" name={`${elem}.contact_person.address.city`} id={`${elem}.contact_person.address.city`} component={TextField} fullWidth />
+            <Field label="City" name={`${elem}.contact_person.primary_address.address.city`} id={`${elem}.contact_person.primary_address.address.city`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
-            <Field label="Region" name={`${elem}.contact_person.address.stateRegion`} id={`${elem}.contact_person.address.stateRegion`} component={TextField} fullWidth />
+            <Field label="Region" name={`${elem}.contact_person.primary_address.address.stateRegion`} id={`${elem}.contact_person.primary_address.address.stateRegion`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
-            <Field label="ZIP/Postal Code" name={`${elem}.contact_person.address.zipCode`} id={`${elem}.address.zipCode`} component={TextField} fullWidth />
+            <Field label="ZIP/Postal Code" name={`${elem}.contact_person.primary_address.address.zipCode`} id={`${elem}.address.zipCode`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
-            <Field label="Country*" name={`${elem}.contact_person.address.country`} id={`${elem}.contact_person.address.country`} validate={[Required]} component={Select} dataOptions={dropdownCountry} fullWidth />
+            <Field label="Country*" name={`${elem}.contact_person.primary_address.address.country`} id={`${elem}.contact_person.primary_address.country`} validate={[Required]} component={Select} dataOptions={dropdownCountry} fullWidth />
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />
-            <div className={css.subHeadings}>Contacts</div>
+            <div className={css.subHeadings}>Primary Phone Numbers</div>
           </Col>
           <Col xs={12}>
-            <Field label="Phone Number*" name={`${elem}.contact_person.phone_number.phone_number`} id={`${elem}.contact_person.phone_number.phone_number`} type="tel" validate={[Required]} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12}>
-            <hr style={{ borderColor: '#f0f0f0' }} />
-          </Col>
-          <Col xs={12} md={6}>
-            <Field label="Email Address*" name={`${elem}.contact_person.email.value`} id={`${elem}.contact_person.email.value`} type="email" validate={[Required]} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={6}>
-            <Field label="Description" name={`${elem}.contact_person.email.description`} id={`${elem}.contact_person.email.description`} component={TextField} fullWidth />
+            <PhoneNumbersCP name={`${elem}.contact_person.primary_phone_number`} {...this.props} />
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />
+            <div className={css.subHeadings}>Additional Phone Numbers</div>
+          </Col>
+          <Col xs={12}>
+            <FieldArray label="Phone Numbers" name={`${elem}.contact_person.phone_numbers`} id={`${elem}.contact_person.phone_numbers`} component={PhoneNumbers} {...this.props} contactPeopleForm />
+          </Col>
+          <Col xs={12}>
+            <hr style={{ borderColor: '#f0f0f0' }} />
+            <div className={css.subHeadings}>Email</div>
           </Col>
           <Col xs={12} md={6}>
-            <Field label="URL" name={`${elem}.contact_person.url.value`} id={`${elem}.url.value`} component={TextField} fullWidth />
+            <Field label="Email Address*" name={`${elem}.contact_person.primary_email.email.value`} id={`${elem}.contact_person.email.value`} type="email" validate={[Required]} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={6}>
-            <Field label="URL Description" name={`${elem}.contact_person.url.description`} id={`${elem}.url.description`} component={TextField} fullWidth />
+            <Field label="Description" name={`${elem}.contact_person.primary_email.email.description`} id={`${elem}.contact_person.email.description`} component={TextField} fullWidth />
+          </Col>
+          <Col xs={12}>
+            <hr style={{ borderColor: '#f0f0f0' }} />
+            <div className={css.subHeadings}>URL</div>
+          </Col>
+          <Col xs={12} md={6}>
+            <Field label="URL" name={`${elem}.contact_person.primary_url.url.value`} id={`${elem}.url.value`} component={TextField} fullWidth />
+          </Col>
+          <Col xs={12} md={6}>
+            <Field label="URL Description" name={`${elem}.contact_person.primary_url.url.description`} id={`${elem}.url.description`} component={TextField} fullWidth />
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />

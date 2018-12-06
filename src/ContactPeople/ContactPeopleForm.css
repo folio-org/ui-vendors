@@ -1,15 +1,14 @@
 /* ContactPeopleForm.css */
 .panels {
-  background: var(--panel-bg-color);
-  padding: 0 1.2rem 0;
+  background: #dddddd30;
+  padding: 0 1rem 0;
   border-radius: var(--panel-radius);
   border-bottom: var(--panel-border-bottom);
-
   &>row:not(:first-child) {
     padding-bottom:.5rem;
     border-radius: 2px;
     overflow: hidden;
-    border-bottom: 2px solid #e3e3e3;
+    border-bottom: 3px solid #e3e3e3;
   }
 }
 
@@ -19,3 +18,12 @@
   font-weight: var(--subHeading-font-weight);
   margin: var(--subHeading-margin);
 }
+
+.sub2Headings {
+  color: var(--sub2Heading-color);
+  font-size: var(--sub2Heading-font-size);
+  font-weight: var(--sub2Heading-font-weight);
+  margin: var(--sub2Heading-margin);
+}
+
+

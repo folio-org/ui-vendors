@@ -85,14 +85,12 @@ class EmailAddresses extends Component {
     const { fields } = this.props;
     return (
       <Row>
+        <Col xs={12}>
+          <div className={css.subHeadings}>Email Address</div>
+        </Col>
         {fields.length === 0 &&
-          <Col xs={6}>
+          <Col xs={12}>
             <div><em>- Please add email -</em></div>
-          </Col>
-        }
-        {fields.length !== 0 &&
-          <Col xs={6}>
-            <div className={css.subHeadings}>Email Address</div>
           </Col>
         }
         <Col xs={12}>
