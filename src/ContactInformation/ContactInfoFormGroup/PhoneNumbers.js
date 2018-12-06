@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field, getFormValues } from 'redux-form';
+import { Field } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, Select } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
-import { Required } from '../../Utils/Validate';
 
 class PhoneNumbers extends Component {
   static propTypes = {
@@ -41,7 +40,7 @@ class PhoneNumbers extends Component {
 
   renderSubPhoneNumbers = (elem, index, fields) => {
     const { dropdownCategories, dropdownLanguages, dropdownPhoneType, contactPeopleForm } = this.props;
-    const isContactPeopleForm = fields.length !== 0 && !contactPeopleForm;
+
     return (
       <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
         <Col xs={12} md={3}>
