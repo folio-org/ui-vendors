@@ -9,7 +9,7 @@
 * Change postal code label to ZIP/Postal Code. Ref: UIV-17.
 * Updated phone number type. Ref: UIV-19.
 * Change ERP label. Ref: UIV-41.
-* Update technical support label in Filter and Categories. Ref: UIV-13.
+* Update technical support label in Filter and Categories. Ref: UIV-13. 
 * On edit layer data, Fixed empty data on load inside edit layer. Ref: UIV-42.
 * Updated categories. Ref: UIV-15.
 * URL not mandatory, removed required field in URL under contact people section. Ref: UIV-14.
