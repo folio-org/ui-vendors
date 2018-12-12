@@ -84,7 +84,7 @@ class ContactPeopleView extends React.Component {
           <KeyValue label="Email" value={email()} />
         </Col>
         <Col xs={4}>
-          <KeyValue label="Url" value={url()} />
+          <KeyValue label="URL" value={url()} />
         </Col>
         <Col xs={6}>
           <KeyValue label="Notes" value={_.get(val, 'contact_person.notes')} />
