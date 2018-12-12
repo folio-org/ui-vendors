@@ -9,7 +9,8 @@ class ContactPeopleView extends React.Component {
     initialValues: PropTypes.object,
     parentResources: PropTypes.shape({
       dropdown: PropTypes.object.isRequired,
-      dropdownCategories: PropTypes.arrayOf(PropTypes.object)
+      dropdownCategories: PropTypes.arrayOf(PropTypes.object),
+      CountryList: PropTypes.arrayOf(PropTypes.object)
     })
   }
 
@@ -40,12 +41,23 @@ class ContactPeopleView extends React.Component {
   }
 
   getContacts(val, key) {
+    const { parentResources: { CountryList } } = this.props;
     const rowCount = (this.props.initialValues.contacts.length - 1) !== key;
     const categories = val.categories.join(', ') || null;
     const fullName = `${_.get(val, 'contact_person.prefix', '')} ${_.get(val, 'contact_person.first_name', '')} ${_.get(val, 'contact_person.last_name', '')}`;
     const phoneNumber = `${_.get(val, 'contact_person.primary_phone_number.phone_number.phone_number', '')}`;
     const language = `${_.get(val, 'contact_person.language', '')}`;
-    const address = `${_.get(val, 'contact_person.primary_address.address.addressLine1', '')} ${_.get(val, 'contact_person.primary_address.address.city', '')} ${_.get(val, 'contact_person.primary_address.address.stateRegion', '')} ${_.get(val, 'contact_person.primary_address.address.country', '')} ${_.get(val, 'contact_person.primary_address.address.zipCode', '')} ${_.get(', ' + val, 'contact_person.primary_address.address.zipCode', '')}`;
+    // Address
+    const address = _.get(val, 'contact_person.primary_address.address.addressLine1');
+    const city = _.get(val, 'contact_person.primary_address.address.city', '');
+    const stateRegion = _.get(val, 'contact_person.primary_address.address.stateRegion', '');
+    const countryVal = _.get(val, 'contact_person.primary_address.address.country', '');
+    const isCountry = CountryList.find(x => x.value === countryVal);
+    const country = isCountry ? `${isCountry.label}` : '';
+    const zipCode = _.get(val, 'contact_person.primary_address.address.zipCode', '');
+    const AddressComplete = `${address} ${city}, ${stateRegion} ${country} ${zipCode}`;
+
+    // Email
     const email = () => {
       const emailDescription = `${_.get(val, 'contact_person.primary_email.email.description', '')}`;
       if (emailDescription.trim().length >= 1) {
@@ -75,7 +87,7 @@ class ContactPeopleView extends React.Component {
           <KeyValue label="Categories" value={categories} />
         </Col>
         <Col xs={4}>
-          <KeyValue label="Address" value={address} />
+          <KeyValue label="Address" value={AddressComplete} />
         </Col>
         <Col xs={4}>
           <KeyValue label="Address 2" value={_.get(val, 'contact_person.primary_address.address.addressLine2', '')} />
