@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import TetherComponent from 'react-tether';
 import { Field } from 'redux-form';
-import { MultiSelection, Row, Col, TextField, Select } from '@folio/stripes/components';
+import { MultiSelection, Row, Col, Select, TextField } from '@folio/stripes/components';
 import { Required } from '../../Utils/Validate';
 
 class PhoneNumbersCP extends Component {
@@ -19,12 +20,20 @@ class PhoneNumbersCP extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isOpen: false,
+    };
     this.onChangeSelect = this.onChangeSelect.bind(this);
+    this.onChangeInput = this.onChangeInput.bind(this);
   }
 
   onChangeSelect = (e, elem, propertyName) => {
     const { dispatch, change } = this.props;
     dispatch(change(`${elem}.${propertyName}`, e));
+  }
+
+  onChangeInput = (e, val) => {
+    console.log(val);
   }
 
   // For Multi dropdown
@@ -37,12 +46,44 @@ class PhoneNumbersCP extends Component {
   };
 
   render() {
+    const { isOpen } = this.state;
     const { name, dropdownCategories, dropdownLanguages, dropdownPhoneType } = this.props;
+    const items = [
+      { 'label': 'army', 'value': 'soldier' },
+      { 'label': 'bottled', 'value': 'water' },
+      { 'label': 'note', 'value': 'book' },
+    ];
+    const constraints = [{
+      to: 'window',
+      attachment: 'together',
+    },
+    {
+      to: 'scrollParent',
+      pin: false
+    }];
+
 
     return (
       <Row>
         <Col xs={12} md={3}>
-          <Field label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} validate={[Required]} placeholder="ex." fullWidth />
+          <TetherComponent
+            attachment="top left"
+            targetAttachment="bottom left"
+            constraints={constraints}
+          >
+            <div>
+              <Field onChange={this.onChangeInput} label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} fullWidth />
+            </div>
+            {
+              isOpen && (
+              <div style={styles.dropdown}>
+                <span>
+                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+                </span>
+              </div>
+              )
+            }
+          </TetherComponent>
         </Col>
         <Col xs={12} md={3}>
           <Field label="Type" name={`${name}.phone_number.type`} id={`${name}.phone_number.type`} component={Select} fullWidth dataOptions={dropdownPhoneType} />
@@ -67,5 +108,13 @@ class PhoneNumbersCP extends Component {
     );
   }
 }
+
+const styles = {
+  dropdown: {
+    background: 'brown',
+    padding: '2px',
+    width: '200px'
+  }
+};
 
 export default PhoneNumbersCP;
