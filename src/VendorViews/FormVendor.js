@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Fields } from 'redux-form';
+import { Fields, getFormValues } from 'redux-form';
 import { IfPermission, Button, Row, Col, AccordionSet, Accordion, ExpandAllButton, Icon } from '@folio/stripes/components';
 // Local Components
 import { SummaryForm } from '../Summary';
@@ -23,6 +23,46 @@ class FormVendor extends Component {
     parentResources: PropTypes.object.isRequired,
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { stripes: { store } } = nextProps;
+    const formValues = getFormValues('FormVendor')(store.getState());
+    const phoneNumberData = [];
+    const getPhoneNum = () => {
+      const num = formValues.phone_numbers;
+      if (!num) return {};
+      const data = num.map((val) => val);
+      return data;
+    };
+    const getPrimaryAndAddionalNumber = () => {
+      const num = formValues.contacts;
+      if (!num) return {};
+      const data = num.map((val) => {
+        const contactPerson = val.contact_person;
+        if (!contactPerson || contactPerson <= 0) return {};
+        // Primary Number
+        const primaryPhoneNumber = Object.assign({}, contactPerson.primary_phone_number);
+        // Additional Phone Number
+        const phoneNumbers = contactPerson.phone_numbers.map((item) => {
+          return item.phone_number;
+        });
+        const allPhones = Object.assign({}, { primaryPhoneNumber }, phoneNumbers);
+        return allPhones;
+      });
+      return data;
+    };
+    console.log(getPrimaryAndAddionalNumber());
+    // console.log(getPhoneNum(num2));
+    // const objPhones = Object.assign({ ...phone_1 }, { ...phone_2 });
+    // console.log(objPhones);
+    // console.log(nextProps);
+    // console.log(nextState);
+    // this.state.data.map(function(item, i){
+    //   console.log('test');
+    //   return <li key={i}>Test</li>
+    // })
+    return null;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -42,7 +82,8 @@ class FormVendor extends Component {
         contactPeopleErr: false,
         agreementsErr: false,
         accountsErr: false,
-      }
+      },
+      phoneNumberData: []
     };
     this.deleteVendor = this.deleteVendor.bind(this);
     this.onToggleSection = this.onToggleSection.bind(this);
@@ -85,7 +126,6 @@ class FormVendor extends Component {
     const { sectionErrors } = this.state;
     const showDeleteButton = initialValues.id || false;
     // Errors
-    // const arrSections = ['name', 'code', 'vendor_status', 'addresses', 'phone_numbers', 'email', 'urls', 'contacts', 'agreements', 'accounts'];
     const arrSections = ['name', 'code', 'vendor_status', 'addresses', 'phone_numbers', 'email', 'urls', 'contacts', 'agreements', 'accounts'];
     const message = (
       <em className={css.requiredIcon} style={{ color: 'red', display: 'flex', alignItems: 'center' }}>
@@ -110,16 +150,16 @@ class FormVendor extends Component {
           </Col>
           <Col xs={12} md={8}>
             <AccordionSet accordionStatus={this.state.sections} onToggle={this.onToggleSection}>
-              <Accordion label="Summary" id="summarySection" displayWhenClosed={summaryErr} displayWhenOpen={summaryErr}>
+              {/* <Accordion label="Summary" id="summarySection" displayWhenClosed={summaryErr} displayWhenOpen={summaryErr}>
                 <SummaryForm {...this.props} />
-              </Accordion>
+              </Accordion> */}
               <Accordion label="Contact Information" id="contactInformationSection" displayWhenClosed={contactInfoErr} displayWhenOpen={contactInfoErr}>
                 <ContactInformationForm {...this.props} />
               </Accordion>
               <Accordion label="Contact People" id="contactPeopleSection" displayWhenClosed={contactPeopleErr} displayWhenOpen={contactPeopleErr}>
                 <ContactPeopleForm {...this.props} />
               </Accordion>
-              <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
+              {/* <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
                 <AgreementsForm {...this.props} />
               </Accordion>
               <Accordion label="Vendor Information" id="vendorInformationSection">
@@ -133,7 +173,7 @@ class FormVendor extends Component {
               </Accordion>
               <Accordion label="Accounts" id="accountsSection" displayWhenClosed={accountsErr} displayWhenOpen={accountsErr}>
                 <AccountsForm {...this.props} />
-              </Accordion>
+              </Accordion> */}
             </AccordionSet>
             <IfPermission perm="vendor.item.delete">
               <Row end="xs">
