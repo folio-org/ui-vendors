@@ -93,7 +93,6 @@ class ViewVendor extends Component {
   }
 
   update(data) {
-    console.log(data);
     // Delete items in contacts
     data.contacts.map((item) => {
       delete item.phone_number;
@@ -145,7 +144,7 @@ class ViewVendor extends Component {
       <Pane id="pane-vendordetails" defaultWidth={this.props.paneWidth} paneTitle={_.get(initialValues, ['name'], '')} lastMenu={lastMenu} dismissible onClose={this.props.onClose}>
         <Row end="xs"><Col xs><ExpandAllButton accordionStatus={this.state.sections} onToggle={this.handleExpandAll} /></Col></Row>
         <AccordionSet accordionStatus={this.state.sections} onToggle={this.onToggleSection}>
-          <Accordion label="Summary" id="summarySection">
+          {/* <Accordion label="Summary" id="summarySection">
             <SummaryView initialValues={initialValues} {...this.props} />
           </Accordion>
           <Accordion label="Contact Information" id="contactInformationSection">
@@ -168,7 +167,7 @@ class ViewVendor extends Component {
           </Accordion>
           <Accordion label="Accounts" id="accountsSection">
             <AccountsView initialValues={initialValues} {...this.props} />
-          </Accordion>
+          </Accordion> */}
         </AccordionSet>
         <Layer isOpen={query.layer ? query.layer === 'edit' : false} label="Edit Vendor Dialog">
           <this.connectedPaneDetails

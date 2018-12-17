@@ -26,40 +26,45 @@ class FormVendor extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { stripes: { store } } = nextProps;
     const formValues = getFormValues('FormVendor')(store.getState());
-    const phoneNumberData = [];
+    // Get Phone Number
     const getPhoneNum = () => {
       const num = formValues.phone_numbers;
       if (!num) return {};
       const data = num.map((val) => val);
       return data;
     };
-    const getPrimaryAndAddionalNumber = () => {
+    // Get Primary Phone Number
+    const getPrimary = () => {
       const num = formValues.contacts;
       if (!num) return {};
       const data = num.map((val) => {
         const contactPerson = val.contact_person;
         if (!contactPerson || contactPerson <= 0) return {};
-        // Primary Number
-        const primaryPhoneNumber = Object.assign({}, contactPerson.primary_phone_number);
-        // Additional Phone Number
-        const phoneNumbers = contactPerson.phone_numbers.map((item) => {
-          return item.phone_number;
-        });
-        const allPhones = Object.assign({}, { primaryPhoneNumber }, phoneNumbers);
-        return allPhones;
+        const primaryPhoneNumber = contactPerson.primary_phone_number || {};
+        return primaryPhoneNumber;
       });
       return data;
     };
-    console.log(getPrimaryAndAddionalNumber());
-    // console.log(getPhoneNum(num2));
-    // const objPhones = Object.assign({ ...phone_1 }, { ...phone_2 });
-    // console.log(objPhones);
-    // console.log(nextProps);
-    // console.log(nextState);
-    // this.state.data.map(function(item, i){
-    //   console.log('test');
-    //   return <li key={i}>Test</li>
-    // })
+    // Get Additional Phone Number
+    const getAdditional = () => {
+      const num = formValues.contacts;
+      if (!num) return {};
+      const data = num.map((val) => {
+        const contactPerson = val.contact_person;
+        if (!contactPerson || contactPerson <= 0) return {};
+        const phoneNums = contactPerson.phone_numbers;
+        if (!phoneNums || phoneNums <= 0) return {};
+        const phoneNumbers = contactPerson.phone_numbers.map((item) => item);
+        return phoneNumbers;
+      });
+      return data;
+    };
+    // Gather all phone numbers
+    const phoneCollection = _.unionBy(getPhoneNum(), getPrimary(), ...getAdditional());
+    // Update state
+    if (!_.isEqual(phoneCollection, prevState.phoneCollection)) {
+      return { phoneCollection };
+    }
     return null;
   }
 
@@ -83,7 +88,7 @@ class FormVendor extends Component {
         agreementsErr: false,
         accountsErr: false,
       },
-      phoneNumberData: []
+      phoneCollection: []
     };
     this.deleteVendor = this.deleteVendor.bind(this);
     this.onToggleSection = this.onToggleSection.bind(this);
@@ -123,8 +128,9 @@ class FormVendor extends Component {
 
   render() {
     const { initialValues } = this.props;
-    const { sectionErrors } = this.state;
+    const { sectionErrors, phoneCollection } = this.state;
     const showDeleteButton = initialValues.id || false;
+
     // Errors
     const arrSections = ['name', 'code', 'vendor_status', 'addresses', 'phone_numbers', 'email', 'urls', 'contacts', 'agreements', 'accounts'];
     const message = (
@@ -138,6 +144,7 @@ class FormVendor extends Component {
     const contactPeopleErr = sectionErrors.contactPeopleErr ? message : null;
     const agreementsErr = sectionErrors.agreementsErr ? message : null;
     const accountsErr = sectionErrors.accountsErr ? message : null;
+
 
     return (
       <div id="form-add-new-vendor">
@@ -154,10 +161,10 @@ class FormVendor extends Component {
                 <SummaryForm {...this.props} />
               </Accordion> */}
               <Accordion label="Contact Information" id="contactInformationSection" displayWhenClosed={contactInfoErr} displayWhenOpen={contactInfoErr}>
-                <ContactInformationForm {...this.props} />
+                <ContactInformationForm phoneCollection={phoneCollection} {...this.props} />
               </Accordion>
               <Accordion label="Contact People" id="contactPeopleSection" displayWhenClosed={contactPeopleErr} displayWhenOpen={contactPeopleErr}>
-                <ContactPeopleForm {...this.props} />
+                <ContactPeopleForm phoneCollection={phoneCollection} {...this.props} />
               </Accordion>
               {/* <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
                 <AgreementsForm {...this.props} />

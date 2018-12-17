@@ -18,10 +18,18 @@ class PhoneNumbersCP extends Component {
     name: PropTypes.string,
   };
 
+  // selectedValues = (index, fields, propertyName) => {
+  //   const { stripes: { store } } = this.props;
+  //   const formValues = getFormValues('FormVendor')(store.getState());
+  //   const currValues = formValues[fields.name][index][propertyName];
+  //   return currValues;
+  // }
+
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false,
+      phoneData: []
     };
     this.onChangeSelect = this.onChangeSelect.bind(this);
     this.onChangeInput = this.onChangeInput.bind(this);
@@ -61,6 +69,7 @@ class PhoneNumbersCP extends Component {
       to: 'scrollParent',
       pin: false
     }];
+    // console.log(this.props);
 
 
     return (
