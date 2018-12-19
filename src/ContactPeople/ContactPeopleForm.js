@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
 import { PhoneNumbers } from '../ContactInformation/ContactInfoFormGroup';
@@ -16,15 +17,23 @@ class ContactPeopleForm extends Component {
       store: PropTypes.object
     }),
     dispatch: PropTypes.func,
-    change: PropTypes.func
+    change: PropTypes.func,
+    phoneCollection: PropTypes.object
   };
 
   constructor(props) {
     super(props);
+    this.state = {
+      isOpen: false, 
+      phoneFilteredCollection: []
+    };
     this.renderCreateContact = this.renderCreateContact.bind(this);
     this.renderSubCreateContact = this.renderSubCreateContact.bind(this);
     this.onChangeSelect = this.onChangeSelect.bind(this);
     this.selectedValues = this.selectedValues.bind(this);
+    this.onPhoneInputChange = this.onPhoneInputChange.bind(this);
+    this.onPhoneInputClear = this.onPhoneInputClear.bind(this);
+    this.onPhoneClickItem = this.onPhoneClickItem.bind(this);
   }
 
   onChangeSelect = (e, elem, propertyName) => {
@@ -37,6 +46,37 @@ class ContactPeopleForm extends Component {
     const formValues = getFormValues('FormVendor')(store.getState());
     const currValues = formValues[fields.name][index][propertyName];
     return currValues;
+  }
+
+  onPhoneInputChange(obj, e) {
+    const { isOpen } = this.state;
+    const { phoneCollection } = this.props;
+    if (!_.isEmpty(phoneCollection) && (e.trim().length >= 1)) {
+      const num = phoneCollection;
+      const objFiltered = _.filter(num, (o) => o.phone_number.phone_number.includes(e));
+      if (!_.isEmpty(objFiltered) && !isOpen) {
+        return this.setState({ isOpen: true, phoneFilteredCollection: objFiltered });
+      } else if (_.isEmpty(objFiltered) && isOpen) {
+        return this.setState({ isOpen: false, phoneFilteredCollection: [] });
+      }
+      return false;
+    }
+
+    if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
+    return false;
+  }
+
+  onPhoneInputClear() {
+    const { isOpen } = this.state;
+    this.setState({ isOpen: false });
+    if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
+  }
+
+  onPhoneClickItem(name, item) {
+    const { isOpen } = this.state;
+    const { dispatch, change } = this.props;
+    dispatch(change(`${name}`, item));
+    if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
   }
 
   renderCreateContact = ({ fields }) => {
@@ -108,14 +148,33 @@ class ContactPeopleForm extends Component {
             <div className={css.subHeadings}>Primary Phone Numbers</div>
           </Col>
           <Col xs={12}>
-            <PhoneNumbersCP name={`${elem}.contact_person.primary_phone_number`} {...this.props} />
+            <PhoneNumbersCP
+              name={`${elem}.contact_person.primary_phone_number`}
+              id={`${elem}.contact_person.primary_phone_number`}
+              isOpen={this.state.isOpen}
+              phoneFilteredCollection={this.state.phoneFilteredCollection}
+              onPhoneInputChange={this.onPhoneInputChange}
+              onPhoneInputClear={this.onPhoneInputClear}
+              onPhoneClickItem={this.onPhoneClickItem}
+              {...this.props}
+            />
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />
             <div className={css.subHeadings}>Additional Phone Numbers</div>
           </Col>
           <Col xs={12}>
-            <FieldArray label="Phone Numbers" name={`${elem}.contact_person.phone_numbers`} id={`${elem}.contact_person.phone_numbers`} component={PhoneNumbers} {...this.props} contactPeopleForm />
+            <FieldArray
+              label="Phone Numbers"
+              name={`${elem}.contact_person.phone_numbers`}
+              id={`${elem}.contact_person.phone_numbers`}
+              component={PhoneNumbers}
+              phoneFilteredCollection={this.state.phoneFilteredCollection}
+              onPhoneInputChange={this.onPhoneInputChange}
+              onPhoneInputClear={this.onPhoneInputClear}
+              onPhoneClickItem={this.onPhoneClickItem}
+              {...this.props}
+            />
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />

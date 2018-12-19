@@ -16,23 +16,17 @@ class PhoneNumbersCP extends Component {
     dispatch: PropTypes.func,
     change: PropTypes.func,
     name: PropTypes.string,
+    isOpen: PropTypes.bool.isRequired,
+    onPhoneInputChange: PropTypes.func.isRequired,
+    onPhoneInputClear: PropTypes.func.isRequired,
+    onPhoneClickItem: PropTypes.func.isRequired,
+    phoneFilteredCollection: PropTypes.arrayOf(PropTypes.object).isRequired
   };
-
-  // selectedValues = (index, fields, propertyName) => {
-  //   const { stripes: { store } } = this.props;
-  //   const formValues = getFormValues('FormVendor')(store.getState());
-  //   const currValues = formValues[fields.name][index][propertyName];
-  //   return currValues;
-  // }
 
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false,
-      phoneData: []
-    };
     this.onChangeSelect = this.onChangeSelect.bind(this);
-    this.onChangeInput = this.onChangeInput.bind(this);
+    this.renderItems = this.renderItems.bind(this);
   }
 
   onChangeSelect = (e, elem, propertyName) => {
@@ -40,8 +34,24 @@ class PhoneNumbersCP extends Component {
     dispatch(change(`${elem}.${propertyName}`, e));
   }
 
-  onChangeInput = (e, val) => {
-    console.log(val);
+  renderItems = () => {
+    const { phoneFilteredCollection, name, onPhoneClickItem } = this.props;
+    const listItems = phoneFilteredCollection.map((item, i) => {
+      return (
+        <div key={i}>
+          <div style={styles.inlineButton} onClick={(e) => onPhoneClickItem(name, item)}>
+            {item.phone_number.phone_number}
+          </div>
+        </div>
+      );
+    });
+
+    return (
+      <div>
+        {listItems}
+        <hr />
+      </div>
+    );
   }
 
   // For Multi dropdown
@@ -54,13 +64,7 @@ class PhoneNumbersCP extends Component {
   };
 
   render() {
-    const { isOpen } = this.state;
-    const { name, dropdownCategories, dropdownLanguages, dropdownPhoneType } = this.props;
-    const items = [
-      { 'label': 'army', 'value': 'soldier' },
-      { 'label': 'bottled', 'value': 'water' },
-      { 'label': 'note', 'value': 'book' },
-    ];
+    const { name, dropdownCategories, dropdownLanguages, dropdownPhoneType, onPhoneInputChange, onPhoneInputClear, isOpen } = this.props;
     const constraints = [{
       to: 'window',
       attachment: 'together',
@@ -69,8 +73,6 @@ class PhoneNumbersCP extends Component {
       to: 'scrollParent',
       pin: false
     }];
-    // console.log(this.props);
-
 
     return (
       <Row>
@@ -81,13 +83,13 @@ class PhoneNumbersCP extends Component {
             constraints={constraints}
           >
             <div>
-              <Field onChange={this.onChangeInput} label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} fullWidth />
+              <Field onChange={onPhoneInputChange} onClearField={onPhoneInputClear} label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} fullWidth />
             </div>
             {
               isOpen && (
               <div style={styles.dropdown}>
                 <span>
-                  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+                  {this.renderItems()}
                 </span>
               </div>
               )
@@ -120,9 +122,13 @@ class PhoneNumbersCP extends Component {
 
 const styles = {
   dropdown: {
-    background: 'brown',
+    background: 'white',
+    border: '1px solid lightGrey',
     padding: '2px',
     width: '200px'
+  },
+  inlineButton: {
+    cursor: 'pointer'
   }
 };
 
