@@ -1,18 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import TetherComponent from 'react-tether';
 import { Field } from 'redux-form';
 import { MultiSelection, Row, Col, Select, TextField } from '@folio/stripes/components';
 import { Required } from './Validate';
-
-const styles = {
-  dropdown: {
-    background: 'white',
-    border: '1px solid lightGrey',
-    padding: '2px',
-    width: '200px'
-  }
-};
+import css from './PhoneNumbersCP.css';
 
 class PhoneNumbersCP extends Component {
   static propTypes = {
@@ -25,22 +18,46 @@ class PhoneNumbersCP extends Component {
     dispatch: PropTypes.func,
     change: PropTypes.func,
     name: PropTypes.string,
-    isOpen: PropTypes.bool.isRequired,
-    onPhoneInputChange: PropTypes.func.isRequired,
-    onPhoneInputClear: PropTypes.func.isRequired,
-    phoneRenderItem: PropTypes.func.isRequired
+    phoneCollection: PropTypes.arrayOf(PropTypes.object)
   };
 
   constructor(props) {
     super(props);
+    this.state = {
+      isOpen: false,
+      currWidth: 100,
+      phoneFilteredCollection: []
+    };
     this.onChangeSelect = this.onChangeSelect.bind(this);
+    this.onPhoneInputChange = this.onPhoneInputChange.bind(this);
+    this.onPhoneInputClear = this.onPhoneInputClear.bind(this);
+    this.onPhoneClickItem = this.onPhoneClickItem.bind(this);
+    this.phoneRenderItem = this.phoneRenderItem.bind(this);
+
+    this.fieldRef = React.createRef();
+  }
+
+  componentDidMount() {
+    const { currWidth } = this.state;
+    const { clientWidth } = this.fieldRef.current;
+    if (clientWidth !== currWidth) {
+      return this.setState({ currWidth: clientWidth });
+    }
+    return false;
+  }
+
+  static getSnapshotBeforeUpdate(prevProps, prevState) {
+    const { clientWidth } = this.fieldRef.current;
+    if (clientWidth !== prevState.currWidth) {
+      return this.setState({ currWidth: clientWidth });
+    }
+    return false;
   }
 
   onChangeSelect = (e, elem, propertyName) => {
     const { dispatch, change } = this.props;
     dispatch(change(`${elem}.${propertyName}`, e));
   }
-
   // For Multi dropdown
   toString = (option) => option;
   formatter = ({ option }) => <div>{option}</div>;
@@ -50,16 +67,73 @@ class PhoneNumbersCP extends Component {
     return { renderedItems };
   };
 
+  onPhoneInputChange(obj, e) {
+    const { isOpen } = this.state;
+    const { phoneCollection } = this.props;
+    if (!_.isEmpty(phoneCollection) && (e.trim().length >= 1)) {
+      const num = phoneCollection;
+      const objFiltered = _.filter(num, (o) => o.phone_number.phone_number.includes(e));
+      if (!_.isEmpty(objFiltered) && !isOpen) {
+        return this.setState({ isOpen: true, phoneFilteredCollection: objFiltered });
+      } else if (_.isEmpty(objFiltered) && isOpen) {
+        return this.setState({ isOpen: false, phoneFilteredCollection: [] });
+      }
+      return false;
+    }
+
+    if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
+    return false;
+  }
+
+  onPhoneInputClear() {
+    const { isOpen } = this.state;
+    if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
+  }
+
+  onPhoneClickItem(name, item) {
+    const { isOpen } = this.state;
+    const { dispatch, change } = this.props;
+    dispatch(change(`${name}`, item));
+    if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
+  }
+
+  phoneRenderItem = (name) => {
+    const { phoneFilteredCollection } = this.state;
+    const listItems = phoneFilteredCollection.map((item, i) => {
+      return (
+        <div key={i}>
+          <div className={css.inlineButton} onClick={(e) =>this. onPhoneClickItem(name, item)}>
+            {item.phone_number.phone_number}
+          </div>
+        </div>
+      );
+    });
+    return (<div>{listItems}</div>);
+  }
+
+  renderCreateContact = ({ fields }) => {
+    return (
+      <Row>
+        {fields.length === 0 &&
+          <Col xs={12}>
+            <div><em>- Please add contact person -</em></div>
+          </Col>
+        }
+        {fields.map(this.renderSubCreateContact)}
+        <Col xs={12} style={{ paddingTop: '10px' }}>
+          <Button onClick={() => fields.push({})}>+ Add</Button>
+        </Col>
+      </Row>
+    );
+  }
+
   render() {
+    const { isOpen, currWidth } = this.state;
     const {
       name,
       dropdownCategories,
       dropdownLanguages,
       dropdownPhoneType,
-      onPhoneInputChange,
-      onPhoneInputClear,
-      phoneRenderItem,
-      isOpen
     } = this.props;
     const constraints = [{
       to: 'window',
@@ -70,6 +144,8 @@ class PhoneNumbersCP extends Component {
       pin: false
     }];
 
+    console.log(currWidth);
+
     return (
       <Fragment>
         <Col xs={12} md={3}>
@@ -78,14 +154,14 @@ class PhoneNumbersCP extends Component {
             targetAttachment="bottom left"
             constraints={constraints}
           >
-            <div>
-              <Field onChange={onPhoneInputChange} onClearField={onPhoneInputClear} label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} fullWidth />
+            <div ref={this.fieldRef}>
+              <Field onChange={this.onPhoneInputChange} onClearField={this.onPhoneInputClear} label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} fullWidth />
             </div>
             {
               isOpen && (
-              <div style={styles.dropdown}>
-                <span>
-                  {phoneRenderItem(name)}
+              <div className={css.dropdown} style={{ width:`${currWidth}px` }}>
+                <span className={css.dropDownItem}>
+                  {this.phoneRenderItem(name)}
                 </span>
               </div>
               )
