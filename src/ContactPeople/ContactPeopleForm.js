@@ -24,7 +24,7 @@ class ContactPeopleForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false, 
+      isOpen: false,
       phoneFilteredCollection: []
     };
     this.renderCreateContact = this.renderCreateContact.bind(this);
@@ -34,6 +34,7 @@ class ContactPeopleForm extends Component {
     this.onPhoneInputChange = this.onPhoneInputChange.bind(this);
     this.onPhoneInputClear = this.onPhoneInputClear.bind(this);
     this.onPhoneClickItem = this.onPhoneClickItem.bind(this);
+    this.phoneRenderItem = this.phoneRenderItem.bind(this);
   }
 
   onChangeSelect = (e, elem, propertyName) => {
@@ -77,6 +78,20 @@ class ContactPeopleForm extends Component {
     const { dispatch, change } = this.props;
     dispatch(change(`${name}`, item));
     if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
+  }
+
+  phoneRenderItem = (name) => {
+    const { phoneFilteredCollection } = this.state;
+    const listItems = phoneFilteredCollection.map((item, i) => {
+      return (
+        <div key={i}>
+          <div style={styles.inlineButton} onClick={(e) =>this. onPhoneClickItem(name, item)}>
+            {item.phone_number.phone_number}
+          </div>
+        </div>
+      );
+    });
+    return (<div>{listItems}</div>);
   }
 
   renderCreateContact = ({ fields }) => {
@@ -156,6 +171,7 @@ class ContactPeopleForm extends Component {
               onPhoneInputChange={this.onPhoneInputChange}
               onPhoneInputClear={this.onPhoneInputClear}
               onPhoneClickItem={this.onPhoneClickItem}
+              phoneRenderItem={this.phoneRenderItem}
               {...this.props}
             />
           </Col>
@@ -173,6 +189,7 @@ class ContactPeopleForm extends Component {
               onPhoneInputChange={this.onPhoneInputChange}
               onPhoneInputClear={this.onPhoneInputClear}
               onPhoneClickItem={this.onPhoneClickItem}
+              phoneRenderItem={this.phoneRenderItem}
               {...this.props}
             />
           </Col>
@@ -240,5 +257,11 @@ class ContactPeopleForm extends Component {
     );
   }
 }
+
+const styles = {
+  inlineButton: {
+    cursor: 'pointer'
+  }
+};
 
 export default ContactPeopleForm;

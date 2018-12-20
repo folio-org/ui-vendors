@@ -19,39 +19,17 @@ class PhoneNumbersCP extends Component {
     isOpen: PropTypes.bool.isRequired,
     onPhoneInputChange: PropTypes.func.isRequired,
     onPhoneInputClear: PropTypes.func.isRequired,
-    onPhoneClickItem: PropTypes.func.isRequired,
-    phoneFilteredCollection: PropTypes.arrayOf(PropTypes.object).isRequired
+    phoneRenderItem: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
     this.onChangeSelect = this.onChangeSelect.bind(this);
-    this.renderItems = this.renderItems.bind(this);
   }
 
   onChangeSelect = (e, elem, propertyName) => {
     const { dispatch, change } = this.props;
     dispatch(change(`${elem}.${propertyName}`, e));
-  }
-
-  renderItems = () => {
-    const { phoneFilteredCollection, name, onPhoneClickItem } = this.props;
-    const listItems = phoneFilteredCollection.map((item, i) => {
-      return (
-        <div key={i}>
-          <div style={styles.inlineButton} onClick={(e) => onPhoneClickItem(name, item)}>
-            {item.phone_number.phone_number}
-          </div>
-        </div>
-      );
-    });
-
-    return (
-      <div>
-        {listItems}
-        <hr />
-      </div>
-    );
   }
 
   // For Multi dropdown
@@ -64,7 +42,16 @@ class PhoneNumbersCP extends Component {
   };
 
   render() {
-    const { name, dropdownCategories, dropdownLanguages, dropdownPhoneType, onPhoneInputChange, onPhoneInputClear, isOpen } = this.props;
+    const { 
+      name,
+      dropdownCategories,
+      dropdownLanguages,
+      dropdownPhoneType,
+      onPhoneInputChange,
+      onPhoneInputClear,
+      phoneRenderItem,
+      isOpen
+    } = this.props;
     const constraints = [{
       to: 'window',
       attachment: 'together',
@@ -89,7 +76,7 @@ class PhoneNumbersCP extends Component {
               isOpen && (
               <div style={styles.dropdown}>
                 <span>
-                  {this.renderItems()}
+                  {phoneRenderItem(name)}
                 </span>
               </div>
               )
@@ -126,9 +113,6 @@ const styles = {
     border: '1px solid lightGrey',
     padding: '2px',
     width: '200px'
-  },
-  inlineButton: {
-    cursor: 'pointer'
   }
 };
 
