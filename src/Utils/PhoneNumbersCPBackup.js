@@ -3,7 +3,16 @@ import PropTypes from 'prop-types';
 import TetherComponent from 'react-tether';
 import { Field } from 'redux-form';
 import { MultiSelection, Row, Col, Select, TextField } from '@folio/stripes/components';
-import { Required } from '../../Utils/Validate';
+import { Required } from './Validate';
+
+const styles = {
+  dropdown: {
+    background: 'white',
+    border: '1px solid lightGrey',
+    padding: '2px',
+    width: '200px'
+  }
+};
 
 class PhoneNumbersCP extends Component {
   static propTypes = {
@@ -42,7 +51,7 @@ class PhoneNumbersCP extends Component {
   };
 
   render() {
-    const { 
+    const {
       name,
       dropdownCategories,
       dropdownLanguages,
@@ -62,7 +71,7 @@ class PhoneNumbersCP extends Component {
     }];
 
     return (
-      <Row>
+      <div>
         <Col xs={12} md={3}>
           <TetherComponent
             attachment="top left"
@@ -102,18 +111,9 @@ class PhoneNumbersCP extends Component {
             formatter={this.formatter}
           />
         </Col>
-      </Row>
+      </div>
     );
   }
 }
-
-const styles = {
-  dropdown: {
-    background: 'white',
-    border: '1px solid lightGrey',
-    padding: '2px',
-    width: '200px'
-  }
-};
 
 export default PhoneNumbersCP;

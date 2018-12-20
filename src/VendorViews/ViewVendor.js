@@ -146,14 +146,14 @@ class ViewVendor extends Component {
         <AccordionSet accordionStatus={this.state.sections} onToggle={this.onToggleSection}>
           {/* <Accordion label="Summary" id="summarySection">
             <SummaryView initialValues={initialValues} {...this.props} />
-          </Accordion>
+          </Accordion> */}
           <Accordion label="Contact Information" id="contactInformationSection">
             <ContactInformationView initialValues={initialValues} {...this.props} />
           </Accordion>
           <Accordion label="Contact People" id="contactPeopleSection">
             <ContactPeopleView initialValues={initialValues} {...this.props} />
           </Accordion>
-          <Accordion label="Agreements" id="agreementsSection">
+          {/* <Accordion label="Agreements" id="agreementsSection">
             <AgreementsView initialValues={initialValues} {...this.props} />
           </Accordion>
           <Accordion label="Vendor Information" id="vendorInformationSection">

@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
 import { PhoneNumbers } from '../ContactInformation/ContactInfoFormGroup';
-import PhoneNumbersCP from './ContactPeopleForm/PhoneNumbersCP';
+import PhoneNumbersCP from '../Utils/PhoneNumbersCP';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
 
@@ -163,17 +163,19 @@ class ContactPeopleForm extends Component {
             <div className={css.subHeadings}>Primary Phone Numbers</div>
           </Col>
           <Col xs={12}>
-            <PhoneNumbersCP
-              name={`${elem}.contact_person.primary_phone_number`}
-              id={`${elem}.contact_person.primary_phone_number`}
-              isOpen={this.state.isOpen}
-              phoneFilteredCollection={this.state.phoneFilteredCollection}
-              onPhoneInputChange={this.onPhoneInputChange}
-              onPhoneInputClear={this.onPhoneInputClear}
-              onPhoneClickItem={this.onPhoneClickItem}
-              phoneRenderItem={this.phoneRenderItem}
-              {...this.props}
-            />
+            <Row>
+              <PhoneNumbersCP
+                name={`${elem}.contact_person.primary_phone_number`}
+                id={`${elem}.contact_person.primary_phone_number`}
+                isOpen={this.state.isOpen}
+                // phoneFilteredCollection={this.state.phoneFilteredCollection}
+                // onPhoneInputChange={this.onPhoneInputChange}
+                // onPhoneInputClear={this.onPhoneInputClear}
+                // onPhoneClickItem={this.onPhoneClickItem}
+                // phoneRenderItem={this.phoneRenderItem}
+                {...this.props}
+              />
+            </Row>
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />
@@ -185,12 +187,13 @@ class ContactPeopleForm extends Component {
               name={`${elem}.contact_person.phone_numbers`}
               id={`${elem}.contact_person.phone_numbers`}
               component={PhoneNumbers}
-              phoneFilteredCollection={this.state.phoneFilteredCollection}
-              onPhoneInputChange={this.onPhoneInputChange}
-              onPhoneInputClear={this.onPhoneInputClear}
-              onPhoneClickItem={this.onPhoneClickItem}
-              phoneRenderItem={this.phoneRenderItem}
+              // phoneFilteredCollection={this.state.phoneFilteredCollection}
+              // onPhoneInputChange={this.onPhoneInputChange}
+              // onPhoneInputClear={this.onPhoneInputClear}
+              // onPhoneClickItem={this.onPhoneClickItem}
+              // phoneRenderItem={this.phoneRenderItem}
               {...this.props}
+              contactPeopleForm
             />
           </Col>
           <Col xs={12}>
