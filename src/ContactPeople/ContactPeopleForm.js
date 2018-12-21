@@ -116,6 +116,8 @@ class ContactPeopleForm extends Component {
           <Col xs={12}>
             <Row>
               <PhoneNumbersCP
+                index={index}
+                fields={fields}
                 name={`${elem}.contact_person.primary_phone_number`}
                 id={`${elem}.contact_person.primary_phone_number`}
                 {...this.props}
@@ -131,6 +133,8 @@ class ContactPeopleForm extends Component {
               label="Phone Numbers"
               name={`${elem}.contact_person.phone_numbers`}
               id={`${elem}.contact_person.phone_numbers`}
+              index={index}
+              fields={fields}
               component={PhoneNumbers}
               {...this.props}
               contactPeopleForm
@@ -169,8 +173,8 @@ class ContactPeopleForm extends Component {
               name={`${elem}.categories`}
               dataOptions={this.props.dropdownContactCategories}
               onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
-              style={{ height: '80px' }}
               value={this.selectedValues(index, fields, 'categories')}
+              style={{ height: '80px' }}
               itemToString={this.toString}
               filter={this.filterItems}
               formatter={this.formatter}

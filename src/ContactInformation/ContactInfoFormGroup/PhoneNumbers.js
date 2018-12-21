@@ -28,14 +28,11 @@ class PhoneNumbers extends Component {
     return (
       <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
         <PhoneNumbersCP
+          index={index}
+          fields={fields}
           name={`${elem}`}
           id={`${elem}`}
           isOpen={this.state.isOpen}
-          // phoneFilteredCollection={this.state.phoneFilteredCollection}
-          // onPhoneInputChange={this.onPhoneInputChange}
-          // onPhoneInputClear={this.onPhoneInputClear}
-          // onPhoneClickItem={this.onPhoneClickItem}
-          // phoneRenderItem={this.phoneRenderItem}
           {...this.props}
         />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>

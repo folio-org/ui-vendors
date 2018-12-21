@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import TetherComponent from 'react-tether';
-import { Field } from 'redux-form';
+import { Field, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Select, TextField } from '@folio/stripes/components';
 import { Required } from './Validate';
 import css from './PhoneNumbersCP.css';
@@ -18,6 +18,8 @@ class PhoneNumbersCP extends Component {
     dispatch: PropTypes.func,
     change: PropTypes.func,
     name: PropTypes.string,
+    index: PropTypes.number,
+    fields: PropTypes.object,
     phoneCollection: PropTypes.arrayOf(PropTypes.object)
   };
 
@@ -29,6 +31,7 @@ class PhoneNumbersCP extends Component {
       phoneFilteredCollection: []
     };
     this.onChangeSelect = this.onChangeSelect.bind(this);
+    this.selectedValues = this.selectedValues.bind(this);
     this.onPhoneInputChange = this.onPhoneInputChange.bind(this);
     this.onPhoneInputClear = this.onPhoneInputClear.bind(this);
     this.onPhoneClickItem = this.onPhoneClickItem.bind(this);
@@ -46,19 +49,27 @@ class PhoneNumbersCP extends Component {
     return false;
   }
 
-  static getSnapshotBeforeUpdate(prevProps, prevState) {
-    const { clientWidth } = this.fieldRef.current;
-    if (clientWidth !== prevState.currWidth) {
-      return this.setState({ currWidth: clientWidth });
-    }
-    return false;
-  }
+  // static getSnapshotBeforeUpdate(prevProps, prevState) {
+  //   const { clientWidth } = this.fieldRef.current;
+  //   if (clientWidth !== prevState.currWidth) {
+  //     return this.setState({ currWidth: clientWidth });
+  //   }
+  //   return false;
+  // }
 
+  // Multi dropdown
   onChangeSelect = (e, elem, propertyName) => {
     const { dispatch, change } = this.props;
-    dispatch(change(`${elem}.${propertyName}`, e));
+    return dispatch(change(`${elem}.${propertyName}`, e));
   }
-  // For Multi dropdown
+
+  selectedValues = (index, fields, propertyName) => {
+    const { stripes: { store } } = this.props;
+    const formValues = getFormValues('FormVendor')(store.getState());
+    const currValues = formValues[fields.name][index][propertyName];
+    return currValues;
+  }
+
   toString = (option) => option;
   formatter = ({ option }) => <div>{option}</div>;
   filterItems = (filterText, list) => {
@@ -66,13 +77,19 @@ class PhoneNumbersCP extends Component {
     const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
     return { renderedItems };
   };
+  // End Multi dropdown
 
+  // Phone Numbers
   onPhoneInputChange(obj, e) {
     const { isOpen } = this.state;
     const { phoneCollection } = this.props;
     if (!_.isEmpty(phoneCollection) && (e.trim().length >= 1)) {
       const num = phoneCollection;
-      const objFiltered = _.filter(num, (o) => o.phone_number.phone_number.includes(e));
+      const objFiltered = _.filter(num, (o) => {
+        if (o.phone_number && o.phone_number.phone_number) o.phone_number.phone_number.includes(e);
+        return false;
+      });
+
       if (!_.isEmpty(objFiltered) && !isOpen) {
         return this.setState({ isOpen: true, phoneFilteredCollection: objFiltered });
       } else if (_.isEmpty(objFiltered) && isOpen) {
@@ -102,7 +119,7 @@ class PhoneNumbersCP extends Component {
     const listItems = phoneFilteredCollection.map((item, i) => {
       return (
         <div key={i}>
-          <div className={css.inlineButton} onClick={(e) =>this. onPhoneClickItem(name, item)}>
+          <div className={css.inlineButton} onClick={(e) => this.onPhoneClickItem(name, item)}>
             {item.phone_number.phone_number}
           </div>
         </div>
@@ -110,6 +127,7 @@ class PhoneNumbersCP extends Component {
     });
     return (<div>{listItems}</div>);
   }
+  // End Phone Numbers
 
   renderCreateContact = ({ fields }) => {
     return (
@@ -130,6 +148,8 @@ class PhoneNumbersCP extends Component {
   render() {
     const { isOpen, currWidth } = this.state;
     const {
+      index,
+      fields,
       name,
       dropdownCategories,
       dropdownLanguages,
@@ -143,8 +163,6 @@ class PhoneNumbersCP extends Component {
       to: 'scrollParent',
       pin: false
     }];
-
-    console.log(currWidth);
 
     return (
       <Fragment>
@@ -182,6 +200,7 @@ class PhoneNumbersCP extends Component {
             name={`${name}.categories`}
             dataOptions={dropdownCategories}
             onChange={(e) => this.onChangeSelect(e, name, 'categories')}
+            value={this.selectedValues(index, fields, 'categories')}
             style={{ height: '80px' }}
             itemToString={this.toString}
             formatter={this.formatter}
