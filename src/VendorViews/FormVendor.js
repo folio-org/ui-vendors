@@ -60,7 +60,7 @@ class FormVendor extends Component {
       return data;
     };
     // Gather all phone numbers
-    const phoneCollection = _.unionBy(getPhoneNum(), getPrimary(), ...getAdditional());
+    const phoneCollection = _.assign(getPhoneNum(), getPrimary(), ...getAdditional());
     // Update state
     if (!_.isEqual(phoneCollection, prevState.phoneCollection)) {
       return { phoneCollection };

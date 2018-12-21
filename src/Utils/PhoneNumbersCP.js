@@ -75,6 +75,7 @@ class PhoneNumbersCP extends Component {
   filterItems = (filterText, list) => {
     const filterRegExp = new RegExp(`^${filterText}`, 'i');
     const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+
     return { renderedItems };
   };
   // End Multi dropdown
@@ -86,8 +87,9 @@ class PhoneNumbersCP extends Component {
     if (!_.isEmpty(phoneCollection) && (e.trim().length >= 1)) {
       const num = phoneCollection;
       const objFiltered = _.filter(num, (o) => {
-        if (o.phone_number && o.phone_number.phone_number) o.phone_number.phone_number.includes(e);
-        return false;
+        const phoneNumber = ((o.phone_number || []).phone_number || []);
+        if (!_.includes(phoneNumber, e)) return false;
+        return o;
       });
 
       if (!_.isEmpty(objFiltered) && !isOpen) {
