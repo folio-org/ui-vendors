@@ -25,6 +25,7 @@ class FormVendor extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { stripes: { store } } = nextProps;
+    const arr = [];
     const formValues = getFormValues('FormVendor')(store.getState());
     // Get Phone Number
     const getPhoneNum = () => {
@@ -38,9 +39,8 @@ class FormVendor extends Component {
       const num = formValues.contacts;
       if (!num) return {};
       const data = num.map((val) => {
-        const contactPerson = val.contact_person;
-        if (!contactPerson || contactPerson <= 0) return {};
-        const primaryPhoneNumber = contactPerson.primary_phone_number || {};
+        const primaryPhoneNumber = ((val.contact_person || {}).primary_phone_number || {});
+        if (!primaryPhoneNumber) return {};
         return primaryPhoneNumber;
       });
       return data;
@@ -59,8 +59,11 @@ class FormVendor extends Component {
       });
       return data;
     };
+    arr.push(...getPhoneNum());
+    arr.push(...getPrimary());
+    arr.push(...getAdditional());
     // Gather all phone numbers
-    const phoneCollection = _.assign(getPhoneNum(), getPrimary(), ...getAdditional());
+    const phoneCollection = _.assign({}, ...getAdditional(), getPhoneNum(), getPrimary());
     // Update state
     if (!_.isEqual(phoneCollection, prevState.phoneCollection)) {
       return { phoneCollection };
@@ -130,7 +133,6 @@ class FormVendor extends Component {
     const { initialValues } = this.props;
     const { sectionErrors, phoneCollection } = this.state;
     const showDeleteButton = initialValues.id || false;
-
     // Errors
     const arrSections = ['name', 'code', 'vendor_status', 'addresses', 'phone_numbers', 'email', 'urls', 'contacts', 'agreements', 'accounts'];
     const message = (
@@ -157,16 +159,16 @@ class FormVendor extends Component {
           </Col>
           <Col xs={12} md={8}>
             <AccordionSet accordionStatus={this.state.sections} onToggle={this.onToggleSection}>
-              <Accordion label="Summary" id="summarySection" displayWhenClosed={summaryErr} displayWhenOpen={summaryErr}>
+              {/* <Accordion label="Summary" id="summarySection" displayWhenClosed={summaryErr} displayWhenOpen={summaryErr}>
                 <SummaryForm {...this.props} />
               </Accordion>
               <Accordion label="Contact Information" id="contactInformationSection" displayWhenClosed={contactInfoErr} displayWhenOpen={contactInfoErr}>
                 <ContactInformationForm phoneCollection={phoneCollection} {...this.props} />
-              </Accordion>
+              </Accordion> */}
               <Accordion label="Contact People" id="contactPeopleSection" displayWhenClosed={contactPeopleErr} displayWhenOpen={contactPeopleErr}>
                 <ContactPeopleForm phoneCollection={phoneCollection} {...this.props} />
               </Accordion>
-              <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
+              {/* <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
                 <AgreementsForm {...this.props} />
               </Accordion>
               <Accordion label="Vendor Information" id="vendorInformationSection">
@@ -180,7 +182,7 @@ class FormVendor extends Component {
               </Accordion>
               <Accordion label="Accounts" id="accountsSection" displayWhenClosed={accountsErr} displayWhenOpen={accountsErr}>
                 <AccountsForm {...this.props} />
-              </Accordion>
+              </Accordion> */}
             </AccordionSet>
             <IfPermission perm="vendor.item.delete">
               <Row end="xs">
