@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
-import { PhoneNumbers } from '../ContactInformation/ContactInfoFormGroup';
+import AdditionalPhoneNumbers from './AdditionalPhoneNumbers';
 import PhoneNumbersCP from '../Utils/PhoneNumbersCP';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
@@ -133,9 +133,7 @@ class ContactPeopleForm extends Component {
               label="Phone Numbers"
               name={`${elem}.contact_person.phone_numbers`}
               id={`${elem}.contact_person.phone_numbers`}
-              index={index}
-              fields={fields}
-              component={PhoneNumbers}
+              component={AdditionalPhoneNumbers}
               {...this.props}
               contactPeopleForm
             />
