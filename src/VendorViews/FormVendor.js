@@ -161,10 +161,10 @@ class FormVendor extends Component {
             <AccordionSet accordionStatus={this.state.sections} onToggle={this.onToggleSection}>
               {/* <Accordion label="Summary" id="summarySection" displayWhenClosed={summaryErr} displayWhenOpen={summaryErr}>
                 <SummaryForm {...this.props} />
-              </Accordion>
+              </Accordion> */}
               <Accordion label="Contact Information" id="contactInformationSection" displayWhenClosed={contactInfoErr} displayWhenOpen={contactInfoErr}>
                 <ContactInformationForm phoneCollection={phoneCollection} {...this.props} />
-              </Accordion> */}
+              </Accordion>
               <Accordion label="Contact People" id="contactPeopleSection" displayWhenClosed={contactPeopleErr} displayWhenOpen={contactPeopleErr}>
                 <ContactPeopleForm phoneCollection={phoneCollection} {...this.props} />
               </Accordion>

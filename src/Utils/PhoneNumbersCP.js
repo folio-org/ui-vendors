@@ -31,7 +31,7 @@ class PhoneNumbersCP extends Component {
       phoneFilteredCollection: []
     };
     this.onChangeSelect = this.onChangeSelect.bind(this);
-    this.selectedValues = this.selectedValues.bind(this);
+    // this.selectedValues = this.selectedValues.bind(this);
     this.onPhoneInputChange = this.onPhoneInputChange.bind(this);
     this.onPhoneInputClear = this.onPhoneInputClear.bind(this);
     this.onPhoneClickItem = this.onPhoneClickItem.bind(this);
@@ -63,12 +63,12 @@ class PhoneNumbersCP extends Component {
     return dispatch(change(`${elem}.${propertyName}`, e));
   }
 
-  selectedValues = (index, fields, propertyName) => {
-    const { stripes: { store } } = this.props;
-    const formValues = getFormValues('FormVendor')(store.getState());
-    const currValues = formValues[fields.name][index][propertyName];
-    return currValues;
-  }
+  // selectedValues = (index, fields, propertyName) => {
+  //   const { stripes: { store } } = this.props;
+  //   const formValues = getFormValues('FormVendor')(store.getState());
+  //   const currValues = formValues[fields.name][index][propertyName];
+  //   return currValues;
+  // }
 
   toString = (option) => option;
   formatter = ({ option }) => <div>{option}</div>;
@@ -131,22 +131,6 @@ class PhoneNumbersCP extends Component {
   }
   // End Phone Numbers
 
-  renderCreateContact = ({ fields }) => {
-    return (
-      <Row>
-        {fields.length === 0 &&
-          <Col xs={12}>
-            <div><em>- Please add contact person -</em></div>
-          </Col>
-        }
-        {fields.map(this.renderSubCreateContact)}
-        <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add</Button>
-        </Col>
-      </Row>
-    );
-  }
-
   render() {
     const { isOpen, currWidth } = this.state;
     const {
@@ -202,7 +186,7 @@ class PhoneNumbersCP extends Component {
             name={`${name}.categories`}
             dataOptions={dropdownCategories}
             onChange={(e) => this.onChangeSelect(e, name, 'categories')}
-            value={this.selectedValues(index, fields, 'categories')}
+            // value={this.selectedValues(index, fields, 'categories')}
             style={{ height: '80px' }}
             itemToString={this.toString}
             formatter={this.formatter}

@@ -24,25 +24,16 @@ class PhoneNumbers extends Component {
 
   renderSubPhoneNumbers = (elem, index) => {
     const { fields } = this.props;
-    console.log(fields.getAll());
-    // console.log(fields);
-    // console.log(index);
     return (
       <Row key={index}>
-        <Field
-          label="Type"
-          name={`${elem}.phone_number.type`}
-          id={`${elem}.phone_number.type`}
-          component={TextField}
-        />
-        {/* <PhoneNumbersCP
+        <PhoneNumbersCP
           index={index}
           fields={fields}
           name={`${elem}`}
           id={`${elem}`}
           isOpen={this.state.isOpen}
           {...this.props}
-        /> */}
+        />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
           <Button onClick={() => fields.remove(index)} buttonStyle="danger">
             Remove

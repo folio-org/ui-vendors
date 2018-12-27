@@ -93,11 +93,6 @@ class ViewVendor extends Component {
   }
 
   update(data) {
-    // Delete items in contacts
-    data.contacts.map((item) => {
-      delete item.phone_number;
-      return item;
-    });
     // Delete items in address
     data.addresses.map((item) => {
       delete item.address.primaryAddress;
