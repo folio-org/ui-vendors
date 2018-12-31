@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import TetherComponent from 'react-tether';
 import { Field, getFormValues } from 'redux-form';
-import { MultiSelection, Row, Col, Select, TextField } from '@folio/stripes/components';
-import { Required } from './Validate';
+import { MultiSelection, Col, Select, TextField } from '@folio/stripes/components';
 import css from './PhoneNumbersCP.css';
 
 class PhoneNumbersCP extends Component {
@@ -18,8 +17,6 @@ class PhoneNumbersCP extends Component {
     dispatch: PropTypes.func,
     change: PropTypes.func,
     name: PropTypes.string,
-    index: PropTypes.number,
-    fields: PropTypes.object,
     phoneCollection: PropTypes.arrayOf(PropTypes.object)
   };
 
@@ -35,9 +32,11 @@ class PhoneNumbersCP extends Component {
     this.onPhoneInputChange = this.onPhoneInputChange.bind(this);
     this.onPhoneInputClear = this.onPhoneInputClear.bind(this);
     this.onPhoneClickItem = this.onPhoneClickItem.bind(this);
+    this.onKeyPressed = this.onKeyPressed.bind(this);
     this.phoneRenderItem = this.phoneRenderItem.bind(this);
 
     this.fieldRef = React.createRef();
+    return false;
   }
 
   componentDidMount() {
@@ -48,14 +47,6 @@ class PhoneNumbersCP extends Component {
     }
     return false;
   }
-
-  // static getSnapshotBeforeUpdate(prevProps, prevState) {
-  //   const { clientWidth } = this.fieldRef.current;
-  //   if (clientWidth !== prevState.currWidth) {
-  //     return this.setState({ currWidth: clientWidth });
-  //   }
-  //   return false;
-  // }
 
   // Multi dropdown
   onChangeSelect = (e, elem, propertyName) => {
@@ -114,6 +105,11 @@ class PhoneNumbersCP extends Component {
     const { dispatch, change } = this.props;
     dispatch(change(`${name}`, item));
     if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
+    return false;
+  }
+
+  onKeyPressed = () => {
+    return false;
   }
 
   phoneRenderItem = (name) => {
@@ -121,8 +117,9 @@ class PhoneNumbersCP extends Component {
     const listItems = phoneFilteredCollection.map((item, i) => {
       return (
         <div key={i}>
-          <div className={css.inlineButton} onClick={(e) => this.onPhoneClickItem(name, item)}>
+          <div className={css.inlineButton} onClick={() => this.onPhoneClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">
             {item.phone_number.phone_number}
+            return false;
           </div>
         </div>
       );
@@ -134,8 +131,6 @@ class PhoneNumbersCP extends Component {
   render() {
     const { isOpen, currWidth } = this.state;
     const {
-      index,
-      fields,
       name,
       dropdownCategories,
       dropdownLanguages,
@@ -186,7 +181,6 @@ class PhoneNumbersCP extends Component {
             name={`${name}.categories`}
             dataOptions={dropdownCategories}
             onChange={(e) => this.onChangeSelect(e, name, 'categories')}
-            // value={this.selectedValues(index, fields, 'categories')}
             style={{ height: '80px' }}
             itemToString={this.toString}
             formatter={this.formatter}

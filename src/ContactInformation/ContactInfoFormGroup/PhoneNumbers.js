@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
-import { MultiSelection, Row, Col, Button, TextField, Select } from '@folio/stripes/components';
+import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
-import { Required } from '../../Utils/Validate';
 import PhoneNumbersCP from '../../Utils/PhoneNumbersCP';
 
 class PhoneNumbers extends Component {
