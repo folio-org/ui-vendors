@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
-import { PhoneNumbers } from '../ContactInformation/ContactInfoFormGroup';
-import PhoneNumbersCP from './ContactPeopleForm/PhoneNumbersCP';
+import AdditionalPhoneNumbers from './AdditionalPhoneNumbers';
+import PhoneNumbersCP from '../Utils/PhoneNumbersCP';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
 
@@ -16,7 +16,8 @@ class ContactPeopleForm extends Component {
       store: PropTypes.object
     }),
     dispatch: PropTypes.func,
-    change: PropTypes.func
+    change: PropTypes.func,
+    phoneCollection: PropTypes.object
   };
 
   constructor(props) {
@@ -39,6 +40,20 @@ class ContactPeopleForm extends Component {
     return currValues;
   }
 
+  onPhoneStateUpdate(obj) {
+    if (!obj) return false;
+    return this.setState(obj);
+  }
+
+  // For Multi dropdown
+  toString = (option) => option;
+  formatter = ({ option }) => <div>{option}</div>;
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
+
   renderCreateContact = ({ fields }) => {
     return (
       <Row>
@@ -54,15 +69,6 @@ class ContactPeopleForm extends Component {
       </Row>
     );
   }
-
-  // For Multi dropdown
-  toString = (option) => option;
-  formatter = ({ option }) => <div>{option}</div>;
-  filterItems = (filterText, list) => {
-    const filterRegExp = new RegExp(`^${filterText}`, 'i');
-    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-    return { renderedItems };
-  };
 
   renderSubCreateContact = (elem, index, fields) => {
     const { dropdownLanguages, dropdownCountry } = this.props;
@@ -108,14 +114,29 @@ class ContactPeopleForm extends Component {
             <div className={css.subHeadings}>Primary Phone Numbers</div>
           </Col>
           <Col xs={12}>
-            <PhoneNumbersCP name={`${elem}.contact_person.primary_phone_number`} {...this.props} />
+            <Row>
+              <PhoneNumbersCP
+                index={index}
+                fields={fields}
+                name={`${elem}.contact_person.primary_phone_number`}
+                id={`${elem}.contact_person.primary_phone_number`}
+                {...this.props}
+              />
+            </Row>
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />
             <div className={css.subHeadings}>Additional Phone Numbers</div>
           </Col>
           <Col xs={12}>
-            <FieldArray label="Phone Numbers" name={`${elem}.contact_person.phone_numbers`} id={`${elem}.contact_person.phone_numbers`} component={PhoneNumbers} {...this.props} contactPeopleForm />
+            <FieldArray
+              label="Phone Numbers"
+              name={`${elem}.contact_person.phone_numbers`}
+              id={`${elem}.contact_person.phone_numbers`}
+              component={AdditionalPhoneNumbers}
+              {...this.props}
+              contactPeopleForm
+            />
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />
@@ -150,8 +171,8 @@ class ContactPeopleForm extends Component {
               name={`${elem}.categories`}
               dataOptions={this.props.dropdownContactCategories}
               onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
-              style={{ height: '80px' }}
               value={this.selectedValues(index, fields, 'categories')}
+              style={{ height: '80px' }}
               itemToString={this.toString}
               filter={this.filterItems}
               formatter={this.formatter}

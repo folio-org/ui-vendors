@@ -180,7 +180,8 @@
     "query-string": "^5.0.0",
     "react-router-dom": "^4.3.1",
     "redux-form": "^7.3.0",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "react-tether": "^1.0.1"
   },
   "peerDependencies": {
     "@folio/stripes": "^1.0.0",

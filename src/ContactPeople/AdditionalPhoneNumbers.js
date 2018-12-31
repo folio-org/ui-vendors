@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
-import css from '../ContactInfoFormGroup.css';
-import PhoneNumbersCP from '../../Utils/PhoneNumbersCP';
+import css from './ContactPeopleForm.css';
+import PhoneNumbersCP from '../Utils/PhoneNumbersCP';
 
-class PhoneNumbers extends Component {
+class AdditionalPhoneNumbers extends Component {
   static propTypes = {
     fields: PropTypes.object,
     stripes: PropTypes.shape({
@@ -20,11 +20,10 @@ class PhoneNumbers extends Component {
     };
   }
 
-  renderSubPhoneNumbers = (elem, index, fields) => {
-    const { contactPeopleForm } = this.props;
-
+  renderSubPhoneNumbers = (elem, index) => {
+    const { fields } = this.props;
     return (
-      <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
+      <Row key={index}>
         <PhoneNumbersCP
           index={index}
           fields={fields}
@@ -67,4 +66,4 @@ class PhoneNumbers extends Component {
   }
 }
 
-export default PhoneNumbers;
+export default AdditionalPhoneNumbers;
