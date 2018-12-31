@@ -30,14 +30,14 @@ class FormVendor extends Component {
     // Get Phone Number
     const getPhoneNum = () => {
       const num = formValues.phone_numbers;
-      if (!num) return {};
+      if (!num) return false;
       return num.map((val) => arrPhones.push(val));
     };
     getPhoneNum();
     // Get Primary Phone Number
     const getPrimary = () => {
       const num = formValues.contacts;
-      if (!num) return {};
+      if (!num) return false;
       num.map((val) => {
         const primaryPhoneNumber = ((val.contact_person || {}).primary_phone_number || {});
         if (!primaryPhoneNumber && _.isEmpty(primaryPhoneNumber)) return false;
