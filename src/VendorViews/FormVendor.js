@@ -40,7 +40,7 @@ class FormVendor extends Component {
       if (!num) return false;
       num.map((val) => {
         const primaryPhoneNumber = ((val.contact_person || {}).primary_phone_number || {});
-        if (!primaryPhoneNumber && _.isEmpty(primaryPhoneNumber)) return false;
+        if (!_.isEmpty(primaryPhoneNumber)) return false;
         return arrPhones.push(primaryPhoneNumber);
       });
       return false;
