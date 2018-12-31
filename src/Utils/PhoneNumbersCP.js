@@ -63,12 +63,12 @@ class PhoneNumbersCP extends Component {
     return dispatch(change(`${elem}.${propertyName}`, e));
   }
 
-  // selectedValues = (index, fields, propertyName) => {
-  //   const { stripes: { store } } = this.props;
-  //   const formValues = getFormValues('FormVendor')(store.getState());
-  //   const currValues = formValues[fields.name][index][propertyName];
-  //   return currValues;
-  // }
+  selectedValues = (index, fields, propertyName) => {
+    const { stripes: { store } } = this.props;
+    const formValues = getFormValues('FormVendor')(store.getState());
+    const currValues = formValues[fields.name][index][propertyName] || null;
+    return currValues;
+  }
 
   toString = (option) => option;
   formatter = ({ option }) => <div>{option}</div>;

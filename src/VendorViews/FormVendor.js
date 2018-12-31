@@ -25,48 +25,45 @@ class FormVendor extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { stripes: { store } } = nextProps;
-    const arr = [];
+    const arrPhones = [];
     const formValues = getFormValues('FormVendor')(store.getState());
     // Get Phone Number
     const getPhoneNum = () => {
       const num = formValues.phone_numbers;
       if (!num) return {};
-      const data = num.map((val) => val);
-      return data;
+      return num.map((val) => arrPhones.push(val));
     };
+    getPhoneNum();
     // Get Primary Phone Number
     const getPrimary = () => {
       const num = formValues.contacts;
       if (!num) return {};
-      const data = num.map((val) => {
+      num.map((val) => {
         const primaryPhoneNumber = ((val.contact_person || {}).primary_phone_number || {});
-        if (!primaryPhoneNumber) return {};
-        return primaryPhoneNumber;
+        if (!primaryPhoneNumber && _.isEmpty(primaryPhoneNumber)) return false;
+        return arrPhones.push(primaryPhoneNumber);
       });
-      return data;
+      return false;
     };
+    getPrimary();
     // Get Additional Phone Number
     const getAdditional = () => {
       const num = formValues.contacts;
       if (!num) return {};
-      const data = num.map((val) => {
+      num.map((val) => {
         const contactPerson = val.contact_person;
-        if (!contactPerson || contactPerson <= 0) return {};
+        if (!contactPerson || contactPerson <= 0) return false;
         const phoneNums = contactPerson.phone_numbers;
-        if (!phoneNums || phoneNums <= 0) return {};
-        const phoneNumbers = contactPerson.phone_numbers.map((item) => item);
-        return phoneNumbers;
+        if (!phoneNums || phoneNums <= 0) return false;
+        contactPerson.phone_numbers.map((item) => arrPhones.push(item));
+        return false;
       });
-      return data;
+      return false;
     };
-    arr.push(...getPhoneNum());
-    arr.push(...getPrimary());
-    arr.push(...getAdditional());
-    // Gather all phone numbers
-    const phoneCollection = _.assign({}, ...getAdditional(), getPhoneNum(), getPrimary());
+    getAdditional();
     // Update state
-    if (!_.isEqual(phoneCollection, prevState.phoneCollection)) {
-      return { phoneCollection };
+    if (!_.isEqual(arrPhones, prevState.phoneCollection)) {
+      return { phoneCollection: arrPhones };
     }
     return null;
   }
