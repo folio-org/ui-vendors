@@ -48,7 +48,7 @@ class ContactPeopleView extends React.Component {
     const phoneNumber = `${_.get(val, 'contact_person.primary_phone_number.phone_number.phone_number', '')}`;
     const language = `${_.get(val, 'contact_person.language', '')}`;
     // Address
-    const address = _.get(val, 'contact_person.primary_address.address.addressLine1');
+    const address = _.get(val, 'contact_person.primary_address.address.addressLine1', '');
     const city = _.get(val, 'contact_person.primary_address.address.city', '');
     const stateRegion = _.get(val, 'contact_person.primary_address.address.stateRegion', '');
     const countryVal = _.get(val, 'contact_person.primary_address.address.country', '');
