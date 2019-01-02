@@ -1,9 +1,4 @@
-// import LanguageList from './Languages';
-// import CountryList from './Country';
 const Filters = () => {
-  // const CL = CountryList.map(item => ({ name: item.label, cql: item.value }));
-  // const LL = LanguageList.map(item => ({ name: item.label, cql: item.value }));
-
   return [
     {
       label: 'Vendor Status',
@@ -54,8 +49,9 @@ const Filters = () => {
 };
 
 const SearchableIndexes = [
-  { label: 'All', value: 'all', makeQuery: term => `(name="${term}*" or code="${term}*" or language="${term}*" or aliases="${term}*" or erp_code="${term}*" or tax_id="${term}*" or interfaces="${term}*")` },
+  { label: 'All', value: 'all', makeQuery: term => `(name="${term}*" or code="${term}*" or language="${term}*" or aliases="${term}*" or erp_code="${term}*" or tax_id="${term}*" or interfaces="${term}*" or contacts="${term}*")` },
   { label: 'Name', value: 'name', makeQuery: term => `(name="${term}*")` },
+  { label: 'Contacts', value: 'contacts', makeQuery: term => `(contacts="${term}*")` },
   { label: 'Code', value: 'code', makeQuery: term => `(code="${term}*")` },
   { label: 'Language', value: 'language', makeQuery: term => `(language="${term}*")` },
   { label: 'Alias', value: 'aliases', makeQuery: term => `(aliases="${term}*")` },
