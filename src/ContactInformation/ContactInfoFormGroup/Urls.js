@@ -86,7 +86,7 @@ class Url extends Component {
     return (
       <Row>
         <Col xs={12}>
-          <div className={css.subHeadings}>URL(s)</div>
+          <div className={css.subHeadings}>URL</div>
           {fields.length === 0 &&
             <div><em>- Please add URL -</em></div>
           }
