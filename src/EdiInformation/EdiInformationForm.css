@@ -6,3 +6,7 @@
 .leftPadding {
   border-left: 22px solid #e5e5e5;
 }
+
+.fontSizeSmall {
+  font-size: var(--font-size-small);
+}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Pane, PaneMenu, Button } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
+import css from './PaneDetails.css';
 import { FormVendor } from '../VendorViews';
 
 class PaneDetails extends React.Component {
@@ -36,7 +37,7 @@ class PaneDetails extends React.Component {
     return (
       <PaneMenu>
         <button type="button" id="clickable-closenewvendordialog" onClick={onCancel} title="close" aria-label="Close New Vendor Dialog">
-          <span style={{ fontSize: '30px', color: '#999', lineHeight: '18px' }}>&times;</span>
+          <span className={css.closeButton}>&times;</span>
         </button>
       </PaneMenu>
     );
