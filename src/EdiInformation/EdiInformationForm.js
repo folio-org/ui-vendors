@@ -157,7 +157,7 @@ class EdiInformationForm extends Component {
                     <Field label="Time" name="edi.edi_job.time" id="edi_edi_job.time" placeholder="Select Time" component={Timepicker} timeZone="UTC" />
                   </Col>
                   <Col xs={12}>
-                    <p style={{ fontSize: '.8rem', fontWeight: 'bold' }}>Weekly:</p>
+                    <p className={css.fontSizeSmall}>Weekly:</p>
                     <Row>
                       <Col xs={12} md={6} className={css.EDIInfoCheckbox}>
                         <Field label="Monday" name="edi.edi_job.is_monday" id="is_monday" component={Checkbox} inline={false} />
@@ -178,7 +178,7 @@ class EdiInformationForm extends Component {
               <Col xs={12} md={6}>
                 <Row>
                   <Col xs={12}>
-                    <p style={{ fontSize: '.8rem', fontWeight: 'bold' }}>NotificationOptions:</p>
+                    <p className={css.fontSizeSmall}>NotificationOptions:</p>
                   </Col>
                   <Col xs={12}>
                     <Field label="Send To" name="edi.edi_job.send_to_emails" id="send_to_emails" placeholder="Enter e-mail address(es)" component={TextField} fullWidth />
