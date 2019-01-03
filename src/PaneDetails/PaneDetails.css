@@ -1,6 +1,6 @@
 /* Pane Details */
 .closeButton {
-  font-size: var(--font-size-medium);
+  font-size: 30px;
   color: '#999';
   line-height: '18px';
 }
