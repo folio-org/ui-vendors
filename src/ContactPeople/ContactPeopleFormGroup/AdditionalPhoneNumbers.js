@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
-import css from './ContactPeopleForm.css';
-import PhoneNumbersCP from '../Utils/PhoneNumbersCP';
+import css from '../ContactPeopleForm.css';
+import PhoneNumbersCP from '../../Utils/PhoneNumbersCP';
 
 class AdditionalPhoneNumbers extends Component {
   static propTypes = {

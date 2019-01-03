@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
-import AdditionalPhoneNumbers from './AdditionalPhoneNumbers';
+import AdditionalPhoneNumbers from './ContactPeopleFormGroup/AdditionalPhoneNumbers';
 import PhoneNumbersCP from '../Utils/PhoneNumbersCP';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
