@@ -119,7 +119,6 @@ class PhoneNumbersCP extends Component {
         <div key={i}>
           <div className={css.inlineButton} onClick={() => this.onPhoneClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">
             {item.phone_number.phone_number}
-            return false;
           </div>
         </div>
       );
