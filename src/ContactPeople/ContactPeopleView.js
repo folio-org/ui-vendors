@@ -53,9 +53,9 @@ class ContactPeopleView extends React.Component {
     const stateRegion = _.get(val, 'contact_person.primary_address.address.stateRegion', '');
     const countryVal = _.get(val, 'contact_person.primary_address.address.country', '');
     const isCountry = CountryList.find(x => x.value === countryVal);
-    const country = isCountry ? `${isCountry.label}` : '';
+    const country = isCountry && isCountry.value !== '' ? `${isCountry.label}` : '';
     const zipCode = _.get(val, 'contact_person.primary_address.address.zipCode', '');
-    const AddressComplete = `${address} ${city}, ${stateRegion} ${country} ${zipCode}`;
+    const AddressComplete = `${address} ${city} ${stateRegion} ${country} ${zipCode}`;
 
     // Email
     const email = () => {
