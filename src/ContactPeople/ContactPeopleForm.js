@@ -4,6 +4,7 @@ import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
 import AdditionalPhoneNumbers from './ContactPeopleFormGroup/AdditionalPhoneNumbers';
 import PhoneNumbersCP from '../Utils/PhoneNumbersCP';
+import Emails from '../RepeatableForms/Emails';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
 
@@ -176,16 +177,15 @@ class ContactPeopleForm extends Component {
             <hr style={{ borderColor: '#f0f0f0' }} />
             <div className={css.subHeadings}>Email</div>
           </Col>
-          <Col xs={12}>
-            <FieldArray
-              label="Phone Numbers"
-              name={`${elem}.contact_person.phone_numbers`}
-              id={`${elem}.contact_person.phone_numbers`}
-              component={AdditionalPhoneNumbers}
+          {/* <Col xs={12}>
+            <Emails
+              index={index}
+              fields={fields}
+              name={`${elem}.contact_person.primary_phone_number`}
+              id={`${elem}.contact_person.primary_phone_number`}
               {...this.props}
-              contactPeopleForm
             />
-          </Col>
+          </Col> */}
           {/* <Col xs={12} md={6}>
             <Field label="Email Address*" name={`${elem}.contact_person.primary_email.email.value`} id={`${elem}.contact_person.email.value`} type="email" validate={[Required]} component={TextField} fullWidth />
           </Col>

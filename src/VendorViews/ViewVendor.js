@@ -93,19 +93,20 @@ class ViewVendor extends Component {
   }
 
   update(data) {
+    console.log(data);
     // Delete items in address
-    data.addresses.map((item) => {
-      delete item.address.primaryAddress;
-      delete item.address.categories;
-      return item;
-    });
-    // Update time
-    const time = FormatTime(data, 'post');
-    if (time) { data.edi.edi_job.time = time; }
-    // Mutate
-    this.props.parentMutator.records.PUT(data).then(() => {
-      this.props.onCloseEdit();
-    });
+    // data.addresses.map((item) => {
+    //   delete item.address.primaryAddress;
+    //   delete item.address.categories;
+    //   return item;
+    // });
+    // // Update time
+    // const time = FormatTime(data, 'post');
+    // if (time) { data.edi.edi_job.time = time; }
+    // // Mutate
+    // this.props.parentMutator.records.PUT(data).then(() => {
+    //   this.props.onCloseEdit();
+    // });
   }
 
   render() {
