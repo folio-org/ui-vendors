@@ -21,9 +21,6 @@ class ContactInformationForm extends React.Component {
           <br />
         </Col>
         <Col xs={12}>
-          <Emails label="Email Addresses" name="emails" id="emails" {...this.props} />
-        </Col>
-        <Col xs={12}>
           <FieldArray label="urls" name="urls" id="urls" component={Urls} {...this.props} />
           <br />
         </Col>
