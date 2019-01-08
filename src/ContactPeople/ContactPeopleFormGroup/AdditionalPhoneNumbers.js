@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactPeopleForm.css';
-import PhoneNumbersCP from '../../Utils/PhoneNumbersCP';
+import PhoneNumbersMF from '../../MultiForms/PhoneNumbersMF';
 
 class AdditionalPhoneNumbers extends Component {
   static propTypes = {
@@ -24,7 +24,7 @@ class AdditionalPhoneNumbers extends Component {
     const { fields } = this.props;
     return (
       <Row key={index}>
-        <PhoneNumbersCP
+        <PhoneNumbersMF
           index={index}
           fields={fields}
           name={`${elem}`}

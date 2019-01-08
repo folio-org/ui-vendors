@@ -2,7 +2,6 @@ import React from 'react';
 import { FieldArray } from 'redux-form';
 import { Row, Col } from '@folio/stripes/components';
 import { AddressInfo, PhoneNumbers, EmailAddresses, Urls } from './ContactInfoFormGroup';
-import Emails from '../RepeatableForms/Emails';
 
 class ContactInformationForm extends React.Component {
   render() {
@@ -17,7 +16,7 @@ class ContactInformationForm extends React.Component {
           <br />
         </Col>
         <Col xs={12}>
-          <FieldArray label="Email Addresses" name="emails" id="emails" component={Emails} {...this.props} />
+          <FieldArray label="Email Addresses" name="emails" id="emails" component={EmailAddresses} {...this.props} />
           <br />
         </Col>
         <Col xs={12}>

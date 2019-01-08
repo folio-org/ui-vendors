@@ -3,76 +3,40 @@ import PropTypes from 'prop-types';
 import { Field, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, Select } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
-import { Required } from '../../Utils/Validate';
+import EmailsMF from '../../MultiForms/EmailsMF';
+
 
 class EmailAddresses extends Component {
   static propTypes = {
-    dropdownCategories: PropTypes.arrayOf(PropTypes.string),
-    dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
     fields: PropTypes.object,
     stripes: PropTypes.shape({
       store: PropTypes.object
     }),
-    dispatch: PropTypes.func,
+    dispatch: PropTypes.func, 
     change: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
+    this.state = {
+      isOpen: false
+    };
     this.renderSubEmailAddresses = this.renderSubEmailAddresses.bind(this);
-    this.onChangeSelect = this.onChangeSelect.bind(this);
-    this.selectedValues = this.selectedValues.bind(this);
   }
-
-  onChangeSelect = (e, elem, propertyName) => {
-    const { dispatch, change } = this.props;
-    dispatch(change(`${elem}.${propertyName}`, e));
-  }
-
-  selectedValues = (index, fields, propertyName) => {
-    const { stripes: { store } } = this.props;
-    const formValues = getFormValues('FormVendor')(store.getState());
-    const currValues = formValues[fields.name][index][propertyName];
-    return currValues;
-  }
-
-  // For Multi dropdown
-  toString = (option) => option;
-  formatter = ({ option }) => <div>{option}</div>;
-  filterItems = (filterText, list) => {
-    const filterRegExp = new RegExp(`^${filterText}`, 'i');
-    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-    return { renderedItems };
-  };
 
   renderSubEmailAddresses = (elem, index, fields) => {
     const { dropdownCategories, dropdownLanguages } = this.props;
     return (
       <Row key={index} className={css.panels}>
-        <Col xs={12} md={3}>
-          <Field label="Email Address*" name={`${elem}.email.value`} id={`${elem}.email.value`} validate={[Required]} component={TextField} fullWidth />
-        </Col>
-        <Col xs={12} md={3}>
-          <Field label="Description" name={`${elem}.email.description`} id={`${elem}.email.description`} component={TextField} fullWidth />
-        </Col>
-        <Col xs={12} md={3}>
-          <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
-        </Col>
-        <Col xs={12} md={3}>
-          <Field
-            component={MultiSelection}
-            filter={this.filterItems}
-            label="Categories"
-            name={`${elem}.categories`}
-            dataOptions={dropdownCategories}
-            onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
-            style={{ height: '80px' }}
-            value={this.selectedValues(index, fields, 'categories')}
-            itemToString={this.toString}
-            formatter={this.formatter}
-          />
-        </Col>
-        <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
+        <EmailsMF
+          index={index}
+          fields={fields}
+          name={`${elem}`}
+          id={`${elem}`}
+          isOpen={this.state.isOpen}
+          {...this.props}
+        />
+        <Col xs={12} md={3} mdOf fset={9} style={{ textAlign: 'right' }}>
           <Button onClick={() => fields.remove(index)} buttonStyle="danger">
             Remove
           </Button>

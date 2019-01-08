@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
 import AdditionalPhoneNumbers from './ContactPeopleFormGroup/AdditionalPhoneNumbers';
-import PhoneNumbersCP from '../Utils/PhoneNumbersCP';
-import Emails from '../RepeatableForms/Emails';
+import PhoneNumbersMF from '../MultiForms/PhoneNumbersMF';
+import Emails from '../MultiForms/EmailsMF';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
 
@@ -150,7 +150,7 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12}>
             <Row>
-              <PhoneNumbersCP
+              <PhoneNumbersMF
                 index={index}
                 fields={fields}
                 name={`${elem}.contact_person.primary_phone_number`}
