@@ -27,7 +27,7 @@ class Emails extends Component {
       isOpen: false,
       currWidth: 100,
       itemCollection: [],
-      items: []
+      data: []
     };
     this.renderSub = this.renderSub.bind(this);
     this.onChangeSelect = this.onChangeSelect.bind(this);
@@ -45,10 +45,14 @@ class Emails extends Component {
     const { stripes: { store } } = props;
     const formValues = getFormValues('FormVendor')(store.getState());
     const currValues = formValues[state.parentName] || null;
-    console.log(currValues);
-    
+
+    if (state.data !== currValues) {
+      console.log("data updated");
+      return { data:currValues };
+    }
+
+    return false;
   }
-  
 
   // Multi dropdown
   onChangeSelect = (e, elem, propertyName) => {
@@ -130,7 +134,9 @@ class Emails extends Component {
   // End Phone Numbers
 
   renderSub = (elem, index, fields) => {
-    const { isOpen, currWidth } = this.state;
+    const { isOpen, currWidth, data } = this.state;
+
+    console.log(data);
     const { dropdownCategories, dropdownLanguages, name, label } = this.props;
     const constraints = [{
       to: 'window',
@@ -141,7 +147,6 @@ class Emails extends Component {
       pin: false
     }];
 
-    console.log(elem);
     return (
       <div>
         <KeyValue label="Phone Number" value={_.get(elem, 'email.value', '')} />
