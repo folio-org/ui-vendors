@@ -17,8 +17,52 @@ class PhoneNumbersMF extends Component {
     dispatch: PropTypes.func,
     change: PropTypes.func,
     name: PropTypes.string,
-    phoneCollection: PropTypes.arrayOf(PropTypes.object)
   };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { stripes: { store } } = nextProps;
+    const arrPhones = [];
+    const formValues = getFormValues('FormVendor')(store.getState());
+    // Get Phone Number
+    const getPhoneNum = () => {
+      const num = formValues.phone_numbers;
+      if (!num) return false;
+      return num.map((val) => arrPhones.push(val));
+    };
+    getPhoneNum();
+    // Get Primary Phone Number
+    const getPrimary = () => {
+      const num = formValues.contacts;
+      if (!num) return false;
+      num.map((val) => {
+        const primaryPhoneNumber = ((val.contact_person || {}).primary_phone_number || {});
+        if (!_.isEmpty(primaryPhoneNumber)) return false;
+        return arrPhones.push(primaryPhoneNumber);
+      });
+      return false;
+    };
+    getPrimary();
+    // Get Additional Phone Number
+    const getAdditional = () => {
+      const num = formValues.contacts;
+      if (!num) return false;
+      num.map((val) => {
+        const contactPerson = val.contact_person;
+        if (!contactPerson || contactPerson <= 0) return false;
+        const phoneNums = contactPerson.phone_numbers;
+        if (!phoneNums || phoneNums <= 0) return false;
+        contactPerson.phone_numbers.map((item) => arrPhones.push(item));
+        return false;
+      });
+      return false;
+    };
+    getAdditional();
+    // Update state
+    if (!_.isEqual(arrPhones, prevState.itemCollection)) {
+      return { itemCollection: arrPhones };
+    }
+    return null;
+  }
 
   constructor(props) {
     super(props);
@@ -73,10 +117,9 @@ class PhoneNumbersMF extends Component {
   // Input Actions
   // variables and prop names needs to be change for other use
   onInputChange(obj, e) {
-    const { isOpen } = this.state;
-    const { phoneCollection } = this.props;
-    if (!_.isEmpty(phoneCollection) && (e.trim().length >= 1)) {
-      const num = phoneCollection;
+    const { isOpen, itemCollection } = this.state;
+    if (!_.isEmpty(itemCollection) && (e.trim().length >= 1)) {
+      const num = itemCollection;
       const objFiltered = _.filter(num, (o) => {
         const phoneNumber = ((o.phone_number || []).phone_number || []);
         if (!_.includes(phoneNumber, e)) return false;

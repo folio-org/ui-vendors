@@ -22,6 +22,52 @@ class EmailMF extends Component {
     emailCollection: PropTypes.arrayOf(PropTypes.object)
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { stripes: { store } } = nextProps;
+    const arrItems = [];
+    const formValues = getFormValues('FormVendor')(store.getState());
+    console.log(formValues);
+    // Get Phone Number
+    const getEmailNum = () => {
+      const num = formValues.emails;
+      if (!num) return false;
+      return num.map((val) => arrItems.push(val));
+    };
+    getEmailNum();
+    // Get Primary Phone Number
+    const getPrimary = () => {
+      const num = formValues.contacts;
+      if (!num) return false;
+      num.map((val) => {
+        const primaryPhoneNumber = ((val.contact_person || {}).primary_email || {});
+        if (!_.isEmpty(primaryPhoneNumber)) return false;
+        return arrItems.push(primaryPhoneNumber);
+      });
+      return false;
+    };
+    getPrimary();
+    // Get Additional Phone Number
+    const getAdditional = () => {
+      const num = formValues.contacts;
+      if (!num) return false;
+      num.map((val) => {
+        const contactPerson = val.contact_person;
+        if (!contactPerson || contactPerson <= 0) return false;
+        const phoneNums = contactPerson.emails;
+        if (!phoneNums || phoneNums <= 0) return false;
+        contactPerson.phone_numbers.map((item) => arrItems.push(item));
+        return false;
+      });
+      return false;
+    };
+    getAdditional();
+    // Update state
+    if (!_.isEqual(arrItems, prevState.itemCollection)) {
+      return { itemCollection: arrItems };
+    }
+    return null;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -41,14 +87,14 @@ class EmailMF extends Component {
     return false;
   }
 
-  componentDidMount() {
-    const { currWidth } = this.state;
-    const { clientWidth } = this.fieldRef.current;
-    if (clientWidth !== currWidth) {
-      return this.setState({ currWidth: clientWidth });
-    }
-    return false;
-  }
+  // componentDidMount() {
+  //   const { currWidth } = this.state;
+  //   const { clientWidth } = this.fieldRef.current;
+  //   if (clientWidth !== currWidth) {
+  //     return this.setState({ currWidth: clientWidth });
+  //   }
+  //   return false;
+  // }
 
   // Multi dropdown
   onChangeSelect = (e, elem, propertyName) => {
@@ -76,10 +122,10 @@ class EmailMF extends Component {
   // Input Actions
   // variables and prop names needs to be change for other use
   onInputChange(obj, e) {
-    const { isOpen } = this.state;
-    const { phoneCollection } = this.props;
-    if (!_.isEmpty(phoneCollection) && (e.trim().length >= 1)) {
-      const num = phoneCollection;
+    const { isOpen, itemCollection } = this.state;
+    if (!_.isEmpty(itemCollection) && (e.trim().length >= 1)) {
+      const num = itemCollection;
+      console.log(num);
       const objFiltered = _.filter(num, (o) => {
         const phoneNumber = ((o.phone_number || []).phone_number || []);
         if (!_.includes(phoneNumber, e)) return false;
@@ -159,7 +205,15 @@ class EmailMF extends Component {
             constraints={constraints}
           >
             <div ref={this.fieldRef}>
-              <Field onChange={this.onInputChange} onClearField={this.onInputClear} label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} fullWidth />
+              <Field
+                onChange={this.onInputChange}
+                onClearField={this.onInputClear}
+                label="Email Address*"
+                name={`${name}.email.value`}
+                id={`${name}.email.value`}
+                component={TextField}
+                fullWidth
+              />
             </div>
             {
               isOpen && (
@@ -173,7 +227,16 @@ class EmailMF extends Component {
           </TetherComponent>
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Email Address*" name={`${name}.email.value`} id={`${name}.email.value`} validate={[Required]} component={TextField} fullWidth />
+          {/* <Field
+            onChange={this.onInputChange}
+            onClearField={this.onInputClear}
+            label="Email Address*"
+            name={`${name}.email.value`}
+            id={`${name}.email.value`}
+            component={TextField}
+            fullWidth
+          /> */}
+          {/* <Field label="Email Address*" name={`${name}.email.value`} id={`${name}.email.value`} validate={[Required]} component={TextField} fullWidth /> */}
         </Col>
         <Col xs={12} md={3}>
           <Field label="Description" name={`${name}.email.description`} id={`${name}.email.description`} component={TextField} fullWidth />
