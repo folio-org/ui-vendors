@@ -13,13 +13,6 @@ class AdditionalPhoneNumbers extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false
-    };
-  }
-
   renderSubPhoneNumbers = (elem, index) => {
     const { fields } = this.props;
     return (
@@ -29,7 +22,6 @@ class AdditionalPhoneNumbers extends Component {
           fields={fields}
           name={`${elem}`}
           id={`${elem}`}
-          isOpen={this.state.isOpen}
           {...this.props}
         />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>

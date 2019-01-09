@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
-import AdditionalPhoneNumbers from './ContactPeopleFormGroup/AdditionalPhoneNumbers';
-import PhoneNumbersMF from '../MultiForms/PhoneNumbersMF';
-import Emails from '../MultiForms/EmailsMF';
+import {AdditionalEmails, AdditionalPhoneNumbers } from './ContactPeopleFormGroup';
+import { EmailsMF, PhoneNumbersMF } from '../MultiForms';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
 
@@ -74,6 +73,8 @@ class ContactPeopleForm extends Component {
   renderSubCreateContact = (elem, index, fields) => {
     const { dropdownLanguages, dropdownCountry } = this.props;
     const indexNum = index + 1;
+
+    console.log(this.props);
     return (
       <Col xs={12} key={index} className={css.panels}>
         <Row>
@@ -175,23 +176,33 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12}>
             <hr style={{ borderColor: '#f0f0f0' }} />
-            <div className={css.subHeadings}>Email</div>
+            <div className={css.subHeadings}>Primary Email</div>
           </Col>
-          {/* <Col xs={12}>
-            <Emails
-              index={index}
-              fields={fields}
-              name={`${elem}.contact_person.primary_phone_number`}
-              id={`${elem}.contact_person.primary_phone_number`}
+          <Col xs={12}>
+            <Row>
+              <EmailsMF
+                index={index}
+                fields={fields}
+                name={`${elem}.contact_person.primary_email`}
+                id={`${elem}.contact_person.primary_email`}
+                {...this.props}
+              />
+            </Row>
+          </Col>
+          <Col xs={12}>
+            <hr style={{ borderColor: '#f0f0f0' }} />
+            <div className={css.subHeadings}>Additional Emails</div>
+          </Col>
+          <Col xs={12}>
+            <FieldArray
+              label="Additional Email"
+              name={`${elem}.contact_person.emails`}
+              id={`${elem}.contact_person.emails`}
+              component={AdditionalEmails}
               {...this.props}
+              contactPeopleForm
             />
-          </Col> */}
-          {/* <Col xs={12} md={6}>
-            <Field label="Email Address*" name={`${elem}.contact_person.primary_email.email.value`} id={`${elem}.contact_person.email.value`} type="email" validate={[Required]} component={TextField} fullWidth />
           </Col>
-          <Col xs={12} md={6}>
-            <Field label="Description" name={`${elem}.contact_person.primary_email.email.description`} id={`${elem}.contact_person.email.description`} component={TextField} fullWidth />
-          </Col> */}
           <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
             <hr style={{ borderColor: '#f0f0f0' }} />
             <Button onClick={() => fields.remove(index)} buttonStyle="danger">

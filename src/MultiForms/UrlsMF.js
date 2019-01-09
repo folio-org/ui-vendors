@@ -7,7 +7,7 @@ import { MultiSelection, Col, Select, TextField } from '@folio/stripes/component
 import css from './css/MultiForms.css';
 import { Required } from '../Utils/Validate';
 
-class EmailsMF extends Component {
+class UrlsMF extends Component {
   static propTypes = {
     dropdownCategories: PropTypes.arrayOf(PropTypes.string),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
@@ -38,7 +38,7 @@ class EmailsMF extends Component {
       const num = formValues.contacts;
       if (!num) return false;
       num.map((val) => {
-        const item = ((val.contact_person || {}).primary_email || {});
+        const item = ((val.contact_person || {}).primary_url || {});
         if (!_.isEmpty(item)) return false;
         return arrItems.push(item);
       });
@@ -52,7 +52,7 @@ class EmailsMF extends Component {
       num.map((val) => {
         const contactPerson = val.contact_person;
         if (!contactPerson || contactPerson <= 0) return false;
-        const phoneNums = contactPerson.emails;
+        const phoneNums = contactPerson.urls;
         if (!phoneNums || phoneNums <= 0) return false;
         contactPerson.emails.map((item) => arrItems.push(item));
         return false;
@@ -61,6 +61,7 @@ class EmailsMF extends Component {
     };
     getAdditional();
     // Update state
+    console.log(arrItems);
     if (!_.isEqual(arrItems, prevState.itemCollection)) {
       return { itemCollection: arrItems };
     }
@@ -124,8 +125,8 @@ class EmailsMF extends Component {
     if (!_.isEmpty(itemCollection) && (e.trim().length >= 1)) {
       const num = itemCollection;
       const objFiltered = _.filter(num, (o) => {
-        const email = ((o.email || []).value || []);
-        if (!_.includes(email, e)) return false;
+        const url = ((o.url || []).value || []);
+        if (!_.includes(url, e)) return false;
         return o;
       });
       console.log(objFiltered);
@@ -163,8 +164,8 @@ class EmailsMF extends Component {
     const listItems = filteredCollection.map((item, i) => {
       return (
         <div key={i}>
-          <div className={css.inlineButton} onClick={() => this.onClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">
-            {item.email.value}
+          <div className={css.inlineButton} onClick={() => this.onClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">4
+            {item.url.value}
           </div>
         </div>
       );
@@ -204,9 +205,9 @@ class EmailsMF extends Component {
               <Field
                 onChange={this.onInputChange}
                 onClearField={this.onInputClear}
-                label="Email Address*"
-                name={`${name}.email.value`}
-                id={`${name}.email.value`}
+                label="URL*"
+                name={`${name}.url.value`}
+                id={`${name}.url.value`}
                 component={TextField}
                 fullWidth
               />
@@ -223,24 +224,24 @@ class EmailsMF extends Component {
           </TetherComponent>
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Description" name={`${name}.email.description`} id={`${name}.email.description`} component={TextField} fullWidth />
-        </Col>
-        <Col xs={12} md={3}>
-          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
+          <Field label="Description" name={`${name}.url.description`} id={`${name}.url.description`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
           <Field
             component={MultiSelection}
-            filter={this.filterItems}
             label="Categories"
             name={`${name}.categories`}
             dataOptions={dropdownCategories}
-            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
+            onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
             style={{ height: '80px' }}
-            // value={this.selectedValues(index, fields, 'categories')}
+            value={this.selectedValues(index, fields, 'categories')}
             itemToString={this.toString}
+            filter={this.filterItems}
             formatter={this.formatter}
           />
+        </Col>
+        <Col xs={12} md={3}>
+          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
         </Col>
       </Fragment>
     );
@@ -248,4 +249,4 @@ class EmailsMF extends Component {
 }
 
 
-export default EmailsMF;
+export default UrlsMF;

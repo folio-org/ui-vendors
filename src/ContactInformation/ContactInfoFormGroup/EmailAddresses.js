@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field, getFormValues } from 'redux-form';
-import { MultiSelection, Row, Col, Button, TextField, Select } from '@folio/stripes/components';
+import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
 import EmailsMF from '../../MultiForms/EmailsMF';
-
 
 class EmailAddresses extends Component {
   static propTypes = {
@@ -18,9 +16,6 @@ class EmailAddresses extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: false
-    };
     this.renderSubEmailAddresses = this.renderSubEmailAddresses.bind(this);
   }
 
@@ -33,10 +28,9 @@ class EmailAddresses extends Component {
           fields={fields}
           name={`${elem}`}
           id={`${elem}`}
-          isOpen={this.state.isOpen}
           {...this.props}
         />
-        <Col xs={12} md={3} mdOf fset={9} style={{ textAlign: 'right' }}>
+        <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
           <Button onClick={() => fields.remove(index)} buttonStyle="danger">
             Remove
           </Button>
