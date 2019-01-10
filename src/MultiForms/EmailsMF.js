@@ -52,8 +52,8 @@ class EmailsMF extends Component {
       num.map((val) => {
         const contactPerson = val.contact_person;
         if (!contactPerson || contactPerson <= 0) return false;
-        const phoneNums = contactPerson.emails;
-        if (!phoneNums || phoneNums <= 0) return false;
+        const emails = contactPerson.emails;
+        if (!emails || emails <= 0) return false;
         contactPerson.emails.map((item) => arrItems.push(item));
         return false;
       });
@@ -208,6 +208,7 @@ class EmailsMF extends Component {
                 name={`${name}.email.value`}
                 id={`${name}.email.value`}
                 component={TextField}
+                validate={[Required]}
                 fullWidth
               />
             </div>
