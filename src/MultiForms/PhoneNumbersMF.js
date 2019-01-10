@@ -5,6 +5,7 @@ import TetherComponent from 'react-tether';
 import { Field, getFormValues } from 'redux-form';
 import { MultiSelection, Col, Select, TextField } from '@folio/stripes/components';
 import css from './css/MultiForms.css';
+import { Required } from '../Utils/Validate';
 
 class PhoneNumbersMF extends Component {
   static propTypes = {
@@ -196,7 +197,16 @@ class PhoneNumbersMF extends Component {
             constraints={constraints}
           >
             <div ref={this.fieldRef}>
-              <Field onChange={this.onInputChange} onClearField={this.onInputClear} label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} fullWidth />
+              <Field
+                onChange={this.onInputChange}
+                onClearField={this.onInputClear}
+                label="Phone Number*"
+                name={`${name}.phone_number.phone_number`}
+                id={`${name}.phone_number.phone_number`}
+                component={TextField}
+                validate={[Required]}
+                fullWidth
+              />
             </div>
             {
               isOpen && (

@@ -3,6 +3,7 @@
   background: white;
   border: 1px solid lightGrey;
   display: block;
+  overflow: hidden;
 }
 
 .dropDownItem {

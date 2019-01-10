@@ -19,7 +19,7 @@ class UrlsMF extends Component {
     name: PropTypes.string,
     index: PropTypes.number,
     fields: PropTypes.object,
-    emailCollection: PropTypes.arrayOf(PropTypes.object)
+    urlCollection: PropTypes.arrayOf(PropTypes.object)
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -28,7 +28,7 @@ class UrlsMF extends Component {
     const formValues = getFormValues('FormVendor')(store.getState());
     // Get Phone Number
     const getEmailNum = () => {
-      const num = formValues.emails;
+      const num = formValues.urls;
       if (!num) return false;
       return num.map((val) => arrItems.push(val));
     };
@@ -52,9 +52,9 @@ class UrlsMF extends Component {
       num.map((val) => {
         const contactPerson = val.contact_person;
         if (!contactPerson || contactPerson <= 0) return false;
-        const phoneNums = contactPerson.urls;
-        if (!phoneNums || phoneNums <= 0) return false;
-        contactPerson.emails.map((item) => arrItems.push(item));
+        const urls = contactPerson.urls;
+        if (!urls || urls <= 0) return false;
+        contactPerson.urls.map((item) => arrItems.push(item));
         return false;
       });
       return false;
@@ -129,7 +129,6 @@ class UrlsMF extends Component {
         if (!_.includes(url, e)) return false;
         return o;
       });
-      console.log(objFiltered);
       if (!_.isEmpty(objFiltered) && !isOpen) {
         return this.setState({ isOpen: true, filteredCollection: objFiltered });
       } else if (_.isEmpty(objFiltered) && isOpen) {
@@ -209,6 +208,7 @@ class UrlsMF extends Component {
                 name={`${name}.url.value`}
                 id={`${name}.url.value`}
                 component={TextField}
+                validate={[Required]}
                 fullWidth
               />
             </div>
@@ -234,7 +234,7 @@ class UrlsMF extends Component {
             dataOptions={dropdownCategories}
             onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
             style={{ height: '80px' }}
-            value={this.selectedValues(index, fields, 'categories')}
+            // value={this.selectedValues(index, fields, 'categories')}
             itemToString={this.toString}
             filter={this.filterItems}
             formatter={this.formatter}
