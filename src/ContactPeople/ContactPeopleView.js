@@ -18,6 +18,8 @@ class ContactPeopleView extends React.Component {
     super(props);
     this.getContacts = this.getContacts.bind(this);
     this.getAddPhoneNumbers = this.getAddPhoneNumbers.bind(this);
+    this.getAddEmails = this.getAddEmails.bind(this);
+    this.getAddUrls = this.getAddUrls.bind(this);
   }
 
   getAddPhoneNumbers(val, key) {
@@ -40,6 +42,46 @@ class ContactPeopleView extends React.Component {
     );
   }
 
+  getAddEmails(val, key) {
+    const categories = val.categories.join(', ') || null;
+    return (
+      <Row key={key} className={css.rptBlocks}>
+        <Col xs={4}>
+          <KeyValue label="Email" value={`${_.get(val, 'email.value', '')}`} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Description" value={`${_.get(val, 'email.value', '')}`} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Categories" value={categories} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Language" value={`${_.get(val, 'language', '')}`} />
+        </Col>
+      </Row>
+    );
+  }
+
+  getAddUrls(val, key) {
+    const categories = val.categories.join(', ') || null;
+    return (
+      <Row key={key} className={css.rptBlocks}>
+        <Col xs={4}>
+          <KeyValue label="URL" value={`${_.get(val, 'url.value', '')}`} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Description" value={`${_.get(val, 'url.value', '')}`} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Categories" value={categories} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Language" value={`${_.get(val, 'language', '')}`} />
+        </Col>
+      </Row>
+    );
+  }
+
   getContacts(val, key) {
     const { parentResources: { CountryList } } = this.props;
     const rowCount = (this.props.initialValues.contacts.length - 1) !== key;
@@ -56,6 +98,9 @@ class ContactPeopleView extends React.Component {
     const zipCode = _.get(val, 'contact_person.primary_address.address.zipCode', '');
     const AddressComplete = `${address} ${city} ${stateRegion} ${country} ${zipCode}`;
     const addPhoneNumbers = _.get(val, 'contact_person.phone_numbers', '');
+    const addEmails = _.get(val, 'contact_person.emails', '');
+    const addURLS = _.get(val, 'contact_person.urls', '');
+
     return (
       <Row key={key}>
         <Col xs={4}>
@@ -77,7 +122,7 @@ class ContactPeopleView extends React.Component {
           <KeyValue label="Notes" value={_.get(val, 'contact_person.notes')} />
         </Col>
         <Col xs={12}> 
-          <div className={css.subHeadings}>Phone Numbers</div>
+          <div className={css.subHeadings}>Primary Numbers</div>
         </Col>
         <Col xs={4}>
           <KeyValue label="Phone Number" value={`${_.get(val, 'contact_person.primary_phone_number.phone_number.phone_number', '')}`} />
@@ -101,9 +146,7 @@ class ContactPeopleView extends React.Component {
             </Col>
           </Fragment>
         )}
-
-        {/* <Col xs={12}>
-          <hr />
+        <Col xs={12}>
           <div className={css.subHeadings}>Primary Email</div>
         </Col>
         <Col xs={4}>
@@ -118,35 +161,44 @@ class ContactPeopleView extends React.Component {
         <Col xs={4}>
           <KeyValue label="Language" value={`${_.get(val, 'contact_person.primary_email.language', '')}`} />
         </Col>
+        { addEmails.length > 0 && (
+          <Fragment>
+            <Col xs={12}>
+              <div className={css.sub2Headings}>Additional Email</div>
+            </Col>
+            <Col xs={12}>
+              <p>This is email section</p>
+              { addEmails.map(this.getAddEmails) }
+            </Col>
+          </Fragment>
+        )}
+
         <Col xs={12}>
-          <div className={css.sub2Headings}>Additional Email</div>
-        </Col> */}
-        {/* <Col xs={12}>
-          { addPhoneNumbers.map(this.getAddPhoneNumbers) }
-          contact_person.primary_email.email.value
-        </Col> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          <div className={css.subHeadings}>Primary URL</div>
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="URL" value={`${_.get(val, 'contact_person.primary_url.url.value', '')}`} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Description" value={`${_.get(val, 'contact_person.primary_url.url.description', '')}`} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Category" value={`${_.get(val, 'contact_person.primary_url.categories', '')}`} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Language" value={`${_.get(val, 'contact_person.primary_url.language', '')}`} />
+        </Col>
+        { addURLS.length > 0 && (
+          <Fragment>
+            <Col xs={12}>
+              <div className={css.sub2Headings}>Additional URL</div>
+            </Col>
+            <Col xs={12}>
+              <p>This is email section</p>
+              { addURLS.map(this.getAddUrls) }
+            </Col>
+          </Fragment>
+        )}
         {rowCount &&
           <div style={{ width: '100%' }}>
             <hr />
