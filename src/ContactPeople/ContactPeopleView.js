@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
@@ -28,13 +28,13 @@ class ContactPeopleView extends React.Component {
           <KeyValue label="Phone Number" value={_.get(val, 'phone_number.phone_number', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="type" value={_.get(val, 'phone_number.type', '')} />
+          <KeyValue label="Type" value={_.get(val, 'types', '')} />
         </Col>
         <Col xs={3}>
           <KeyValue label="Language" value={_.get(val, 'language', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="categories" value={categories} />
+          <KeyValue label="Categories" value={categories} />
         </Col>
       </Row>
     );
@@ -45,7 +45,6 @@ class ContactPeopleView extends React.Component {
     const rowCount = (this.props.initialValues.contacts.length - 1) !== key;
     const categories = val.categories.join(', ') || null;
     const fullName = `${_.get(val, 'contact_person.prefix', '')} ${_.get(val, 'contact_person.first_name', '')} ${_.get(val, 'contact_person.last_name', '')}`;
-    const phoneNumber = `${_.get(val, 'contact_person.primary_phone_number.phone_number.phone_number', '')}`;
     const language = `${_.get(val, 'contact_person.language', '')}`;
     // Address
     const address = _.get(val, 'contact_person.primary_address.address.addressLine1', '');
@@ -56,24 +55,6 @@ class ContactPeopleView extends React.Component {
     const country = isCountry && isCountry.value !== '' ? `${isCountry.label}` : '';
     const zipCode = _.get(val, 'contact_person.primary_address.address.zipCode', '');
     const AddressComplete = `${address} ${city} ${stateRegion} ${country} ${zipCode}`;
-
-    // Email
-    const email = () => {
-      const emailDescription = `${_.get(val, 'contact_person.primary_email.email.description', '')}`;
-      if (emailDescription.trim().length >= 1) {
-        return `${_.get(val, 'contact_person.primary_email.email.value', '')} - ${emailDescription}`;
-      } else {
-        return `${_.get(val, 'contact_person.primary_email.email.value', '')}`;
-      }
-    };
-    const url = () => {
-      const urlDescription = `${_.get(val, 'contact_person.primary_url.url.description', '')}`;
-      if (urlDescription.trim().length >= 1) {
-        return `${_.get(val, 'contact_person.primary_url.url.value', '')} - ${urlDescription}`;
-      } else {
-        return `${_.get(val, 'contact_person.primary_url.url.value', '')}`;
-      }
-    };
     const addPhoneNumbers = _.get(val, 'contact_person.phone_numbers', '');
     return (
       <Row key={key}>
@@ -92,21 +73,14 @@ class ContactPeopleView extends React.Component {
         <Col xs={4}>
           <KeyValue label="Address 2" value={_.get(val, 'contact_person.primary_address.address.addressLine2', '')} />
         </Col>
-        <Col xs={4}>
-          <KeyValue label="Email" value={email()} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="URL" value={url()} />
-        </Col>
         <Col xs={6}>
           <KeyValue label="Notes" value={_.get(val, 'contact_person.notes')} />
         </Col>
-        <Col xs={12}>
-          <hr />
+        <Col xs={12}> 
           <div className={css.subHeadings}>Phone Numbers</div>
         </Col>
         <Col xs={4}>
-          <KeyValue label="Phone Number" value={phoneNumber} />
+          <KeyValue label="Phone Number" value={`${_.get(val, 'contact_person.primary_phone_number.phone_number.phone_number', '')}`} />
         </Col>
         <Col xs={4}>
           <KeyValue label="Type" value={`${_.get(val, 'contact_person.primary_phone_number.phone_number.type', '')}`} />
@@ -117,12 +91,62 @@ class ContactPeopleView extends React.Component {
         <Col xs={4}>
           <KeyValue label="Language" value={`${_.get(val, 'contact_person.primary_phone_number.Language', '')}`} />
         </Col>
-        <Col xs={12}>
-          <div className={css.sub2Headings}>Additional Phone Numbers</div>
+        { addPhoneNumbers.length > 0 && (
+          <Fragment>
+            <Col xs={12}>
+              <div className={css.sub2Headings}>Additional Phone Numbers</div>
+            </Col>
+            <Col xs={12}>
+              { addPhoneNumbers.map(this.getAddPhoneNumbers) }
+            </Col>
+          </Fragment>
+        )}
+
+        {/* <Col xs={12}>
+          <hr />
+          <div className={css.subHeadings}>Primary Email</div>
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Email" value={`${_.get(val, 'contact_person.primary_email.email.value', '')}`} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Description" value={`${_.get(val, 'contact_person.primary_email.email.description', '')}`} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Category" value={`${_.get(val, 'contact_person.primary_email.categories', '')}`} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Language" value={`${_.get(val, 'contact_person.primary_email.language', '')}`} />
         </Col>
         <Col xs={12}>
+          <div className={css.sub2Headings}>Additional Email</div>
+        </Col> */}
+        {/* <Col xs={12}>
           { addPhoneNumbers.map(this.getAddPhoneNumbers) }
-        </Col>
+          contact_person.primary_email.email.value
+        </Col> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         {rowCount &&
           <div style={{ width: '100%' }}>
             <hr />
