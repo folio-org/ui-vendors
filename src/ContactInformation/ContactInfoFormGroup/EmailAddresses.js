@@ -10,7 +10,7 @@ class EmailAddresses extends Component {
     stripes: PropTypes.shape({
       store: PropTypes.object
     }),
-    dispatch: PropTypes.func, 
+    dispatch: PropTypes.func,
     change: PropTypes.func,
   };
 
@@ -20,7 +20,6 @@ class EmailAddresses extends Component {
   }
 
   renderSubEmailAddresses = (elem, index, fields) => {
-    const { dropdownCategories, dropdownLanguages } = this.props;
     return (
       <Row key={index} className={css.panels}>
         <EmailsMF

@@ -16,10 +16,7 @@ class UrlsMF extends Component {
     }),
     dispatch: PropTypes.func,
     change: PropTypes.func,
-    name: PropTypes.string,
-    index: PropTypes.number,
-    fields: PropTypes.object,
-    urlCollection: PropTypes.arrayOf(PropTypes.object)
+    name: PropTypes.string
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -61,7 +58,6 @@ class UrlsMF extends Component {
     };
     getAdditional();
     // Update state
-    console.log(arrItems);
     if (!_.isEqual(arrItems, prevState.itemCollection)) {
       return { itemCollection: arrItems };
     }
@@ -163,7 +159,7 @@ class UrlsMF extends Component {
     const listItems = filteredCollection.map((item, i) => {
       return (
         <div key={i}>
-          <div className={css.inlineButton} onClick={() => this.onClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">4
+          <div className={css.inlineButton} onClick={() => this.onClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">
             {item.url.value}
           </div>
         </div>
@@ -177,11 +173,8 @@ class UrlsMF extends Component {
     const { isOpen, currWidth } = this.state;
     const {
       name,
-      index,
-      fields,
       dropdownCategories,
-      dropdownLanguages,
-      dropdownPhoneType,
+      dropdownLanguages
     } = this.props;
     const constraints = [{
       to: 'window',
@@ -232,7 +225,7 @@ class UrlsMF extends Component {
             label="Categories"
             name={`${name}.categories`}
             dataOptions={dropdownCategories}
-            onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
+            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
             style={{ height: '80px' }}
             // value={this.selectedValues(index, fields, 'categories')}
             itemToString={this.toString}

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
-import css from '../ContactInfoFormGroup.css';
+import css from '../ContactPeopleForm.css';
 import { UrlsMF } from '../../MultiForms';
 
-class Url extends Component {
+class AdditionalUrls extends Component {
   static propTypes = {
     fields: PropTypes.object,
     stripes: PropTypes.shape({
@@ -13,9 +13,10 @@ class Url extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  renderSubUrl = (elem, index, fields) => {
+  renderSub = (elem, index) => {
+    const { fields } = this.props;
     return (
-      <Row key={index} className={css.panels}>
+      <Row key={index}>
         <UrlsMF
           index={index}
           fields={fields}
@@ -33,17 +34,21 @@ class Url extends Component {
   }
 
   render() {
-    const { fields } = this.props;
+    const { fields, contactPeopleForm } = this.props;
     return (
       <Row>
+        { !contactPeopleForm &&
+          <Col xs={12}>
+            <div className={css.subHeadings}>URL</div>
+          </Col>
+        }
+        {fields.length === 0 &&
+          <Col xs={6}>
+            <div><em>- Please add url -</em></div>
+          </Col>
+        }
         <Col xs={12}>
-          <div className={css.subHeadings}>URL</div>
-          {fields.length === 0 &&
-            <div><em>- Please add URL -</em></div>
-          }
-        </Col>
-        <Col xs={12}>
-          {fields.map(this.renderSubUrl)}
+          {fields.map(this.renderSub)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
           <Button onClick={() => fields.push({})}>+ Add URL</Button>
@@ -53,4 +58,4 @@ class Url extends Component {
   }
 }
 
-export default Url;
+export default AdditionalUrls;

@@ -16,10 +16,7 @@ class EmailsMF extends Component {
     }),
     dispatch: PropTypes.func,
     change: PropTypes.func,
-    name: PropTypes.string,
-    index: PropTypes.number,
-    fields: PropTypes.object,
-    emailCollection: PropTypes.arrayOf(PropTypes.object)
+    name: PropTypes.string
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -128,7 +125,6 @@ class EmailsMF extends Component {
         if (!_.includes(email, e)) return false;
         return o;
       });
-      console.log(objFiltered);
       if (!_.isEmpty(objFiltered) && !isOpen) {
         return this.setState({ isOpen: true, filteredCollection: objFiltered });
       } else if (_.isEmpty(objFiltered) && isOpen) {
@@ -177,11 +173,8 @@ class EmailsMF extends Component {
     const { isOpen, currWidth } = this.state;
     const {
       name,
-      index,
-      fields,
       dropdownCategories,
-      dropdownLanguages,
-      dropdownPhoneType,
+      dropdownLanguages
     } = this.props;
     const constraints = [{
       to: 'window',
@@ -227,9 +220,6 @@ class EmailsMF extends Component {
           <Field label="Description" name={`${name}.email.description`} id={`${name}.email.description`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
-        </Col>
-        <Col xs={12} md={3}>
           <Field
             component={MultiSelection}
             filter={this.filterItems}
@@ -242,6 +232,9 @@ class EmailsMF extends Component {
             itemToString={this.toString}
             formatter={this.formatter}
           />
+        </Col>
+        <Col xs={12} md={3}>
+          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
         </Col>
       </Fragment>
     );

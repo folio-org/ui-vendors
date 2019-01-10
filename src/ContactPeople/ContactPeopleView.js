@@ -121,7 +121,7 @@ class ContactPeopleView extends React.Component {
         <Col xs={6}>
           <KeyValue label="Notes" value={_.get(val, 'contact_person.notes')} />
         </Col>
-        <Col xs={12}> 
+        <Col xs={12}>
           <div className={css.subHeadings}>Primary Numbers</div>
         </Col>
         <Col xs={4}>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Fields, getFormValues } from 'redux-form';
+import { Fields } from 'redux-form';
 import { IfPermission, Button, Row, Col, AccordionSet, Accordion, ExpandAllButton, Icon } from '@folio/stripes/components';
 // Local Components
 import { SummaryForm } from '../Summary';
@@ -27,9 +27,9 @@ class FormVendor extends Component {
     super(props);
     this.state = {
       sections: {
-        summarySection: false,
-        contactInformationSection: true,
-        contactPeopleSection: true,
+        summarySection: true,
+        contactInformationSection: false,
+        contactPeopleSection: false,
         agreementsSection: false,
         vendorInformationSection: false,
         EDIInformationSection: false,
@@ -42,8 +42,7 @@ class FormVendor extends Component {
         contactPeopleErr: false,
         agreementsErr: false,
         accountsErr: false,
-      },
-      phoneCollection: []
+      }
     };
     this.deleteVendor = this.deleteVendor.bind(this);
     this.onToggleSection = this.onToggleSection.bind(this);
@@ -83,7 +82,7 @@ class FormVendor extends Component {
 
   render() {
     const { initialValues } = this.props;
-    const { sectionErrors, phoneCollection } = this.state;
+    const { sectionErrors } = this.state;
     const showDeleteButton = initialValues.id || false;
     // Errors
     const arrSections = ['name', 'code', 'vendor_status', 'addresses', 'phone_numbers', 'email', 'urls', 'contacts', 'agreements', 'accounts'];
@@ -111,16 +110,16 @@ class FormVendor extends Component {
           </Col>
           <Col xs={12} md={8}>
             <AccordionSet accordionStatus={this.state.sections} onToggle={this.onToggleSection}>
-              {/* <Accordion label="Summary" id="summarySection" displayWhenClosed={summaryErr} displayWhenOpen={summaryErr}>
+              <Accordion label="Summary" id="summarySection" displayWhenClosed={summaryErr} displayWhenOpen={summaryErr}>
                 <SummaryForm {...this.props} />
-              </Accordion> */}
+              </Accordion>
               <Accordion label="Contact Information" id="contactInformationSection" displayWhenClosed={contactInfoErr} displayWhenOpen={contactInfoErr}>
                 <ContactInformationForm {...this.props} />
               </Accordion>
               <Accordion label="Contact People" id="contactPeopleSection" displayWhenClosed={contactPeopleErr} displayWhenOpen={contactPeopleErr}>
                 <ContactPeopleForm {...this.props} />
               </Accordion>
-              {/* <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
+              <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
                 <AgreementsForm {...this.props} />
               </Accordion>
               <Accordion label="Vendor Information" id="vendorInformationSection">
@@ -134,7 +133,7 @@ class FormVendor extends Component {
               </Accordion>
               <Accordion label="Accounts" id="accountsSection" displayWhenClosed={accountsErr} displayWhenOpen={accountsErr}>
                 <AccountsForm {...this.props} />
-              </Accordion> */}
+              </Accordion>
             </AccordionSet>
             <IfPermission perm="vendor.item.delete">
               <Row end="xs">
