@@ -202,7 +202,7 @@ class ContactPeopleForm extends Component {
             </Row>
           </Col>
           <Col xs={12}>
-            <div className={css.subHeadings}>Additional URL</div>
+            <div className={css.subHeadings}>Additional URLs</div>
           </Col>
           <Col xs={12}>
             <FieldArray

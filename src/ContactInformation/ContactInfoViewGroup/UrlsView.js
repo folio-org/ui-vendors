@@ -31,7 +31,7 @@ class ContactInformationView extends React.Component {
     return (
       <Row key={key}>
         <Col xs={5}>
-          <KeyValue label="Url" value={url()} />
+          <KeyValue label="URL" value={url()} />
         </Col>
         <Col xs={4}>
           <KeyValue label="Categories" value={categories} />
@@ -52,7 +52,7 @@ class ContactInformationView extends React.Component {
     const { dataVal } = this.props;
     return (
       <Col xs={12} className={css.rowHeader}>
-        <div className={css.subHeadings}>URL</div>
+        <div className={css.subHeadings}>URLs</div>
         {dataVal.map(this.getUrls)}
       </Col>
     );

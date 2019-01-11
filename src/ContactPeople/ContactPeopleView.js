@@ -191,7 +191,7 @@ class ContactPeopleView extends React.Component {
         { addURLS.length > 0 && (
           <Fragment>
             <Col xs={12}>
-              <div className={css.sub2Headings}>Additional URL</div>
+              <div className={css.sub2Headings}>Additional URLs</div>
             </Col>
             <Col xs={12}>
               <p>This is email section</p>
