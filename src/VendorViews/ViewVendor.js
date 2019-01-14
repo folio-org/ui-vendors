@@ -37,7 +37,7 @@ class ViewVendor extends Component {
     super(props);
     this.state = {
       sections: {
-        summarySection: false,
+        summarySection: true,
         contactInformationSection: false,
         contactPeopleSection: true,
         agreementsSection: false,

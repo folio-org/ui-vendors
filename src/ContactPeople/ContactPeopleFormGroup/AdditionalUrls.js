@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
-import css from './ContactPeopleForm.css';
-import PhoneNumbersCP from '../Utils/PhoneNumbersCP';
+import css from '../ContactPeopleForm.css';
+import { UrlsMF } from '../../MultiForms';
 
-class AdditionalPhoneNumbers extends Component {
+class AdditionalUrls extends Component {
   static propTypes = {
     fields: PropTypes.object,
     stripes: PropTypes.shape({
@@ -13,23 +13,15 @@ class AdditionalPhoneNumbers extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false
-    };
-  }
-
-  renderSubPhoneNumbers = (elem, index) => {
+  renderSub = (elem, index) => {
     const { fields } = this.props;
     return (
       <Row key={index}>
-        <PhoneNumbersCP
+        <UrlsMF
           index={index}
           fields={fields}
           name={`${elem}`}
           id={`${elem}`}
-          isOpen={this.state.isOpen}
           {...this.props}
         />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
@@ -47,23 +39,23 @@ class AdditionalPhoneNumbers extends Component {
       <Row>
         { !contactPeopleForm &&
           <Col xs={12}>
-            <div className={css.subHeadings}>Phone Number</div>
+            <div className={css.subHeadings}>URL</div>
           </Col>
         }
         {fields.length === 0 &&
           <Col xs={6}>
-            <div><em>- Please add phone number -</em></div>
+            <div><em>- Please add url -</em></div>
           </Col>
         }
         <Col xs={12}>
-          {fields.map(this.renderSubPhoneNumbers)}
+          {fields.map(this.renderSub)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add Phone Number</Button>
+          <Button onClick={() => fields.push({})}>+ Add URL</Button>
         </Col>
       </Row>
     );
   }
 }
 
-export default AdditionalPhoneNumbers;
+export default AdditionalUrls;

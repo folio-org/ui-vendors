@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Fields, getFormValues } from 'redux-form';
+import { Fields } from 'redux-form';
 import { IfPermission, Button, Row, Col, AccordionSet, Accordion, ExpandAllButton, Icon } from '@folio/stripes/components';
 // Local Components
 import { SummaryForm } from '../Summary';
@@ -23,58 +23,13 @@ class FormVendor extends Component {
     parentResources: PropTypes.object.isRequired,
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { stripes: { store } } = nextProps;
-    const arrPhones = [];
-    const formValues = getFormValues('FormVendor')(store.getState());
-    // Get Phone Number
-    const getPhoneNum = () => {
-      const num = formValues.phone_numbers;
-      if (!num) return false;
-      return num.map((val) => arrPhones.push(val));
-    };
-    getPhoneNum();
-    // Get Primary Phone Number
-    const getPrimary = () => {
-      const num = formValues.contacts;
-      if (!num) return false;
-      num.map((val) => {
-        const primaryPhoneNumber = ((val.contact_person || {}).primary_phone_number || {});
-        if (!_.isEmpty(primaryPhoneNumber)) return false;
-        return arrPhones.push(primaryPhoneNumber);
-      });
-      return false;
-    };
-    getPrimary();
-    // Get Additional Phone Number
-    const getAdditional = () => {
-      const num = formValues.contacts;
-      if (!num) return false;
-      num.map((val) => {
-        const contactPerson = val.contact_person;
-        if (!contactPerson || contactPerson <= 0) return false;
-        const phoneNums = contactPerson.phone_numbers;
-        if (!phoneNums || phoneNums <= 0) return false;
-        contactPerson.phone_numbers.map((item) => arrPhones.push(item));
-        return false;
-      });
-      return false;
-    };
-    getAdditional();
-    // Update state
-    if (!_.isEqual(arrPhones, prevState.phoneCollection)) {
-      return { phoneCollection: arrPhones };
-    }
-    return null;
-  }
-
   constructor(props) {
     super(props);
     this.state = {
       sections: {
-        summarySection: false,
-        contactInformationSection: true,
-        contactPeopleSection: true,
+        summarySection: true,
+        contactInformationSection: false,
+        contactPeopleSection: false,
         agreementsSection: false,
         vendorInformationSection: false,
         EDIInformationSection: false,
@@ -87,8 +42,7 @@ class FormVendor extends Component {
         contactPeopleErr: false,
         agreementsErr: false,
         accountsErr: false,
-      },
-      phoneCollection: []
+      }
     };
     this.deleteVendor = this.deleteVendor.bind(this);
     this.onToggleSection = this.onToggleSection.bind(this);
@@ -128,7 +82,7 @@ class FormVendor extends Component {
 
   render() {
     const { initialValues } = this.props;
-    const { sectionErrors, phoneCollection } = this.state;
+    const { sectionErrors } = this.state;
     const showDeleteButton = initialValues.id || false;
     // Errors
     const arrSections = ['name', 'code', 'vendor_status', 'addresses', 'phone_numbers', 'email', 'urls', 'contacts', 'agreements', 'accounts'];
@@ -160,10 +114,10 @@ class FormVendor extends Component {
                 <SummaryForm {...this.props} />
               </Accordion>
               <Accordion label="Contact Information" id="contactInformationSection" displayWhenClosed={contactInfoErr} displayWhenOpen={contactInfoErr}>
-                <ContactInformationForm phoneCollection={phoneCollection} {...this.props} />
+                <ContactInformationForm {...this.props} />
               </Accordion>
               <Accordion label="Contact People" id="contactPeopleSection" displayWhenClosed={contactPeopleErr} displayWhenOpen={contactPeopleErr}>
-                <ContactPeopleForm phoneCollection={phoneCollection} {...this.props} />
+                <ContactPeopleForm {...this.props} />
               </Accordion>
               <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
                 <AgreementsForm {...this.props} />

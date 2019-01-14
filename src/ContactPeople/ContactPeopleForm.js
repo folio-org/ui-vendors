@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
-import AdditionalPhoneNumbers from './AdditionalPhoneNumbers';
-import PhoneNumbersCP from '../Utils/PhoneNumbersCP';
+import { AdditionalEmails, AdditionalPhoneNumbers, AdditionalUrls } from './ContactPeopleFormGroup';
+import { EmailsMF, PhoneNumbersMF, UrlsMF } from '../MultiForms';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
 
@@ -72,6 +72,7 @@ class ContactPeopleForm extends Component {
 
   renderSubCreateContact = (elem, index, fields) => {
     const { dropdownLanguages, dropdownCountry } = this.props;
+    const indexNum = index + 1;
     return (
       <Col xs={12} key={index} className={css.panels}>
         <Row>
@@ -88,7 +89,7 @@ class ContactPeopleForm extends Component {
             <Field label="Last Name*" name={`${elem}.contact_person.last_name`} id={`${elem}.contact_person.last_name`} validate={[Required]} component={TextField} fullWidth />
           </Col>
           <Col xs={12}>
-            <hr style={{ borderColor: '#f0f0f0' }} />
+            <hr className={css.thinBorder} />
             <div className={css.subHeadings}>Address</div>
           </Col>
           <Col xs={12} md={4}>
@@ -108,58 +109,6 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12} md={4}>
             <Field label="Country*" name={`${elem}.contact_person.primary_address.address.country`} id={`${elem}.contact_person.primary_address.country`} validate={[Required]} component={Select} dataOptions={dropdownCountry} fullWidth />
-          </Col>
-          <Col xs={12}>
-            <hr style={{ borderColor: '#f0f0f0' }} />
-            <div className={css.subHeadings}>Primary Phone Numbers</div>
-          </Col>
-          <Col xs={12}>
-            <Row>
-              <PhoneNumbersCP
-                index={index}
-                fields={fields}
-                name={`${elem}.contact_person.primary_phone_number`}
-                id={`${elem}.contact_person.primary_phone_number`}
-                {...this.props}
-              />
-            </Row>
-          </Col>
-          <Col xs={12}>
-            <hr style={{ borderColor: '#f0f0f0' }} />
-            <div className={css.subHeadings}>Additional Phone Numbers</div>
-          </Col>
-          <Col xs={12}>
-            <FieldArray
-              label="Phone Numbers"
-              name={`${elem}.contact_person.phone_numbers`}
-              id={`${elem}.contact_person.phone_numbers`}
-              component={AdditionalPhoneNumbers}
-              {...this.props}
-              contactPeopleForm
-            />
-          </Col>
-          <Col xs={12}>
-            <hr style={{ borderColor: '#f0f0f0' }} />
-            <div className={css.subHeadings}>Email</div>
-          </Col>
-          <Col xs={12} md={6}>
-            <Field label="Email Address*" name={`${elem}.contact_person.primary_email.email.value`} id={`${elem}.contact_person.email.value`} type="email" validate={[Required]} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={6}>
-            <Field label="Description" name={`${elem}.contact_person.primary_email.email.description`} id={`${elem}.contact_person.email.description`} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12}>
-            <hr style={{ borderColor: '#f0f0f0' }} />
-            <div className={css.subHeadings}>URL</div>
-          </Col>
-          <Col xs={12} md={6}>
-            <Field label="URL" name={`${elem}.contact_person.primary_url.url.value`} id={`${elem}.url.value`} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={6}>
-            <Field label="URL Description" name={`${elem}.contact_person.primary_url.url.description`} id={`${elem}.url.description`} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12}>
-            <hr style={{ borderColor: '#f0f0f0' }} />
           </Col>
           <Col xs={12} md={3}>
             <Field label="Default Language" name={`${elem}.contact_person.language`} id={`${elem}.contact_person.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
@@ -181,10 +130,97 @@ class ContactPeopleForm extends Component {
           <Col xs={12} md={6}>
             <Field label="Notes" name={`${elem}.contact_person.notes`} id={`${elem}.contact_person.notes`} component={TextArea} style={{ height: '79px' }} fullWidth />
           </Col>
+          <Col xs={12}>
+            <hr className={css.thinBorder} />
+            <div className={css.subHeadings}>Primary Phone Numbers</div>
+          </Col>
+          <Col xs={12}>
+            <Row>
+              <PhoneNumbersMF
+                index={index}
+                fields={fields}
+                name={`${elem}.contact_person.primary_phone_number`}
+                id={`${elem}.contact_person.primary_phone_number`}
+                {...this.props}
+              />
+            </Row>
+          </Col>
+          <Col xs={12}>
+            <div className={css.subHeadings}>Additional Phone Numbers</div>
+          </Col>
+          <Col xs={12}>
+            <FieldArray
+              label="Phone Numbers"
+              name={`${elem}.contact_person.phone_numbers`}
+              id={`${elem}.contact_person.phone_numbers`}
+              component={AdditionalPhoneNumbers}
+              {...this.props}
+              contactPeopleForm
+            />
+          </Col>
+          <Col xs={12}>
+            <hr className={css.thinBorder} />
+            <div className={css.subHeadings}>Primary Email</div>
+          </Col>
+          <Col xs={12}>
+            <Row>
+              <EmailsMF
+                index={index}
+                fields={fields}
+                name={`${elem}.contact_person.primary_email`}
+                id={`${elem}.contact_person.primary_email`}
+                {...this.props}
+              />
+            </Row>
+          </Col>
+          <Col xs={12}>
+            <div className={css.subHeadings}>Additional Emails</div>
+          </Col>
+          <Col xs={12}>
+            <FieldArray
+              label="Additional Email"
+              name={`${elem}.contact_person.emails`}
+              id={`${elem}.contact_person.emails`}
+              component={AdditionalEmails}
+              {...this.props}
+              contactPeopleForm
+            />
+          </Col>
+          <Col xs={12}>
+            <hr className={css.thinBorder} />
+            <div className={css.subHeadings}>Primary URL</div>
+          </Col>
+          <Col xs={12}>
+            <Row>
+              <UrlsMF
+                index={index}
+                fields={fields}
+                name={`${elem}.contact_person.primary_url`}
+                id={`${elem}.contact_person.primary_url`}
+                {...this.props}
+              />
+            </Row>
+          </Col>
+          <Col xs={12}>
+            <div className={css.subHeadings}>Additional URLs</div>
+          </Col>
+          <Col xs={12}>
+            <FieldArray
+              label="Additional Email"
+              name={`${elem}.contact_person.urls`}
+              id={`${elem}.contact_person.urls`}
+              component={AdditionalUrls}
+              {...this.props}
+              contactPeopleForm
+            />
+          </Col>
           <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
             <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-              Remove
+              {`Remove Contact ${indexNum}`}
             </Button>
+          </Col>
+          <Col xs={12}>
+            <hr className={css.thickBorder} />
           </Col>
         </Row>
       </Col>
