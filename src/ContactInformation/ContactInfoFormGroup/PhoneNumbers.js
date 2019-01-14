@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
-import PhoneNumbersCP from '../../Utils/PhoneNumbersCP';
+import PhoneNumbersMF from '../../MultiForms/PhoneNumbersMF';
 
 class PhoneNumbers extends Component {
   static propTypes = {
@@ -13,24 +13,16 @@ class PhoneNumbers extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false
-    };
-  }
-
   renderSubPhoneNumbers = (elem, index, fields) => {
     const { contactPeopleForm } = this.props;
 
     return (
       <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
-        <PhoneNumbersCP
+        <PhoneNumbersMF
           index={index}
           fields={fields}
           name={`${elem}`}
           id={`${elem}`}
-          isOpen={this.state.isOpen}
           {...this.props}
         />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>

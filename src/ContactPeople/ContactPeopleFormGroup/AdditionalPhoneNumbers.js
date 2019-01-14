@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
-import css from '../ContactInfoFormGroup.css';
-import { UrlsMF } from '../../MultiForms';
+import css from '../ContactPeopleForm.css';
+import PhoneNumbersMF from '../../MultiForms/PhoneNumbersMF';
 
-class Url extends Component {
+class AdditionalPhoneNumbers extends Component {
   static propTypes = {
     fields: PropTypes.object,
     stripes: PropTypes.shape({
@@ -13,10 +13,11 @@ class Url extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  renderSubUrl = (elem, index, fields) => {
+  renderSubPhoneNumbers = (elem, index) => {
+    const { fields } = this.props;
     return (
-      <Row key={index} className={css.panels}>
-        <UrlsMF
+      <Row key={index}>
+        <PhoneNumbersMF
           index={index}
           fields={fields}
           name={`${elem}`}
@@ -33,24 +34,28 @@ class Url extends Component {
   }
 
   render() {
-    const { fields } = this.props;
+    const { fields, contactPeopleForm } = this.props;
     return (
       <Row>
+        { !contactPeopleForm &&
+          <Col xs={12}>
+            <div className={css.subHeadings}>Phone Number</div>
+          </Col>
+        }
+        {fields.length === 0 &&
+          <Col xs={6}>
+            <div><em>- Please add phone number -</em></div>
+          </Col>
+        }
         <Col xs={12}>
-          <div className={css.subHeadings}>URLs</div>
-          {fields.length === 0 &&
-            <div><em>- Please add URL -</em></div>
-          }
-        </Col>
-        <Col xs={12}>
-          {fields.map(this.renderSubUrl)}
+          {fields.map(this.renderSubPhoneNumbers)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add URL</Button>
+          <Button onClick={() => fields.push({})}>+ Add Phone Number</Button>
         </Col>
       </Row>
     );
   }
 }
 
-export default Url;
+export default AdditionalPhoneNumbers;

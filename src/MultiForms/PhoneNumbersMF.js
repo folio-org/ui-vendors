@@ -4,9 +4,10 @@ import _ from 'lodash';
 import TetherComponent from 'react-tether';
 import { Field, getFormValues } from 'redux-form';
 import { MultiSelection, Col, Select, TextField } from '@folio/stripes/components';
-import css from './PhoneNumbersCP.css';
+import css from './css/MultiForms.css';
+import { Required } from '../Utils/Validate';
 
-class PhoneNumbersCP extends Component {
+class PhoneNumbersMF extends Component {
   static propTypes = {
     dropdownCategories: PropTypes.arrayOf(PropTypes.string),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
@@ -17,23 +18,66 @@ class PhoneNumbersCP extends Component {
     dispatch: PropTypes.func,
     change: PropTypes.func,
     name: PropTypes.string,
-    phoneCollection: PropTypes.arrayOf(PropTypes.object)
   };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { stripes: { store } } = nextProps;
+    const arrPhones = [];
+    const formValues = getFormValues('FormVendor')(store.getState());
+    // Get Phone Number
+    const getPhoneNum = () => {
+      const num = formValues.phone_numbers;
+      if (!num) return false;
+      return num.map((val) => arrPhones.push(val));
+    };
+    getPhoneNum();
+    // Get Primary Phone Number
+    const getPrimary = () => {
+      const num = formValues.contacts;
+      if (!num) return false;
+      num.map((val) => {
+        const primaryPhoneNumber = ((val.contact_person || {}).primary_phone_number || {});
+        if (!_.isEmpty(primaryPhoneNumber)) return false;
+        return arrPhones.push(primaryPhoneNumber);
+      });
+      return false;
+    };
+    getPrimary();
+    // Get Additional Phone Number
+    const getAdditional = () => {
+      const num = formValues.contacts;
+      if (!num) return false;
+      num.map((val) => {
+        const contactPerson = val.contact_person;
+        if (!contactPerson || contactPerson <= 0) return false;
+        const phoneNums = contactPerson.phone_numbers;
+        if (!phoneNums || phoneNums <= 0) return false;
+        contactPerson.phone_numbers.map((item) => arrPhones.push(item));
+        return false;
+      });
+      return false;
+    };
+    getAdditional();
+    // Update state
+    if (!_.isEqual(arrPhones, prevState.itemCollection)) {
+      return { itemCollection: arrPhones };
+    }
+    return null;
+  }
 
   constructor(props) {
     super(props);
     this.state = {
       isOpen: false,
       currWidth: 100,
-      phoneFilteredCollection: []
+      filteredCollection: []
     };
     this.onChangeSelect = this.onChangeSelect.bind(this);
-    // this.selectedValues = this.selectedValues.bind(this);
-    this.onPhoneInputChange = this.onPhoneInputChange.bind(this);
-    this.onPhoneInputClear = this.onPhoneInputClear.bind(this);
-    this.onPhoneClickItem = this.onPhoneClickItem.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onInputClear = this.onInputClear.bind(this);
+    this.onClickItem = this.onClickItem.bind(this);
     this.onKeyPressed = this.onKeyPressed.bind(this);
-    this.phoneRenderItem = this.phoneRenderItem.bind(this);
+    this.renderItem = this.renderItem.bind(this);
 
     this.fieldRef = React.createRef();
     return false;
@@ -71,12 +115,12 @@ class PhoneNumbersCP extends Component {
   };
   // End Multi dropdown
 
-  // Phone Numbers
-  onPhoneInputChange(obj, e) {
-    const { isOpen } = this.state;
-    const { phoneCollection } = this.props;
-    if (!_.isEmpty(phoneCollection) && (e.trim().length >= 1)) {
-      const num = phoneCollection;
+  // Input Actions
+  // variables and prop names needs to be change for other use
+  onInputChange(obj, e) {
+    const { isOpen, itemCollection } = this.state;
+    if (!_.isEmpty(itemCollection) && (e.trim().length >= 1)) {
+      const num = itemCollection;
       const objFiltered = _.filter(num, (o) => {
         const phoneNumber = ((o.phone_number || []).phone_number || []);
         if (!_.includes(phoneNumber, e)) return false;
@@ -84,27 +128,27 @@ class PhoneNumbersCP extends Component {
       });
 
       if (!_.isEmpty(objFiltered) && !isOpen) {
-        return this.setState({ isOpen: true, phoneFilteredCollection: objFiltered });
+        return this.setState({ isOpen: true, filteredCollection: objFiltered });
       } else if (_.isEmpty(objFiltered) && isOpen) {
-        return this.setState({ isOpen: false, phoneFilteredCollection: [] });
+        return this.setState({ isOpen: false, filteredCollection: [] });
       }
       return false;
     }
 
-    if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
+    if (isOpen) this.setState({ isOpen: false, filteredCollection: [] });
     return false;
   }
 
-  onPhoneInputClear() {
+  onInputClear() {
     const { isOpen } = this.state;
-    if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
+    if (isOpen) this.setState({ isOpen: false, filteredCollection: [] });
   }
 
-  onPhoneClickItem(name, item) {
+  onClickItem(name, item) {
     const { isOpen } = this.state;
     const { dispatch, change } = this.props;
     dispatch(change(`${name}`, item));
-    if (isOpen) this.setState({ isOpen: false, phoneFilteredCollection: [] });
+    if (isOpen) this.setState({ isOpen: false, filteredCollection: [] });
     return false;
   }
 
@@ -112,12 +156,12 @@ class PhoneNumbersCP extends Component {
     return false;
   }
 
-  phoneRenderItem = (name) => {
-    const { phoneFilteredCollection } = this.state;
-    const listItems = phoneFilteredCollection.map((item, i) => {
+  renderItem = (name) => {
+    const { filteredCollection } = this.state;
+    const listItems = filteredCollection.map((item, i) => {
       return (
         <div key={i}>
-          <div className={css.inlineButton} onClick={() => this.onPhoneClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">
+          <div className={css.inlineButton} onClick={() => this.onClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">
             {item.phone_number.phone_number}
           </div>
         </div>
@@ -125,7 +169,7 @@ class PhoneNumbersCP extends Component {
     });
     return (<div>{listItems}</div>);
   }
-  // End Phone Numbers
+  // End Input Actions
 
   render() {
     const { isOpen, currWidth } = this.state;
@@ -153,13 +197,22 @@ class PhoneNumbersCP extends Component {
             constraints={constraints}
           >
             <div ref={this.fieldRef}>
-              <Field onChange={this.onPhoneInputChange} onClearField={this.onPhoneInputClear} label="Phone Number*" name={`${name}.phone_number.phone_number`} id={`${name}.phone_number.phone_number`} component={TextField} fullWidth />
+              <Field
+                onChange={this.onInputChange}
+                onClearField={this.onInputClear}
+                label="Phone Number*"
+                name={`${name}.phone_number.phone_number`}
+                id={`${name}.phone_number.phone_number`}
+                component={TextField}
+                validate={[Required]}
+                fullWidth
+              />
             </div>
             {
               isOpen && (
               <div className={css.dropdown} style={{ width:`${currWidth}px` }}>
                 <span className={css.dropDownItem}>
-                  {this.phoneRenderItem(name)}
+                  {this.renderItem(name)}
                 </span>
               </div>
               )
@@ -190,4 +243,4 @@ class PhoneNumbersCP extends Component {
   }
 }
 
-export default PhoneNumbersCP;
+export default PhoneNumbersMF;
