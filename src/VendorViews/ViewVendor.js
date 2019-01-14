@@ -39,7 +39,7 @@ class ViewVendor extends Component {
       sections: {
         summarySection: true,
         contactInformationSection: false,
-        contactPeopleSection: true,
+        contactPeopleSection: false,
         agreementsSection: false,
         vendorInformationSection: false,
         EDIInformationSection: false,

@@ -15,7 +15,6 @@ class AddressInfoView extends React.Component {
   }
 
   getAddress(val, key) {
-    const rowCount = (this.props.dataVal.length - 1) !== key;
     const categories = val.categories.join(', ') || null;
     const addresses = () => {
       if (key >= 1) return val.address;
@@ -39,11 +38,6 @@ class AddressInfoView extends React.Component {
         <Col xs={12}>
           <AddressView addressObject={addresses()} visibleFields={visibleFields} />
         </Col>
-        {rowCount &&
-          <div style={{ width: '100%' }}>
-            <hr />
-          </div>
-        }
       </Row>
     );
   }
