@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Fields } from 'redux-form';
+import { Fields, getFormSyncErrors } from 'redux-form';
 import { IfPermission, Button, Row, Col, AccordionSet, Accordion, ExpandAllButton, Icon } from '@folio/stripes/components';
 // Local Components
 import { SummaryForm } from '../Summary';
@@ -21,6 +21,24 @@ class FormVendor extends Component {
     deleteLedger: PropTypes.func,
     parentMutator: PropTypes.object.isRequired,
     parentResources: PropTypes.object.isRequired,
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    const { stripes: { store } } = props;
+    const { sections } = state;
+    const errorKeys = Object.keys(getFormSyncErrors('FormVendor')(store.getState()));
+    if (errorKeys.length > 0) {
+      const newSections = { ...sections };
+      errorKeys.forEach(key => {
+        if (key === 'name' || key === 'code' || key === 'vendor_status') newSections.summarySection = true;
+        if (key === 'addresses' || key === 'phone_numbers' || key === 'email' || key === 'urls') newSections.contactInformationSection = true;
+        if (key === 'contacts') newSections.contactPeopleSection = true;
+        if (key === 'agreements') newSections.agreementsSection = true;
+        if (key === 'accounts') newSections.accountsSection = true;
+      });
+      return { sections: newSections };
+    }
+    return null;
   }
 
   constructor(props) {
