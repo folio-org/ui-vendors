@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import queryString from 'query-string';
-import { getFormSyncErrors } from 'redux-form';
 // Folio
 import { Pane, PaneMenu, Row, Col, Icon, IconButton, IfPermission, Layer, AccordionSet, Accordion, ExpandAllButton } from '@folio/stripes/components';
 import { withTags } from '@folio/stripes/smart-components';
@@ -54,27 +53,12 @@ class ViewVendor extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { parentMutator, parentResources, match: { params: { id } }, stripes: { store } } = props;
+    const { parentMutator, parentResources, match: { params: { id } } } = props;
     const vendorID = (parentResources.vendorID || {}).records || [];
     if (!_.isEqual(vendorID, state.vendorData)) {
       parentMutator.queryCustom.update({ vendorIDQuery: `query=(id=${id})` });
       return { vendorData: vendorID };
     }
-
-    const errorKeys = Object.keys(getFormSyncErrors('FormVendor')(store.getState()));
-    if (errorKeys.length > 0) {
-      console.log(errorKeys);
-      // const newSections = { ...sections };
-      // errorKeys.forEach(key => {
-        // const accordionName = MAP_FIELD_ACCORDION[key];
-        // if (accordionName) {
-        //   newSections[accordionName] = true;
-        // }
-      // });
-      // return { sections: newSections };
-    }
-
-
     return null;
   }
 
