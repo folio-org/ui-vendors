@@ -69,7 +69,6 @@ class PhoneNumbersMF extends Component {
     super(props);
     this.state = {
       isOpen: false,
-      currWidth: 100,
       filteredCollection: []
     };
     this.onChangeSelect = this.onChangeSelect.bind(this);
@@ -80,15 +79,6 @@ class PhoneNumbersMF extends Component {
     this.renderItem = this.renderItem.bind(this);
 
     this.fieldRef = React.createRef();
-    return false;
-  }
-
-  componentDidMount() {
-    const { currWidth } = this.state;
-    const { clientWidth } = this.fieldRef.current;
-    if (clientWidth !== currWidth) {
-      return this.setState({ currWidth: clientWidth });
-    }
     return false;
   }
 
@@ -172,7 +162,7 @@ class PhoneNumbersMF extends Component {
   // End Input Actions
 
   render() {
-    const { isOpen, currWidth } = this.state;
+    const { isOpen } = this.state;
     const {
       name,
       dropdownCategories,
@@ -188,6 +178,9 @@ class PhoneNumbersMF extends Component {
       pin: false
     }];
 
+    const defaultWidth = 100;
+    const clientWidth = ((this.fieldRef || defaultWidth).current || defaultWidth).clientWidth || defaultWidth;
+
     return (
       <Fragment>
         <Col xs={12} md={3}>
@@ -196,7 +189,7 @@ class PhoneNumbersMF extends Component {
             targetAttachment="bottom left"
             constraints={constraints}
           >
-            <div ref={this.fieldRef}>
+            <div ref={this.fieldRef} style={{ width:'100%' }}>
               <Field
                 onChange={this.onInputChange}
                 onClearField={this.onInputClear}
@@ -210,7 +203,7 @@ class PhoneNumbersMF extends Component {
             </div>
             {
               isOpen && (
-              <div className={css.dropdown} style={{ width:`${currWidth}px` }}>
+              <div className={css.dropdown} style={{ width:`${clientWidth}px` }}>
                 <span className={css.dropDownItem}>
                   {this.renderItem(name)}
                 </span>
