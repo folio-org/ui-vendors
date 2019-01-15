@@ -69,7 +69,6 @@ class EmailsMF extends Component {
     super(props);
     this.state = {
       isOpen: false,
-      currWidth: 100,
       filteredCollection: []
     };
     // this.selectedValues = this.selectedValues.bind(this);

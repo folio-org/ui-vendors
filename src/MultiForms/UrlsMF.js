@@ -160,7 +160,7 @@ class UrlsMF extends Component {
   // End Input Actions
 
   render() {
-    const { isOpen, currWidth } = this.state;
+    const { isOpen } = this.state;
     const {
       name,
       dropdownCategories,
