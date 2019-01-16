@@ -43,7 +43,7 @@ class Main extends Component {
       initialValue: {
         query: '',
         filters: '',
-        sort: ''
+        sort: 'Name'
       },
     },
     resultCount: { initialValue: INITIAL_RESULT_COUNT },
