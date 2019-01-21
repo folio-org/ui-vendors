@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
+import { Pluggable } from '@folio/stripes/core';
 import { Required } from '../Utils/Validate';
 import css from './SummaryForm.css';
 
@@ -14,6 +15,31 @@ class SummaryForm extends React.Component {
     super(props);
     this.renderList = this.renderList.bind(this);
     this.renderSubFields = this.renderSubFields.bind(this);
+  }
+
+  userVendor() {
+    const columnMapping = {
+      name: "vendor_name",
+      vendor_status: "vendor_status",
+    };
+    const { stripes } = this.props;
+
+    return (
+      <Pluggable
+        aria-haspopup="true"
+        type="find-vendor"
+        dataKey="vendor"
+        searchLabel="+"
+        searchButtonStyle="default"
+        selectVendor={vendor => this.onAddVendor(vendor)}
+        visibleColumns={['name', 'vendor_status']}
+        columnMapping={columnMapping}
+        disableRecordCreation
+        stripes={stripes}
+      >
+        <span>[no vendor-selection plugin]</span>
+      </Pluggable>
+    );
   }
 
   renderList = ({ fields }) => {
@@ -63,6 +89,11 @@ class SummaryForm extends React.Component {
 
     return (
       <Row>
+        <Col xs={12}>
+          <div style={{ marginLeft: '10px', top: '0', position: 'relative' }}>
+            {this.userVendor()}
+          </div>
+        </Col>
         <Col xs={12}>
           <Field label="Name*" name="name" id="name" validate={[Required]} component={TextField} fullWidth />
         </Col>
