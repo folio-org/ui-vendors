@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import queryString from 'query-string';
 // Folio
-import { Pane, PaneMenu, Row, Col, Icon, IconButton, IfPermission, Layer, AccordionSet, Accordion, ExpandAllButton } from '@folio/stripes/components';
+import { IfPermission } from '@folio/stripes/core';
+import { Pane, PaneMenu, Row, Col, Icon, IconButton, Layer, AccordionSet, Accordion, ExpandAllButton } from '@folio/stripes/components';
 import { withTags } from '@folio/stripes/smart-components';
 // Local Components
 import { SummaryView } from '../Summary';
