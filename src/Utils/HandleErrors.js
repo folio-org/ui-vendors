@@ -1,6 +1,13 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class HandleErrors extends Component {
+  static propTypes = {
+    names: PropTypes.arrayOf(PropTypes.string),
+    updateSectionErrors: PropTypes.object,
+    data: PropTypes.object
+  };
+
   static getDerivedStateFromProps(props, state) {
     const { names, updateSectionErrors, data } = props;
     const isAllFalse = item => item === false;
