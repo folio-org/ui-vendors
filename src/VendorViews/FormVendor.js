@@ -22,6 +22,7 @@ class FormVendor extends Component {
     deleteLedger: PropTypes.func,
     parentMutator: PropTypes.object.isRequired,
     parentResources: PropTypes.object.isRequired,
+    stripes: PropTypes.object
   }
 
   static getDerivedStateFromProps(props, state) {
