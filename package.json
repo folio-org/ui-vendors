@@ -16,7 +16,7 @@
     "displayName": "ui-vendors.meta.title",
     "moduleName": "Vendors",
     "route": "/vendors",
-    "home": "/vendors",
+    "home": "/vendors?sort=name",
     "hasSettings": true,
     "okapiInterfaces": {
       "account": "1.0", 
@@ -837,6 +837,7 @@
     "@folio/eslint-config-stripes": "^3.2.1",
     "@folio/stripes": "^1.0.0",
     "babel-eslint": "^9.0.0",
+    "react-intl": "^2.4.0",
     "eslint": "^5.6.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
