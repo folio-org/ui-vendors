@@ -819,7 +819,7 @@
       },
       {
         "permissionName": "settings.vendor.enabled",
-        "displayName": "Settings (Vendor): Display list of settings for VEndor",
+        "displayName": "Settings (Vendor): Display list of settings for Vendor",
         "visible": true,
         "subPermissions": [
           "settings.enabled"
