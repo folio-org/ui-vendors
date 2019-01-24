@@ -32,13 +32,13 @@
       "interface": "1.0", 
       "phone_number": "1.0", 
       "url": "1.0", 
-      "vendor_address": "1.0", 
-      "vendor_contact_person": "1.0", 
-      "vendor_email": "1.0", 
-      "vendor_phone": "1.0", 
-      "vendor_type": "1.0", 
-      "vendor_url": "1.0", 
-      "vendor": "1.0"
+      "vendor.all": "1.0",
+      "vendor_address.all": "1.0",
+      "vendor_contact_person.all": "1.0",
+      "vendor_email.all": "1.0",
+      "vendor_phone.all": "1.0",
+      "vendor_type.all": "1.0",
+      "vendor_url.all": "1.0"
     },
     "queryResource": "query",
     "icons": [
@@ -793,6 +793,7 @@
         "permissionName" : "vendor.module.all",
         "displayName" : "vendor-module all",
         "description" : "All permissions for the vendor module",
+        "visible": true,
         "subPermissions" : [
           "account.all",
           "address.all",
@@ -814,6 +815,14 @@
           "vendor_phone.all",
           "vendor_type.all",
           "vendor_url.all"
+        ]
+      },
+      {
+        "permissionName": "settings.vendor.enabled",
+        "displayName": "Settings (Vendor): Display list of settings for VEndor",
+        "visible": true,
+        "subPermissions": [
+          "settings.enabled"
         ]
       }
     ]
