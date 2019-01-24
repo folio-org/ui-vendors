@@ -19,26 +19,7 @@
     "home": "/vendors?sort=name",
     "hasSettings": true,
     "okapiInterfaces": {
-      "account": "1.0", 
-      "address": "1.0", 
-      "agreement": "1.0", 
-      "alias": "1.0", 
-      "category": "1.0", 
-      "contact_person": "1.0", 
-      "edi": "1.0", 
-      "edi_ftp": "1.0", 
-      "edi_job": "1.0", 
-      "email": "1.0", 
-      "interface": "1.0", 
-      "phone_number": "1.0", 
-      "url": "1.0", 
-      "vendor.all": "1.0",
-      "vendor_address.all": "1.0",
-      "vendor_contact_person.all": "1.0",
-      "vendor_email.all": "1.0",
-      "vendor_phone.all": "1.0",
-      "vendor_type.all": "1.0",
-      "vendor_url.all": "1.0"
+      "vendor": "1.0"
     },
     "queryResource": "query",
     "icons": [
@@ -48,740 +29,116 @@
         "title": "Vendors"
       }
     ],
-    "permissionSets" : [
-      {
-        "permissionName" : "account.collection.get",
-        "displayName" : "account collection get",
-        "description" : "Get a collection of accounts"
+    "permissionSets": [
+      { 
+        "permissionName": "module.vendors.enabled",
+        "displayName": "UI: Vendors module is enabled"
       },
       {
-        "permissionName" : "account.item.post",
-        "displayName" : "account post",
-        "description" : "Create a new account"
+        "permissionName": "contact_category.collection.get",
+        "displayName": "contact-categories collection get",
+        "description": "Get a collection of categories for Contacts"
       },
       {
-        "permissionName" : "account.item.get",
-        "displayName" : "account get",
-        "description" : "Fetch an account"
+        "permissionName": "contact_category.item.post",
+        "displayName": "contact-category post",
+        "description": "Create a new Contact category"
       },
       {
-        "permissionName" : "account.item.put",
-        "displayName" : "account put",
-        "description" : "Update an account"
+        "permissionName": "contact_category.item.get",
+        "displayName": "contact-category get",
+        "description": "Fetch a Contact category"
       },
       {
-        "permissionName" : "account.item.delete",
-        "displayName" : "account delete",
-        "description" : "Delete a account"
+        "permissionName": "contact_category.item.put",
+        "displayName": "contact-category put",
+        "description": "Update a Contact category"
       },
       {
-        "permissionName" : "account.all",
-        "displayName" : "account all",
-        "description" : "All permissions for account",
-        "subPermissions" : [
-          "account.collection.get",
-          "account.item.post",
-          "account.item.get",
-          "account.item.put",
-          "account.item.delete"
+        "permissionName": "contact_category.item.delete",
+        "displayName": "contact-category delete",
+        "description": "Delete a Contact category"
+      },
+      {
+        "permissionName": "contact_category.all",
+        "displayName": "contact_category all",
+        "description": "All permissions for contact_category",
+        "subPermissions": [
+          "contact_category.collection.get",
+          "contact_category.item.post",
+          "contact_category.item.get",
+          "contact_category.item.put",
+          "contact_category.item.delete"
         ]
       },
       {
-        "permissionName" : "address.collection.get",
-        "displayName" : "address collection get",
-        "description" : "Get a collection of addresses"
+        "permissionName": "vendor_category.collection.get",
+        "displayName": "categories collection get",
+        "description": "Get a collection of categories"
       },
       {
-        "permissionName" : "address.item.post",
-        "displayName" : "address post",
-        "description" : "Create a new address"
+        "permissionName": "vendor_category.item.post",
+        "displayName": "vendor-category post",
+        "description": "Create a new category"
       },
       {
-        "permissionName" : "address.item.get",
-        "displayName" : "address get",
-        "description" : "Fetch a address"
+        "permissionName": "vendor_category.item.get",
+        "displayName": "contact-category get",
+        "description": "Fetch a category"
       },
       {
-        "permissionName" : "address.item.put",
-        "displayName" : "address put",
-        "description" : "Update a address"
+        "permissionName": "vendor_category.item.put",
+        "displayName": "contact-category put",
+        "description": "Update a category"
       },
       {
-        "permissionName" : "address.item.delete",
-        "displayName" : "address delete",
-        "description" : "Delete a address"
+        "permissionName": "vendor_category.item.delete",
+        "displayName": "contact-category delete",
+        "description": "Delete a category"
       },
       {
-        "permissionName" : "address.all",
-        "displayName" : "address all",
-        "description" : "All permissions for address",
-        "subPermissions" : [
-          "address.collection.get",
-          "address.item.post",
-          "address.item.get",
-          "address.item.put",
-          "address.item.delete"
+        "permissionName": "vendor_category.all",
+        "displayName": "vendor_category all",
+        "description": "All permissions for categories",
+        "subPermissions": [
+          "vendor_category.collection.get",
+          "vendor_category.item.post",
+          "vendor_category.item.get",
+          "vendor_category.item.put",
+          "vendor_category.item.delete"
         ]
       },
       {
-        "permissionName" : "agreement.collection.get",
-        "displayName" : "agreement collection get",
-        "description" : "Get a collection of agreements"
+        "permissionName": "vendor.collection.get",
+        "displayName": "vendor collection get",
+        "description": "Get a collection of vendors"
       },
       {
-        "permissionName" : "agreement.item.post",
-        "displayName" : "agreement post",
-        "description" : "Create a new agreement"
+        "permissionName": "vendor.item.post",
+        "displayName": "vendor post",
+        "description": "Create a new vendor"
       },
       {
-        "permissionName" : "agreement.item.get",
-        "displayName" : "agreement get",
-        "description" : "Fetch a agreement"
+        "permissionName": "vendor.item.get",
+        "displayName": "vendor get",
+        "description": "Fetch a vendor"
       },
       {
-        "permissionName" : "agreement.item.put",
-        "displayName" : "agreement put",
-        "description" : "Update a agreement"
+        "permissionName": "vendor.item.put",
+        "displayName": "vendor put",
+        "description": "Update a vendor"
       },
       {
-        "permissionName" : "agreement.item.delete",
-        "displayName" : "agreement delete",
-        "description" : "Delete a agreement"
+        "permissionName": "vendor.item.delete",
+        "displayName": "vendor delete",
+        "description": "Delete a vendor"
       },
       {
-        "permissionName" : "agreement.all",
-        "displayName" : "agreement all",
-        "description" : "All permissions for agreement",
-        "subPermissions" : [
-          "agreement.collection.get",
-          "agreement.item.post",
-          "agreement.item.get",
-          "agreement.item.put",
-          "agreement.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "alias.collection.get",
-        "displayName" : "alias collection get",
-        "description" : "Get a collection of aliases"
-      },
-      {
-        "permissionName" : "alias.item.post",
-        "displayName" : "alias post",
-        "description" : "Create a new alias"
-      },
-      {
-        "permissionName" : "alias.item.get",
-        "displayName" : "alias get",
-        "description" : "Fetch a alias"
-      },
-      {
-        "permissionName" : "alias.item.put",
-        "displayName" : "alias put",
-        "description" : "Update a alias"
-      },
-      {
-        "permissionName" : "alias.item.delete",
-        "displayName" : "alias delete",
-        "description" : "Delete a alias"
-      },
-      {
-        "permissionName" : "alias.all",
-        "displayName" : "alias all",
-        "description" : "All permissions for alias",
-        "subPermissions" : [
-          "alias.collection.get",
-          "alias.item.post",
-          "alias.item.get",
-          "alias.item.put",
-          "alias.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "category.collection.get",
-        "displayName" : "ccategory collection get",
-        "description" : "Get a collection of categories"
-      },
-      {
-        "permissionName" : "category.item.post",
-        "displayName" : "category post",
-        "description" : "Create a new category"
-      },
-      {
-        "permissionName" : "category.item.get",
-        "displayName" : "category get",
-        "description" : "Fetch a category"
-      },
-      {
-        "permissionName" : "category.item.put",
-        "displayName" : "category put",
-        "description" : "Update a category"
-      },
-      {
-        "permissionName" : "category.item.delete",
-        "displayName" : "category delete",
-        "description" : "Delete a category"
-      },
-      {
-        "permissionName" : "category.all",
-        "displayName" : "category all",
-        "description" : "All permissions for category",
-        "subPermissions" : [
-          "category.collection.get",
-          "category.item.post",
-          "category.item.get",
-          "category.item.put",
-          "category.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "contact_person.collection.get",
-        "displayName" : "ccontact_person collection get",
-        "description" : "Get a collection of contact persons"
-      },
-      {
-        "permissionName" : "contact_person.item.post",
-        "displayName" : "contact_person post",
-        "description" : "Create a new contact_person"
-      },
-      {
-        "permissionName" : "contact_person.item.get",
-        "displayName" : "contact_person get",
-        "description" : "Fetch a contact_person"
-      },
-      {
-        "permissionName" : "contact_person.item.put",
-        "displayName" : "contact_person put",
-        "description" : "Update a contact_person"
-      },
-      {
-        "permissionName" : "contact_person.item.delete",
-        "displayName" : "contact_person delete",
-        "description" : "Delete a contact_person"
-      },
-      {
-        "permissionName" : "contact_person.all",
-        "displayName" : "contact_person all",
-        "description" : "All permissions for contact_person",
-        "subPermissions" : [
-          "contact_person.collection.get",
-          "contact_person.item.post",
-          "contact_person.item.get",
-          "contact_person.item.put",
-          "contact_person.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "edi.collection.get",
-        "displayName" : "edi collection get",
-        "description" : "Get a collection of edis"
-      },
-      {
-        "permissionName" : "edi.item.post",
-        "displayName" : "edi post",
-        "description" : "Create a new edi"
-      },
-      {
-        "permissionName" : "edi.item.get",
-        "displayName" : "edi get",
-        "description" : "Fetch a edi"
-      },
-      {
-        "permissionName" : "edi.item.put",
-        "displayName" : "edi put",
-        "description" : "Update a edi"
-      },
-      {
-        "permissionName" : "edi.item.delete",
-        "displayName" : "edi delete",
-        "description" : "Delete a edi"
-      },
-      {
-        "permissionName" : "edi.all",
-        "displayName" : "edi all",
-        "description" : "All permissions for edi",
-        "subPermissions" : [
-          "edi.collection.get",
-          "edi.item.post",
-          "edi.item.get",
-          "edi.item.put",
-          "edi.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "edi_ftp.collection.get",
-        "displayName" : "edi_ftp collection get",
-        "description" : "Get a collection of edi_ftps"
-      },
-      {
-        "permissionName" : "edi_ftp.item.post",
-        "displayName" : "edi_ftp post",
-        "description" : "Create a new edi_ftp"
-      },
-      {
-        "permissionName" : "edi_ftp.item.get",
-        "displayName" : "edi_ftp get",
-        "description" : "Fetch a edi_ftp"
-      },
-      {
-        "permissionName" : "edi_ftp.item.put",
-        "displayName" : "edi_ftp put",
-        "description" : "Update a edi_ftp"
-      },
-      {
-        "permissionName" : "edi_ftp.item.delete",
-        "displayName" : "edi_ftp delete",
-        "description" : "Delete a edi_ftp"
-      },
-      {
-        "permissionName" : "edi_ftp.all",
-        "displayName" : "edi_ftp all",
-        "description" : "All permissions for edi_ftp",
-        "subPermissions" : [
-          "edi_ftp.collection.get",
-          "edi_ftp.item.post",
-          "edi_ftp.item.get",
-          "edi_ftp.item.put",
-          "edi_ftp.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "edi_job.collection.get",
-        "displayName" : "edi_job collection get",
-        "description" : "Get a collection of edi_job"
-      },
-      {
-        "permissionName" : "edi_job.item.post",
-        "displayName" : "edi_job post",
-        "description" : "Create a new edi_job"
-      },
-      {
-        "permissionName" : "edi_job.item.get",
-        "displayName" : "edi_job get",
-        "description" : "Fetch a edi_job"
-      },
-      {
-        "permissionName" : "edi_job.item.put",
-        "displayName" : "edi_job put",
-        "description" : "Update a edi_job"
-      },
-      {
-        "permissionName" : "edi_job.item.delete",
-        "displayName" : "edi_job delete",
-        "description" : "Delete a edi_job"
-      },
-      {
-        "permissionName" : "edi_job.all",
-        "displayName" : "edi_job all",
-        "description" : "All permissions for edi_job",
-        "subPermissions" : [
-          "edi_job.collection.get",
-          "edi_job.item.post",
-          "edi_job.item.get",
-          "edi_job.item.put",
-          "edi_job.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "email.collection.get",
-        "displayName" : "email collection get",
-        "description" : "Get a collection of emails"
-      },
-      {
-        "permissionName" : "email.item.post",
-        "displayName" : "email post",
-        "description" : "Create a new email"
-      },
-      {
-        "permissionName" : "email.item.get",
-        "displayName" : "email get",
-        "description" : "Fetch a email"
-      },
-      {
-        "permissionName" : "email.item.put",
-        "displayName" : "email put",
-        "description" : "Update a email"
-      },
-      {
-        "permissionName" : "email.item.delete",
-        "displayName" : "email delete",
-        "description" : "Delete a email"
-      },
-      {
-        "permissionName" : "email.all",
-        "displayName" : "email all",
-        "description" : "All permissions for email",
-        "subPermissions" : [
-          "email.collection.get",
-          "email.item.post",
-          "email.item.get",
-          "email.item.put",
-          "email.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "interface.collection.get",
-        "displayName" : "interface collection get",
-        "description" : "Get a collection of interface"
-      },
-      {
-        "permissionName" : "interface.item.post",
-        "displayName" : "interface post",
-        "description" : "Create a new interface"
-      },
-      {
-        "permissionName" : "interface.item.get",
-        "displayName" : "interface get",
-        "description" : "Fetch a interface"
-      },
-      {
-        "permissionName" : "interface.item.put",
-        "displayName" : "interface put",
-        "description" : "Update a interface"
-      },
-      {
-        "permissionName" : "interface.item.delete",
-        "displayName" : "interface delete",
-        "description" : "Delete a interface"
-      },
-      {
-        "permissionName" : "interface.all",
-        "displayName" : "interface all",
-        "description" : "All permissions for interface",
-        "subPermissions" : [
-          "interface.collection.get",
-          "interface.item.post",
-          "interface.item.get",
-          "interface.item.put",
-          "interface.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "phone_number.collection.get",
-        "displayName" : "phone_number collection get",
-        "description" : "Get a collection of phone_numbers"
-      },
-      {
-        "permissionName" : "phone_number.item.post",
-        "displayName" : "phone_number post",
-        "description" : "Create a new phone_number"
-      },
-      {
-        "permissionName" : "phone_number.item.get",
-        "displayName" : "phone_number get",
-        "description" : "Fetch a phone_number"
-      },
-      {
-        "permissionName" : "phone_number.item.put",
-        "displayName" : "phone_number put",
-        "description" : "Update a phone_number"
-      },
-      {
-        "permissionName" : "phone_number.item.delete",
-        "displayName" : "phone_number delete",
-        "description" : "Delete a phone_number"
-      },
-      {
-        "permissionName" : "phone_number.all",
-        "displayName" : "phone_number all",
-        "description" : "All permissions for phone_number",
-        "subPermissions" : [
-          "phone_number.collection.get",
-          "phone_number.item.post",
-          "phone_number.item.get",
-          "phone_number.item.put",
-          "phone_number.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "url.collection.get",
-        "displayName" : "url collection get",
-        "description" : "Get a collection of urls"
-      },
-      {
-        "permissionName" : "url.item.post",
-        "displayName" : "url post",
-        "description" : "Create a new url"
-      },
-      {
-        "permissionName" : "url.item.get",
-        "displayName" : "url get",
-        "description" : "Fetch a url"
-      },
-      {
-        "permissionName" : "url.item.put",
-        "displayName" : "url put",
-        "description" : "Update a url"
-      },
-      {
-        "permissionName" : "url.item.delete",
-        "displayName" : "url delete",
-        "description" : "Delete a url"
-      },
-      {
-        "permissionName" : "url.all",
-        "displayName" : "url all",
-        "description" : "All permissions for url",
-        "subPermissions" : [
-          "url.collection.get",
-          "url.item.post",
-          "url.item.get",
-          "url.item.put",
-          "url.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "vendor_address.collection.get",
-        "displayName" : "vendor_address collection get",
-        "description" : "Get a collection of vendor_addresses"
-      },
-      {
-        "permissionName" : "vendor_address.item.post",
-        "displayName" : "vendor_address post",
-        "description" : "Create a new vendor_address"
-      },
-      {
-        "permissionName" : "vendor_address.item.get",
-        "displayName" : "vendor_address get",
-        "description" : "Fetch a vendor_address"
-      },
-      {
-        "permissionName" : "vendor_address.item.put",
-        "displayName" : "vendor_address put",
-        "description" : "Update a vendor_address"
-      },
-      {
-        "permissionName" : "vendor_address.item.delete",
-        "displayName" : "vendor_address delete",
-        "description" : "Delete a vendor_address"
-      },
-      {
-        "permissionName" : "vendor_address.all",
-        "displayName" : "vendor_address all",
-        "description" : "All permissions for vendor_address",
-        "subPermissions" : [
-          "vendor_address.collection.get",
-          "vendor_address.item.post",
-          "vendor_address.item.get",
-          "vendor_address.item.put",
-          "vendor_address.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "vendor_contact_person.collection.get",
-        "displayName" : "vendor_contact_person get",
-        "description" : "Get a collection of vendor_contact_persons"
-      },
-      {
-        "permissionName" : "vendor_contact_person.item.post",
-        "displayName" : "vendor_contact_person post",
-        "description" : "Create a new vendor_contact_person"
-      },
-      {
-        "permissionName" : "vendor_contact_person.item.get",
-        "displayName" : "vendor_contact_person get",
-        "description" : "Fetch a vendor_contact_person"
-      },
-      {
-        "permissionName" : "vendor_contact_person.item.put",
-        "displayName" : "vendor_contact_person put",
-        "description" : "Update a vendor_contact_person"
-      },
-      {
-        "permissionName" : "vendor_contact_person.item.delete",
-        "displayName" : "vendor_contact_person delete",
-        "description" : "Delete a vendor_contact_person"
-      },
-      {
-        "permissionName" : "vendor_contact_person.all",
-        "displayName" : "vendor_contact_person all",
-        "description" : "All permissions for vendor_contact_person",
-        "subPermissions" : [
-          "vendor_contact_person.collection.get",
-          "vendor_contact_person.item.post",
-          "vendor_contact_person.item.get",
-          "vendor_contact_person.item.put",
-          "vendor_contact_person.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "vendor_email.collection.get",
-        "displayName" : "vendor_email collection get",
-        "description" : "Get a collection of vendor_emails"
-      },
-      {
-        "permissionName" : "vendor_email.item.post",
-        "displayName" : "vendor_email post",
-        "description" : "Create a new Contact category"
-      },
-      {
-        "permissionName" : "vendor_email.item.get",
-        "displayName" : "vendor_email get",
-        "description" : "Fetch a vendor_email"
-      },
-      {
-        "permissionName" : "vendor_email.item.put",
-        "displayName" : "vendor_email put",
-        "description" : "Update a vendor_email"
-      },
-      {
-        "permissionName" : "vendor_email.item.delete",
-        "displayName" : "vendor_email delete",
-        "description" : "Delete a vendor_email"
-      },
-      {
-        "permissionName" : "vendor_email.all",
-        "displayName" : "vendor_email all",
-        "description" : "All permissions for vendor_email",
-        "subPermissions" : [
-          "vendor_email.collection.get",
-          "vendor_email.item.post",
-          "vendor_email.item.get",
-          "vendor_email.item.put",
-          "vendor_email.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "vendor_phone.collection.get",
-        "displayName" : "vendor_phone collection get",
-        "description" : "Get a collection of vendor_phones"
-      },
-      {
-        "permissionName" : "vendor_phone.item.post",
-        "displayName" : "vendor_phone post",
-        "description" : "Create a new vendor_phone"
-      },
-      {
-        "permissionName" : "vendor_phone.item.get",
-        "displayName" : "vendor_phone get",
-        "description" : "Fetch a vendor_phone"
-      },
-      {
-        "permissionName" : "vendor_phone.item.put",
-        "displayName" : "vendor_phone put",
-        "description" : "Update a vendor_phone"
-      },
-      {
-        "permissionName" : "vendor_phone.item.delete",
-        "displayName" : "vendor_phone delete",
-        "description" : "Delete a vendor_phone"
-      },
-      {
-        "permissionName" : "vendor_phone.all",
-        "displayName" : "vendor_phone all",
-        "description" : "All permissions for vendor_phone",
-        "subPermissions" : [
-          "vendor_phone.collection.get",
-          "vendor_phone.item.post",
-          "vendor_phone.item.get",
-          "vendor_phone.item.put",
-          "vendor_phone.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "vendor_type.collection.get",
-        "displayName" : "vendor_type collection get",
-        "description" : "Get a collection of vendor_types"
-      },
-      {
-        "permissionName" : "vendor_type.item.post",
-        "displayName" : "vendor_type post",
-        "description" : "Create a new vendor_type"
-      },
-      {
-        "permissionName" : "vendor_type.item.get",
-        "displayName" : "vendor_type get",
-        "description" : "Fetch a vendor_type"
-      },
-      {
-        "permissionName" : "vendor_type.item.put",
-        "displayName" : "vendor_type put",
-        "description" : "Update a vendor_type"
-      },
-      {
-        "permissionName" : "vendor_type.item.delete",
-        "displayName" : "vendor_type delete",
-        "description" : "Delete a vendor_type"
-      },
-      {
-        "permissionName" : "vendor_type.all",
-        "displayName" : "vendor_type all",
-        "description" : "All permissions for vendor_type",
-        "subPermissions" : [
-          "vendor_type.collection.get",
-          "vendor_type.item.post",
-          "vendor_type.item.get",
-          "vendor_type.item.put",
-          "vendor_type.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "vendor_url.collection.get",
-        "displayName" : "vendor_url collection get",
-        "description" : "Get a collection of vendor_urls"
-      },
-      {
-        "permissionName" : "vendor_url.item.post",
-        "displayName" : "vendor_url post",
-        "description" : "Create a new vendor_url"
-      },
-      {
-        "permissionName" : "vendor_url.item.get",
-        "displayName" : "vendor_url get",
-        "description" : "Fetch a vendor_url"
-      },
-      {
-        "permissionName" : "vendor_url.item.put",
-        "displayName" : "vendor_url put",
-        "description" : "Update a vendor_url"
-      },
-      {
-        "permissionName" : "vendor_url.item.delete",
-        "displayName" : "vendor_url delete",
-        "description" : "Delete a vendor_url"
-      },
-      {
-        "permissionName" : "vendor_url.all",
-        "displayName" : "vendor_url all",
-        "description" : "All permissions for vendor_url",
-        "subPermissions" : [
-          "vendor_url.collection.get",
-          "vendor_url.item.post",
-          "vendor_url.item.get",
-          "vendor_url.item.put",
-          "vendor_url.item.delete"
-        ]
-      },
-      {
-        "permissionName" : "vendor.collection.get",
-        "displayName" : "vendor collection get",
-        "description" : "Get a collection of vendors"
-      },
-      {
-        "permissionName" : "vendor.item.post",
-        "displayName" : "vendor post",
-        "description" : "Create a new vendor"
-      },
-      {
-        "permissionName" : "vendor.item.get",
-        "displayName" : "vendor get",
-        "description" : "Fetch a vendor"
-      },
-      {
-        "permissionName" : "vendor.item.put",
-        "displayName" : "vendor put",
-        "description" : "Update a vendor"
-      },
-      {
-        "permissionName" : "vendor.item.delete",
-        "displayName" : "vendor delete",
-        "description" : "Delete a vendor"
-      },
-      {
-        "permissionName" : "vendor.all",
-        "displayName" : "vendor all",
-        "description" : "All permissions for vendors",
-        "subPermissions" : [
+        "permissionName": "vendor.all",
+        "displayName": "vendor all",
+        "description": "All permissions for vendors",
+        "visible": true,
+        "subPermissions": [
           "vendor.collection.get",
           "vendor.item.post",
           "vendor.item.get",
@@ -790,31 +147,13 @@
         ]
       },
       {
-        "permissionName" : "vendor.module.all",
-        "displayName" : "vendor-module all",
-        "description" : "All permissions for the vendor module",
-        "visible": true,
-        "subPermissions" : [
-          "account.all",
-          "address.all",
-          "agreement.all",
-          "alias.all",
-          "category.all",
-          "contact_person.all",
-          "edi.all",
-          "edi_ftp.all",
-          "edi_job.all",
-          "email.all",
-          "interface.all",
-          "phone_number.all",
-          "url.all",
+        "permissionName": "vendor.module.all",
+        "displayName": "vendor-module all",
+        "description": "All permissions for the vendor module",
+        "subPermissions": [
           "vendor.all",
-          "vendor_address.all",
-          "vendor_contact_person.all",
-          "vendor_email.all",
-          "vendor_phone.all",
-          "vendor_type.all",
-          "vendor_url.all"
+          "vendor_category.all",
+          "contact_category.all"
         ]
       },
       {
