@@ -1,10 +1,13 @@
 # Change history for ui-vendors
 
-## 1.3.0 (IN PROGRESS)
+## [1.3.0](https://github.com/folio-org/ui-vendors/tree/v1.3.0) (2019-01-25)
+[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.2.0...v1.3.0)
 
 * Upgrade to stripes v2.0.0
 
-## [1.2.0](https://github.com/folio-org/ui-vendors/tree/v1.2.0) (2018-12-6)
+## [1.2.0](https://github.com/folio-org/ui-vendors/tree/v1.2.0) (2018-12-06)
+[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.1.0...v1.2.0)
+
 * Contact people multi options. Ref: UIV-30.
 * Fixed Vendor Form submit error. Ref: UIV-52.
 * Fixed Vendor Form submit error. Ref: UIV-52.
@@ -13,7 +16,7 @@
 * Change postal code label to ZIP/Postal Code. Ref: UIV-17.
 * Updated phone number type. Ref: UIV-19.
 * Change ERP label. Ref: UIV-41.
-* Update technical support label in Filter and Categories. Ref: UIV-13. 
+* Update technical support label in Filter and Categories. Ref: UIV-13.
 * On edit layer data, Fixed empty data on load inside edit layer. Ref: UIV-42.
 * Updated categories. Ref: UIV-15.
 * URL not mandatory, removed required field in URL under contact people section. Ref: UIV-14.
@@ -22,6 +25,7 @@
 
 ## [1.1.0](https://github.com/folio-org/ui-vendors/tree/v1.1.0) (2018-11-30)
 [Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.1.0)
+
 * Moved Sans Code outside address array. ref: UIV-51.
 * Removed tags and notes. ref: UIV-27.
 * Moved Sans code field into summary, UIV-21
@@ -38,10 +42,12 @@
 * Fix Mismatch in terminology between Alias and AKA. Fixes MODVEND-50.
 * Make status field required, Fixes MODVEND-51.
 * Update label "- Please add vendors -" to "- Please add alternative names -". Fixes MODVEND-52.
-* Ignored stripesclirc and stripes.config.js.local. 
+* Ignored stripesclirc and stripes.config.js.local.
 * Switch to `stripes v1.0.0` for core dependencies. UIV-32
 
 ## [1.0.1](https://github.com/folio-org/ui-vendors/tree/v1.0.1) (2018-09-17)
+[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.0.0...v1.0.1)
+
 * Update stripes-form version. Fixes UIV-8.
 
 ## 1.0.0
