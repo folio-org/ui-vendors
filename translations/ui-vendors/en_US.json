@@ -1,10 +1,10 @@
 {
     "meta.title": "Vendor",
     "search": "Search",
-    "resultCount": "{count, number} {count, plural, one {Record found} other {Records found}}",
+    "resultCount": "{count, number} {count, plural, one {record found} other {records found}}",
     "data.contactTypes.email": "Email",
-    "data.contactTypes.mail": "Mail (Primary Address)",
-    "data.contactTypes.textMessage": "Text Message",
+    "data.contactTypes.mail": "Mail (Primary address)",
+    "data.contactTypes.textMessage": "Text message",
     "data.countries.AFG": "Afghanistan",
     "data.countries.ALA": "ALA Aland Islands",
     "data.countries.ALB": "Albania",
@@ -254,11 +254,11 @@
     "data.contactTypes.addressLine1": "Address 1",
     "data.contactTypes.addressLine2": "Address 2",
     "data.contactTypes.stateProviceOrRegion": "Province",
-    "data.contactTypes.zipOrPostalCode": "Postal Code",
-    "data.contactTypes.addressType": "Address Type",
+    "data.contactTypes.zipOrPostalCode": "Postal code",
+    "data.contactTypes.addressType": "Address type",
     "data.contactTypes.city": "City",
     "data.contactTypes.country": "Country",
-    "data.contactTypes.editThisAddress": "Edit Address",
-    "data.contactTypes.primaryAddress": "Primary Address",
-    "data.contactTypes.alternateAddress": "Alternate Address"
+    "data.contactTypes.editThisAddress": "Edit address",
+    "data.contactTypes.primaryAddress": "Primary address",
+    "data.contactTypes.alternateAddress": "Alternate address"
 }
