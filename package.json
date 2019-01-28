@@ -19,7 +19,7 @@
     "home": "/vendors?sort=name",
     "hasSettings": true,
     "okapiInterfaces": {
-      "vendor": "1.0"
+      "vendor-storage.vendors": "1.0"
     },
     "queryResource": "query",
     "icons": [
@@ -30,7 +30,7 @@
       }
     ],
     "permissionSets": [
-      { 
+      {
         "permissionName": "module.vendors.enabled",
         "displayName": "UI: Vendors module is enabled"
       },
