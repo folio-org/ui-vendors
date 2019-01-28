@@ -52,7 +52,7 @@ class Main extends Component {
       clear: true,
       records: 'vendors',
       recordsRequired: '%{resultCount}',
-      path: 'vendor',
+      path: 'vendor-storage/vendors',
       perRequest: RESULT_COUNT_INCREMENT,
       GET: {
         params: {
@@ -112,13 +112,13 @@ class Main extends Component {
     vendorCategory: {
       type: 'okapi',
       records: 'categories',
-      path: 'vendor_category'
+      path: 'vendor-storage/categories'
     },
-    vendorContactCategory: {
-      type: 'okapi',
-      records: 'categories',
-      path: 'contact_category'
-    },
+    // vendorContactCategory: {
+    //   type: 'okapi',
+    //   records: 'categories',
+    //   path: 'contact_category'
+    // },
     queryCustom: {
       initialValue: {
         vendorIDQuery: 'query=(name=null)',
@@ -127,7 +127,7 @@ class Main extends Component {
     vendorID: {
       type: 'okapi',
       records: 'vendors',
-      path: 'vendor',
+      path: 'vendor-storage/vendors',
       params: {
         query: (...args) => {
           // const newData = 'query=(id="d375f933-a093-4348-a594-0c02442946f3*")';
