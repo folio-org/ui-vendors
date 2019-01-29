@@ -634,7 +634,6 @@
         "permissionName" : "vendor-storage.vendors.all",
         "displayName" : "vendor all",
         "description" : "All permissions for vendors",
-        "visible": true,
         "subPermissions" : [
           "vendor-storage.vendors.collection.get",
           "vendor-storage.vendors.item.post",
