@@ -54,22 +54,22 @@ class AddressInfo extends Component {
       <Row key={index} className={css.panels}>
         <br />
         <Col xs={12} md={3}>
-          <Field label="Address 1" name={`${elem}.address.addressLine1`} id={`${elem}.address.addressLine1`} component={TextField} fullWidth />
+          <Field label="Address 1" name={`${elem}.addressLine1`} id={`${elem}.addressLine1`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Address 2" name={`${elem}.address.addressLine2`} id={`${elem}.address.addressLine2`} component={TextField} fullWidth />
+          <Field label="Address 2" name={`${elem}.addressLine2`} id={`${elem}.addressLine2`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="City" name={`${elem}.address.city`} id={`${elem}.address.city`} component={TextField} fullWidth />
+          <Field label="City" name={`${elem}.city`} id={`${elem}.city`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Region" name={`${elem}.address.stateRegion`} id={`${elem}.address.stateRegion`} component={TextField} fullWidth />
+          <Field label="Region" name={`${elem}.stateRegion`} id={`${elem}.stateRegion`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="ZIP/Postal Code" name={`${elem}.address.zipCode`} id={`${elem}.address.zipCode`} component={TextField} fullWidth />
+          <Field label="ZIP/Postal Code" name={`${elem}.zipCode`} id={`${elem}.zipCode`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Country*" name={`${elem}.address.country`} id={`${elem}.address.country`} component={Select} dataOptions={dropdownCountry} validate={[Required]} fullWidth />
+          <Field label="Country*" name={`${elem}.country`} id={`${elem}.country`} component={Select} dataOptions={dropdownCountry} validate={[Required]} fullWidth />
         </Col>
         <Col xs={12} md={3}>
           <Field label="Default Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} dataOptions={dropdownLanguages} fullWidth />
