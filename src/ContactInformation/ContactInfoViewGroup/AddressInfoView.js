@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { Row, Col } from '@folio/stripes/components';
 import { AddressView } from '@folio/stripes/smart-components';
 import css from '../ContactInformationView.css';
@@ -15,13 +16,8 @@ class AddressInfoView extends React.Component {
   }
 
   getAddress(val, key) {
-    const categories = val.categories.join(', ') || null;
-    const addresses = () => {
-      if (key >= 1) return val.address;
-      val.address.primaryAddress = true;
-      val.address.categories = categories;
-      return val.address;
-    };
+    const newVal = Object.assign({}, val);
+    newVal.categories = _.join(newVal.categories, ', ');
 
     const visibleFields = [
       'addressLine1',
@@ -36,7 +32,7 @@ class AddressInfoView extends React.Component {
     return (
       <Row key={key}>
         <Col xs={12}>
-          <AddressView addressObject={addresses()} visibleFields={visibleFields} />
+          <AddressView addressObject={newVal} visibleFields={visibleFields} />
         </Col>
       </Row>
     );
