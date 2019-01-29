@@ -85,32 +85,37 @@
       },
       {
         "permissionName" : "vendor-storage.addresses.collection.get",
-        "displayName" : "address collection get",
+        "displayName" : "Address collection get",
+        "visible": true,
         "description" : "Get a collection of addresses"
       },
       {
         "permissionName" : "vendor-storage.addresses.item.post",
-        "displayName" : "address post",
+        "displayName" : "Address post",
+        "visible": true,
         "description" : "Create a new address"
       },
       {
         "permissionName" : "vendor-storage.addresses.item.get",
-        "displayName" : "address get",
+        "displayName" : "Address get",
+        "visible": true,
         "description" : "Fetch a address"
       },
       {
         "permissionName" : "vendor-storage.addresses.item.put",
-        "displayName" : "address put",
+        "displayName" : "Address put",
+        "visible": true,
         "description" : "Update a address"
       },
       {
         "permissionName" : "vendor-storage.addresses.item.delete",
-        "displayName" : "address delete",
+        "displayName" : "Address delete",
+        "visible": true,
         "description" : "Delete a address"
       },
       {
         "permissionName" : "vendor-storage.addresses.all",
-        "displayName" : "address all",
+        "displayName" : "Address all",
         "description" : "All permissions for address",
         "visible": true,
         "subPermissions" : [
@@ -382,32 +387,37 @@
       },
       {
         "permissionName" : "vendor-storage.emails.collection.get",
-        "displayName" : "email collection get",
+        "displayName" : "Email collection get",
+        "visible": true,
         "description" : "Get a collection of emails"
       },
       {
         "permissionName" : "vendor-storage.emails.item.post",
-        "displayName" : "email post",
+        "displayName" : "Email post",
+        "visible": true,
         "description" : "Create a new email"
       },
       {
         "permissionName" : "vendor-storage.emails.item.get",
-        "displayName" : "email get",
+        "displayName" : "Email get",
+        "visible": true,
         "description" : "Fetch a email"
       },
       {
         "permissionName" : "vendor-storage.emails.item.put",
-        "displayName" : "email put",
+        "displayName" : "Email put",
+        "visible": true,
         "description" : "Update a email"
       },
       {
         "permissionName" : "vendor-storage.emails.item.delete",
-        "displayName" : "email delete",
+        "displayName" : "Email delete",
+        "visible": true,
         "description" : "Delete a email"
       },
       {
         "permissionName" : "vendor-storage.emails.all",
-        "displayName" : "email all",
+        "displayName" : "Email all",
         "description" : "All permissions for email",
         "visible": true,
         "subPermissions" : [
@@ -457,32 +467,37 @@
       },
       {
         "permissionName" : "vendor-storage.phone-numbers.collection.get",
-        "displayName" : "phone_number collection get",
+        "displayName" : "Phone Number collection get",
+        "visible": true,
         "description" : "Get a collection of phone_numbers"
       },
       {
         "permissionName" : "vendor-storage.phone-numbers.item.post",
-        "displayName" : "phone_number post",
+        "displayName" : "Phone Number post",
+        "visible": true,
         "description" : "Create a new phone_number"
       },
       {
         "permissionName" : "vendor-storage.phone-numbers.item.get",
-        "displayName" : "phone_number get",
+        "displayName" : "Phone Number get",
+        "visible": true,
         "description" : "Fetch a phone_number"
       },
       {
         "permissionName" : "vendor-storage.phone-numbers.item.put",
-        "displayName" : "phone_number put",
+        "displayName" : "Phone Number put",
+        "visible": true,
         "description" : "Update a phone_number"
       },
       {
         "permissionName" : "vendor-storage.phone-numbers.item.delete",
-        "displayName" : "phone_number delete",
+        "displayName" : "Phone Number delete",
+        "visible": true,
         "description" : "Delete a phone_number"
       },
       {
         "permissionName" : "vendor-storage.phone-numbers.all",
-        "displayName" : "phone_number all",
+        "displayName" : "Phone Number all",
         "description" : "All permissions for phone_number",
         "visible": true,
         "subPermissions" : [
@@ -495,32 +510,37 @@
       },
       {
         "permissionName" : "vendor-storage.urls.collection.get",
-        "displayName" : "url collection get",
+        "displayName" : "URL collection get",
+        "visible": true,
         "description" : "Get a collection of urls"
       },
       {
         "permissionName" : "vendor-storage.urls.item.post",
-        "displayName" : "url post",
+        "displayName" : "URL post",
+        "visible": true,
         "description" : "Create a new url"
       },
       {
         "permissionName" : "vendor-storage.urls.item.get",
-        "displayName" : "url get",
+        "displayName" : "URL get",
+        "visible": true,
         "description" : "Fetch a url"
       },
       {
         "permissionName" : "vendor-storage.urls.item.put",
-        "displayName" : "url put",
+        "displayName" : "URL put",
+        "visible": true,
         "description" : "Update a url"
       },
       {
         "permissionName" : "vendor-storage.urls.item.delete",
-        "displayName" : "url delete",
+        "displayName" : "URL delete",
+        "visible": true,
         "description" : "Delete a url"
       },
       {
         "permissionName" : "vendor-storage.urls.all",
-        "displayName" : "url all",
+        "displayName" : "URL all",
         "description" : "All permissions for url",
         "visible": true,
         "subPermissions" : [
@@ -607,34 +627,39 @@
       },
       {
         "permissionName" : "vendor-storage.vendors.collection.get",
-        "displayName" : "vendor collection get",
+        "displayName" : "Vendor collection get",
+        "visible": true,
         "description" : "Get a collection of vendors"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.post",
-        "displayName" : "vendor post",
+        "displayName" : "Vendor post",
+        "visible": true,
         "description" : "Create a new vendor"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.get",
-        "displayName" : "vendor get",
+        "displayName" : "Vendor get",
+        "visible": true,
         "description" : "Fetch a vendor"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.put",
-        "displayName" : "vendor put",
+        "displayName" : "Vendor put",
+        "visible": true,
         "description" : "Update a vendor"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.delete",
-        "displayName" : "vendor delete",
+        "displayName" : "Vendor delete",
+        "visible": true,
         "description" : "Delete a vendor"
       },
       {
         "permissionName" : "vendor-storage.vendors.all",
         "displayName" : "vendor all",
-        "description" : "All permissions for vendors",
         "visible": true,
+        "description" : "All permissions for vendors",
         "subPermissions" : [
           "vendor-storage.vendors.collection.get",
           "vendor-storage.vendors.item.post",
