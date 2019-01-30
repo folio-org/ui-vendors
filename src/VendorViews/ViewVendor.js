@@ -115,7 +115,7 @@ class ViewVendor extends Component {
     const query = location.search ? queryString.parse(location.search) : {};
     const lastMenu = (
       <PaneMenu>
-        <IfPermission perm="vendor.item.put">
+        <IfPermission perm="vendor-storage.vendors.item.put">
           <IconButton
             icon="edit"
             id="clickable-editvendor"
