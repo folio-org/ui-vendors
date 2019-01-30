@@ -155,7 +155,7 @@ class FormVendor extends Component {
                 <AccountsForm {...this.props} />
               </Accordion>
             </AccordionSet>
-            <IfPermission perm="vendor.item.delete">
+            <IfPermission perm="vendor-storage.vendors.item.delete">
               <Row end="xs">
                 <Col xs={12}>
                   {
