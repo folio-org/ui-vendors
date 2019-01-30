@@ -194,8 +194,8 @@ class PhoneNumbersMF extends Component {
                 onChange={this.onInputChange}
                 onClearField={this.onInputClear}
                 label="Phone Number*"
-                name={`${name}.phone_number.phone_number`}
-                id={`${name}.phone_number.phone_number`}
+                name={`${name}.phone_number`}
+                id={`${name}.phone_number`}
                 component={TextField}
                 validate={[Required]}
                 fullWidth
@@ -213,7 +213,7 @@ class PhoneNumbersMF extends Component {
           </TetherComponent>
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Type" name={`${name}.phone_number.type`} id={`${name}.phone_number.type`} component={Select} fullWidth dataOptions={dropdownPhoneType} />
+          <Field label="Type" name={`${name}.type`} id={`${name}.type`} component={Select} fullWidth dataOptions={dropdownPhoneType} />
         </Col>
         <Col xs={12} md={3}>
           <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />

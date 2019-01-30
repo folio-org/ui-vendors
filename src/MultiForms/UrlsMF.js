@@ -191,8 +191,8 @@ class UrlsMF extends Component {
                 onChange={this.onInputChange}
                 onClearField={this.onInputClear}
                 label="URL*"
-                name={`${name}.url.value`}
-                id={`${name}.url.value`}
+                name={`${name}.value`}
+                id={`${name}.value`}
                 component={TextField}
                 validate={[Required]}
                 fullWidth
@@ -210,7 +210,7 @@ class UrlsMF extends Component {
           </TetherComponent>
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Description" name={`${name}.url.description`} id={`${name}.url.description`} component={TextField} fullWidth />
+          <Field label="Description" name={`${name}.description`} id={`${name}.description`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
           <Field

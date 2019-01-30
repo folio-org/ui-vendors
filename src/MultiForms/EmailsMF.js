@@ -185,8 +185,8 @@ class EmailsMF extends Component {
                 onChange={this.onInputChange}
                 onClearField={this.onInputClear}
                 label="Email Address*"
-                name={`${name}.email.value`}
-                id={`${name}.email.value`}
+                name={`${name}.value`}
+                id={`${name}.value`}
                 component={TextField}
                 validate={[Required]}
                 fullWidth
@@ -204,7 +204,7 @@ class EmailsMF extends Component {
           </TetherComponent>
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Description" name={`${name}.email.description`} id={`${name}.email.description`} component={TextField} fullWidth />
+          <Field label="Description" name={`${name}.description`} id={`${name}.description`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
           <Field
