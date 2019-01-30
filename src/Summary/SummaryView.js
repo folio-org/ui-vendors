@@ -37,9 +37,6 @@ class SummaryView extends React.Component {
         <Col xs={4}>
           <KeyValue label="Default Language" value={getLanguage} />
         </Col>
-        <Col xs={4}>
-          <KeyValue label="San Code" value={_.get(dataVal, 'san_code', '')} />
-        </Col>
         <Col xs={12}>
           <KeyValue label="Description" value={_.get(dataVal, 'description', '')} />
         </Col>

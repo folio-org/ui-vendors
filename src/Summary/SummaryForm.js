@@ -71,7 +71,6 @@ class SummaryForm extends React.Component {
           <Field label="Accounting Code" name="erp_code" id="erp_code" component={TextField} fullWidth />
           <Field label="Status*" name="vendor_status" id="vendor_status" validate={[Required]} component={Select} fullWidth dataOptions={statusOptions} />
           <Field label="Default Language" name="language" id="language" component={Select} fullWidth dataOptions={this.props.dropdownLanguages} />
-          <Field label="San Code" name="san_code" id="san_code" component={TextField} fullWidth disabled />
         </Col>
         <Col xs={12} md={6}>
           <Field label="Vendor Description" name="description" id="description" component={TextArea} style={{ width: '100%', height: '139px' }} />
