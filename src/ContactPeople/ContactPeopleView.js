@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
+import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './ContactPeopleView.css';
 
 class ContactPeopleView extends React.Component {
@@ -105,6 +106,11 @@ class ContactPeopleView extends React.Component {
       <Row key={key}>
         <Col xs={4}>
           <KeyValue label="Name" value={fullName} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Status">
+            <BoolToCheckbox name="Status" value={_.get(val, ['inactive'])} />
+          </KeyValue>
         </Col>
         <Col xs={4}>
           <KeyValue label="Language" value={language} />

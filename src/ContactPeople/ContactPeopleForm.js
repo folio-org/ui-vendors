@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
-import { MultiSelection, Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
+import { MultiSelection, Row, Col, Button, TextField, TextArea, Select, Checkbox } from '@folio/stripes/components';
 import { AdditionalEmails, AdditionalPhoneNumbers, AdditionalUrls } from './ContactPeopleFormGroup';
 import { EmailsMF, PhoneNumbersMF, UrlsMF } from '../MultiForms';
 import { Required } from '../Utils/Validate';
@@ -82,11 +82,15 @@ class ContactPeopleForm extends Component {
           <Col xs={12} md={2}>
             <Field label="Prefix" name={`${elem}.contact_person.prefix`} id={`${elem}.contact_person.perfix`} component={TextField} fullWidth />
           </Col>
-          <Col xs={12} md={5}>
+          <Col xs={12} md={4}>
             <Field label="First Name*" name={`${elem}.contact_person.first_name`} id={`${elem}.contact_person.first_name`} validate={[Required]} component={TextField} fullWidth />
           </Col>
-          <Col xs={12} md={5}>
+          <Col xs={12} md={4}>
             <Field label="Last Name*" name={`${elem}.contact_person.last_name`} id={`${elem}.contact_person.last_name`} validate={[Required]} component={TextField} fullWidth />
+          </Col>
+          <Col xs={12} md={2}>
+            <div className={css.subHeadings}>Status</div>
+            <Field label="Inactive" name={`${elem}.contact_person.inactive`} id={`${elem}.contact_person.inactive`} component={Checkbox} inline />
           </Col>
           <Col xs={12}>
             <hr className={css.thinBorder} />
