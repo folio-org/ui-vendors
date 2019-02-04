@@ -92,48 +92,6 @@ class ContactPeopleForm extends Component {
             <div className={css.subHeadings}>Status</div>
             <Field label="Inactive" name={`${elem}.contact_person.inactive`} id={`${elem}.contact_person.inactive`} component={Checkbox} inline />
           </Col>
-          {/* <Col xs={12}>
-            <hr className={css.thinBorder} />
-            <div className={css.subHeadings}>Address</div>
-          </Col>
-          <Col xs={12} md={4}>
-            <Field label="Address 1" name={`${elem}.contact_person.address.addressLine1`} id={`${elem}.contact_person.address.addressLine1`} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={4}>
-            <Field label="Address 2" name={`${elem}.contact_person.address.addressLine2`} id={`${elem}.contact_person.address.addressLine2`} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={4}>
-            <Field label="City" name={`${elem}.contact_person.address.city`} id={`${elem}.contact_person.address.city`} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={4}>
-            <Field label="Region" name={`${elem}.contact_person.address.stateRegion`} id={`${elem}.contact_person.address.stateRegion`} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={4}>
-            <Field label="ZIP/Postal Code" name={`${elem}.contact_person.address.zipCode`} id={`${elem}.address.zipCode`} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={4}>
-            <Field label="Country*" name={`${elem}.contact_person.address.country`} id={`${elem}.contact_person.country`} validate={[Required]} component={Select} dataOptions={dropdownCountry} fullWidth />
-          </Col>
-          <Col xs={12} md={3}>
-            <Field label="Default Language" name={`${elem}.contact_person.language`} id={`${elem}.contact_person.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
-          </Col>
-          <Col xs={12} md={3}>
-            <Field
-              component={MultiSelection}
-              label="Categories"
-              name={`${elem}.categories`}
-              dataOptions={this.props.dropdownContactCategories}
-              onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
-              value={this.selectedValues(index, fields, 'categories')}
-              style={{ height: '80px' }}
-              itemToString={this.toString}
-              filter={this.filterItems}
-              formatter={this.formatter}
-            />
-          </Col>
-          <Col xs={12} md={6}>
-            <Field label="Notes" name={`${elem}.contact_person.notes`} id={`${elem}.contact_person.notes`} component={TextArea} style={{ height: '79px' }} fullWidth />
-          </Col> */}
           <Col xs={12}>
             <hr className={css.thinBorder} />
             <div className={css.subHeadings}>Phone Numbers</div>
