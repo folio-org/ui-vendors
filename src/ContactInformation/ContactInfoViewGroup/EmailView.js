@@ -18,20 +18,12 @@ class ContactInformationView extends React.Component {
   getEmail(val, key) {
     const rowCount = (this.props.dataVal.length - 1) !== key;
     const categories = val.categories.join(', ') || null;
-    const email = () => {
-      const emailDescription = `${_.get(val, 'email.description', '')}`;
-      if (emailDescription.trim().length >= 1) {
-        return `${_.get(val, 'email.value', '')} - ${emailDescription}`;
-      } else {
-        return `${_.get(val, 'email.value', '')}`;
-      }
-    };
     const getLanguage = LanguageLookup(_.get(val, 'language', ''));
 
     return (
       <Row key={key}>
         <Col xs={5}>
-          <KeyValue label="Email" value={email()} />
+          <KeyValue label="Email" value={`${_.get(val, 'value', '')}`} />
         </Col>
         <Col xs={4}>
           <KeyValue label="Categories" value={categories} />
