@@ -104,103 +104,49 @@ class ContactPeopleView extends React.Component {
 
     return (
       <Row key={key}>
-        <Col xs={4}>
+        <Col xs={3}>
           <KeyValue label="Name" value={fullName} />
         </Col>
-        <Col xs={4}>
-          <KeyValue label="Status">
+        <Col xs={3}>
+          <KeyValue label="Inactive">
             <BoolToCheckbox name="Status" value={_.get(val, ['inactive'])} />
           </KeyValue>
         </Col>
-        <Col xs={4}>
+        <Col xs={3}>
           <KeyValue label="Language" value={language} />
         </Col>
-        <Col xs={4}>
+        <Col xs={3}>
           <KeyValue label="Categories" value={categories} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Address" value={AddressComplete} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Address 2" value={_.get(val, 'contact_person.primary_address.address.addressLine2', '')} />
-        </Col>
-        <Col xs={6}>
-          <KeyValue label="Notes" value={_.get(val, 'contact_person.notes')} />
-        </Col>
-        <Col xs={12}>
-          <div className={css.subHeadings}>Primary Numbers</div>
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Phone Number" value={`${_.get(val, 'contact_person.primary_phone_number.phone_number.phone_number', '')}`} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Type" value={`${_.get(val, 'contact_person.primary_phone_number.phone_number.type', '')}`} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Category" value={`${_.get(val, 'contact_person.primary_phone_number.categories', '')}`} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Language" value={`${_.get(val, 'contact_person.primary_phone_number.Language', '')}`} />
         </Col>
         { addPhoneNumbers.length > 0 && (
           <Fragment>
             <Col xs={12}>
-              <div className={css.sub2Headings}>Additional Phone Numbers</div>
+              <hr />
+              <div className={css.sub2Headings}>Phone Numbers</div>
             </Col>
             <Col xs={12}>
               { addPhoneNumbers.map(this.getAddPhoneNumbers) }
             </Col>
           </Fragment>
         )}
-        <Col xs={12}>
-          <div className={css.subHeadings}>Primary Email</div>
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Email" value={`${_.get(val, 'contact_person.primary_email.email.value', '')}`} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Description" value={`${_.get(val, 'contact_person.primary_email.email.description', '')}`} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Category" value={`${_.get(val, 'contact_person.primary_email.categories', '')}`} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Language" value={`${_.get(val, 'contact_person.primary_email.language', '')}`} />
-        </Col>
         { addEmails.length > 0 && (
           <Fragment>
             <Col xs={12}>
-              <div className={css.sub2Headings}>Additional Email</div>
+              <hr />
+              <div className={css.sub2Headings}>Email</div>
             </Col>
             <Col xs={12}>
-              <p>This is email section</p>
               { addEmails.map(this.getAddEmails) }
             </Col>
           </Fragment>
         )}
-
-        <Col xs={12}>
-          <div className={css.subHeadings}>Primary URL</div>
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="URL" value={`${_.get(val, 'contact_person.primary_url.url.value', '')}`} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Description" value={`${_.get(val, 'contact_person.primary_url.url.description', '')}`} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Category" value={`${_.get(val, 'contact_person.primary_url.categories', '')}`} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Language" value={`${_.get(val, 'contact_person.primary_url.language', '')}`} />
-        </Col>
         { addURLS.length > 0 && (
           <Fragment>
             <Col xs={12}>
-              <div className={css.sub2Headings}>Additional URLs</div>
+              <hr />
+              <div className={css.sub2Headings}>URLs</div>
             </Col>
             <Col xs={12}>
-              <p>This is email section</p>
               { addURLS.map(this.getAddUrls) }
             </Col>
           </Fragment>
