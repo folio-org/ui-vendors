@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { AddressView } from '@folio/stripes/smart-components';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './ContactPeopleView.css';
@@ -18,9 +19,33 @@ class ContactPeopleView extends React.Component {
   constructor(props) {
     super(props);
     this.getContacts = this.getContacts.bind(this);
+    this.getAddresses = this.getAddresses.bind(this);
     this.getAddPhoneNumbers = this.getAddPhoneNumbers.bind(this);
     this.getAddEmails = this.getAddEmails.bind(this);
     this.getAddUrls = this.getAddUrls.bind(this);
+  }
+
+  getAddresses(val, key) {
+    const newVal = Object.assign({}, val);
+    newVal.categories = _.join(newVal.categories, ', ');
+
+    const visibleFields = [
+      'addressLine1',
+      'addressLine2',
+      'city',
+      'stateRegion',
+      'zipCode',
+      'country',
+      'categories'
+    ];
+
+    return (
+      <Row key={key}>
+        <Col xs={12}>
+          <AddressView addressObject={newVal} visibleFields={visibleFields} />
+        </Col>
+      </Row>
+    );
   }
 
   getAddPhoneNumbers(val, key) {
@@ -28,10 +53,10 @@ class ContactPeopleView extends React.Component {
     return (
       <Row key={key} className={css.rptBlocks}>
         <Col xs={3}>
-          <KeyValue label="Phone Number" value={_.get(val, 'phone_number.phone_number', '')} />
+          <KeyValue label="Phone Number" value={_.get(val, 'phone_number', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Type" value={_.get(val, 'types', '')} />
+          <KeyValue label="Type" value={_.get(val, 'type', '')} />
         </Col>
         <Col xs={3}>
           <KeyValue label="Language" value={_.get(val, 'language', '')} />
@@ -47,16 +72,16 @@ class ContactPeopleView extends React.Component {
     const categories = val.categories.join(', ') || null;
     return (
       <Row key={key} className={css.rptBlocks}>
-        <Col xs={4}>
-          <KeyValue label="Email" value={`${_.get(val, 'email.value', '')}`} />
+        <Col xs={3}>
+          <KeyValue label="Email" value={`${_.get(val, 'value', '')}`} />
         </Col>
-        <Col xs={4}>
-          <KeyValue label="Description" value={`${_.get(val, 'email.value', '')}`} />
+        <Col xs={3}>
+          <KeyValue label="Description" value={`${_.get(val, 'description', '')}`} />
         </Col>
-        <Col xs={4}>
+        <Col xs={3}>
           <KeyValue label="Categories" value={categories} />
         </Col>
-        <Col xs={4}>
+        <Col xs={3}>
           <KeyValue label="Language" value={`${_.get(val, 'language', '')}`} />
         </Col>
       </Row>
@@ -67,16 +92,16 @@ class ContactPeopleView extends React.Component {
     const categories = val.categories.join(', ') || null;
     return (
       <Row key={key} className={css.rptBlocks}>
-        <Col xs={4}>
-          <KeyValue label="URL" value={`${_.get(val, 'url.value', '')}`} />
+        <Col xs={3}>
+          <KeyValue label="URL" value={`${_.get(val, 'value', '')}`} />
         </Col>
-        <Col xs={4}>
-          <KeyValue label="Description" value={`${_.get(val, 'url.value', '')}`} />
+        <Col xs={3}>
+          <KeyValue label="Description" value={`${_.get(val, 'description', '')}`} />
         </Col>
-        <Col xs={4}>
+        <Col xs={3}>
           <KeyValue label="Categories" value={categories} />
         </Col>
-        <Col xs={4}>
+        <Col xs={3}>
           <KeyValue label="Language" value={`${_.get(val, 'language', '')}`} />
         </Col>
       </Row>
@@ -89,18 +114,11 @@ class ContactPeopleView extends React.Component {
     const categories = val.categories.join(', ') || null;
     const fullName = `${_.get(val, 'contact_person.prefix', '')} ${_.get(val, 'contact_person.first_name', '')} ${_.get(val, 'contact_person.last_name', '')}`;
     const language = `${_.get(val, 'contact_person.language', '')}`;
-    // Address
-    const address = _.get(val, 'contact_person.primary_address.address.addressLine1', '');
-    const city = _.get(val, 'contact_person.primary_address.address.city', '');
-    const stateRegion = _.get(val, 'contact_person.primary_address.address.stateRegion', '');
-    const countryVal = _.get(val, 'contact_person.primary_address.address.country', '');
-    const isCountry = CountryList.find(x => x.value === countryVal);
-    const country = isCountry && isCountry.value !== '' ? `${isCountry.label}` : '';
-    const zipCode = _.get(val, 'contact_person.primary_address.address.zipCode', '');
-    const AddressComplete = `${address} ${city} ${stateRegion} ${country} ${zipCode}`;
+    const addressComplete = _.get(val, 'contact_person.addresses', '');
     const addPhoneNumbers = _.get(val, 'contact_person.phone_numbers', '');
     const addEmails = _.get(val, 'contact_person.emails', '');
     const addURLS = _.get(val, 'contact_person.urls', '');
+    console.log(val);
 
     return (
       <Row key={key}>
@@ -118,6 +136,17 @@ class ContactPeopleView extends React.Component {
         <Col xs={3}>
           <KeyValue label="Categories" value={categories} />
         </Col>
+        { addressComplete.length > 0 && (
+          <Fragment>
+            <Col xs={12}>
+              <hr />
+              <div className={css.sub2Headings}>Addresses</div>
+            </Col>
+            <Col xs={12}>
+              { addressComplete.map(this.getAddresses) }
+            </Col>
+          </Fragment>
+        )}
         { addPhoneNumbers.length > 0 && (
           <Fragment>
             <Col xs={12}>
