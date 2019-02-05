@@ -47,10 +47,10 @@ class PhoneNumbersMF extends Component {
     };
     getAdditional();
     // Remove Duplicates
-    const arrNumbersNoDuplicate = _.uniqBy(arrPhones, (e) => e.phone_number);
+    const arrItemsNoDuplicate = _.uniqBy(arrPhones, (e) => e.phone_number);
     // Update state
-    if (!_.isEqual(arrPhones, prevState.itemCollection)) {
-      return { itemCollection: arrNumbersNoDuplicate };
+    if (!_.isEqual(arrItemsNoDuplicate, prevState.itemCollection)) {
+      return { itemCollection: arrItemsNoDuplicate };
     }
     return null;
   }

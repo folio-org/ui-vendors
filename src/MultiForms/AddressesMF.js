@@ -46,9 +46,11 @@ class AddressesMF extends Component {
       return false;
     };
     getAdditional();
+    // Remove Duplicates
+    const arrItemsNoDuplicate = _.uniqBy(arrItems, (e) => e.addressLine1);
     // Update state
-    if (!_.isEqual(arrItems, prevState.itemCollection)) {
-      return { itemCollection: arrItems };
+    if (!_.isEqual(arrItemsNoDuplicate, prevState.itemCollection)) {
+      return { itemCollection: arrItemsNoDuplicate };
     }
 
     return null;
