@@ -11,6 +11,7 @@ class EmailsMF extends Component {
   static propTypes = {
     dropdownCategories: PropTypes.arrayOf(PropTypes.string),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
+    dropdownCountry: PropTypes.arrayOf(PropTypes.object),
     stripes: PropTypes.shape({
       store: PropTypes.object
     }),
@@ -158,7 +159,8 @@ class EmailsMF extends Component {
     const {
       name,
       dropdownCategories,
-      dropdownLanguages
+      dropdownLanguages,
+      dropdownCountry
     } = this.props;
     const constraints = [{
       to: 'window',
@@ -175,53 +177,39 @@ class EmailsMF extends Component {
     return (
       <Fragment>
         <Col xs={12} md={3}>
-          <TetherComponent
-            attachment="top left"
-            targetAttachment="bottom left"
-            constraints={constraints}
-          >
-            <div ref={this.fieldRef} style={{ width:'100%' }}>
-              <Field
-                onChange={this.onInputChange}
-                onClearField={this.onInputClear}
-                label="Email Address*"
-                name={`${name}.value`}
-                id={`${name}.value`}
-                component={TextField}
-                validate={[Required]}
-                fullWidth
-              />
-            </div>
-            {
-              isOpen && (
-              <div className={css.dropdown} style={{ width:`${clientWidth}px` }}>
-                <span className={css.dropDownItem}>
-                  {this.renderItem(name)}
-                </span>
-              </div>
-              )
-            }
-          </TetherComponent>
+          <Field label="Address 1" name={`${name}.addressLine1`} id={`${name}.addressLine1`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Description" name={`${name}.description`} id={`${name}.description`} component={TextField} fullWidth />
+          <Field label="Address 2" name={`${name}.addressLine2`} id={`${name}.addressLine2`} component={TextField} fullWidth />
+        </Col>
+        <Col xs={12} md={3}>
+          <Field label="City" name={`${name}.city`} id={`${name}.city`} component={TextField} fullWidth />
+        </Col>
+        <Col xs={12} md={3}>
+          <Field label="Region" name={`${name}.stateRegion`} id={`${name}.stateRegion`} component={TextField} fullWidth />
+        </Col>
+        <Col xs={12} md={3}>
+          <Field label="ZIP/Postal Code" name={`${name}.zipCode`} id={`${name}.zipCode`} component={TextField} fullWidth />
+        </Col>
+        <Col xs={12} md={3}>
+          <Field label="Country*" name={`${name}.country`} id={`${name}.country`} component={Select} dataOptions={dropdownCountry} validate={[Required]} fullWidth />
+        </Col>
+        <Col xs={12} md={3}>
+          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} dataOptions={dropdownLanguages} fullWidth />
         </Col>
         <Col xs={12} md={3}>
           <Field
             component={MultiSelection}
-            filter={this.filterItems}
             label="Categories"
             name={`${name}.categories`}
             dataOptions={dropdownCategories}
             onChange={(e) => this.onChangeSelect(e, name, 'categories')}
             style={{ height: '80px' }}
-            // value={this.selectedValues(index, fields, 'categories')}
             itemToString={this.toString}
             formatter={this.formatter}
+            filter={this.filterItems}
+            fullWidth
           />
-        </Col>
-        <Col xs={12} md={3}>
-          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
         </Col>
       </Fragment>
     );

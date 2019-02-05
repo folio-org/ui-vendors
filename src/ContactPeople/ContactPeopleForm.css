@@ -12,16 +12,14 @@
 }
 
 .subHeadings {
-  color: var(--subHeading-color);
-  font-size: var(--subHeading-font-size);
-  font-weight: var(--subHeading-font-weight);
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 8px;
 }
 
 .sub2Headings {
-  color: var(--sub2Heading-color);
-  font-size: var(--sub2Heading-font-size);
-  font-weight: var(--sub2Heading-font-weight);
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 8px;
 }
 

@@ -8,7 +8,7 @@ class ContactInformationForm extends React.Component {
     return (
       <Row>
         <Col xs={12}>
-          <FieldArray label="Addess" name="addresses" id="addresses_address" component={AddressInfo} {...this.props} />
+          <FieldArray label="Addess" name="addresses" id="addresses" component={AddressInfo} {...this.props} />
           <br />
         </Col>
         <Col xs={12}>

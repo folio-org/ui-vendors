@@ -18,20 +18,12 @@ class ContactInformationView extends React.Component {
   getUrls(val, key) {
     const rowCount = this.props.dataVal.length - 1 !== key;
     const categories = val.categories.join(', ') || null;
-    const url = () => {
-      const urlDescription = `${_.get(val, 'url.description', '')}`;
-      if (urlDescription.trim().length >= 1) {
-        return `${_.get(val, 'url.value', '')} - ${urlDescription}`;
-      } else {
-        return `${_.get(val, 'url.value', '')}`;
-      }
-    };
     const getLanguage = LanguageLookup(_.get(val, 'language', ''));
 
     return (
       <Row key={key}>
         <Col xs={5}>
-          <KeyValue label="URL" value={url()} />
+          <KeyValue label="URL" value={`${_.get(val, 'value', '')}`} />
         </Col>
         <Col xs={4}>
           <KeyValue label="Categories" value={categories} />

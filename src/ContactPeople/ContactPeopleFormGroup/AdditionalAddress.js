@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
-import css from '../ContactInfoFormGroup.css';
-import AddressesMF from '../../MultiForms/AddressesMF';
+import css from '../ContactPeopleForm.css';
+import { AddressesMF } from '../../MultiForms';
 
-class AddressInfo extends Component {
+class AdditionalAddress extends Component {
   static propTypes = {
     fields: PropTypes.object,
     stripes: PropTypes.shape({
@@ -13,11 +13,10 @@ class AddressInfo extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  renderSubAddress = (elem, index, fields) => {
-    const { contactPeopleForm } = this.props;
-
+  renderSub = (elem, index) => {
+    const { fields } = this.props;
     return (
-      <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
+      <Row key={index}>
         <AddressesMF
           index={index}
           fields={fields}
@@ -35,17 +34,21 @@ class AddressInfo extends Component {
   }
 
   render() {
-    const { fields } = this.props;
+    const { fields, contactPeopleForm } = this.props;
     return (
       <Row>
-        <Col xs={6}>
-          <div className={css.subHeadings}>Address Info</div>
-          {fields.length === 0 &&
-            <div><em>- Please add address info -</em></div>
-          }
-        </Col>
+        { !contactPeopleForm &&
+          <Col xs={12}>
+            <div className={css.subHeadings}>Address</div>
+          </Col>
+        }
+        {fields.length === 0 &&
+          <Col xs={6}>
+            <div><em>- Please add address -</em></div>
+          </Col>
+        }
         <Col xs={12}>
-          {fields.map(this.renderSubAddress)}
+          {fields.map(this.renderSub)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
           <Button onClick={() => fields.push({})}>+ Add Address</Button>
@@ -55,4 +58,4 @@ class AddressInfo extends Component {
   }
 }
 
-export default AddressInfo;
+export default AdditionalAddress;
