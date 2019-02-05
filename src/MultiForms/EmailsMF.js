@@ -213,11 +213,12 @@ class EmailsMF extends Component {
             label="Categories"
             name={`${name}.categories`}
             dataOptions={dropdownCategories}
-            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
             style={{ height: '80px' }}
             // value={this.selectedValues(index, fields, 'categories')}
             itemToString={this.toString}
             formatter={this.formatter}
+            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
+            onBlur={(e) => { e.preventDefault(); }}
           />
         </Col>
         <Col xs={12} md={3}>

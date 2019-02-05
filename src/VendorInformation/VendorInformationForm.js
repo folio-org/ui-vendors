@@ -81,12 +81,13 @@ class VendorInformationForm extends Component {
                 name="vendor_currencies"
                 id="vendor_currencies"
                 dataOptions={dropdownCurrencies}
-                onChange={(e) => this.onChangeSelect(e, 'vendor_currencies')}
                 style={{ height: '80px' }}
                 value={this.selectedValues('vendor_currencies')}
                 itemToString={this.toString}
                 formatter={this.formatter}
                 filter={this.filterItems}
+                onChange={(e) => this.onChangeSelect(e, 'vendor_currencies')}
+                onBlur={(e) => { e.preventDefault(); }}
               />
             </Col>
           </Row>
