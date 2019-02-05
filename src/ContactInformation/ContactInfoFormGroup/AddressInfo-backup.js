@@ -80,13 +80,14 @@ class AddressInfo extends Component {
             label="Categories"
             name={`${elem}.categories`}
             dataOptions={dropdownCategories}
-            onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
             style={{ height: '80px' }}
             value={this.selectedValues(index, fields, 'categories')}
             itemToString={this.toString}
             formatter={this.formatter}
             filter={this.filterItems}
             fullWidth
+            onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
+            onBlur={(e) => { e.preventDefault(); }}
           />
         </Col>
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>

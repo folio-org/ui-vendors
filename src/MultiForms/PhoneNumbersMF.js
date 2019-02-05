@@ -225,10 +225,11 @@ class PhoneNumbersMF extends Component {
             label="Categories"
             name={`${name}.categories`}
             dataOptions={dropdownCategories}
-            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
             style={{ height: '80px' }}
             itemToString={this.toString}
             formatter={this.formatter}
+            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
+            onBlur={(e) => { e.preventDefault(); }}
           />
         </Col>
       </Fragment>
