@@ -118,7 +118,6 @@ class ContactPeopleView extends React.Component {
     const addPhoneNumbers = _.get(val, 'contact_person.phone_numbers', '');
     const addEmails = _.get(val, 'contact_person.emails', '');
     const addURLS = _.get(val, 'contact_person.urls', '');
-    console.log(val);
 
     return (
       <Row key={key}>

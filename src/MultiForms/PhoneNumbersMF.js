@@ -31,19 +31,7 @@ class PhoneNumbersMF extends Component {
       return num.map((val) => arrPhones.push(val));
     };
     getPhoneNum();
-    // Get Primary Phone Number
-    const getPrimary = () => {
-      const num = formValues.contacts;
-      if (!num) return false;
-      num.map((val) => {
-        const primaryPhoneNumber = ((val.contact_person || {}).primary_phone_number || {});
-        if (!_.isEmpty(primaryPhoneNumber)) return false;
-        return arrPhones.push(primaryPhoneNumber);
-      });
-      return false;
-    };
-    getPrimary();
-    // Get Additional Phone Number
+    // Get Phone Number
     const getAdditional = () => {
       const num = formValues.contacts;
       if (!num) return false;
@@ -52,15 +40,17 @@ class PhoneNumbersMF extends Component {
         if (!contactPerson || contactPerson <= 0) return false;
         const phoneNums = contactPerson.phone_numbers;
         if (!phoneNums || phoneNums <= 0) return false;
-        contactPerson.phone_numbers.map((item) => arrPhones.push(item));
+        phoneNums.map((item) => arrPhones.push(item));
         return false;
       });
       return false;
     };
     getAdditional();
+    // Remove Duplicates
+    const arrNumbersNoDuplicate = _.uniqBy(arrPhones, (e) => e.phone_number);
     // Update state
     if (!_.isEqual(arrPhones, prevState.itemCollection)) {
-      return { itemCollection: arrPhones };
+      return { itemCollection: arrNumbersNoDuplicate };
     }
     return null;
   }
@@ -100,7 +90,6 @@ class PhoneNumbersMF extends Component {
   filterItems = (filterText, list) => {
     const filterRegExp = new RegExp(`^${filterText}`, 'i');
     const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-
     return { renderedItems };
   };
   // End Multi dropdown
@@ -112,7 +101,7 @@ class PhoneNumbersMF extends Component {
     if (!_.isEmpty(itemCollection) && (e.trim().length >= 1)) {
       const num = itemCollection;
       const objFiltered = _.filter(num, (o) => {
-        const phoneNumber = ((o.phone_number || []).phone_number || []);
+        const phoneNumber = (o.phone_number || []);
         if (!_.includes(phoneNumber, e)) return false;
         return o;
       });
@@ -152,7 +141,7 @@ class PhoneNumbersMF extends Component {
       return (
         <div key={i}>
           <div className={css.inlineButton} onClick={() => this.onClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">
-            {item.phone_number.phone_number}
+            {item.phone_number}
           </div>
         </div>
       );
