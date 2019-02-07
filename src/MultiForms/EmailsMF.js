@@ -30,18 +30,6 @@ class EmailsMF extends Component {
       return num.map((val) => arrItems.push(val));
     };
     getEmailNum();
-    // Get Primary Phone Number
-    const getPrimary = () => {
-      const num = formValues.contacts;
-      if (!num) return false;
-      num.map((val) => {
-        const item = ((val.contact_person || {}).primary_email || {});
-        if (!_.isEmpty(item)) return false;
-        return arrItems.push(item);
-      });
-      return false;
-    };
-    getPrimary();
     // Get Additional Phone Number
     const getAdditional = () => {
       const num = formValues.contacts;
@@ -51,17 +39,18 @@ class EmailsMF extends Component {
         if (!contactPerson || contactPerson <= 0) return false;
         const emails = contactPerson.emails;
         if (!emails || emails <= 0) return false;
-        contactPerson.emails.map((item) => arrItems.push(item));
+        emails.map((item) => arrItems.push(item));
         return false;
       });
       return false;
     };
     getAdditional();
+    // Remove Duplicates
+    const arrItemsNoDuplicate = _.uniqBy(arrItems, (e) => e.value);
     // Update state
-    if (!_.isEqual(arrItems, prevState.itemCollection)) {
-      return { itemCollection: arrItems };
+    if (!_.isEqual(arrItemsNoDuplicate, prevState.itemCollection)) {
+      return { itemCollection: arrItemsNoDuplicate };
     }
-
     return null;
   }
 
@@ -105,8 +94,7 @@ class EmailsMF extends Component {
     if (!_.isEmpty(itemCollection) && (e.trim().length >= 1)) {
       const num = itemCollection;
       const objFiltered = _.filter(num, (o) => {
-        const email = ((o.email || []).value || []);
-        if (!_.includes(email, e)) return false;
+        if (!_.includes(o.value, e)) return false;
         return o;
       });
       if (!_.isEmpty(objFiltered) && !isOpen) {
@@ -144,7 +132,7 @@ class EmailsMF extends Component {
       return (
         <div key={i}>
           <div className={css.inlineButton} onClick={() => this.onClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">
-            {item.email.value}
+            {item.value}
           </div>
         </div>
       );

@@ -23,26 +23,14 @@ class UrlsMF extends Component {
     const { stripes: { store } } = nextProps;
     const arrItems = [];
     const formValues = getFormValues('FormVendor')(store.getState());
-    // Get Phone Number
+    // Get URls
     const getEmailNum = () => {
       const num = formValues.urls;
       if (!num) return false;
       return num.map((val) => arrItems.push(val));
     };
     getEmailNum();
-    // Get Primary Phone Number
-    const getPrimary = () => {
-      const num = formValues.contacts;
-      if (!num) return false;
-      num.map((val) => {
-        const item = ((val.contact_person || {}).primary_url || {});
-        if (!_.isEmpty(item)) return false;
-        return arrItems.push(item);
-      });
-      return false;
-    };
-    getPrimary();
-    // Get Additional Phone Number
+    // Get Contact URls
     const getAdditional = () => {
       const num = formValues.contacts;
       if (!num) return false;
@@ -51,15 +39,17 @@ class UrlsMF extends Component {
         if (!contactPerson || contactPerson <= 0) return false;
         const urls = contactPerson.urls;
         if (!urls || urls <= 0) return false;
-        contactPerson.urls.map((item) => arrItems.push(item));
+        urls.map((item) => arrItems.push(item));
         return false;
       });
       return false;
     };
     getAdditional();
+    // Remove Duplicates
+    const arrItemsNoDuplicate = _.uniqBy(arrItems, (e) => e.value);
     // Update state
-    if (!_.isEqual(arrItems, prevState.itemCollection)) {
-      return { itemCollection: arrItems };
+    if (!_.isEqual(arrItemsNoDuplicate, prevState.itemCollection)) {
+      return { itemCollection: arrItemsNoDuplicate };
     }
     return null;
   }
@@ -111,8 +101,7 @@ class UrlsMF extends Component {
     if (!_.isEmpty(itemCollection) && (e.trim().length >= 1)) {
       const num = itemCollection;
       const objFiltered = _.filter(num, (o) => {
-        const url = ((o.url || []).value || []);
-        if (!_.includes(url, e)) return false;
+        if (!_.includes(o.value, e)) return false;
         return o;
       });
       if (!_.isEmpty(objFiltered) && !isOpen) {
@@ -150,7 +139,7 @@ class UrlsMF extends Component {
       return (
         <div key={i}>
           <div className={css.inlineButton} onClick={() => this.onClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">
-            {item.url.value}
+            {item.value}
           </div>
         </div>
       );

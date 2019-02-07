@@ -7,7 +7,7 @@ import { MultiSelection, Col, Select, TextField } from '@folio/stripes/component
 import css from './css/MultiForms.css';
 import { Required } from '../Utils/Validate';
 
-class EmailsMF extends Component {
+class AddressesMF extends Component {
   static propTypes = {
     dropdownCategories: PropTypes.arrayOf(PropTypes.string),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
@@ -24,43 +24,33 @@ class EmailsMF extends Component {
     const { stripes: { store } } = nextProps;
     const arrItems = [];
     const formValues = getFormValues('FormVendor')(store.getState());
-    // Get Phone Number
-    const getEmailNum = () => {
-      const num = formValues.emails;
+    // Get Addresses
+    const getAddressNum = () => {
+      const num = formValues.addresses;
       if (!num) return false;
       return num.map((val) => arrItems.push(val));
     };
-    getEmailNum();
-    // Get Primary Phone Number
-    const getPrimary = () => {
-      const num = formValues.contacts;
-      if (!num) return false;
-      num.map((val) => {
-        const item = ((val.contact_person || {}).primary_email || {});
-        if (!_.isEmpty(item)) return false;
-        return arrItems.push(item);
-      });
-      return false;
-    };
-    getPrimary();
-    // Get Additional Phone Number
+    getAddressNum();
+    // Get Contact Addresses
     const getAdditional = () => {
       const num = formValues.contacts;
       if (!num) return false;
       num.map((val) => {
         const contactPerson = val.contact_person;
         if (!contactPerson || contactPerson <= 0) return false;
-        const emails = contactPerson.emails;
-        if (!emails || emails <= 0) return false;
-        contactPerson.emails.map((item) => arrItems.push(item));
+        const address = contactPerson.addresses;
+        if (!address || address <= 0) return false;
+        address.map((item) => arrItems.push(item));
         return false;
       });
       return false;
     };
     getAdditional();
+    // Remove Duplicates
+    const arrItemsNoDuplicate = _.uniqBy(arrItems, (e) => e.addressLine1);
     // Update state
-    if (!_.isEqual(arrItems, prevState.itemCollection)) {
-      return { itemCollection: arrItems };
+    if (!_.isEqual(arrItemsNoDuplicate, prevState.itemCollection)) {
+      return { itemCollection: arrItemsNoDuplicate };
     }
 
     return null;
@@ -106,9 +96,11 @@ class EmailsMF extends Component {
     if (!_.isEmpty(itemCollection) && (e.trim().length >= 1)) {
       const num = itemCollection;
       const objFiltered = _.filter(num, (o) => {
-        const email = ((o.email || []).value || []);
-        if (!_.includes(email, e)) return false;
+        // const item = o.addressLine1 || '';
+        // console.log(item);
+        if (!_.includes(o.addressLine1, e)) return false;
         return o;
+        // return null;
       });
       if (!_.isEmpty(objFiltered) && !isOpen) {
         return this.setState({ isOpen: true, filteredCollection: objFiltered });
@@ -145,7 +137,7 @@ class EmailsMF extends Component {
       return (
         <div key={i}>
           <div className={css.inlineButton} onClick={() => this.onClickItem(name, item)} onKeyPress={(e) => this.onKeyPressed(e)} role="presentation">
-            {item.email.value}
+            {item.addressLine1}
           </div>
         </div>
       );
@@ -177,7 +169,32 @@ class EmailsMF extends Component {
     return (
       <Fragment>
         <Col xs={12} md={3}>
-          <Field label="Address 1" name={`${name}.addressLine1`} id={`${name}.addressLine1`} component={TextField} fullWidth />
+          <TetherComponent
+            attachment="top left"
+            targetAttachment="bottom left"
+            constraints={constraints}
+          >
+            <div ref={this.fieldRef} style={{ width:'100%' }}>
+              <Field
+                onChange={this.onInputChange}
+                onClearField={this.onInputClear}
+                label="Address 1"
+                name={`${name}.addressLine1`}
+                id={`${name}.addressLine1`}
+                component={TextField}
+                fullWidth
+              />
+            </div>
+            {
+              isOpen && (
+              <div className={css.dropdown} style={{ width:`${clientWidth}px` }}>
+                <span className={css.dropDownItem}>
+                  {this.renderItem(name)}
+                </span>
+              </div>
+              )
+            }
+          </TetherComponent>
         </Col>
         <Col xs={12} md={3}>
           <Field label="Address 2" name={`${name}.addressLine2`} id={`${name}.addressLine2`} component={TextField} fullWidth />
@@ -218,4 +235,4 @@ class EmailsMF extends Component {
 }
 
 
-export default EmailsMF;
+export default AddressesMF;
