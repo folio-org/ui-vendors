@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Fields, getFormSyncErrors } from 'redux-form';
+import { Fields, getFormSyncErrors, getFormValues, getFormMeta } from 'redux-form';
 import { IfPermission } from '@folio/stripes/core';
 import { Button, Row, Col, AccordionSet, Accordion, ExpandAllButton, Icon } from '@folio/stripes/components';
 // Local Components
@@ -28,7 +28,11 @@ class FormVendor extends Component {
   static getDerivedStateFromProps(props, state) {
     const { stripes: { store } } = props;
     const { sections } = state;
+
     const errorKeys = Object.keys(getFormSyncErrors('FormVendor')(store.getState()));
+    const formMeta = getFormValues('FormVendor')(store.getState());
+    // console.log(formMeta);
+    // console.log(!_.isEmpty(_.get(formMeta, 'accounts')));
     if (errorKeys.length > 0) {
       const newSections = { ...sections };
       errorKeys.forEach(key => {
@@ -36,7 +40,7 @@ class FormVendor extends Component {
         if (key === 'addresses' || key === 'phone_numbers' || key === 'email' || key === 'urls') newSections.contactInformationSection = true;
         if (key === 'contacts') newSections.contactPeopleSection = true;
         if (key === 'agreements') newSections.agreementsSection = true;
-        if (key === 'accounts') newSections.accountsSection = true;
+        if (key === 'accounts' && !_.isEmpty(_.get(formMeta, 'accounts'))) newSections.accountsSection = true;
       });
       return { sections: newSections };
     }
