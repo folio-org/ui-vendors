@@ -109,15 +109,14 @@ class ContactPeopleView extends React.Component {
   }
 
   getContacts(val, key) {
-    const { parentResources: { CountryList } } = this.props;
     const rowCount = (this.props.initialValues.contacts.length - 1) !== key;
     const categories = val.categories.join(', ') || null;
-    const fullName = `${_.get(val, 'contact_person.prefix', '')} ${_.get(val, 'contact_person.first_name', '')} ${_.get(val, 'contact_person.last_name', '')}`;
-    const language = `${_.get(val, 'contact_person.language', '')}`;
-    const addressComplete = _.get(val, 'contact_person.addresses', '');
-    const addPhoneNumbers = _.get(val, 'contact_person.phone_numbers', '');
-    const addEmails = _.get(val, 'contact_person.emails', '');
-    const addURLS = _.get(val, 'contact_person.urls', '');
+    const fullName = `${_.get(val, 'prefix', '')} ${_.get(val, 'first_name', '')} ${_.get(val, 'last_name', '')}`;
+    const language = `${_.get(val, 'language', '')}`;
+    const addressComplete = _.get(val, 'addresses', '');
+    const addPhoneNumbers = _.get(val, 'phone_numbers', '');
+    const addEmails = _.get(val, 'emails', '');
+    const addURLS = _.get(val, 'urls', '');
 
     return (
       <Row key={key}>
@@ -191,6 +190,7 @@ class ContactPeopleView extends React.Component {
   render() {
     const { initialValues } = this.props;
     const dataVal = initialValues.contacts.length >= 1 ? initialValues.contacts : false;
+    console.log(dataVal);
     if (dataVal) {
       return (
         <div style={{ width: '100%' }} className={css.horizontalLine}>
