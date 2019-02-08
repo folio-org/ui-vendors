@@ -94,9 +94,10 @@ class ViewVendor extends Component {
   }
 
   update(data) {
+    console.log(data);
     // Update time
-    const time = FormatTime(data, 'post');
-    if (time) { data.edi.edi_job.time = time; }
+    // const time = FormatTime(data, 'post');
+    // if (time) { data.edi.edi_job.time = time; }
     // Mutate
     this.props.parentMutator.records.PUT(data).then(() => {
       this.props.onCloseEdit();
