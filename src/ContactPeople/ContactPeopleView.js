@@ -190,7 +190,6 @@ class ContactPeopleView extends React.Component {
   render() {
     const { initialValues } = this.props;
     const dataVal = initialValues.contacts.length >= 1 ? initialValues.contacts : false;
-    console.log(dataVal);
     if (dataVal) {
       return (
         <div style={{ width: '100%' }} className={css.horizontalLine}>
