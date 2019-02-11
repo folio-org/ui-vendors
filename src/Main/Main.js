@@ -159,10 +159,10 @@ class Main extends Component {
         ],
         vendorEdiCodeTypeDD: [
           { 'label': '-- Select --', 'value': '' },
-          { label: '014/EAN', value: '014/EAN' },
-          { label: '31B/US-SAN', value: '31B/US-SAN' },
-          { label: '091/Vendor-assigned', value: '091/Vendor-assigned' },
-          { label: '092/Customer-assigned', value: '092/Customer-assigned' },
+          { label: '31B', value: '31b' },
+          { label: '014', value: '014' },
+          { label: '091', value: '091' },
+          { label: '092', value: '092' },
         ],
         libraryEDICodeDD: [
           { label: '-- Select --', value: '' },
@@ -171,9 +171,9 @@ class Main extends Component {
         libraryEdiCodeTypeDD: [
           { label: '-- Select --', value: '' },
           { label: '31B', value: '31b' },
-          { label: '31B/US-SAN', value: '31B/US-SAN' },
-          { label: '091/Vendor-assigned', value: '091/Vendor-assigned' },
-          { label: '092/Customer-assigned', value: '092/Customer-assigned' },
+          { label: '014', value: '014' },
+          { label: '091', value: '091' },
+          { label: '092', value: '092' },
         ],
         ftpDD: [
           { label: '-- Select --', value: '' },

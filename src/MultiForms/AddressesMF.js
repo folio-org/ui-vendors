@@ -96,8 +96,11 @@ class AddressesMF extends Component {
     if (!_.isEmpty(itemCollection) && (e.trim().length >= 1)) {
       const num = itemCollection;
       const objFiltered = _.filter(num, (o) => {
+        // const item = o.addressLine1 || '';
+        // console.log(item);
         if (!_.includes(o.addressLine1, e)) return false;
         return o;
+        // return null;
       });
       if (!_.isEmpty(objFiltered) && !isOpen) {
         return this.setState({ isOpen: true, filteredCollection: objFiltered });
