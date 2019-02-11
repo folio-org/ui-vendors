@@ -79,17 +79,17 @@ class ContactPeopleForm extends Component {
             <div className={css.subHeadings}>Name</div>
           </Col>
           <Col xs={12} md={2}>
-            <Field label="Prefix" name={`${elem}.prefix`} id={`${elem}.perfix`} component={TextField} fullWidth />
+            <Field label="Prefix" name={`${elem}.contact_person.prefix`} id={`${elem}.contact_person.perfix`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
-            <Field label="First Name*" name={`${elem}.first_name`} id={`${elem}.first_name`} validate={[Required]} component={TextField} fullWidth />
+            <Field label="First Name*" name={`${elem}.contact_person.first_name`} id={`${elem}.contact_person.first_name`} validate={[Required]} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
-            <Field label="Last Name*" name={`${elem}.last_name`} id={`${elem}.last_name`} validate={[Required]} component={TextField} fullWidth />
+            <Field label="Last Name*" name={`${elem}.contact_person.last_name`} id={`${elem}.contact_person.last_name`} validate={[Required]} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={2}>
             <div>Status</div>
-            <Field label="Inactive" name={`${elem}.inactive`} id={`${elem}.inactive`} component={Checkbox} inline />
+            <Field label="Inactive" name={`${elem}.contact_person.inactive`} id={`${elem}.contact_person.inactive`} component={Checkbox} inline />
           </Col>
 
 
@@ -100,8 +100,8 @@ class ContactPeopleForm extends Component {
           <Col xs={12}>
             <FieldArray
               label="Addresses"
-              name={`${elem}.addresses`}
-              id={`${elem}.addresses`}
+              name={`${elem}.contact_person.addresses`}
+              id={`${elem}.contact_person.addresses`}
               component={AdditionalAddress}
               {...this.props}
               contactPeopleForm
@@ -114,8 +114,8 @@ class ContactPeopleForm extends Component {
           <Col xs={12}>
             <FieldArray
               label="Phone Numbers"
-              name={`${elem}.phone_numbers`}
-              id={`${elem}.phone_numbers`}
+              name={`${elem}.contact_person.phone_numbers`}
+              id={`${elem}.contact_person.phone_numbers`}
               component={AdditionalPhoneNumbers}
               {...this.props}
               contactPeopleForm
@@ -128,8 +128,8 @@ class ContactPeopleForm extends Component {
           <Col xs={12}>
             <FieldArray
               label="Additional Email"
-              name={`${elem}.emails`}
-              id={`${elem}.emails`}
+              name={`${elem}.contact_person.emails`}
+              id={`${elem}.contact_person.emails`}
               component={AdditionalEmails}
               {...this.props}
               contactPeopleForm
@@ -142,8 +142,8 @@ class ContactPeopleForm extends Component {
           <Col xs={12}>
             <FieldArray
               label="Additional Email"
-              name={`${elem}.urls`}
-              id={`${elem}.urls`}
+              name={`${elem}.contact_person.urls`}
+              id={`${elem}.contact_person.urls`}
               component={AdditionalUrls}
               {...this.props}
               contactPeopleForm

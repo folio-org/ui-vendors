@@ -45,7 +45,9 @@ class EdiInformationForm extends Component {
 
   render() {
     const { parentResources } = this.props;
+    // const vendorEdiCodeDD = (parentResources.dropdown || {}).vendorEdiCodeDD || [];
     const vendorEdiCodeTypeDD = (parentResources.dropdown || {}).vendorEdiCodeTypeDD || [];
+    // const libraryEDICodeDD = (parentResources.dropdown || {}).libraryEDICodeDD || [];
     const libraryEdiCodeTypeDD = (parentResources.dropdown || {}).libraryEdiCodeTypeDD || [];
     const ftpDD = (parentResources.dropdown || {}).ftpDD || [];
     const transmissionModeDD = (parentResources.dropdown || {}).transmissionModeDD || [];

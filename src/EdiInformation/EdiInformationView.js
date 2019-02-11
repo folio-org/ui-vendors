@@ -12,7 +12,7 @@ class EdiInformationView extends React.Component {
 
   render() {
     const { initialValues } = this.props;
-    const dataVal = initialValues || false;
+    const dataVal = initialValues.edi || false;
     const ediFtp = initialValues.edi ? initialValues.edi.edi_ftp : null;
     const ediScheduling = initialValues.edi ? initialValues.edi.edi_job : null;
     if (dataVal) {
@@ -24,49 +24,49 @@ class EdiInformationView extends React.Component {
                 <div className={css.subHeadings}>EDI Basic</div>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Vendor EDI Code" value={_.get(dataVal, 'edi.vendor_edi_code', '')} />
+                <KeyValue label="Vendor EDI Code" value={_.get(dataVal, ['vendor_edi_code'], '')} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Vendor EDI Type" value={_.get(dataVal, 'edi.vendor_edi_type', '')} />
+                <KeyValue label="Vendor EDI Type" value={_.get(dataVal, ['vendor_edi_type'], '')} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Library EDI Code" value={_.get(dataVal, 'edi.lib_edi_code', '')} />
+                <KeyValue label="Library EDI Code" value={_.get(dataVal, ['lib_edi_code'], '')} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Library EDI Type" value={_.get(dataVal, 'edi.lib_edi_type', '')} />
+                <KeyValue label="Library EDI Type" value={_.get(dataVal, ['lib_edi_type'], '')} />
               </Col>
               <Col xs={3}>
                 <KeyValue label="Prorate Tax">
-                  <BoolToCheckbox name="Prorate Tax" value={_.get(dataVal, 'edi.prorate_tax')} />
+                  <BoolToCheckbox name="Prorate Tax" value={_.get(dataVal, ['prorate_tax'])} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Prorate Fees">
-                  <BoolToCheckbox name="Prorate Fees" value={_.get(dataVal, 'edi.prorate_fees')} />
+                  <BoolToCheckbox name="Prorate Fees" value={_.get(dataVal, ['prorate_fees'])} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="EDI Naming Convention">
-                  <BoolToCheckbox name="EDI Naming Convention" value={_.get(dataVal, 'edi.edi_naming_convention')} />
+                  <BoolToCheckbox name="EDI Naming Convention" value={_.get(dataVal, ['edi_naming_convention'])} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Send Account Number">
-                  <BoolToCheckbox name="Send Account Number" value={_.get(dataVal, 'edi.send_acct_num')} />
+                  <BoolToCheckbox name="Send Account Number" value={_.get(dataVal, ['send_acct_num'])} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Support Order">
-                  <BoolToCheckbox name="Support Order" value={_.get(dataVal, 'edi.support_order')} />
+                  <BoolToCheckbox name="Support Order" value={_.get(dataVal, ['support_order'])} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Support Invoice">
-                  <BoolToCheckbox name="Support Invoice" value={_.get(dataVal, 'edi.support_invoice')} />
+                  <BoolToCheckbox name="Support Invoice" value={_.get(dataVal, ['support_invoice'])} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Notes" value={_.get(dataVal, 'edi.notes', '')} />
+                <KeyValue label="Notes" value={_.get(dataVal, ['notes'], '')} />
               </Col>
               <Col xs={12}>
                 <hr />
