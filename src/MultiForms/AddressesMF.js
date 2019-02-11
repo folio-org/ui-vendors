@@ -89,7 +89,7 @@ class AddressesMF extends Component {
   };
   // End Multi dropdown
 
-  // Input Actions
+  // Input Actions 
   // variables and prop names needs to be change for other use
   onInputChange(obj, e) {
     const { isOpen, itemCollection } = this.state;

@@ -4,8 +4,11 @@ const Required = (value) => {
   return 'Required!';
 };
 
-const RequiredInput = () => {
-  return false;
+const isURLValid = (value) => {
+  const regex = new RegExp('^$|([Hh][Tt][Tt][Pp]|[Ff][Tt][Pp])([Ss])?://.+$');
+  const isTrue = regex.test(value);
+  if (isTrue) return undefined;
+  return 'Invalid URL';
 };
 
-export { Required, RequiredInput };
+export { Required, isURLValid };
