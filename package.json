@@ -484,7 +484,7 @@
       },
       {
         "permissionName" : "vendor-storage.vendors.all",
-        "displayName" : "Vendor: Can create, read, update and delete",
+        "displayName" : "Vendor: Can create, view, update and delete",
         "visible": true,
         "description" : "All permissions for vendors",
         "subPermissions" : [
