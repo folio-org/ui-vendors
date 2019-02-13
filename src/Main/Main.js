@@ -114,11 +114,6 @@ class Main extends Component {
       records: 'categories',
       path: 'vendor-storage/categories'
     },
-    // vendorContactCategory: {
-    //   type: 'okapi',
-    //   records: 'categories',
-    //   path: 'contact_category'
-    // },
     queryCustom: {
       initialValue: {
         vendorIDQuery: 'query=(name=null)',

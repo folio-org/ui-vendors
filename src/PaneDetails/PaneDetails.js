@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import mapKeys from 'lodash/mapKeys';
 import { Pane, PaneMenu, Button } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
 import css from './PaneDetails.css';
@@ -27,6 +27,7 @@ class PaneDetails extends React.Component {
     super(props);
     this.deleteVendor = this.deleteVendor.bind(this);
     this.getContactCategory = this.getContactCategory.bind(this);
+    this.getVendorCategory = this.getVendorCategory.bind(this);
     this.getCurrencies = this.getCurrencies.bind(this);
     this.getCountryList = this.getCountryList.bind(this);
     this.getLanguageList = this.getLanguageList.bind(this);
@@ -69,9 +70,21 @@ class PaneDetails extends React.Component {
     return data;
   }
 
+  getVendorCategory() {
+    const { parentResources } = this.props;
+    const records = (parentResources.vendorCategory || {}).records || [];
+    if (!records || records.length === 0) return null;
+    const data = records.map((o) => {
+      return Object.assign({
+        label: o.value,
+        value: o.id
+      });
+    });
+    return data;
+  }
+
   getContactCategory() {
     const { parentResources } = this.props;
-    // const data = (parentResources.vendorContactCategory || {}).records || [];
     const data = (parentResources.dropdown || {}).categoriesDD || [];
     if (!data || data.length === 0) return null;
     return data;
@@ -151,9 +164,10 @@ class PaneDetails extends React.Component {
         <Pane defaultWidth="100%" firstMenu={firstMenu} lastMenu={lastMenu} paneTitle={paneTitle}>
           <FormVendor
             dropdownCurrencies={this.getCurrencies()}
-            dropdownCategories={this.getCategory()}
+            // dropdownCategories={this.getCategory()}
+            dropdownVendorCategories={this.getVendorCategory()}
             dropdownContactCategories={this.getContactCategory()}
-            dropdownCountry={this.getCountryList()}
+            // dropdownCountry={this.getCountryList()}
             dropdownLanguages={this.getLanguageList()}
             dropdownPhoneType={this.getPhoneType()}
             deleteVendor={this.deleteVendor}

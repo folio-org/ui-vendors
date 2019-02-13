@@ -7,7 +7,7 @@ import { Required } from '../../Utils/Validate';
 
 class AddressInfo extends Component {
   static propTypes = {
-    dropdownCategories: PropTypes.arrayOf(PropTypes.string),
+    dropdownVendorCategories: PropTypes.arrayOf(PropTypes.object),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
     dropdownCountry: PropTypes.arrayOf(PropTypes.object),
     fields: PropTypes.object,
@@ -48,7 +48,7 @@ class AddressInfo extends Component {
 
 
   renderSubAddress = (elem, index, fields) => {
-    const { dropdownCategories, dropdownLanguages, dropdownCountry } = this.props;
+    const { dropdownVendorCategories, dropdownLanguages, dropdownCountry } = this.props;
 
     return (
       <Row key={index} className={css.panels}>
@@ -79,7 +79,7 @@ class AddressInfo extends Component {
             component={MultiSelection}
             label="Categories"
             name={`${elem}.categories`}
-            dataOptions={dropdownCategories}
+            dataOptions={dropdownVendorCategories}
             style={{ height: '80px' }}
             value={this.selectedValues(index, fields, 'categories')}
             itemToString={this.toString}

@@ -9,7 +9,7 @@ import { Required } from '../Utils/Validate';
 
 class AddressesMF extends Component {
   static propTypes = {
-    dropdownCategories: PropTypes.arrayOf(PropTypes.string),
+    dropdownVendorCategories: PropTypes.arrayOf(PropTypes.object),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
     dropdownCountry: PropTypes.arrayOf(PropTypes.object),
     stripes: PropTypes.shape({
@@ -74,21 +74,6 @@ class AddressesMF extends Component {
     return false;
   }
 
-  // Multi dropdown
-  onChangeSelect = (e, elem, propertyName) => {
-    const { dispatch, change } = this.props;
-    return dispatch(change(`${elem}.${propertyName}`, e));
-  }
-
-  toString = (option) => option;
-  formatter = ({ option }) => <div>{option}</div>;
-  filterItems = (filterText, list) => {
-    const filterRegExp = new RegExp(`^${filterText}`, 'i');
-    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-    return { renderedItems };
-  };
-  // End Multi dropdown
-
   // Input Actions
   // variables and prop names needs to be change for other use
   onInputChange(obj, e) {
@@ -147,7 +132,7 @@ class AddressesMF extends Component {
     const { isOpen } = this.state;
     const {
       name,
-      dropdownCategories,
+      dropdownVendorCategories,
       dropdownLanguages,
       dropdownCountry
     } = this.props;
@@ -216,13 +201,8 @@ class AddressesMF extends Component {
             component={MultiSelection}
             label="Categories"
             name={`${name}.categories`}
-            dataOptions={dropdownCategories}
+            dataOptions={dropdownVendorCategories}
             style={{ height: '80px' }}
-            itemToString={this.toString}
-            formatter={this.formatter}
-            filter={this.filterItems}
-            fullWidth
-            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
             onBlur={(e) => { e.preventDefault(); }}
           />
         </Col>
