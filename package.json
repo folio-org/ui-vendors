@@ -456,36 +456,35 @@
       {
         "permissionName" : "vendor-storage.vendors.collection.get",
         "displayName" : "vendor collection get",
-        "visible": true,
         "description" : "Get a collection of vendors"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.post",
         "displayName" : "vendor post",
         "visible": true,
-        "description" : "Create a new vendor"
+        "description" : "Vendor: Can create item"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.get",
-        "displayName" : "vendor get",
+        "displayName" : "Vendor: Can view item",
         "visible": true,
         "description" : "Fetch a vendor"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.put",
-        "displayName" : "vendor put",
+        "displayName" : "Vendor: Can update item",
         "visible": true,
         "description" : "Update a vendor"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.delete",
-        "displayName" : "vendor delete",
+        "displayName" : "Vendor: Can delete item",
         "visible": true,
         "description" : "Delete a vendor"
       },
       {
         "permissionName" : "vendor-storage.vendors.all",
-        "displayName" : "vendor all",
+        "displayName" : "Vendor: Can create, read, update and delete",
         "visible": true,
         "description" : "All permissions for vendors",
         "subPermissions" : [
