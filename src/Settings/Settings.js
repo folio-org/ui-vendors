@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Settings } from '@folio/stripes/smart-components';
+import CategorySettings from './CategorySettings';
 
-export default class Settings extends React.Component {
+class SettingsPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.pages = [
+      {
+        component: CategorySettings,
+        label: 'Categories',
+        route: 'category',
+      }
+    ];
+  }
+
   render() {
     return (
-      <div id="demo-settings-message">
-        These are your app settings. Testing
-      </div>
+      <Settings {...this.props} pages={this.pages} paneTitle="Vendor Settings" />
     );
   }
 }
+
+
+export default SettingsPage;
