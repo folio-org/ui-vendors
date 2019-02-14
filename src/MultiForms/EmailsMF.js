@@ -9,7 +9,7 @@ import { Required } from '../Utils/Validate';
 
 class EmailsMF extends Component {
   static propTypes = {
-    dropdownCategories: PropTypes.arrayOf(PropTypes.string),
+    dropdownVendorCategories: PropTypes.arrayOf(PropTypes.object),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
     stripes: PropTypes.shape({
       store: PropTypes.object
@@ -60,8 +60,6 @@ class EmailsMF extends Component {
       isOpen: false,
       filteredCollection: []
     };
-    // this.selectedValues = this.selectedValues.bind(this);
-    this.onChangeSelect = this.onChangeSelect.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onInputClear = this.onInputClear.bind(this);
     this.onClickItem = this.onClickItem.bind(this);
@@ -71,21 +69,6 @@ class EmailsMF extends Component {
     this.fieldRef = React.createRef();
     return false;
   }
-
-  // Multi dropdown
-  onChangeSelect = (e, elem, propertyName) => {
-    const { dispatch, change } = this.props;
-    return dispatch(change(`${elem}.${propertyName}`, e));
-  }
-
-  toString = (option) => option;
-  formatter = ({ option }) => <div>{option}</div>;
-  filterItems = (filterText, list) => {
-    const filterRegExp = new RegExp(`^${filterText}`, 'i');
-    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-    return { renderedItems };
-  };
-  // End Multi dropdown
 
   // Input Actions
   // variables and prop names needs to be change for other use
@@ -145,7 +128,7 @@ class EmailsMF extends Component {
     const { isOpen } = this.state;
     const {
       name,
-      dropdownCategories,
+      dropdownVendorCategories,
       dropdownLanguages
     } = this.props;
     const constraints = [{
@@ -200,16 +183,12 @@ class EmailsMF extends Component {
         <Col xs={12} md={3}>
           <Field
             component={MultiSelection}
-            filter={this.filterItems}
             label="Categories"
             name={`${name}.categories`}
-            dataOptions={dropdownCategories}
+            dataOptions={dropdownVendorCategories}
             style={{ height: '80px' }}
-            // value={this.selectedValues(index, fields, 'categories')}
-            itemToString={this.toString}
-            formatter={this.formatter}
-            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
             onBlur={(e) => { e.preventDefault(); }}
+            type="select"
           />
         </Col>
       </Fragment>

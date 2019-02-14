@@ -16,7 +16,7 @@
     "displayName": "ui-vendors.meta.title",
     "moduleName": "Vendors",
     "route": "/vendors",
-    "home": "/vendors?sort=name",
+    "home": "/vendors?sort=Name",
     "hasSettings": true,
     "okapiInterfaces": {
       "vendor-storage.vendors": "1.0",
