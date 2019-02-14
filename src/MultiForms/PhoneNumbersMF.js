@@ -24,6 +24,7 @@ class PhoneNumbersMF extends Component {
     const { stripes: { store } } = nextProps;
     const arrPhones = [];
     const formValues = getFormValues('FormVendor')(store.getState());
+    console.log(formValues);
     // Get Phone Number
     const getPhoneNum = () => {
       const num = formValues.phone_numbers;

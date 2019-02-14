@@ -62,14 +62,6 @@ class PaneDetails extends React.Component {
     );
   }
 
-  getCategory() {
-    const { parentResources } = this.props;
-    // const data = (parentResources.vendorCategory || {}).records || [];
-    const data = (parentResources.dropdown || {}).categoriesDD || [];
-    if (!data || data.length === 0) return null;
-    return data;
-  }
-
   getVendorCategory() {
     const { parentResources } = this.props;
     const records = (parentResources.vendorCategory || {}).records || [];
@@ -164,10 +156,8 @@ class PaneDetails extends React.Component {
         <Pane defaultWidth="100%" firstMenu={firstMenu} lastMenu={lastMenu} paneTitle={paneTitle}>
           <FormVendor
             dropdownCurrencies={this.getCurrencies()}
-            // dropdownCategories={this.getCategory()}
             dropdownVendorCategories={this.getVendorCategory()}
             dropdownContactCategories={this.getContactCategory()}
-            // dropdownCountry={this.getCountryList()}
             dropdownLanguages={this.getLanguageList()}
             dropdownPhoneType={this.getPhoneType()}
             deleteVendor={this.deleteVendor}
