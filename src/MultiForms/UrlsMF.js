@@ -5,7 +5,7 @@ import TetherComponent from 'react-tether';
 import { Field, getFormValues } from 'redux-form';
 import { MultiSelection, Col, Select, TextField } from '@folio/stripes/components';
 import css from './css/MultiForms.css';
-import { Required } from '../Utils/Validate';
+import { Required, isURLValid } from '../Utils/Validate';
 
 class UrlsMF extends Component {
   static propTypes = {
@@ -183,7 +183,8 @@ class UrlsMF extends Component {
                 name={`${name}.value`}
                 id={`${name}.value`}
                 component={TextField}
-                validate={[Required]}
+                validate={[Required, isURLValid]}
+                placeholder="http(s):// or ftp(s)://"
                 fullWidth
               />
             </div>

@@ -263,5 +263,8 @@
   "data.countries.ESH": "Western Sahara",
   "data.countries.YEM": "Yemen",
   "data.countries.ZMB": "Zambia",
-  "data.countries.ZWE": "Zimbabwe"
+  "data.countries.ZWE": "Zimbabwe",
+
+  "valid.required": "Required!",
+  "valid.isURLValid": "Invalid URL"
 }
