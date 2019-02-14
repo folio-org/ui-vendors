@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea } from '@folio/stripes/components';
-import { isURLValid } from '../Utils/Validate';
+import { Required, isURLValid } from '../Utils/Validate';
 import css from './AgreementsForm.css';
 
 class AgreementsForm extends Component {
@@ -34,13 +34,13 @@ class AgreementsForm extends Component {
       <div key={index} className={css.panels}>
         <Row key={index}>
           <Col xs={12} md={4}>
-            <Field label="Name*" name={`${elem}.name`} id={`${elem}.name`} validate={[isURLValid]} component={TextField} fullWidth />
+            <Field label="Name*" name={`${elem}.name`} id={`${elem}.name`} validate={[Required]} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
             <Field label="Discount %" name={`${elem}.discount`} id={`${elem}.discount`} type="number" component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
-            <Field label="URL" name={`${elem}.reference_url`} id={`${elem}.reference_url`} type="text" component={TextField} fullWidth />
+            <Field label="URL" name={`${elem}.reference_url`} id={`${elem}.reference_url`} validate={[isURLValid]} type="text" component={TextField} fullWidth />
           </Col>
           <Col xs={12}>
             <Field label="Notes" name={`${elem}.notes`} id={`${elem}.notes`} component={TextArea} fullWidth />
