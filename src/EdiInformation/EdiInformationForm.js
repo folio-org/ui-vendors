@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Field } from 'redux-form';
-import { isURLValid } from '../Utils/Validate';
 import {
   Row,
   Col,
@@ -16,6 +15,7 @@ import {
   AccordionSet,
   Accordion
 } from '@folio/stripes/components';
+import { isURLValid } from '../Utils/Validate';
 import css from './EdiInformationForm.css';
 import TogglePassword from '../Utils/TogglePassword';
 
