@@ -62,8 +62,6 @@ class AddressesMF extends Component {
       isOpen: false,
       filteredCollection: []
     };
-    // this.selectedValues = this.selectedValues.bind(this);
-    this.onChangeSelect = this.onChangeSelect.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onInputClear = this.onInputClear.bind(this);
     this.onClickItem = this.onClickItem.bind(this);
