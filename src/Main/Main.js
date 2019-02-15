@@ -177,8 +177,8 @@ class Main extends Component {
         ],
         ftpDD: [
           { label: '-- Select --', value: '' },
-          { label: 'SFTP', value: 'sftp' },
-          { label: 'FTP', value: 'ftp' },
+          { label: 'SFTP', value: 'SFTP' },
+          { label: 'FTP', value: 'FTP' },
         ],
         transmissionModeDD: [
           { label: '-- Select --', value: '' },
