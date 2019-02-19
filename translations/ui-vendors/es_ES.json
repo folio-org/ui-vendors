@@ -260,5 +260,7 @@
     "data.contactTypes.country": "Country",
     "data.contactTypes.editThisAddress": "Edit Address",
     "data.contactTypes.primaryAddress": "Primary Address",
-    "data.contactTypes.alternateAddress": "Alternate Address"
+    "data.contactTypes.alternateAddress": "Alternate Address",
+    "valid.required": "Required!",
+    "valid.isURLValid": "Invalid URL"
 }
