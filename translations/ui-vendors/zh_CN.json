@@ -260,5 +260,7 @@
     "data.contactTypes.country": "国家",
     "data.contactTypes.editThisAddress": "编辑地址",
     "data.contactTypes.primaryAddress": "主要地址",
-    "data.contactTypes.alternateAddress": "备用地址"
+    "data.contactTypes.alternateAddress": "备用地址",
+    "valid.required": "必须的！",
+    "valid.isURLValid": "无效的网址"
 }
