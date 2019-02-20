@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { getFormValues } from 'redux-form';
+import { isEmpty } from 'lodash';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
 import AddressesMF from '../../MultiForms/AddressesMF';
+import CatIDToObject from '../../Utils/CatIDToObject';
 
 class AddressInfo extends Component {
   static propTypes = {
@@ -12,6 +15,15 @@ class AddressInfo extends Component {
     }),
     contactPeopleForm: PropTypes.string,
   };
+
+  componentDidMount() {
+    const { stripes: { store }, dispatch, change, dropdownVendorCategories } = this.props;
+    const formValues = getFormValues('FormVendor')(store.getState());
+    if (formValues && !isEmpty(formValues.addresses)) {
+      const categories = CatIDToObject(formValues.addresses, dropdownVendorCategories);
+      dispatch(change('addresses', categories));
+    }
+  }
 
   renderSubAddress = (elem, index, fields) => {
     const { contactPeopleForm } = this.props;
