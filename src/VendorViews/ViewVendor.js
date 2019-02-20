@@ -17,6 +17,7 @@ import { InterfaceView } from '../Interface';
 import { AccountsView } from '../Accounts';
 import PaneDetails from '../PaneDetails';
 import FormatTime from '../Utils/FormatTime';
+import CatIDToObject from '../Utils/CatIDToObject';
 
 class ViewVendor extends Component {
   static propTypes = {
@@ -39,7 +40,7 @@ class ViewVendor extends Component {
     this.state = {
       sections: {
         summarySection: true,
-        contactInformationSection: false,
+        contactInformationSection: true,
         contactPeopleSection: false,
         agreementsSection: false,
         vendorInformationSection: false,
@@ -68,7 +69,7 @@ class ViewVendor extends Component {
     const resourceData = ((parentResources.records || {}).records || []);
     const selectData = resourceData.length > 0 ? resourceData : this.state.vendorData;
     const vendorData = !_.isEmpty(selectData) ? selectData : [];
-    //  If no ID return null
+    //  If no ID return nulPl
     if (!id) return null;
     // Else check if data matches id
     const data = vendorData.find(u => u.id === id);
@@ -94,11 +95,33 @@ class ViewVendor extends Component {
   }
 
   update(data) {
-    console.log(data);
+    // Update Categories for URLS, Phone Numbers, Emails, Address
+    const urlsCat = this.getCategoryIDContactInfo(data, 'urls');
+    const phoneNumbersCat = this.getCategoryIDContactInfo(data, 'phone_numbers');
+    const emailsCat = this.getCategoryIDContactInfo(data, 'emails');
+    const addressCat = this.getCategoryIDContactInfo(data, 'addresses');
+    if (!_.isEmpty(urlsCat)) data.urls = urlsCat;
+    if (!_.isEmpty(phoneNumbersCat)) data.phone_numbers = phoneNumbersCat;
+    if (!_.isEmpty(emailsCat)) data.emails = emailsCat;
+    if (!_.isEmpty(addressCat)) data.addresses = addressCat;
+    // End Update Categories for URLS, Phone Numbers, Emails, Address
+
     // Mutate
     this.props.parentMutator.records.PUT(data).then(() => {
       this.props.onCloseEdit();
     });
+  }
+
+  getCategoryIDContactInfo(data, objName) {
+    if (_.isEmpty(data[objName])) return [];
+    const obj = data[objName];
+    const newObj = obj.map((item) => {
+      if (_.isEmpty(item.categories)) return item;
+      const carArray = item.categories.map((cat) => cat.value);
+      item.categories = carArray;
+      return item;
+    });
+    return newObj;
   }
 
   render() {
