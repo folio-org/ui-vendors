@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { isEmpty, get } from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import css from '../ContactInformationView.css';
 import LanguageLookup from '../../Utils/LanguageLookup';
@@ -17,10 +17,10 @@ class ContactInformationView extends React.Component {
 
   getPhoneNumbers(val, key) {
     const rowCount = (this.props.dataVal.length - 1) !== key;
-    const categories = val.categories.join(', ') || null;
-    const phonenumber = _.get(val, 'phone_number', '');
-    const type = _.get(val, 'type', '');
-    const getLanguage = LanguageLookup(_.get(val, 'language', ''));
+    const categories = !isEmpty(val.categories) ? val.categories.map((e) => e.label) : [];
+    const phonenumber = get(val, 'phone_number', '');
+    const type = get(val, 'type', '');
+    const getLanguage = LanguageLookup(get(val, 'language', ''));
 
     return (
       <Row key={key}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 import { Row, Col } from '@folio/stripes/components';
 import { AddressView } from '@folio/stripes/smart-components';
 import css from '../ContactInformationView.css';
@@ -17,7 +17,7 @@ class AddressInfoView extends React.Component {
 
   getAddress(val, key) {
     const newVal = Object.assign({}, val);
-    newVal.categories = _.join(newVal.categories, ', ');
+    newVal.categories = !isEmpty(val.categories) ? val.categories.map((e) => e.label) : [];
 
     const visibleFields = [
       'addressLine1',
