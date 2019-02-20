@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import mapKeys from 'lodash/mapKeys';
+import { get } from 'lodash';
 import { Pane, PaneMenu, Button } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
 import css from './PaneDetails.css';
@@ -26,7 +26,6 @@ class PaneDetails extends React.Component {
   constructor(props) {
     super(props);
     this.deleteVendor = this.deleteVendor.bind(this);
-    this.getContactCategory = this.getContactCategory.bind(this);
     this.getVendorCategory = this.getVendorCategory.bind(this);
     this.getCurrencies = this.getCurrencies.bind(this);
     this.getCountryList = this.getCountryList.bind(this);
@@ -75,13 +74,6 @@ class PaneDetails extends React.Component {
     return data;
   }
 
-  getContactCategory() {
-    const { parentResources } = this.props;
-    const data = (parentResources.dropdown || {}).categoriesDD || [];
-    if (!data || data.length === 0) return null;
-    return data;
-  }
-
   getCountryList() {
     const { parentResources } = this.props;
     const data = parentResources.CountryList || [];
@@ -110,25 +102,6 @@ class PaneDetails extends React.Component {
     return data;
   }
 
-  convertValueToLabel(resourcesPath) {
-    const newArray = [];
-    const resCat = resourcesPath;
-    const arrLength = resCat.records.length - 1;
-    if (arrLength >= 1) {
-      const arr = resCat.records;
-      // Convert value to label & id to value
-      Object.keys(arr).map((key) => {
-        const obj = {
-          label: arr[key].value,
-          value: arr[key].id
-        };
-        newArray.push(obj);
-        return newArray;
-      });
-    }
-    return newArray;
-  }
-
   deleteVendor(ID) {
     const { parentMutator } = this.props;
     parentMutator.records.DELETE({ id: ID }).then(() => {
@@ -144,7 +117,7 @@ class PaneDetails extends React.Component {
     const firstMenu = this.getAddFirstMenu();
     const paneTitle = initialValues.id ? (
       <span>
-        {`Edit: ${_.get(initialValues, ['name'], '')}`}
+        {`Edit: ${get(initialValues, ['name'], '')}`}
       </span>
     ) : 'Create Vendor';
     const lastMenu = initialValues.id ?
@@ -157,7 +130,6 @@ class PaneDetails extends React.Component {
           <FormVendor
             dropdownCurrencies={this.getCurrencies()}
             dropdownVendorCategories={this.getVendorCategory()}
-            dropdownContactCategories={this.getContactCategory()}
             dropdownLanguages={this.getLanguageList()}
             dropdownPhoneType={this.getPhoneType()}
             deleteVendor={this.deleteVendor}
