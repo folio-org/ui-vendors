@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { getFormValues } from 'redux-form';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
 import { UrlsMF } from '../../MultiForms';
@@ -12,6 +13,30 @@ class Url extends Component {
     }),
     contactPeopleForm: PropTypes.string,
   };
+
+  componentDidMount() {
+    const { stripes: { store }, dispatch, change } = this.props;
+    console.log(this.props);
+    const formValues = getFormValues('FormVendor')(store.getState());
+    const json = [{
+      'categories': [],
+      'description': 'testing',
+      'isPrimary': true,
+      'language': 'fr',
+      'notes': 'this is replacing data inside redux',
+      'value': 'https://www.test.com'
+    }];
+    dispatch(change('urls', json));
+    // console.log(formValues.urls);
+    // const resourceCategories = ((parentResources.vendorCategory || {}).records || []);
+    // // Updated Categories
+    // if (data && !_.isEmpty(data.urls)) {
+    //   // Delete
+    //   const urlsCat = CatIDToObject(data.urls, resourceCategories);
+    //   data = urlsCat;
+    // }
+    // concdsole.log(data);
+  }
 
   renderSubUrl = (elem, index, fields) => {
     return (
@@ -33,7 +58,10 @@ class Url extends Component {
   }
 
   render() {
-    const { fields } = this.props;
+    const { fields, stripes: { store } } = this.props;
+    const formValues = getFormValues('FormVendor')(store.getState());
+    console.log(formValues.urls);
+
     return (
       <Row>
         <Col xs={12}>
