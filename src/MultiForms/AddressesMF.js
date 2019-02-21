@@ -9,7 +9,7 @@ import { Required } from '../Utils/Validate';
 
 class AddressesMF extends Component {
   static propTypes = {
-    dropdownCategories: PropTypes.arrayOf(PropTypes.string),
+    dropdownVendorCategories: PropTypes.arrayOf(PropTypes.object),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
     dropdownCountry: PropTypes.arrayOf(PropTypes.object),
     stripes: PropTypes.shape({
@@ -62,8 +62,6 @@ class AddressesMF extends Component {
       isOpen: false,
       filteredCollection: []
     };
-    // this.selectedValues = this.selectedValues.bind(this);
-    this.onChangeSelect = this.onChangeSelect.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onInputClear = this.onInputClear.bind(this);
     this.onClickItem = this.onClickItem.bind(this);
@@ -73,21 +71,6 @@ class AddressesMF extends Component {
     this.fieldRef = React.createRef();
     return false;
   }
-
-  // Multi dropdown
-  onChangeSelect = (e, elem, propertyName) => {
-    const { dispatch, change } = this.props;
-    return dispatch(change(`${elem}.${propertyName}`, e));
-  }
-
-  toString = (option) => option;
-  formatter = ({ option }) => <div>{option}</div>;
-  filterItems = (filterText, list) => {
-    const filterRegExp = new RegExp(`^${filterText}`, 'i');
-    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-    return { renderedItems };
-  };
-  // End Multi dropdown
 
   // Input Actions
   // variables and prop names needs to be change for other use
@@ -143,11 +126,32 @@ class AddressesMF extends Component {
   }
   // End Input Actions
 
+  // Multi Select
+  toString = (option) => option;
+  formatter = ({ option }) => {
+    const { dropdownVendorCategories } = this.props;
+    const item = _.find(dropdownVendorCategories, { id: option }) || option;
+    if (!item) return option;
+    return <div>{item.value}</div>;
+  };
+
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
+
+  dataOptions() {
+    const { dropdownVendorCategories } = this.props;
+    if (!dropdownVendorCategories) return [];
+    return dropdownVendorCategories.map(item => item.id) || [];
+  }
+  // End Multi Select
+
   render() {
     const { isOpen } = this.state;
     const {
       name,
-      dropdownCategories,
       dropdownLanguages,
       dropdownCountry
     } = this.props;
@@ -216,14 +220,12 @@ class AddressesMF extends Component {
             component={MultiSelection}
             label="Categories"
             name={`${name}.categories`}
-            dataOptions={dropdownCategories}
             style={{ height: '80px' }}
+            onBlur={(e) => { e.preventDefault(); }}
+            dataOptions={this.dataOptions()}
             itemToString={this.toString}
             formatter={this.formatter}
             filter={this.filterItems}
-            fullWidth
-            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
-            onBlur={(e) => { e.preventDefault(); }}
           />
         </Col>
       </Fragment>

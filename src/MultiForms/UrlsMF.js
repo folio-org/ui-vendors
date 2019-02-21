@@ -9,7 +9,7 @@ import { Required, isURLValid } from '../Utils/Validate';
 
 class UrlsMF extends Component {
   static propTypes = {
-    dropdownCategories: PropTypes.arrayOf(PropTypes.string),
+    dropdownVendorCategories: PropTypes.arrayOf(PropTypes.object),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
     stripes: PropTypes.shape({
       store: PropTypes.object
@@ -60,8 +60,6 @@ class UrlsMF extends Component {
       isOpen: false,
       filteredCollection: []
     };
-    // this.selectedValues = this.selectedValues.bind(this);
-    this.onChangeSelect = this.onChangeSelect.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onInputClear = this.onInputClear.bind(this);
     this.onClickItem = this.onClickItem.bind(this);
@@ -71,28 +69,6 @@ class UrlsMF extends Component {
     this.fieldRef = React.createRef();
     return false;
   }
-
-  // Multi dropdown
-  onChangeSelect = (e, elem, propertyName) => {
-    const { dispatch, change } = this.props;
-    return dispatch(change(`${elem}.${propertyName}`, e));
-  }
-
-  // selectedValues = (index, fields, propertyName) => {
-  //   const { stripes: { store } } = this.props;
-  //   const formValues = getFormValues('FormVendor')(store.getState());
-  //   const currValues = formValues[fields.name][index][propertyName] || null;
-  //   return currValues;
-  // }
-
-  toString = (option) => option;
-  formatter = ({ option }) => <div>{option}</div>;
-  filterItems = (filterText, list) => {
-    const filterRegExp = new RegExp(`^${filterText}`, 'i');
-    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-    return { renderedItems };
-  };
-  // End Multi dropdown
 
   // Input Actions
   // variables and prop names needs to be change for other use
@@ -146,13 +122,33 @@ class UrlsMF extends Component {
     });
     return (<div>{listItems}</div>);
   }
-  // End Input Actions
+
+  // Multi Select
+  toString = (option) => option;
+  formatter = ({ option }) => {
+    const { dropdownVendorCategories } = this.props;
+    const item = _.find(dropdownVendorCategories, { id: option }) || option;
+    if (!item) return option;
+    return <div>{item.value}</div>;
+  };
+
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
+
+  dataOptions() {
+    const { dropdownVendorCategories } = this.props;
+    if (!dropdownVendorCategories) return [];
+    return dropdownVendorCategories.map(item => item.id) || [];
+  }
+  // End Multi Select
 
   render() {
     const { isOpen } = this.state;
     const {
       name,
-      dropdownCategories,
       dropdownLanguages
     } = this.props;
     const constraints = [{
@@ -163,7 +159,6 @@ class UrlsMF extends Component {
       to: 'scrollParent',
       pin: false
     }];
-
     const defaultWidth = 100;
     const clientWidth = ((this.fieldRef || defaultWidth).current || defaultWidth).clientWidth || defaultWidth;
 
@@ -210,14 +205,12 @@ class UrlsMF extends Component {
             component={MultiSelection}
             label="Categories"
             name={`${name}.categories`}
-            dataOptions={dropdownCategories}
             style={{ height: '80px' }}
-            // value={this.selectedValues(index, fields, 'categories')}
-            itemToString={this.toString}
-            filter={this.filterItems}
-            formatter={this.formatter}
-            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
             onBlur={(e) => { e.preventDefault(); }}
+            dataOptions={this.dataOptions()}
+            itemToString={this.toString}
+            formatter={this.formatter}
+            filter={this.filterItems}
           />
         </Col>
       </Fragment>
