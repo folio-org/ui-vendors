@@ -1,6 +1,5 @@
 import { isEmpty, isNil } from 'lodash';
 
-// CatIDToLabel
 const CatIDToLabel = (data, catItems) => {
   if (isEmpty(data) || isNil(catItems)) return data;
   const arr = [];

@@ -65,13 +65,7 @@ class PaneDetails extends React.Component {
     const { parentResources } = this.props;
     const records = (parentResources.vendorCategory || {}).records || [];
     if (!records || records.length === 0) return null;
-    const data = records.map((o) => {
-      return Object.assign({
-        label: o.value,
-        value: o.id
-      });
-    });
-    return data;
+    return records;
   }
 
   getCountryList() {
