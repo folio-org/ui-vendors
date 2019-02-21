@@ -45,9 +45,8 @@ class Url extends Component {
   }
 
   render() {
-    const { fields, stripes: { store } } = this.props;
-    const formValues = getFormValues('FormVendor')(store.getState());
-    console.log(formValues);
+    const { fields } = this.props;
+
     return (
       <Row>
         <Col xs={12}>
