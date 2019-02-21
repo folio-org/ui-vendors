@@ -7,14 +7,14 @@ class ContactInformationForm extends React.Component {
   render() {
     return (
       <Row>
-        {/* <Col xs={12}>
+        <Col xs={12}>
           <FieldArray label="Addess" name="addresses" id="addresses" component={AddressInfo} {...this.props} />
           <br />
         </Col>
         <Col xs={12}>
           <FieldArray label="Phone Numbers" name="phone_numbers" id="phone_numbers" component={PhoneNumbers} {...this.props} />
           <br />
-        </Col> */}
+        </Col>
         <Col xs={12}>
           <FieldArray label="Email Addresses" name="emails" id="emails" component={EmailAddresses} {...this.props} />
           <br />

@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import { isEmpty, isNil } from 'lodash';
 
 // CatIDToLabel
 const CatIDToLabel = (data, catItems) => {
@@ -7,9 +7,11 @@ const CatIDToLabel = (data, catItems) => {
     if (isEmpty(item.categories)) return item;
     const arr = [];
     item.categories.forEach(cat => {
-      for (const key in catItems) {
-        if (cat === catItems[key].value) {
-          arr.push(catItems[key]);
+      if (!isNil(cat) && (typeof cat === 'string')) {
+        for (const key in catItems) {
+          if (cat === catItems[key].value) {
+            arr.push(catItems[key]);
+          }
         }
       }
       return false;

@@ -95,24 +95,25 @@ class ViewVendor extends Component {
   }
 
   update(data) {
-    // Update Categories for URLS, Phone Numbers, Emails, Address
-    const urlsCat = this.getCategoryIDContactInfo(data, 'urls');
-    const phoneNumbersCat = this.getCategoryIDContactInfo(data, 'phone_numbers');
-    const emailsCat = this.getCategoryIDContactInfo(data, 'emails');
-    const addressCat = this.getCategoryIDContactInfo(data, 'addresses');
-    if (!_.isEmpty(urlsCat)) data.urls = urlsCat;
-    if (!_.isEmpty(phoneNumbersCat)) data.phone_numbers = phoneNumbersCat;
-    if (!_.isEmpty(emailsCat)) data.emails = emailsCat;
-    if (!_.isEmpty(addressCat)) data.addresses = addressCat;
-    // End Update Categories for URLS, Phone Numbers, Emails, Address
-
-    // Mutate
+    // // Update Categories for Contact Information
+    // const urlsCat = this.getCategoryID(data, 'urls');
+    // const phoneNumbersCat = this.getCategoryID(data, 'phone_numbers');
+    // const emailsCat = this.getCategoryID(data, 'emails');
+    // const addressCatInfo = this.getCategoryID(data, 'addresses');
+    // if (!_.isEmpty(urlsCat)) data.urls = urlsCat;
+    // if (!_.isEmpty(phoneNumbersCat)) data.phone_numbers = phoneNumbersCat;
+    // if (!_.isEmpty(emailsCat)) data.emails = emailsCat;
+    // if (!_.isEmpty(addressCatInfo)) data.addresses = addressCatInfo;
+    // // Update Categories for Contact People
+    // const contactPeople = this.getCategoryIDContactPeople(data);
+    // if (!_.isEmpty(contactPeople)) data.contact = contactPeople;
+    // // Mutate
     this.props.parentMutator.records.PUT(data).then(() => {
       this.props.onCloseEdit();
     });
   }
 
-  getCategoryIDContactInfo(data, objName) {
+  getCategoryID(data, objName) {
     if (_.isEmpty(data[objName])) return [];
     const obj = data[objName];
     const newObj = obj.map((item) => {
@@ -122,6 +123,24 @@ class ViewVendor extends Component {
       return item;
     });
     return newObj;
+  }
+
+  getCategoryIDContactPeople(data) {
+    if (_.isEmpty(data.contacts)) return []; // return if contact if empty;
+    const objData = data.contacts.map((contactItem) => {
+      const urlsCat = this.getCategoryID(contactItem, 'urls');
+      const phoneNumbersCat = this.getCategoryID(contactItem, 'phone_numbers');
+      const emailsCat = this.getCategoryID(contactItem, 'emails');
+      const addressCatInfo = this.getCategoryID(contactItem, 'addresses');
+      if (!_.isEmpty(urlsCat)) contactItem.urls = urlsCat;
+      if (!_.isEmpty(phoneNumbersCat)) contactItem.phone_numbers = phoneNumbersCat;
+      if (!_.isEmpty(emailsCat)) contactItem.emails = emailsCat;
+      if (!_.isEmpty(addressCatInfo)) contactItem.addresses = addressCatInfo;
+      console.log(contactItem);
+      return contactItem;
+    });
+    console.log(objData);
+    return objData;
   }
 
   render() {

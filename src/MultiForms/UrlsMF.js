@@ -123,13 +123,23 @@ class UrlsMF extends Component {
     return (<div>{listItems}</div>);
   }
 
+
+  formatter = ({ option }) => {
+    console.log(option);
+    return <div>"tests"</div>;
+  };
+
   render() {
     const { isOpen } = this.state;
     const {
       name,
       dropdownVendorCategories,
-      dropdownLanguages
+      dropdownLanguages,
+      stripes: { store }
     } = this.props;
+
+    const formValues = getFormValues('FormVendor')(store.getState());
+    console.log(formValues);
 
     const constraints = [{
       to: 'window',
@@ -142,6 +152,14 @@ class UrlsMF extends Component {
 
     const defaultWidth = 100;
     const clientWidth = ((this.fieldRef || defaultWidth).current || defaultWidth).clientWidth || defaultWidth;
+
+    const optionArr = [
+      'ae057d68-3315-45a0-b602-b5b1d2f95f39',
+      'e8605e0d-fce6-44a1-8e83-fe25d9083a26',
+      '25d690d5-647a-498e-9eee-9afa96df1c6b'
+    ];
+
+
     return (
       <Fragment>
         <Col xs={12} md={3}>
@@ -185,9 +203,11 @@ class UrlsMF extends Component {
             component={MultiSelection}
             label="Categories"
             name={`${name}.categories`}
-            dataOptions={dropdownVendorCategories}
+            dataOptions={optionArr}
             style={{ height: '80px' }}
             onBlur={(e) => { e.preventDefault(); }}
+            formatter={this.formatter}
+            filter={this.filterItems}
           />
         </Col>
       </Fragment>
