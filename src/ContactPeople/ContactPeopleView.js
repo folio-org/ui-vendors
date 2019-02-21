@@ -79,10 +79,10 @@ class ContactPeopleView extends React.Component {
           <KeyValue label="Description" value={`${_.get(val, 'description', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Categories" value={categories} />
+          <KeyValue label="Language" value={`${_.get(val, 'language', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Language" value={`${_.get(val, 'language', '')}`} />
+          <KeyValue label="Categories" value={categories} />
         </Col>
       </Row>
     );
@@ -99,10 +99,10 @@ class ContactPeopleView extends React.Component {
           <KeyValue label="Description" value={`${_.get(val, 'description', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Categories" value={categories} />
+          <KeyValue label="Language" value={`${_.get(val, 'language', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Language" value={`${_.get(val, 'language', '')}`} />
+          <KeyValue label="Categories" value={categories} />
         </Col>
       </Row>
     );
