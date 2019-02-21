@@ -15,7 +15,7 @@ class ContactInformationView extends Component {
   getVendorcategory() {
     const { parentResources } = this.props;
     const data = ((parentResources || {}).vendorCategory || {}).records || [];
-    if (!data && data.length === 0) return null;
+    if (data.length === 0) return null;
     return data;
   }
 
