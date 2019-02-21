@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Settings } from '@folio/stripes/smart-components';
 import CategorySettings from './CategorySettings';
 
-class SettingsPage extends Component{
+class SettingsPage extends Component {
   constructor(props) {
     super(props);
 
