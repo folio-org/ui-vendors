@@ -28,11 +28,11 @@ class ContactInformationView extends React.Component {
         <Col xs={5}>
           <KeyValue label="Email" value={`${get(val, 'value', '')}`} />
         </Col>
-        <Col xs={4}>
-          <KeyValue label="Categories" value={categories} />
-        </Col>
         <Col xs={3}>
           <KeyValue label="Language" value={getLanguage} />
+        </Col>
+        <Col xs={4}>
+          <KeyValue label="Categories" value={categories} />
         </Col>
         {rowCount &&
           <div style={{ width: '100%' }}>
