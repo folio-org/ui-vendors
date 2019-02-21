@@ -260,5 +260,7 @@
     "data.contactTypes.country": "البلد",
     "data.contactTypes.editThisAddress": "تحرير العنوان",
     "data.contactTypes.primaryAddress": "العنوان الرئيسي",
-    "data.contactTypes.alternateAddress": "العنوان البديل"
+    "data.contactTypes.alternateAddress": "العنوان البديل",
+    "valid.required": "مطلوب!",
+    "valid.isURLValid": "عنوان URL غير صالح"
 }
