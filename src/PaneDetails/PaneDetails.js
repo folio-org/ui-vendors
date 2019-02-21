@@ -64,7 +64,7 @@ class PaneDetails extends React.Component {
   getVendorCategory() {
     const { parentResources } = this.props;
     const records = (parentResources.vendorCategory || {}).records || [];
-    if (!records && records.length === 0) return null;
+    if (records.length === 0) return null;
     return records;
   }
 
