@@ -34,6 +34,7 @@ class Url extends Component {
 
   render() {
     const { fields } = this.props;
+
     return (
       <Row>
         <Col xs={12}>

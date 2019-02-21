@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea, Select, Checkbox } from '@folio/stripes/components';
+import { isURLValid } from '../Utils/Validate';
 import TogglePassword from '../Utils/TogglePassword';
 import css from './InterfaceForm.css';
 
@@ -51,7 +52,7 @@ class InterfaceForm extends Component {
             <Field label="Name" name={`${elem}.name`} id={`${elem}.name`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={6}>
-            <Field label="URL" name={`${elem}.uri`} id={`${elem}.uri`} type="url" component={TextField} fullWidth />
+            <Field label="URL" name={`${elem}.uri`} id={`${elem}.uri`} type="url" validate={[isURLValid]} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={6}>
             <Field label="Username" name={`${elem}.username`} id={`${elem}.username`} component={TextField} fullWidth />

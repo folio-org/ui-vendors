@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import { Row, Col } from '@folio/stripes/components';
 import { AddressView } from '@folio/stripes/smart-components';
 import css from '../ContactInformationView.css';
+import CatIDToLabel from '../../Utils/CatIDToLabel';
 
 class AddressInfoView extends React.Component {
   static propTypes = {
-    dataVal: PropTypes.arrayOf(PropTypes.object)
+    dataVal: PropTypes.arrayOf(PropTypes.object),
+    dropdownVendorCategories: PropTypes.arrayOf(PropTypes.object)
   };
 
   constructor(props) {
@@ -16,8 +17,9 @@ class AddressInfoView extends React.Component {
   }
 
   getAddress(val, key) {
+    const { dropdownVendorCategories } = this.props;
     const newVal = Object.assign({}, val);
-    newVal.categories = _.join(newVal.categories, ', ');
+    newVal.categories = CatIDToLabel(val.categories, dropdownVendorCategories) || '';
 
     const visibleFields = [
       'addressLine1',

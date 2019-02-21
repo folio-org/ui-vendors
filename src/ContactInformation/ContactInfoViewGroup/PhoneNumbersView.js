@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { get } from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import css from '../ContactInformationView.css';
 import LanguageLookup from '../../Utils/LanguageLookup';
+import CatIDToLabel from '../../Utils/CatIDToLabel';
 
 class ContactInformationView extends React.Component {
   static propTypes = {
-    dataVal: PropTypes.arrayOf(PropTypes.object)
+    dataVal: PropTypes.arrayOf(PropTypes.object),
+    dropdownVendorCategories: PropTypes.arrayOf(PropTypes.object),
   };
 
   constructor(props) {
@@ -16,11 +18,12 @@ class ContactInformationView extends React.Component {
   }
 
   getPhoneNumbers(val, key) {
+    const { dropdownVendorCategories } = this.props;
     const rowCount = (this.props.dataVal.length - 1) !== key;
-    const categories = val.categories.join(', ') || null;
-    const phonenumber = _.get(val, 'phone_number', '');
-    const type = _.get(val, 'type', '');
-    const getLanguage = LanguageLookup(_.get(val, 'language', ''));
+    const categories = CatIDToLabel(val.categories, dropdownVendorCategories) || '';
+    const phonenumber = get(val, 'phone_number', '');
+    const type = get(val, 'type', '');
+    const getLanguage = LanguageLookup(get(val, 'language', ''));
 
     return (
       <Row key={key}>
@@ -31,10 +34,10 @@ class ContactInformationView extends React.Component {
           <KeyValue label="Type" value={type} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Categories" value={categories} />
+          <KeyValue label="Language" value={getLanguage} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Language" value={getLanguage} />
+          <KeyValue label="Categories" value={categories} />
         </Col>
         {rowCount &&
           <div style={{ width: '100%' }}>

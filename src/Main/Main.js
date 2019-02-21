@@ -114,11 +114,6 @@ class Main extends Component {
       records: 'categories',
       path: 'vendor-storage/categories'
     },
-    // vendorContactCategory: {
-    //   type: 'okapi',
-    //   records: 'categories',
-    //   path: 'contact_category'
-    // },
     queryCustom: {
       initialValue: {
         vendorIDQuery: 'query=(name=null)',
@@ -177,8 +172,8 @@ class Main extends Component {
         ],
         ftpDD: [
           { label: '-- Select --', value: '' },
-          { label: 'SFTP', value: 'sftp' },
-          { label: 'FTP', value: 'ftp' },
+          { label: 'SFTP', value: 'SFTP' },
+          { label: 'FTP', value: 'FTP' },
         ],
         transmissionModeDD: [
           { label: '-- Select --', value: '' },
@@ -212,25 +207,6 @@ class Main extends Component {
           { label: 'Active', value: 'Active' },
           { label: 'Inactive', value: 'Inactive' },
           { label: 'Pending', value: 'Pending' },
-        ],
-        categoriesDD: [
-          'Accounting',
-          'Books',
-          'Customer Service',
-          'Databases',
-          'Ebooks',
-          'Econtent',
-          'General',
-          'Journals',
-          'Licenses',
-          'Primary',
-          'Sales',
-          'Serials',
-          'Returns',
-          'Shipments',
-          'Payments',
-          'Technical Support',
-          'Other'
         ],
         currencyDD: ['USD', 'CAD', 'GBP', 'EUR'],
         phoneTypeDD: [
