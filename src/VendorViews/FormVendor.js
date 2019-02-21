@@ -139,7 +139,7 @@ class FormVendor extends Component {
               <Accordion label="Contact People" id="contactPeopleSection" displayWhenClosed={contactPeopleErr} displayWhenOpen={contactPeopleErr}>
                 <ContactPeopleForm {...this.props} />
               </Accordion>
-              <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
+              {/* <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
                 <AgreementsForm {...this.props} />
               </Accordion>
               <Accordion label="Vendor Information" id="vendorInformationSection">
@@ -153,7 +153,7 @@ class FormVendor extends Component {
               </Accordion>
               <Accordion label="Accounts" id="accountsSection" displayWhenClosed={accountsErr} displayWhenOpen={accountsErr}>
                 <AccountsForm {...this.props} />
-              </Accordion>
+              </Accordion> */}
             </AccordionSet>
             <IfPermission perm="vendor-storage.vendors.item.delete">
               <Row end="xs">

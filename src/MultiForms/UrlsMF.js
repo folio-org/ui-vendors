@@ -60,7 +60,6 @@ class UrlsMF extends Component {
       isOpen: false,
       filteredCollection: []
     };
-    this.onChangeSelect = this.onChangeSelect.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onInputClear = this.onInputClear.bind(this);
     this.onClickItem = this.onClickItem.bind(this);
@@ -69,20 +68,6 @@ class UrlsMF extends Component {
 
     this.fieldRef = React.createRef();
     return false;
-  }
-
-  // Multi dropdown
-  onChangeSelect = (items, elem, propertyName) => {
-    const { dispatch, change } = this.props;
-    // const arr = [];
-    // Object.keys(items).map((i) => {
-    //   if (i === 'preventDefault') return false;
-    //   arr.push({ id: items[i].label, value: items[i].value });
-    //   return false;
-    // });
-    // // console.log(arr);
-    // console.log(`${elem}.${propertyName}`);
-    // return dispatch(change(`${elem}.${propertyName}`, { id: 'test', value: 'value' }));
   }
 
   // Input Actions
@@ -137,19 +122,15 @@ class UrlsMF extends Component {
     });
     return (<div>{listItems}</div>);
   }
-  // End Input Actions
 
   render() {
     const { isOpen } = this.state;
-    const { stripes: { store } } = this.props;
-    const formValues = getFormValues('FormVendor')(store.getState());
-    console.log(formValues.urls);
-
     const {
       name,
       dropdownVendorCategories,
       dropdownLanguages
     } = this.props;
+
     const constraints = [{
       to: 'window',
       attachment: 'together',
@@ -205,11 +186,8 @@ class UrlsMF extends Component {
             label="Categories"
             name={`${name}.categories`}
             dataOptions={dropdownVendorCategories}
-            // actions={actions}
             style={{ height: '80px' }}
             onBlur={(e) => { e.preventDefault(); }}
-            type="select"
-            onChange={(e) => this.onChangeSelect(e, name, 'categories')}
           />
         </Col>
       </Fragment>
