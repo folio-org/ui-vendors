@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getFormValues } from 'redux-form';
-import { isEmpty } from 'lodash';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
 import EmailsMF from '../../MultiForms/EmailsMF';
-import CatIDToObject from '../../Utils/CatIDToObject';
 
 class EmailAddresses extends Component {
   static propTypes = {
@@ -21,16 +18,7 @@ class EmailAddresses extends Component {
     super(props);
     this.renderSubEmailAddresses = this.renderSubEmailAddresses.bind(this);
   }
-
-  componentDidMount() {
-    const { stripes: { store }, dispatch, change, dropdownVendorCategories } = this.props;
-    const formValues = getFormValues('FormVendor')(store.getState());
-    if (formValues && !isEmpty(formValues.emails)) {
-      const categories = CatIDToObject(formValues.emails, dropdownVendorCategories);
-      dispatch(change('emails', categories));
-    }
-  }
-
+  
   renderSubEmailAddresses = (elem, index, fields) => {
     return (
       <Row key={index} className={css.panels}>
