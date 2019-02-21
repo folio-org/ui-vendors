@@ -18,7 +18,7 @@ class EmailAddresses extends Component {
     super(props);
     this.renderSubEmailAddresses = this.renderSubEmailAddresses.bind(this);
   }
-  
+
   renderSubEmailAddresses = (elem, index, fields) => {
     return (
       <Row key={index} className={css.panels}>

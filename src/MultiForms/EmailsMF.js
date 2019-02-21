@@ -150,7 +150,6 @@ class EmailsMF extends Component {
     const { isOpen } = this.state;
     const {
       name,
-      dropdownVendorCategories,
       dropdownLanguages
     } = this.props;
     const constraints = [{

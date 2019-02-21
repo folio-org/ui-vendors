@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Pane, Row, TextField } from '@folio/stripes/components';
 import { ControlledVocab } from '@folio/stripes/smart-components';
 
 class CategorySettings extends Component {

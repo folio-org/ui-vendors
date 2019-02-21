@@ -149,8 +149,7 @@ class UrlsMF extends Component {
     const { isOpen } = this.state;
     const {
       name,
-      dropdownLanguages,
-      stripes: { store }
+      dropdownLanguages
     } = this.props;
     const constraints = [{
       to: 'window',
