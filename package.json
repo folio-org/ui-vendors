@@ -460,7 +460,7 @@
       },
       {
         "permissionName" : "vendor-storage.vendors.item.post",
-        "displayName" : "vendor post",
+        "displayName" : "Vendor: Can create item",
         "visible": true,
         "description" : "Vendor: Can create item"
       },
