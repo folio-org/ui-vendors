@@ -124,6 +124,28 @@ class EmailsMF extends Component {
   }
   // End Input Actions
 
+  // Multi Select
+  toString = (option) => option;
+  formatter = ({ option }) => {
+    const { dropdownVendorCategories } = this.props;
+    const item = _.find(dropdownVendorCategories, { id: option }) || option;
+    if (!item) return option;
+    return <div>{item.value}</div>;
+  };
+
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
+
+  dataOptions() {
+    const { dropdownVendorCategories } = this.props;
+    if (!dropdownVendorCategories) return [];
+    return dropdownVendorCategories.map(item => item.id) || [];
+  }
+  // End Multi Select
+
   render() {
     const { isOpen } = this.state;
     const {
@@ -178,18 +200,20 @@ class EmailsMF extends Component {
           <Field label="Description" name={`${name}.description`} id={`${name}.description`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
-        </Col>
-        <Col xs={12} md={3}>
           <Field
             component={MultiSelection}
             label="Categories"
             name={`${name}.categories`}
-            dataOptions={dropdownVendorCategories}
             style={{ height: '80px' }}
             onBlur={(e) => { e.preventDefault(); }}
-            type="select"
+            dataOptions={this.dataOptions()}
+            itemToString={this.toString}
+            formatter={this.formatter}
+            filter={this.filterItems}
           />
+        </Col>
+        <Col xs={12} md={3}>
+          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
         </Col>
       </Fragment>
     );

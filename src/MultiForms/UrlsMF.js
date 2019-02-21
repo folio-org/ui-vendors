@@ -123,24 +123,35 @@ class UrlsMF extends Component {
     return (<div>{listItems}</div>);
   }
 
-
+  // Multi Select
+  toString = (option) => option;
   formatter = ({ option }) => {
-    console.log(option);
-    return <div>"tests"</div>;
+    const { dropdownVendorCategories } = this.props;
+    const item = _.find(dropdownVendorCategories, { id: option }) || option;
+    if (!item) return option;
+    return <div>{item.value}</div>;
   };
+
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
+
+  dataOptions() {
+    const { dropdownVendorCategories } = this.props;
+    if (!dropdownVendorCategories) return [];
+    return dropdownVendorCategories.map(item => item.id) || [];
+  }
+  // End Multi Select
 
   render() {
     const { isOpen } = this.state;
     const {
       name,
-      dropdownVendorCategories,
       dropdownLanguages,
       stripes: { store }
     } = this.props;
-
-    const formValues = getFormValues('FormVendor')(store.getState());
-    console.log(formValues);
-
     const constraints = [{
       to: 'window',
       attachment: 'together',
@@ -149,16 +160,8 @@ class UrlsMF extends Component {
       to: 'scrollParent',
       pin: false
     }];
-
     const defaultWidth = 100;
     const clientWidth = ((this.fieldRef || defaultWidth).current || defaultWidth).clientWidth || defaultWidth;
-
-    const optionArr = [
-      'ae057d68-3315-45a0-b602-b5b1d2f95f39',
-      'e8605e0d-fce6-44a1-8e83-fe25d9083a26',
-      '25d690d5-647a-498e-9eee-9afa96df1c6b'
-    ];
-
 
     return (
       <Fragment>
@@ -203,9 +206,10 @@ class UrlsMF extends Component {
             component={MultiSelection}
             label="Categories"
             name={`${name}.categories`}
-            dataOptions={optionArr}
             style={{ height: '80px' }}
             onBlur={(e) => { e.preventDefault(); }}
+            dataOptions={this.dataOptions()}
+            itemToString={this.toString}
             formatter={this.formatter}
             filter={this.filterItems}
           />
