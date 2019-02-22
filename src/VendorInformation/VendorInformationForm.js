@@ -115,7 +115,6 @@ class VendorInformationForm extends Component {
             <Col xs={12}>
               <Field label="Subscription Interval" name="subscription_interval" id="subscription_interval" type="number" component={TextField} fullWidth />
             </Col>
-            
           </Row>
         </Col>
         <Col xs={12}>
