@@ -107,6 +107,9 @@ class VendorInformationForm extends Component {
               <Field label="Expected Invoice Interval" name="expected_invoice_interval" id="expected_invoice_interval" type="number" component={TextField} fullWidth />
             </Col>
             <Col xs={12}>
+              <Field label="Expected Receipt Interval" name="expected_receipt_interval" id="expected_receipt_interval" type="number" component={TextField} fullWidth />
+            </Col>
+            <Col xs={12}>
               <Field label="Renewal Activation Interval" name="renewal_activation_interval" id="renewal_activation_interval" type="number" component={TextField} fullWidth />
             </Col>
             <Col xs={12}>
