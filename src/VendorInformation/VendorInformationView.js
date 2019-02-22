@@ -60,6 +60,9 @@ class VendorInformationView extends React.Component {
             <KeyValue label="Expected Invoice Interval" value={_.toString(_.get(dataVal, ['expected_invoice_interval']))} />
           </Col>
           <Col xs={3}>
+            <KeyValue label="Expected Receipt Interval" value={_.toString(_.get(dataVal, ['expected_receipt_interval']))} />
+          </Col>
+          <Col xs={3}>
             <KeyValue label="Renewal Activation Interval" value={_.toString(_.get(dataVal, ['renewal_activation_interval']))} />
           </Col>
           <Col xs={3}>

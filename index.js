@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 import Main from './src/Main';
-import Settings from './src/Settings/Settings';
+import Settings from './src/Settings';
 
 class Vendors extends Component {
   static propTypes = {
