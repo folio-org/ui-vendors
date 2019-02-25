@@ -461,25 +461,25 @@
       },
       {
         "permissionName" : "vendor-storage.vendors.item.post",
-        "displayName" : "Vendor: Can create item",
+        "displayName" : "Vendor: Can create record",
         "visible": true,
         "description" : "Vendor: Can create item"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.get",
-        "displayName" : "Vendor: Can view item",
+        "displayName" : "Vendor: Can view record",
         "visible": true,
         "description" : "Fetch a vendor"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.put",
-        "displayName" : "Vendor: Can update item",
+        "displayName" : "Vendor: Can update record",
         "visible": true,
         "description" : "Update a vendor"
       },
       {
         "permissionName" : "vendor-storage.vendors.item.delete",
-        "displayName" : "Vendor: Can delete item",
+        "displayName" : "Vendor: Can delete record",
         "visible": true,
         "description" : "Delete a vendor"
       },
