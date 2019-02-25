@@ -23,7 +23,8 @@
       "vendor-storage.emails": "1.0",
       "vendor-storage.phone-numbers": "1.0",
       "vendor-storage.addresses": "1.0",
-      "vendor-storage.url": "1.0"
+      "vendor-storage.url": "1.0",
+      "vendor-storage.categories": "1.0"
     },
     "queryResource": "query",
     "icons": [
