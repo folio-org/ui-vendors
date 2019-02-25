@@ -8,9 +8,10 @@ class SettingsPage extends Component {
 
     this.pages = [
       {
-        component: CategorySettings,
-        label: 'Categories',
         route: 'category',
+        label: 'Categories',
+        component: CategorySettings,
+        perm: 'settings.vendor.enabled'
       }
     ];
   }
@@ -21,6 +22,5 @@ class SettingsPage extends Component {
     );
   }
 }
-
 
 export default SettingsPage;
