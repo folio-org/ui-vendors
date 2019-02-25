@@ -1,5 +1,4 @@
 # Change history for ui-vendors
-
 ## [1.3.0](https://github.com/folio-org/ui-vendors/tree/v1.3.0) (2019-02-25)
 [Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.2.0...v1.3.0)
 
