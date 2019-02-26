@@ -1,8 +1,20 @@
 # Change history for ui-vendors
-
-## [1.3.0](https://github.com/folio-org/ui-vendors/tree/v1.3.0) (2019-01-25)
+## [1.3.0](https://github.com/folio-org/ui-vendors/tree/v1.3.0) (2019-02-25)
 [Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.2.0...v1.3.0)
 
+* Updated permission names for Create, Edit and Update. UIV-75
+* Created Crud for Settings: Add, Edit, delete Categories from list of categories. UIV-74
+* Fixed SearchAndSort not loading views page. UIV-73
+* Updated interface and permission set in package.json. UIV-72	
+* Updated IfPermission path. UIV-67
+* Aligned pattern for empty required fields within accordions while creating Vendor Records with POL. UIV-65
+* Fixed Auto suggest deduplicate items in suggested list. UIV-64
+* Added 'Expected Receipt Interval' field vendor information. UIV-61
+* Updated permission for Vendors App. UIV-66
+* Removed hardcoded font sizes. UIV-60.
+* Fixed vendor sorting. UIV-59
+* Updated URL label in Contact Information accordion. UIV-57
+* Added auto suggest to Vendor Phone Number Field. UIV-56
 * Upgrade to stripes v2.0.0
 
 ## [1.2.0](https://github.com/folio-org/ui-vendors/tree/v1.2.0) (2018-12-06)
