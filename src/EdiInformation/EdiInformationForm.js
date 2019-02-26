@@ -15,6 +15,7 @@ import {
   AccordionSet,
   Accordion
 } from '@folio/stripes/components';
+import { isURLValid } from '../Utils/Validate';
 import css from './EdiInformationForm.css';
 import TogglePassword from '../Utils/TogglePassword';
 
@@ -45,9 +46,7 @@ class EdiInformationForm extends Component {
 
   render() {
     const { parentResources } = this.props;
-    // const vendorEdiCodeDD = (parentResources.dropdown || {}).vendorEdiCodeDD || [];
     const vendorEdiCodeTypeDD = (parentResources.dropdown || {}).vendorEdiCodeTypeDD || [];
-    // const libraryEDICodeDD = (parentResources.dropdown || {}).libraryEDICodeDD || [];
     const libraryEdiCodeTypeDD = (parentResources.dropdown || {}).libraryEdiCodeTypeDD || [];
     const ftpDD = (parentResources.dropdown || {}).ftpDD || [];
     const transmissionModeDD = (parentResources.dropdown || {}).transmissionModeDD || [];
@@ -109,7 +108,7 @@ class EdiInformationForm extends Component {
                     <Field label="FTP Format" name="edi.edi_ftp.ftp_format" id="edi_edit_ftp_format" component={Select} dataOptions={ftpDD} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Server Address" name="edi.edi_ftp.server_address" id="edi_server_address" type="text" component={TextField} fullWidth />
+                    <Field label="Server Address" name="edi.edi_ftp.server_address" id="edi_server_address" type="text" validate={[isURLValid]} component={TextField} fullWidth />
                   </Col>
                   <Col xs={12}>
                     <Field label="Username" name="edi.edi_ftp.username" id="edi_username" type="text" component={TextField} autoComplete="nope" fullWidth />

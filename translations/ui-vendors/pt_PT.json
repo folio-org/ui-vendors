@@ -1,5 +1,5 @@
 {
-    "meta.title": "Vendor",
+    "meta.title": "Fornecedor",
     "search": "Search",
     "resultCount": "{count, number} {count, plural, one {Record found} other {Records found}}",
     "data.contactTypes.email": "Email",
@@ -162,8 +162,8 @@
     "data.countries.NPL": "Nepal",
     "data.countries.NLD": "Netherlands",
     "data.countries.ANT": "Netherlands Antilles",
-    "data.countries.NCL": "New Caledonia",
-    "data.countries.NZL": "New Zealand",
+    "data.countries.NCL": "Nova Caledónia",
+    "data.countries.NZL": "Nova Zelândia",
     "data.countries.NIC": "Nicaragua",
     "data.countries.NER": "Niger",
     "data.countries.NGA": "Nigeria",
@@ -176,7 +176,7 @@
     "data.countries.PLW": "Palau",
     "data.countries.PSE": "Palestinian Territory",
     "data.countries.PAN": "Panama",
-    "data.countries.PNG": "Papua New Guinea",
+    "data.countries.PNG": "Papua Nova Guiné",
     "data.countries.PRY": "Paraguay",
     "data.countries.PER": "Peru",
     "data.countries.PHL": "Philippines",
@@ -260,5 +260,7 @@
     "data.contactTypes.country": "Country",
     "data.contactTypes.editThisAddress": "Edit Address",
     "data.contactTypes.primaryAddress": "Primary Address",
-    "data.contactTypes.alternateAddress": "Alternate Address"
+    "data.contactTypes.alternateAddress": "Alternate Address",
+    "valid.required": "Required!",
+    "valid.isURLValid": "Invalid URL"
 }

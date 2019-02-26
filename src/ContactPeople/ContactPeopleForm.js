@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
-import { MultiSelection, Row, Col, Button, TextField, TextArea, Select, Checkbox } from '@folio/stripes/components';
+import { Row, Col, Button, TextField, Checkbox } from '@folio/stripes/components';
 import { AdditionalAddress, AdditionalEmails, AdditionalPhoneNumbers, AdditionalUrls } from './ContactPeopleFormGroup';
-import { EmailsMF, PhoneNumbersMF, UrlsMF } from '../MultiForms';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
 
 class ContactPeopleForm extends Component {
   static propTypes = {
-    dropdownContactCategories: PropTypes.arrayOf(PropTypes.string),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
     dropdownCountry: PropTypes.arrayOf(PropTypes.object),
     stripes: PropTypes.shape({
