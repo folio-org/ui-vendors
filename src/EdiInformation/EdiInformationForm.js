@@ -28,8 +28,8 @@ class EdiInformationForm extends Component {
     super(props);
     this.state = {
       subSections: {
-        ediBasicSection: false,
-        ftpDetailsSection: false,
+        ediBasicSection: true,
+        ftpDetailsSection: true,
         schedulingSection: true
       }
     };

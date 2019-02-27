@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Fields, getFormSyncErrors, getFormValues, getFormMeta } from 'redux-form';
+import { getFormSyncErrors } from 'redux-form';
 import { IfPermission } from '@folio/stripes/core';
 import { Button, Row, Col, AccordionSet, Accordion, ExpandAllButton, Icon } from '@folio/stripes/components';
 // Local Components
@@ -13,7 +13,6 @@ import { VendorInformationForm } from '../VendorInformation';
 import { EdiInformationForm } from '../EdiInformation';
 import { InterfaceForm } from '../Interface';
 import { AccountsForm } from '../Accounts';
-import HandleErrors from '../Utils/HandleErrors';
 import css from './css/FormVendor.css';
 
 class FormVendor extends Component {
@@ -28,11 +27,18 @@ class FormVendor extends Component {
   static getDerivedStateFromProps(props, state) {
     const { stripes: { store } } = props;
     const { sections } = state;
-
     const errorKeys = Object.keys(getFormSyncErrors('FormVendor')(store.getState()));
-    const formMeta = getFormValues('FormVendor')(store.getState());
-    // console.log(formMeta);
-    // console.log(!_.isEmpty(_.get(formMeta, 'accounts')));
+    const sectionErrArray = [];
+    // Display error condition
+    errorKeys.forEach(key => {
+      if ((key === 'name' || key === 'code' || key === 'vendor_status') && (sectionErrArray.indexOf('summaryErr') === -1)) sectionErrArray.push('summaryErr');
+      if ((key === 'addresses' || key === 'phone_numbers' || key === 'email' || key === 'urls') && (sectionErrArray.indexOf('contactInfoErr') === -1)) sectionErrArray.push('contactInfoErr');
+      if ((key === 'contacts') && (sectionErrArray.indexOf('contactPeopleErr') === -1)) sectionErrArray.push('contactPeopleErr');
+      if ((key === 'agreements') && (sectionErrArray.indexOf('agreementsErr') === -1)) sectionErrArray.push('agreementsErr');
+      if ((key === 'edi') && (sectionErrArray.indexOf('ediErr') === -1)) sectionErrArray.push('ediErr');
+      if ((key === 'accounts') && (sectionErrArray.indexOf('accountsErr') === -1)) sectionErrArray.accountsErr = true;
+    });
+    // Accordion error condition
     if (errorKeys.length > 0) {
       const newSections = { ...sections };
       errorKeys.forEach(key => {
@@ -40,11 +46,11 @@ class FormVendor extends Component {
         if (key === 'addresses' || key === 'phone_numbers' || key === 'email' || key === 'urls') newSections.contactInformationSection = true;
         if (key === 'contacts') newSections.contactPeopleSection = true;
         if (key === 'agreements') newSections.agreementsSection = true;
-        if (key === 'accounts' && !_.isEmpty(_.get(formMeta, 'accounts'))) newSections.accountsSection = true;
+        if (key === 'accounts') newSections.accountsSection = true;
       });
-      return { sections: newSections };
+      return { sections: newSections, sectionErrors: sectionErrArray };
     }
-    return null;
+    return { sectionErrors: sectionErrArray };
   }
 
   constructor(props) {
@@ -58,24 +64,13 @@ class FormVendor extends Component {
         vendorInformationSection: false,
         EDIInformationSection: false,
         interfaceSection: false,
-        accountsSection: false,
+        accountsSection: false
       },
-      sectionErrors: {
-        summaryErr: false,
-        contactInfoErr: false,
-        contactPeopleErr: false,
-        agreementsErr: false,
-        accountsErr: false,
-      }
+      sectionErrors: []
     };
     this.deleteVendor = this.deleteVendor.bind(this);
     this.onToggleSection = this.onToggleSection.bind(this);
     this.handleExpandAll = this.handleExpandAll.bind(this);
-    this.updateSectionErrors = this.updateSectionErrors.bind(this);
-  }
-
-  updateSectionErrors(obj) {
-    this.setState({ sectionErrors: obj });
   }
 
   onToggleSection({ id }) {
@@ -109,53 +104,47 @@ class FormVendor extends Component {
     const { sectionErrors } = this.state;
     const showDeleteButton = initialValues.id || false;
     // Errors
-    const arrSections = ['name', 'code', 'vendor_status', 'addresses', 'phone_numbers', 'email', 'urls', 'contacts', 'agreements', 'accounts'];
     const message = (
       <em className={css.requiredIcon} style={{ color: 'red', display: 'flex', alignItems: 'center' }}>
         <Icon icon="validation-error" size="medium" />
         Required fields!
       </em>
     );
-    const summaryErr = sectionErrors.summaryErr ? message : null;
-    const contactInfoErr = sectionErrors.contactInfoErr ? message : null;
-    const contactPeopleErr = sectionErrors.contactPeopleErr ? message : null;
-    const agreementsErr = sectionErrors.agreementsErr ? message : null;
-    const accountsErr = sectionErrors.accountsErr ? message : null;
 
+    const isDisplayError = (sectionName) => {
+      return sectionErrors.indexOf(sectionName) > -1 ? message : null;
+    };
 
     return (
       <div id="form-add-new-vendor">
         <Row center="xs" style={{ textAlign: 'left' }}>
           <Col xs={12} md={8}>
-            <Fields names={arrSections} component={HandleErrors} data={sectionErrors} updateSectionErrors={this.updateSectionErrors} />
-          </Col>
-          <Col xs={12} md={8}>
             <Row end="xs"><Col xs><ExpandAllButton accordionStatus={this.state.sections} onToggle={this.handleExpandAll} /></Col></Row>
           </Col>
           <Col xs={12} md={8}>
             <AccordionSet accordionStatus={this.state.sections} onToggle={this.onToggleSection}>
-              <Accordion label="Summary" id="summarySection" displayWhenClosed={summaryErr} displayWhenOpen={summaryErr}>
+              <Accordion label="Summary" id="summarySection" displayWhenClosed={isDisplayError('summaryErr')} displayWhenOpen={isDisplayError('summaryErr')}>
                 <SummaryForm {...this.props} />
               </Accordion>
-              <Accordion label="Contact Information" id="contactInformationSection" displayWhenClosed={contactInfoErr} displayWhenOpen={contactInfoErr}>
+              <Accordion label="Contact Information" id="contactInformationSection" displayWhenClosed={isDisplayError('contactInfoErr')} displayWhenOpen={isDisplayError('contactInfoErr')}>
                 <ContactInformationForm {...this.props} />
               </Accordion>
-              <Accordion label="Contact People" id="contactPeopleSection" displayWhenClosed={contactPeopleErr} displayWhenOpen={contactPeopleErr}>
+              <Accordion label="Contact People" id="contactPeopleSection" displayWhenClosed={isDisplayError('contactPeopleErr')} displayWhenOpen={isDisplayError('contactPeopleErr')}>
                 <ContactPeopleForm {...this.props} />
               </Accordion>
-              <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={agreementsErr} displayWhenOpen={agreementsErr}>
+              <Accordion label="Agreements" id="agreementsSection" displayWhenClosed={isDisplayError('agreementsErr')} displayWhenOpen={isDisplayError('agreementsErr')}>
                 <AgreementsForm {...this.props} />
               </Accordion>
               <Accordion label="Vendor Information" id="vendorInformationSection">
                 <VendorInformationForm {...this.props} />
               </Accordion>
-              <Accordion label="EDI Information" id="EDIInformationSection">
+              <Accordion label="EDI Information" id="EDIInformationSection" displayWhenClosed={isDisplayError('ediErr')} displayWhenOpen={isDisplayError('ediErr')}>
                 <EdiInformationForm {...this.props} />
               </Accordion>
               <Accordion label="Interface" id="interfaceSection">
                 <InterfaceForm {...this.props} />
               </Accordion>
-              <Accordion label="Accounts" id="accountsSection" displayWhenClosed={accountsErr} displayWhenOpen={accountsErr}>
+              <Accordion label="Accounts" id="accountsSection" displayWhenClosed={isDisplayError('accountsErr')} displayWhenOpen={isDisplayError('accountsErr')}>
                 <AccountsForm {...this.props} />
               </Accordion>
             </AccordionSet>

@@ -10,7 +10,7 @@ const Required = (value) => {
 const isURLValid = (value) => {
   const REGEXP_URL = new RegExp('^$|([Hh][Tt][Tt][Pp]|[Ff][Tt][Pp])([Ss])?://.+$');
   const isTrue = REGEXP_URL.test(value);
-  if (isTrue) return undefined;
+  if (value === undefined || isTrue) return undefined;
   return <FormattedMessage id="ui-vendors.valid.isURLValid" />;
 };
 

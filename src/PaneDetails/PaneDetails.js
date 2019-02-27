@@ -125,6 +125,7 @@ class PaneDetails extends React.Component {
             dropdownCurrencies={this.getCurrencies()}
             dropdownVendorCategories={this.getVendorCategory()}
             dropdownLanguages={this.getLanguageList()}
+            dropdownCountry={this.getCountryList()}
             dropdownPhoneType={this.getPhoneType()}
             deleteVendor={this.deleteVendor}
             {...this.props}
