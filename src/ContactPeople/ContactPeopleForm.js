@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
-import { Row, Col, Button, TextField, Checkbox } from '@folio/stripes/components';
+import { MultiSelection, Row, Col, Button, TextField, Checkbox } from '@folio/stripes/components';
 import { AdditionalAddress, AdditionalEmails, AdditionalPhoneNumbers, AdditionalUrls } from './ContactPeopleFormGroup';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
@@ -89,7 +89,20 @@ class ContactPeopleForm extends Component {
             <div>Status</div>
             <Field label="Inactive" name={`${elem}.inactive`} id={`${elem}.inactive`} component={Checkbox} inline />
           </Col>
-
+          <Col xs={12} md={4}>
+            <Field
+              component={MultiSelection}
+              label="Categories"
+              name={`${elem}.categories`}
+              dataOptions={this.props.dropdownContactCategories}
+              onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
+              style={{ height: '80px' }}
+              value={this.selectedValues(index, fields, 'categories')}
+              itemToString={this.toString}
+              filter={this.filterItems}
+              formatter={this.formatter}
+            />
+          </Col>
 
           <Col xs={12}>
             <hr className={css.thinBorder} />
