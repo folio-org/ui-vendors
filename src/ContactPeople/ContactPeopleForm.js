@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray, getFormValues } from 'redux-form';
-import { MultiSelection, Row, Col, Button, TextField, Checkbox } from '@folio/stripes/components';
+import { MultiSelection, Select, Row, Col, Button, TextField, Checkbox } from '@folio/stripes/components';
 import { AdditionalAddress, AdditionalEmails, AdditionalPhoneNumbers, AdditionalUrls } from './ContactPeopleFormGroup';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
@@ -43,14 +43,16 @@ class ContactPeopleForm extends Component {
     return this.setState(obj);
   }
 
-  // For Multi dropdown
-  toString = (option) => option;
-  formatter = ({ option }) => <div>{option}</div>;
-  filterItems = (filterText, list) => {
-    const filterRegExp = new RegExp(`^${filterText}`, 'i');
-    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-    return { renderedItems };
-  };
+  // Multi Select
+  dataOptions() {
+    const { dropdownVendorCategories } = this.props;
+    if (!dropdownVendorCategories) return [];
+    const newDropdown = dropdownVendorCategories.map(item => {
+      return { 'label': item.value, 'value': item.id };
+    });
+    return newDropdown;
+  }
+  // End Multi Select
 
   renderCreateContact = ({ fields }) => {
     return (
@@ -69,6 +71,7 @@ class ContactPeopleForm extends Component {
   }
 
   renderSubCreateContact = (elem, index, fields) => {
+    const { dropdownLanguages } = this.props;
     const indexNum = index + 1;
     return (
       <Col xs={12} key={index} className={css.panels}>
@@ -79,31 +82,29 @@ class ContactPeopleForm extends Component {
           <Col xs={12} md={2}>
             <Field label="Prefix" name={`${elem}.prefix`} id={`${elem}.perfix`} component={TextField} fullWidth />
           </Col>
-          <Col xs={12} md={4}>
+          <Col xs={12} md={5}>
             <Field label="First Name*" name={`${elem}.first_name`} id={`${elem}.first_name`} validate={[Required]} component={TextField} fullWidth />
           </Col>
-          <Col xs={12} md={4}>
+          <Col xs={12} md={5}>
             <Field label="Last Name*" name={`${elem}.last_name`} id={`${elem}.last_name`} validate={[Required]} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={2}>
             <div>Status</div>
             <Field label="Inactive" name={`${elem}.inactive`} id={`${elem}.inactive`} component={Checkbox} inline />
           </Col>
-          <Col xs={12} md={4}>
+          <Col xs={12} md={5}>
+            <Field label="Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
+          </Col>
+          <Col xs={12} md={5}>
             <Field
               component={MultiSelection}
               label="Categories"
               name={`${elem}.categories`}
-              dataOptions={this.props.dropdownContactCategories}
-              onChange={(e) => this.onChangeSelect(e, elem, 'categories')}
               style={{ height: '80px' }}
-              value={this.selectedValues(index, fields, 'categories')}
-              itemToString={this.toString}
-              filter={this.filterItems}
-              formatter={this.formatter}
+              onBlur={(e) => { e.preventDefault(); }}
+              dataOptions={this.dataOptions()}
             />
           </Col>
-
           <Col xs={12}>
             <hr className={css.thinBorder} />
             <div className={css.subHeadings}>Addresses</div>

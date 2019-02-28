@@ -94,10 +94,21 @@ class ViewVendor extends Component {
   }
 
   update(data) {
+    console.log(data);
+    debugger;
     this.props.parentMutator.records.PUT(data).then(() => {
       this.props.onCloseEdit();
     });
   }
+
+  // dataOptions() {
+  //   const { dropdownVendorCategories } = this.props;
+  //   if (!dropdownVendorCategories) return [];
+  //   const newDropdown = dropdownVendorCategories.map(item => {
+  //     return { 'label': item.value, 'value': item.id };
+  //   });
+  //   return newDropdown;
+  // }
 
   render() {
     const { location } = this.props;
