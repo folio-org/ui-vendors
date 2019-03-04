@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Select, Row, Col, Button, TextField, Checkbox } from '@folio/stripes/components';
 import { AdditionalAddress, AdditionalEmails, AdditionalPhoneNumbers, AdditionalUrls } from './ContactPeopleFormGroup';
@@ -44,14 +45,19 @@ class ContactPeopleForm extends Component {
   }
 
   // Multi Select
-  dataOptions() {
+  toString = (option) => option;
+  formatter = ({ option }) => {
     const { dropdownVendorCategories } = this.props;
-    if (!dropdownVendorCategories) return [];
-    const newDropdown = dropdownVendorCategories.map(item => {
-      return { 'label': item.value, 'value': item.id };
-    });
-    return newDropdown;
-  }
+    const item = _.find(dropdownVendorCategories, { id: option }) || option;
+    if (!item) return option;
+    return <div>{item.value}</div>;
+  };
+
+  filterItems = (filterText, list) => {
+    const filterRegExp = new RegExp(`^${filterText}`, 'i');
+    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
+    return { renderedItems };
+  };
   // End Multi Select
 
   renderCreateContact = ({ fields }) => {
@@ -71,7 +77,7 @@ class ContactPeopleForm extends Component {
   }
 
   renderSubCreateContact = (elem, index, fields) => {
-    const { dropdownLanguages } = this.props;
+    const { dropdownLanguages, dropdownVendorCategories } = this.props;
     const indexNum = index + 1;
     return (
       <Col xs={12} key={index} className={css.panels}>
@@ -102,7 +108,10 @@ class ContactPeopleForm extends Component {
               name={`${elem}.categories`}
               style={{ height: '80px' }}
               onBlur={(e) => { e.preventDefault(); }}
-              dataOptions={this.dataOptions()}
+              dataOptions={dropdownVendorCategories}
+              itemToString={this.toString}
+              formatter={this.formatter}
+              filter={this.filterItems}
             />
           </Col>
           <Col xs={12}>

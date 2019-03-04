@@ -199,6 +199,9 @@ class EmailsMF extends Component {
           <Field label="Description" name={`${name}.description`} id={`${name}.description`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
+          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
+        </Col>
+        <Col xs={12} md={3}>
           <Field
             component={MultiSelection}
             label="Categories"
@@ -210,9 +213,6 @@ class EmailsMF extends Component {
             formatter={this.formatter}
             filter={this.filterItems}
           />
-        </Col>
-        <Col xs={12} md={3}>
-          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
         </Col>
       </Fragment>
     );
