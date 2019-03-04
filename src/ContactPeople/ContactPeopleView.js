@@ -5,6 +5,7 @@ import { AddressView } from '@folio/stripes/smart-components';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './ContactPeopleView.css';
+import CatIDToLabel from '../Utils/CatIDToLabel';
 
 class ContactPeopleView extends React.Component {
   static propTypes = {
@@ -19,15 +20,23 @@ class ContactPeopleView extends React.Component {
   constructor(props) {
     super(props);
     this.getContacts = this.getContacts.bind(this);
+    this.getCategories = this.getCategories.bind(this);
     this.getAddresses = this.getAddresses.bind(this);
     this.getAddPhoneNumbers = this.getAddPhoneNumbers.bind(this);
     this.getAddEmails = this.getAddEmails.bind(this);
     this.getAddUrls = this.getAddUrls.bind(this);
   }
 
+  getVendorcategory() {
+    const { parentResources } = this.props;
+    const data = ((parentResources || {}).vendorCategory || {}).records || [];
+    if (data.length === 0) return null;
+    return data;
+  }
+
   getAddresses(val, key) {
     const newVal = Object.assign({}, val);
-    newVal.categories = _.join(newVal.categories, ', ');
+    newVal.categories = CatIDToLabel(val.categories, this.getVendorcategory()) || '';
 
     const visibleFields = [
       'addressLine1',
@@ -49,7 +58,7 @@ class ContactPeopleView extends React.Component {
   }
 
   getAddPhoneNumbers(val, key) {
-    const categories = val.categories.join(', ') || null;
+    const categories = CatIDToLabel(val.categories, this.getVendorcategory()) || '';
     return (
       <Row key={key} className={css.rptBlocks}>
         <Col xs={3}>
@@ -69,7 +78,7 @@ class ContactPeopleView extends React.Component {
   }
 
   getAddEmails(val, key) {
-    const categories = val.categories.join(', ') || null;
+    const categories = CatIDToLabel(val.categories, this.getVendorcategory()) || '';
     return (
       <Row key={key} className={css.rptBlocks}>
         <Col xs={3}>
@@ -89,7 +98,7 @@ class ContactPeopleView extends React.Component {
   }
 
   getAddUrls(val, key) {
-    const categories = val.categories.join(', ') || null;
+    const categories = CatIDToLabel(val.categories, this.getVendorcategory()) || '';
     return (
       <Row key={key} className={css.rptBlocks}>
         <Col xs={3}>
@@ -108,9 +117,14 @@ class ContactPeopleView extends React.Component {
     );
   }
 
+  getCategories(val) {
+    if (_.isEmpty(val.categories)) return [];
+    const categories = val.categories.map(item => item.value);
+    return categories.join(', ');
+  }
+
   getContacts(val, key) {
     const rowCount = (this.props.initialValues.contacts.length - 1) !== key;
-    const categories = val.categories.join(', ') || null;
     const fullName = `${_.get(val, 'prefix', '')} ${_.get(val, 'first_name', '')} ${_.get(val, 'last_name', '')}`;
     const language = `${_.get(val, 'language', '')}`;
     const addressComplete = _.get(val, 'addresses', '');
@@ -132,7 +146,7 @@ class ContactPeopleView extends React.Component {
           <KeyValue label="Language" value={language} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Categories" value={categories} />
+          <KeyValue label="Categories" value={this.getCategories(val)} />
         </Col>
         { addressComplete.length > 0 && (
           <Fragment>
