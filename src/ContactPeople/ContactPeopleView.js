@@ -14,8 +14,7 @@ class ContactPeopleView extends React.Component {
       dropdown: PropTypes.object.isRequired,
       dropdownCategories: PropTypes.arrayOf(PropTypes.object),
       CountryList: PropTypes.arrayOf(PropTypes.object)
-    }),
-    dropdownVendorCategories: PropTypes.arrayOf(PropTypes.object)
+    })
   }
 
   constructor(props) {
