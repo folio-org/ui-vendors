@@ -30,6 +30,7 @@ class Main extends Component {
     disableRecordCreation: PropTypes.bool,
     showSingleResult: PropTypes.bool, // eslint-disable-line react/no-unused-prop-types
     browseOnly: PropTypes.bool,
+    packageInfo: PropTypes.object,
   }
 
   static defaultProps = {
@@ -270,7 +271,7 @@ class Main extends Component {
 
     return (
       <SearchAndSort
-        packageInfo={packageInfo}
+        packageInfo={this.props.packageInfo || packageInfo}
         objectName="vendors"
         baseRoute={packageInfo.stripes.route}
         filterConfig={filterConfig}
