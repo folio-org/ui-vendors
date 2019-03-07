@@ -1,4 +1,10 @@
 # Change history for ui-vendors
+## [1.4.0](https://github.com/folio-org/ui-vendors/tree/v1.4.0) (2019-03-07)
+[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.3.0...v1.4.0)
+
+* Fixed Invisible required field in the contact people accordion. UIV-77
+* Fixed category for contact people view and form. UIV-83
+
 ## [1.3.0](https://github.com/folio-org/ui-vendors/tree/v1.3.0) (2019-02-25)
 [Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.2.0...v1.3.0)
 
