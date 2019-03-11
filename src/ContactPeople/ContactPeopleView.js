@@ -133,71 +133,68 @@ class ContactPeopleView extends React.Component {
     const addURLS = _.get(val, 'urls', '');
 
     return (
-      <Row key={key}>
-        <Col xs={3}>
-          <KeyValue label="Name" value={fullName} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Inactive">
-            <BoolToCheckbox name="Status" value={_.get(val, ['inactive'])} />
-          </KeyValue>
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Language" value={language} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Categories" value={this.getCategories(val)} />
-        </Col>
-        { addressComplete.length > 0 && (
-          <Fragment>
-            <Col xs={12}>
-              <hr />
-              <div className={css.sub2Headings}>Addresses</div>
-            </Col>
-            <Col xs={12}>
-              { addressComplete.map(this.getAddresses) }
-            </Col>
-          </Fragment>
-        )}
-        { addPhoneNumbers.length > 0 && (
-          <Fragment>
-            <Col xs={12}>
-              <hr />
-              <div className={css.sub2Headings}>Phone Numbers</div>
-            </Col>
-            <Col xs={12}>
-              { addPhoneNumbers.map(this.getAddPhoneNumbers) }
-            </Col>
-          </Fragment>
-        )}
-        { addEmails.length > 0 && (
-          <Fragment>
-            <Col xs={12}>
-              <hr />
-              <div className={css.sub2Headings}>Email</div>
-            </Col>
-            <Col xs={12}>
-              { addEmails.map(this.getAddEmails) }
-            </Col>
-          </Fragment>
-        )}
-        { addURLS.length > 0 && (
-          <Fragment>
-            <Col xs={12}>
-              <hr />
-              <div className={css.sub2Headings}>URLs</div>
-            </Col>
-            <Col xs={12}>
-              { addURLS.map(this.getAddUrls) }
-            </Col>
-          </Fragment>
-        )}
-        {rowCount &&
-          <div style={{ width: '100%' }}>
-            <hr />
-          </div>
-        }
-      </Row>
+      <div className={css.horizontalLine}>
+        <Row key={key}>
+          <Col xs={3}>
+            <KeyValue label="Name" value={fullName} />
+          </Col>
+          <Col xs={3}>
+            <KeyValue label="Inactive">
+              <BoolToCheckbox name="Status" value={_.get(val, ['inactive'])} />
+            </KeyValue>
+          </Col>
+          <Col xs={3}>
+            <KeyValue label="Language" value={language} />
+          </Col>
+          <Col xs={3}>
+            <KeyValue label="Categories" value={this.getCategories(val)} />
+          </Col>
+          { addressComplete.length > 0 && (
+            <Fragment>
+              <Col xs={12}>
+                <hr />
+                <div className={css.sub2Headings}>Addresses</div>
+              </Col>
+              <Col xs={12}>
+                { addressComplete.map(this.getAddresses) }
+              </Col>
+            </Fragment>
+          )}
+          { addPhoneNumbers.length > 0 && (
+            <Fragment>
+              <Col xs={12}>
+                <hr />
+                <div className={css.sub2Headings}>Phone Numbers</div>
+              </Col>
+              <Col xs={12}>
+                { addPhoneNumbers.map(this.getAddPhoneNumbers) }
+              </Col>
+            </Fragment>
+          )}
+          { addEmails.length > 0 && (
+            <Fragment>
+              <Col xs={12}>
+                <hr />
+                <div className={css.sub2Headings}>Email</div>
+              </Col>
+              <Col xs={12}>
+                { addEmails.map(this.getAddEmails) }
+              </Col>
+            </Fragment>
+          )}
+          { addURLS.length > 0 && (
+            <Fragment>
+              <Col xs={12}>
+                <hr />
+                <div className={css.sub2Headings}>URLs</div>
+              </Col>
+              <Col xs={12}>
+                { addURLS.map(this.getAddUrls) }
+              </Col>
+            </Fragment>
+          )}
+        </Row>
+      </div>
     );
   }
 
@@ -206,7 +203,7 @@ class ContactPeopleView extends React.Component {
     const dataVal = initialValues.contacts.length >= 1 ? initialValues.contacts : false;
     if (dataVal) {
       return (
-        <div style={{ width: '100%' }} className={css.horizontalLine}>
+        <div style={{ width: '100%' }}>
           {dataVal.map(this.getContacts)}
         </div>
       );
