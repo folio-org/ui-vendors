@@ -36,6 +36,7 @@ class FormVendor extends Component {
       if ((key === 'contacts') && (sectionErrArray.indexOf('contactPeopleErr') === -1)) sectionErrArray.push('contactPeopleErr');
       if ((key === 'agreements') && (sectionErrArray.indexOf('agreementsErr') === -1)) sectionErrArray.push('agreementsErr');
       if ((key === 'edi') && (sectionErrArray.indexOf('ediErr') === -1)) sectionErrArray.push('ediErr');
+      if ((key === 'interfaces') && (sectionErrArray.indexOf('interfacesErr') === -1)) sectionErrArray.push('interfacesErr');
       if ((key === 'accounts') && (sectionErrArray.indexOf('accountsErr') === -1)) sectionErrArray.accountsErr = true;
     });
     // Accordion error condition
@@ -46,6 +47,7 @@ class FormVendor extends Component {
         if (key === 'addresses' || key === 'phone_numbers' || key === 'email' || key === 'urls') newSections.contactInformationSection = true;
         if (key === 'contacts') newSections.contactPeopleSection = true;
         if (key === 'agreements') newSections.agreementsSection = true;
+        if (key === 'interfaces') newSections.interfacesSection = true;
         if (key === 'accounts') newSections.accountsSection = true;
       });
       return { sections: newSections, sectionErrors: sectionErrArray };
@@ -63,7 +65,7 @@ class FormVendor extends Component {
         agreementsSection: false,
         vendorInformationSection: false,
         EDIInformationSection: false,
-        interfaceSection: false,
+        interfacesSection: false,
         accountsSection: false
       },
       sectionErrors: []
@@ -141,7 +143,7 @@ class FormVendor extends Component {
               <Accordion label="EDI Information" id="EDIInformationSection" displayWhenClosed={isDisplayError('ediErr')} displayWhenOpen={isDisplayError('ediErr')}>
                 <EdiInformationForm {...this.props} />
               </Accordion>
-              <Accordion label="Interface" id="interfaceSection">
+              <Accordion label="Interface" id="interfacesSection" displayWhenClosed={isDisplayError('interfacesErr')} displayWhenOpen={isDisplayError('interfacesErr')}>
                 <InterfaceForm {...this.props} />
               </Accordion>
               <Accordion label="Accounts" id="accountsSection" displayWhenClosed={isDisplayError('accountsErr')} displayWhenOpen={isDisplayError('accountsErr')}>
