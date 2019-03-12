@@ -124,7 +124,6 @@ class ContactPeopleView extends React.Component {
   }
 
   getContacts(val, key) {
-    const rowCount = (this.props.initialValues.contacts.length - 1) !== key;
     const fullName = `${_.get(val, 'prefix', '')} ${_.get(val, 'first_name', '')} ${_.get(val, 'last_name', '')}`;
     const language = `${_.get(val, 'language', '')}`;
     const addressComplete = _.get(val, 'addresses', '');
