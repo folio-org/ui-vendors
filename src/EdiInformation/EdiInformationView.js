@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get, find, isNull } from 'lodash';
+import { get, find, isNull, toString } from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './EdiInformationView.css';
@@ -26,15 +26,14 @@ class EdiInformationView extends React.Component {
   getVendorCodeTypeItem(item) {
     const { parentResources: { dropdown: { vendorEdiCodeTypeDD } } } = this.props;
     if (isNull(item)) return '';
-    const obj = find(vendorEdiCodeTypeDD, {value: item});
+    const obj = find(vendorEdiCodeTypeDD, { value: item });
     return obj.label;
   }
 
   getLibraryEdiCodeTypeDD(item) {
     const { parentResources: { dropdown: { libraryEdiCodeTypeDD } } } = this.props;
     if (isNull(item)) return '';
-    const obj = find(libraryEdiCodeTypeDD, {value: item});
-    console.log(obj);
+    const obj = find(libraryEdiCodeTypeDD, { value: item });
     return obj.label;
   }
 
@@ -126,7 +125,7 @@ class EdiInformationView extends React.Component {
                 <KeyValue label="FTP Connection Mode" value={get(ediFtp, ['ftp_conn_mode'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="FTP Port" value={_.toString(get(ediFtp, ['ftp_port']))} />
+                <KeyValue label="FTP Port" value={toString(get(ediFtp, ['ftp_port']))} />
               </Col>
               <Col xs={6}>
                 <KeyValue label="Order Directory" value={get(ediFtp, ['order_directory'])} />
@@ -149,7 +148,7 @@ class EdiInformationView extends React.Component {
               </Col>
               <Col xs={3}>
                 <KeyValue label="Schedule EDI">
-                  <BoolToCheckbox name="Schedule EDI" value={_.toString(get(ediScheduling, ['schedule_edi']))} />
+                  <BoolToCheckbox name="Schedule EDI" value={toString(get(ediScheduling, ['schedule_edi']))} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
@@ -162,51 +161,51 @@ class EdiInformationView extends React.Component {
                 <KeyValue label="Send to Emails" value={get(ediScheduling, ['send_to_emails'], '')} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Notify All EDI" value={_.toString(get(ediScheduling, ['notify_all_edi']))} />
+                <KeyValue label="Notify All EDI" value={toString(get(ediScheduling, ['notify_all_edi']))} />
               </Col>
               <Col xs={3}>
                 <KeyValue label="Notify Invoice Only">
-                  <BoolToCheckbox name="Notify Invoice Only" value={_.toString(get(ediScheduling, ['notify_invoice_only']))} />
+                  <BoolToCheckbox name="Notify Invoice Only" value={toString(get(ediScheduling, ['notify_invoice_only']))} />
                 </KeyValue>
               </Col>
               <Col xs={6}>
                 <KeyValue label="Notify Error Only">
-                  <BoolToCheckbox name="Notify Error Only" value={_.toString(get(ediScheduling, ['notify_error_only']))} />
+                  <BoolToCheckbox name="Notify Error Only" value={toString(get(ediScheduling, ['notify_error_only']))} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Monday">
-                  <BoolToCheckbox name="Monday" value={_.toString(get(ediScheduling, ['is_monday']))} />
+                  <BoolToCheckbox name="Monday" value={toString(get(ediScheduling, ['is_monday']))} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Tuesday">
-                  <BoolToCheckbox name="Tuesday" value={_.toString(get(ediScheduling, ['is_tuesday']))} />
+                  <BoolToCheckbox name="Tuesday" value={toString(get(ediScheduling, ['is_tuesday']))} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Wednesday">
-                  <BoolToCheckbox name="Wednesday" value={_.toString(get(ediScheduling, ['is_wednesday']))} />
+                  <BoolToCheckbox name="Wednesday" value={toString(get(ediScheduling, ['is_wednesday']))} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Thursday">
-                  <BoolToCheckbox name="Thursday" value={_.toString(get(ediScheduling, ['is_thursday']))} />
+                  <BoolToCheckbox name="Thursday" value={toString(get(ediScheduling, ['is_thursday']))} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Friday">
-                  <BoolToCheckbox name="Friday" value={_.toString(get(ediScheduling, ['is_friday']))} />
+                  <BoolToCheckbox name="Friday" value={toString(get(ediScheduling, ['is_friday']))} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Saturday">
-                  <BoolToCheckbox name="Saturday" value={_.toString(get(ediScheduling, ['is_saturday']))} />
+                  <BoolToCheckbox name="Saturday" value={toString(get(ediScheduling, ['is_saturday']))} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
                 <KeyValue label="Sunday">
-                  <BoolToCheckbox name="Sunday" value={_.toString(get(ediScheduling, ['is_sunday']))} />
+                  <BoolToCheckbox name="Sunday" value={toString(get(ediScheduling, ['is_sunday']))} />
                 </KeyValue>
               </Col>
             </Row>
