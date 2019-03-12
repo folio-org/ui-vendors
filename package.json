@@ -40,7 +40,7 @@
         "displayName": "UI: Vendors module is enabled"
       },
       {
-        "permissionName": "settings.vendor.enabled",
+        "permissionName": "settings.vendors.enabled",
         "displayName": "Settings (Vendor): Display list of settings for Vendor",
         "visible": true,
         "subPermissions": [
