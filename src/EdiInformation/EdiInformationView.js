@@ -34,7 +34,7 @@ class EdiInformationView extends React.Component {
               </Col>
               <Col xs={3}>
                 <KeyValue label="Library EDI Type" value={_.get(dataVal, 'edi.lib_edi_type', '')} />
-              </Col> 
+              </Col>
               <Col xs={3}>
                 <KeyValue label="Prorate Tax">
                   <BoolToCheckbox name="Prorate Tax" value={_.get(dataVal, 'edi.prorate_tax')} />
