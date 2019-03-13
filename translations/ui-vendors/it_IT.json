@@ -1,7 +1,7 @@
 {
-    "meta.title": "Vendor",
+    "meta.title": "Fornitore",
     "search": "Cerca",
-    "resultCount": "{count, number} {count, plural, one {Record found} other {Records found}}",
+    "resultCount": "{count, number} {count, plural, one {Record trovato} other {Record trovati}}",
     "data.contactTypes.email": "Email",
     "data.contactTypes.mail": "Indirizzo email (Principale)",
     "data.contactTypes.textMessage": "Messaggio di testo",
