@@ -11,7 +11,7 @@ class SettingsPage extends Component {
         route: 'category',
         label: 'Categories',
         component: CategorySettings,
-        perm: 'settings.vendor.enabled'
+        perm: 'settings.vendors.enabled'
       }
     ];
   }
