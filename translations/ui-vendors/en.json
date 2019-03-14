@@ -266,5 +266,10 @@
   "data.countries.ZWE": "Zimbabwe",
 
   "valid.required": "Required!",
-  "valid.isURLValid": "Invalid URL"
+  "valid.isURLValid": "Invalid URL",
+
+  "filterConfig.vendorStatus": "Vendor status",
+  "filterConfig.vendorStatus.active": "Active",
+  "filterConfig.vendorStatus.inactive": "Inactive",
+  "filterConfig.vendorStatus.pending": "Pending"
 }

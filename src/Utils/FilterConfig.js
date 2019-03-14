@@ -1,12 +1,17 @@
+import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 const Filters = () => {
   return [
     {
-      label: <FormattedMessage id="ui-vendors.filter.vendorStatus" />,
+      label: <FormattedMessage id="ui-vendors.filterConfig.vendorStatus" />,
       name: 'vendor_status',
       cql: 'vendor_status',
-      values: ['Active', 'Inactive', 'Pending']
+      values: [
+        <FormattedMessage id="ui-vendors.filterConfig.vendorStatus.active" />,
+        <FormattedMessage id="ui-vendors.filterConfig.vendorStatus.inactive" />,
+        <FormattedMessage id="ui-vendors.filterConfig.vendorStatus.pending" />
+      ]
     },
     {
       label: 'Address category',
