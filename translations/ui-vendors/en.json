@@ -2,7 +2,6 @@
   "meta.title": "Vendor",
   "search": "Search",
   "resultCount": "{count, number} {count, plural, one {Record found} other {Records found}}",
-  
 
   "data.contactTypes.addressLine1": "Address 1",
   "data.contactTypes.addressLine2": "Address 2",
@@ -269,7 +268,12 @@
   "valid.isURLValid": "Invalid URL",
 
   "filterConfig.vendorStatus": "Vendor status",
-  "filterConfig.vendorStatus.active": "Active",
-  "filterConfig.vendorStatus.inactive": "Inactive",
-  "filterConfig.vendorStatus.pending": "Pending"
+  "filterConfig.addressCategory": "Address category",
+  "filterConfig.contactPeopleCategory": "Contact people category",
+  "filterConfig.country": "Country",
+  "filterConfig.languages": "Languages",
+  "filterConfig.paymentMethod": "Payment method",
+  "filterConfig.statsAvailable": "Stats available",
+
+  "end": ""
 }

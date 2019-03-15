@@ -7,44 +7,40 @@ const Filters = () => {
       label: <FormattedMessage id="ui-vendors.filterConfig.vendorStatus" />,
       name: 'vendor_status',
       cql: 'vendor_status',
-      values: [
-        <FormattedMessage id="ui-vendors.filterConfig.vendorStatus.active" />,
-        <FormattedMessage id="ui-vendors.filterConfig.vendorStatus.inactive" />,
-        <FormattedMessage id="ui-vendors.filterConfig.vendorStatus.pending" />
-      ]
+      values: ['Active', 'Inactive', 'Pending']
     },
     {
-      label: 'Address category',
+      label: <FormattedMessage id="ui-vendors.filterConfig.addressCategory" />,
       name: 'category',
       cql: 'addresses',
       values: ['Accounting', 'Books', 'Customer Service', 'Databases', 'Ebooks', 'Econtent', 'General', 'Journals', 'Licenses', 'Primary', 'Sales', 'Serials', 'Returns', 'Shipments', 'Payments', 'Technical Support', 'Other']
     },
     {
-      label: 'Contact people category',
+      label: <FormattedMessage id="ui-vendors.filterConfig.contactPeopleCategory" />,
       name: 'category',
       cql: 'contacts',
       values: ['Accounting', 'Books', 'Customer Service', 'Databases', 'Ebooks', 'Econtent', 'General', 'Journals', 'Licenses', 'Primary', 'Sales', 'Serials', 'Returns', 'Shipments', 'Payments', 'Technical Support', 'Other']
     },
     {
-      label: 'Country',
+      label: <FormattedMessage id="ui-vendors.filterConfig.country" />,
       name: 'country',
       cql: 'addresses',
       values: []
     },
     {
-      label: 'Languages',
+      label: <FormattedMessage id="ui-vendors.filterConfig.languages" />,
       name: 'language',
       cql: 'language',
       values: []
     },
     {
-      label: 'Payment method',
+      label: <FormattedMessage id="ui-vendors.filterConfig.paymentMethod" />,
       name: 'payment_method',
       cql: 'payment_method',
       values: ['Cash', 'Credit Card/P-Card', 'EFT', 'Deposit Account']
     },
     {
-      label: 'Stats available',
+      label: <FormattedMessage id="ui-vendors.filterConfig.statsAvailable" />,
       name: 'available',
       cql: 'interfaces',
       values: [
