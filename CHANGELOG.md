@@ -1,10 +1,12 @@
 # Change history for ui-vendors
-## [1.4.0](https://github.com/folio-org/ui-vendors/tree/v1.4.0) (2019-03-07)
-[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.3.0...v1.4.0)
+## [1.5.0](https://github.com/folio-org/ui-vendors/tree/v1.5.0) (2019-03-15)
+[Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.4.0...v1.5.0)
 
-* Updated SearchAndSort packageInfo property. UIV-69
-* Fixed Invisible required field in the contact people accordion. UIV-77
-* Fixed category for contact people view and form. UIV-83 
+* Fixed interface section invisible error. UIV-98
+* Updated styling for Contact people view. UIV-95
+* Added translation tags for filter config. UIV-92
+* Fixed missing settings page. UIV-90
+* Added descriptor into edi code type dropdown options. UIV-49
 
 ## [1.3.0](https://github.com/folio-org/ui-vendors/tree/v1.3.0) (2019-02-25)
 [Full Changelog](https://github.com/folio-org/ui-vendors/compare/v1.2.0...v1.3.0)
