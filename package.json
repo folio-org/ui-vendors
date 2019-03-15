@@ -1,6 +1,6 @@
 {
   "name": "@folio/vendors",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Description for ui-vendors",
   "main": "index.js",
   "repository": "",
@@ -10,7 +10,7 @@
   "license": "Apache-2.0",
   "engines": {
     "node": ">=6.0.0"
-  },
+  }, 
   "stripes": {
     "type": "app",
     "displayName": "ui-vendors.meta.title",
