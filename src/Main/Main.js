@@ -166,7 +166,6 @@ class Main extends Component {
         ],
         libraryEdiCodeTypeDD: [
           { label: '-- Select --', value: '' },
-          { label: '31B', value: '31b' },
           { label: '31B (US-SAN)', value: '31B/US-SAN' },
           { label: '091 (Vendor-assigned)', value: '091/Vendor-assigned' },
           { label: '092 (Customer-assigned)', value: '092/Customer-assigned' },
