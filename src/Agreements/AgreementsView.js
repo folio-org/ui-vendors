@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import css from './AgreementsView.css';
+import { FormattedMessage } from 'react-intl';
 
 class AgreementsView extends React.Component {
   static propTypes = {
@@ -20,16 +21,16 @@ class AgreementsView extends React.Component {
     return (
       <Row key={key}>
         <Col xs={3}>
-          <KeyValue label="Name" value={_.get(val, 'name')} />
+    <KeyValue label={<FormattedMessage id="ui-vendors.agreement.name" />} value={_.get(val, 'name')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Discount" value={discount} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.agreement.discount" />} value={discount} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Reference URL" value={_.get(val, 'reference_url')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.agreement.referenceUrl" />} value={_.get(val, 'reference_url')} />
         </Col>
         <Col xs={12}>
-          <KeyValue label="Notes" value={_.get(val, 'notes')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.agreement.notes" />} value={_.get(val, 'notes')} />
         </Col>
         {rowCount &&
           <div style={{ width: '100%' }}>
@@ -52,7 +53,7 @@ class AgreementsView extends React.Component {
     } else {
       return (
         <div>
-          <p>-- No agreements available --</p>
+          <p>-- {<FormattedMessage id="ui-vendors.agreement.noAgreementsAvailable" />} --</p>
         </div>
       );
     }

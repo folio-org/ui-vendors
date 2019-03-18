@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { FormattedMessage } from 'react-intl';
 // Folio
 import { SearchAndSort } from '@folio/stripes/smart-components';
 import { filters2cql } from '@folio/stripes/components';
 import FormatTime from '../Utils/FormatTime';
 import packageInfo from '../../package';
 // Components and Pages
-import { FormattedMessage } from 'react-intl';
 import PaneDetails from '../PaneDetails';
 import { ViewVendor } from '../VendorViews';
 import { Filters, SearchableIndexes } from '../Utils/FilterConfig';
@@ -269,6 +269,12 @@ class Main extends Component {
       'Description': data => _.get(data, ['description'], ''),
       'Vendor Status': data => _.toString(_.get(data, ['vendor_status'], ''))
     };
+    const columnMapping = {
+      'Name': <FormattedMessage id="ui-vendors.main.name" />,
+      'Code': <FormattedMessage id="ui-vendors.main.code" />,
+      'Description': <FormattedMessage id="ui-vendors.main.description" />,
+      'Vendor status': <FormattedMessage id="ui-vendors.main.vendorStatus" />
+    };
 
     return (
       <SearchAndSort
@@ -276,7 +282,8 @@ class Main extends Component {
         objectName="vendors"
         baseRoute={packageInfo.stripes.route}
         filterConfig={filterConfig}
-        visibleColumns={this.props.visibleColumns ? this.props.visibleColumns : ['Name', 'Code', 'Description', 'Vendor Status']}
+        visibleColumns={this.props.visibleColumns ? this.props.visibleColumns : ['Name', 'Code', 'Description', 'Vendor status']}
+        columnMapping={columnMapping}
         resultsFormatter={resultsFormatter}
         viewRecordComponent={ViewVendor}
         onCreate={this.create}

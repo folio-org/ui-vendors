@@ -4,6 +4,7 @@ import { Row, Col } from '@folio/stripes/components';
 import { AddressView } from '@folio/stripes/smart-components';
 import css from '../ContactInformationView.css';
 import CatIDToLabel from '../../Utils/CatIDToLabel';
+import { FormattedMessage } from 'react-intl';
 
 class AddressInfoView extends React.Component {
   static propTypes = {
@@ -31,10 +32,19 @@ class AddressInfoView extends React.Component {
       'categories'
     ];
 
+    const labelMap = {
+      addressLine1: <FormattedMessage id="ui-vendors.data.contactTypes.addressLine1" />,
+      addressLine2: <FormattedMessage id="ui-vendors.data.contactTypes.addressLine2" />,
+      stateRegion: <FormattedMessage id="ui-vendors.data.contactTypes.stateProviceOrRegion" />,
+      zipCode: <FormattedMessage id="ui-vendors.data.contactTypes.zipOrPostalCode" />,
+      country: <FormattedMessage id="ui-vendors.data.contactTypes.country" />,
+      categories: <FormattedMessage id="ui-vendors.data.contactTypes.categories" />
+    }
+
     return (
       <Row key={key}>
         <Col xs={12}>
-          <AddressView addressObject={newVal} visibleFields={visibleFields} />
+          <AddressView addressObject={newVal} visibleFields={visibleFields} labelMap={labelMap} />
         </Col>
       </Row>
     );
@@ -44,7 +54,7 @@ class AddressInfoView extends React.Component {
     const { dataVal } = this.props;
     return (
       <Col xs={12} className={css.rowHeader}>
-        <div className={css.subHeadings}>Address</div>
+        <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.data.contactTypes.address" />}</div>
         {dataVal.map(this.getAddress)}
       </Col>
     );

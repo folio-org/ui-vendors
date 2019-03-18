@@ -5,6 +5,7 @@ import { Row, Col, KeyValue } from '@folio/stripes/components';
 import css from '../ContactInformationView.css';
 import LanguageLookup from '../../Utils/LanguageLookup';
 import CatIDToLabel from '../../Utils/CatIDToLabel';
+import { FormattedMessage } from 'react-intl';
 
 class ContactInformationView extends React.Component {
   static propTypes = {
@@ -28,16 +29,16 @@ class ContactInformationView extends React.Component {
     return (
       <Row key={key}>
         <Col xs={3}>
-          <KeyValue label="Phone Number" value={phonenumber} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.phoneNumber" />} value={phonenumber} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Type" value={type} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.type" />} value={type} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Language" value={getLanguage} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.language" />} value={getLanguage} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Categories" value={categories} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.categories" />} value={categories} />
         </Col>
         {rowCount &&
           <div style={{ width: '100%' }}>
@@ -52,9 +53,9 @@ class ContactInformationView extends React.Component {
     const { dataVal } = this.props;
     return (
       <Col xs={12} className={css.rowHeader}>
-        <div className={css.subHeadings}>Phone Numbers</div>
+        <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactInfo.phoneNumbers" />}</div>
         { dataVal.map(this.getPhoneNumbers) }
-      </Col>
+      </Col>  
     );
   }
 }

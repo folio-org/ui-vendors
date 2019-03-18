@@ -5,6 +5,7 @@ import { Row, Col, KeyValue } from '@folio/stripes/components';
 import css from '../ContactInformationView.css';
 import LanguageLookup from '../../Utils/LanguageLookup';
 import CatIDToLabel from '../../Utils/CatIDToLabel';
+import { FormattedMessage } from 'react-intl';
 
 class ContactInformationView extends React.Component {
   static propTypes = {
@@ -26,13 +27,13 @@ class ContactInformationView extends React.Component {
     return (
       <Row key={key}>
         <Col xs={5}>
-          <KeyValue label="Email" value={`${get(val, 'value', '')}`} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.email" />} value={`${get(val, 'value', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Language" value={getLanguage} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.language" />} value={getLanguage} />
         </Col>
         <Col xs={4}>
-          <KeyValue label="Categories" value={categories} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.categories" />} value={categories} />
         </Col>
         {rowCount &&
           <div style={{ width: '100%' }}>
@@ -47,7 +48,7 @@ class ContactInformationView extends React.Component {
     const { dataVal } = this.props;
     return (
       <Col xs={12} className={css.rowHeader}>
-        <div className={css.subHeadings}>Email Address</div>
+        <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactInfo.emailAddress" />}</div>
         {dataVal.map(this.getEmail)}
       </Col>
     );

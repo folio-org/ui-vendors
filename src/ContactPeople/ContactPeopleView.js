@@ -6,6 +6,7 @@ import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './ContactPeopleView.css';
 import CatIDToLabel from '../Utils/CatIDToLabel';
+import { FormattedMessage } from 'react-intl';
 
 class ContactPeopleView extends React.Component {
   static propTypes = {
@@ -48,10 +49,19 @@ class ContactPeopleView extends React.Component {
       'categories'
     ];
 
+    const labelMap = {
+      addressLine1: <FormattedMessage id="ui-vendors.data.contactTypes.addressLine1" />,
+      addressLine2: <FormattedMessage id="ui-vendors.data.contactTypes.addressLine2" />,
+      stateRegion: <FormattedMessage id="ui-vendors.data.contactTypes.stateProviceOrRegion" />,
+      zipCode: <FormattedMessage id="ui-vendors.data.contactTypes.zipOrPostalCode" />,
+      country: <FormattedMessage id="ui-vendors.data.contactTypes.country" />,
+      categories: <FormattedMessage id="ui-vendors.data.contactTypes.categories" />
+    }
+
     return (
       <Row key={key}>
         <Col xs={12}>
-          <AddressView addressObject={newVal} visibleFields={visibleFields} />
+          <AddressView addressObject={newVal} visibleFields={visibleFields} abelMap={labelMap} />
         </Col>
       </Row>
     );
@@ -62,16 +72,16 @@ class ContactPeopleView extends React.Component {
     return (
       <Row key={key} className={css.rptBlocks}>
         <Col xs={3}>
-          <KeyValue label="Phone Number" value={_.get(val, 'phone_number', '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.phoneNumber" />} value={_.get(val, 'phone_number', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Type" value={_.get(val, 'type', '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.type" />} value={_.get(val, 'type', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Language" value={_.get(val, 'language', '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.language" />} value={_.get(val, 'language', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Categories" value={categories} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.categories" />} value={categories} />
         </Col>
       </Row>
     );
@@ -82,16 +92,16 @@ class ContactPeopleView extends React.Component {
     return (
       <Row key={key} className={css.rptBlocks}>
         <Col xs={3}>
-          <KeyValue label="Email" value={`${_.get(val, 'value', '')}`} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.email" />} value={`${_.get(val, 'value', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Description" value={`${_.get(val, 'description', '')}`} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.description" />} value={`${_.get(val, 'description', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Language" value={`${_.get(val, 'language', '')}`} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.language" />} value={`${_.get(val, 'language', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Categories" value={categories} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.categories" />} value={categories} />
         </Col>
       </Row>
     );
@@ -102,16 +112,16 @@ class ContactPeopleView extends React.Component {
     return (
       <Row key={key} className={css.rptBlocks}>
         <Col xs={3}>
-          <KeyValue label="URL" value={`${_.get(val, 'value', '')}`} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.url" />} value={`${_.get(val, 'value', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Description" value={`${_.get(val, 'description', '')}`} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.description" />} value={`${_.get(val, 'description', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Language" value={`${_.get(val, 'language', '')}`} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.language" />} value={`${_.get(val, 'language', '')}`} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Categories" value={categories} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.categories" />} value={categories} />
         </Col>
       </Row>
     );
@@ -135,24 +145,24 @@ class ContactPeopleView extends React.Component {
       <div className={css.horizontalLine}>
         <Row key={key}>
           <Col xs={3}>
-            <KeyValue label="Name" value={fullName} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.name" />} value={fullName} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Inactive">
+            <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.inactive" />}>
               <BoolToCheckbox name="Status" value={_.get(val, ['inactive'])} />
             </KeyValue>
           </Col>
           <Col xs={3}>
-            <KeyValue label="Language" value={language} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.language" />} value={language} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Categories" value={this.getCategories(val)} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.categories" />} value={this.getCategories(val)} />
           </Col>
           { addressComplete.length > 0 && (
             <Fragment>
               <Col xs={12}>
                 <hr />
-                <div className={css.sub2Headings}>Addresses</div>
+                <div className={css.sub2Headings}>{<FormattedMessage id="ui-vendors.contactPeople.addesses" />}</div>
               </Col>
               <Col xs={12}>
                 { addressComplete.map(this.getAddresses) }
@@ -163,7 +173,7 @@ class ContactPeopleView extends React.Component {
             <Fragment>
               <Col xs={12}>
                 <hr />
-                <div className={css.sub2Headings}>Phone Numbers</div>
+                <div className={css.sub2Headings}>{<FormattedMessage id="ui-vendors.contactPeople.phoneNumbers" />}</div>
               </Col>
               <Col xs={12}>
                 { addPhoneNumbers.map(this.getAddPhoneNumbers) }
@@ -174,7 +184,7 @@ class ContactPeopleView extends React.Component {
             <Fragment>
               <Col xs={12}>
                 <hr />
-                <div className={css.sub2Headings}>Email</div>
+                <div className={css.sub2Headings}>{<FormattedMessage id="ui-vendors.contactPeople.email" />}</div>
               </Col>
               <Col xs={12}>
                 { addEmails.map(this.getAddEmails) }
@@ -185,7 +195,7 @@ class ContactPeopleView extends React.Component {
             <Fragment>
               <Col xs={12}>
                 <hr />
-                <div className={css.sub2Headings}>URLs</div>
+                <div className={css.sub2Headings}>{<FormattedMessage id="ui-vendors.contactPeople.urls" />}</div>
               </Col>
               <Col xs={12}>
                 { addURLS.map(this.getAddUrls) }
@@ -209,7 +219,7 @@ class ContactPeopleView extends React.Component {
     } else {
       return (
         <div>
-          <p>-- No contact available --</p>
+          <p>-- {<FormattedMessage id="ui-vendors.contactPeople.noContactAvailable" />} --</p>
         </div>
       );
     }
