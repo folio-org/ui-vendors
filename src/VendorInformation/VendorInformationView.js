@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './VendorInformationView.css';
+import { FormattedMessage } from 'react-intl';
 
 class VendorInformationView extends React.Component {
   static propTypes = {
@@ -19,76 +20,76 @@ class VendorInformationView extends React.Component {
       return (
         <Row className={css.horizontalLine}>
           <Col xs={3}>
-            <KeyValue label="Payment Method" value={_.get(dataVal, ['payment_method'], '')} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.paymentMethod" />} value={_.get(dataVal, ['payment_method'], '')} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Access Provider" value={_.toString(_.get(dataVal, ['access_provider']))}>
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.accessProvider" />} value={_.toString(_.get(dataVal, ['access_provider']))}>
               <BoolToCheckbox name="Access Provider" value={_.get(dataVal, ['access_provider'])} />
             </KeyValue>
           </Col>
           <Col xs={3}>
-            <KeyValue label="Governmental" value={_.toString(_.get(dataVal, ['governmental']))}>
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.governmental" />} value={_.toString(_.get(dataVal, ['governmental']))}>
               <BoolToCheckbox name="Governmental" value={_.get(dataVal, ['governmental'])} />
             </KeyValue>
           </Col>
           <Col xs={3}>
-            <KeyValue label="Licensor" value={_.toString(_.get(dataVal, ['licensor']))}>
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.licensor" />} value={_.toString(_.get(dataVal, ['licensor']))}>
               <BoolToCheckbox name="Licensor" value={_.get(dataVal, ['licensor'])} />
             </KeyValue>
           </Col>
           <Col xs={3}>
-            <KeyValue label="Material Supplier">
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.materialSupplier" />}>
               <BoolToCheckbox name="Material Supplier" value={_.get(dataVal, ['material_supplier'])} />
             </KeyValue>
           </Col>
           <Col xs={3}>
-            <KeyValue label="Vendor Currencies" value={vendorCurrencies} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.vendorCurrencies" />} value={vendorCurrencies} />
           </Col>
           <Col xs={12}>
             <hr />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Claiming Interval" value={_.toString(_.get(dataVal, ['claiming_interval']))} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.claimingInterval" />} value={_.toString(_.get(dataVal, ['claiming_interval']))} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Discount Percent" value={_.toString(_.get(dataVal, ['discount_percent']))} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.discountPercent" />} value={_.toString(_.get(dataVal, ['discount_percent']))} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Expected Activation Interval" value={_.toString(_.get(dataVal, ['expected_activation_interval']))} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.expectedActivationInterval" />} value={_.toString(_.get(dataVal, ['expected_activation_interval']))} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Expected Invoice Interval" value={_.toString(_.get(dataVal, ['expected_invoice_interval']))} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.expectedInvoiceInterval" />} value={_.toString(_.get(dataVal, ['expected_invoice_interval']))} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Expected Receipt Interval" value={_.toString(_.get(dataVal, ['expected_receipt_interval']))} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.expectedReceiptInterval" />} value={_.toString(_.get(dataVal, ['expected_receipt_interval']))} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Renewal Activation Interval" value={_.toString(_.get(dataVal, ['renewal_activation_interval']))} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.renewalActivationInterval" />} value={_.toString(_.get(dataVal, ['renewal_activation_interval']))} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Subscription Interval" value={_.toString(_.get(dataVal, ['subscription_interval']))} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.subscriptionInterval" />} value={_.toString(_.get(dataVal, ['subscription_interval']))} />
           </Col>
           <Col xs={12}>
             <hr />
           </Col>
           <Col xs={12}>
-            <div className={css.subHeadings}>Tax</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.vendorInfo.tax" />}</div>
           </Col>
           <Col xs={3}>
-            <KeyValue label="Tax ID" value={_.get(dataVal, ['tax_id'], '')} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.taxID" />} value={_.get(dataVal, ['tax_id'], '')} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Tax Percentage" value={_.toString(_.get(dataVal, ['tax_percentage']))} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.taxPercentage" />} value={_.toString(_.get(dataVal, ['tax_percentage']))} />
           </Col>
           <Col xs={3}>
-            <KeyValue label="Liable for VAT" value={_.toString(_.get(dataVal, ['liable_for_vat']))} />
+            <KeyValue label={<FormattedMessage id="ui-vendors.vendorInfo.liableForVAT" />} value={_.toString(_.get(dataVal, ['liable_for_vat']))} />
           </Col>
         </Row>
       );
     } else {
       return (
         <div>
-          <p>-- No agreements available --</p>
+          <p>-- {<FormattedMessage id="ui-vendors.vendorInfo.noInformationAvailable" />} --</p>
         </div>
       );
     }

@@ -157,7 +157,7 @@ class ViewVendor extends Component {
             <AccountsView initialValues={initialValues} {...this.props} />
           </Accordion>
         </AccordionSet>
-        <Layer isOpen={query.layer ? query.layer === <FormattedMessage id="ui-vendors.view.edit" /> : false} label={<FormattedMessage id="ui-vendors.view.editVendorDialog" />}>
+        <Layer isOpen={query.layer ? query.layer === 'edit' : false} label={<FormattedMessage id="ui-vendors.view.editVendorDialog" />}>
           <this.connectedPaneDetails
             stripes={this.props.stripes}
             initialValues={initialValues}

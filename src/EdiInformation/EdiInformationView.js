@@ -4,6 +4,7 @@ import { get, find, isNull, toString } from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './EdiInformationView.css';
+import { FormattedMessage } from 'react-intl';
 
 class EdiInformationView extends React.Component {
   static propTypes = {
@@ -49,52 +50,52 @@ class EdiInformationView extends React.Component {
           {dataVal &&
             <Row>
               <Col xs={12}>
-                <div className={css.subHeadings}>EDI Basic</div>
+                <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.ediBasic" />}</div>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Vendor EDI Code" value={get(dataVal, 'edi.vendor_edi_code', '')} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.vendorEDICode" />} value={get(dataVal, 'edi.vendor_edi_code', '')} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Vendor EDI Type" value={this.getVendorCodeTypeItem(get(dataVal, 'edi.vendor_edi_type', ''))} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.vendorEDIType" />} value={this.getVendorCodeTypeItem(get(dataVal, 'edi.vendor_edi_type', ''))} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Library EDI Code" value={get(dataVal, 'edi.lib_edi_code', '')} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.libraryEDICode" />} value={get(dataVal, 'edi.lib_edi_code', '')} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Library EDI Type" value={this.getLibraryEdiCodeTypeDD(get(dataVal, 'edi.lib_edi_type', ''))} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.libraryEDIType" />} value={this.getLibraryEdiCodeTypeDD(get(dataVal, 'edi.lib_edi_type', ''))} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Prorate Tax">
+                <KeyValue label={<FormattedMessage id="ui-vendors.prorateTax" />}>
                   <BoolToCheckbox name="Prorate Tax" value={get(dataVal, 'edi.prorate_tax')} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Prorate Fees">
+                <KeyValue label={<FormattedMessage id="ui-vendors.prorateFees" />}>
                   <BoolToCheckbox name="Prorate Fees" value={get(dataVal, 'edi.prorate_fees')} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="EDI Naming Convention">
+                <KeyValue label={<FormattedMessage id="ui-vendors.ediNamingConvention" />}>
                   <BoolToCheckbox name="EDI Naming Convention" value={get(dataVal, 'edi.edi_naming_convention')} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Send Account Number">
+                <KeyValue label={<FormattedMessage id="ui-vendors.sendAccountNumber" />}>
                   <BoolToCheckbox name="Send Account Number" value={get(dataVal, 'edi.send_acct_num')} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Support Order">
+                <KeyValue label={<FormattedMessage id="ui-vendors.supportOrder" />}>
                   <BoolToCheckbox name="Support Order" value={get(dataVal, 'edi.support_order')} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Support Invoice">
+                <KeyValue label={<FormattedMessage id="ui-vendors.supportInvoice" />}>
                   <BoolToCheckbox name="Support Invoice" value={get(dataVal, 'edi.support_invoice')} />
                 </KeyValue>
               </Col>
               <Col xs={3}>
-                <KeyValue label="Notes" value={get(dataVal, 'edi.notes', '')} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.notes" />} value={get(dataVal, 'edi.notes', '')} />
               </Col>
               <Col xs={12}>
                 <hr />
@@ -104,37 +105,37 @@ class EdiInformationView extends React.Component {
           {ediFtp &&
             <Row>
               <Col xs={12}>
-                <div className={css.subHeadings}>FTP Details</div>
+                <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.ftpDetails" />}</div>
               </Col>
               <Col xs={3}>
-                <KeyValue label="EDI FTP" value={get(ediFtp, ['ftp_format'])} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.editFTP" />} value={get(ediFtp, ['ftp_format'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Server Address" value={get(ediFtp, ['server_address'])} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.serverAddress" />} value={get(ediFtp, ['server_address'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Username" value={get(ediFtp, ['username'])} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.username" />} value={get(ediFtp, ['username'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="Password" value={get(ediFtp, ['password'])} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.password" />} value={get(ediFtp, ['password'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="FTP Mode" value={get(ediFtp, ['ftp_mode'])} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.ftpMode" />} value={get(ediFtp, ['ftp_mode'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="FTP Connection Mode" value={get(ediFtp, ['ftp_conn_mode'])} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.ftpConnectionMode" />} value={get(ediFtp, ['ftp_conn_mode'])} />
               </Col>
               <Col xs={3}>
-                <KeyValue label="FTP Port" value={toString(get(ediFtp, ['ftp_port']))} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.ftpPort" />} value={toString(get(ediFtp, ['ftp_port']))} />
               </Col>
               <Col xs={6}>
-                <KeyValue label="Order Directory" value={get(ediFtp, ['order_directory'])} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.orderDirectory" />} value={get(ediFtp, ['order_directory'])} />
               </Col>
               <Col xs={6}>
-                <KeyValue label="Invoice Directory" value={get(ediFtp, ['invoice_directory'])} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.invoiceDirectory" />} value={get(ediFtp, ['invoice_directory'])} />
               </Col>
               <Col xs={12}>
-                <KeyValue label="Notes" value={get(ediFtp, ['notes'])} />
+                <KeyValue label={<FormattedMessage id="ui-vendors.notes" />} value={get(ediFtp, ['notes'])} />
               </Col>
               <Col xs={12}>
                 <hr />
