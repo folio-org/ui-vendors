@@ -6,6 +6,7 @@ import { Field, getFormValues } from 'redux-form';
 import { MultiSelection, Col, Select, TextField } from '@folio/stripes/components';
 import css from './css/MultiForms.css';
 import { Required, isURLValid } from '../Utils/Validate';
+import { FormattedMessage } from 'react-intl';
 
 class UrlsMF extends Component {
   static propTypes = {
@@ -174,7 +175,7 @@ class UrlsMF extends Component {
               <Field
                 onChange={this.onInputChange}
                 onClearField={this.onInputClear}
-                label="URL*"
+                label={<FormattedMessage id="ui-vendors.contactInfo.urlAst" />}
                 name={`${name}.value`}
                 id={`${name}.value`}
                 component={TextField}
@@ -195,15 +196,15 @@ class UrlsMF extends Component {
           </TetherComponent>
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Description" name={`${name}.description`} id={`${name}.description`} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.contactInfo.description" />} name={`${name}.description`} id={`${name}.description`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
+          <Field label={<FormattedMessage id="ui-vendors.contactInfo.language" />} name={`${name}.language`} id={`${name}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
         </Col>
         <Col xs={12} md={3}>
           <Field
             component={MultiSelection}
-            label="Categories"
+            label={<FormattedMessage id="ui-vendors.contactInfo.categories" />}
             name={`${name}.categories`}
             style={{ height: '80px' }}
             onBlur={(e) => { e.preventDefault(); }}

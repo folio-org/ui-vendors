@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import css from './InterfaceView.css';
+import { FormattedMessage } from 'react-intl';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 
-class AgreementsView extends React.Component {
+class InterfaceView extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object
   }
@@ -20,43 +21,43 @@ class AgreementsView extends React.Component {
     return (
       <Row key={key}>
         <Col xs={3}>
-          <KeyValue label="Name" value={_.get(val, ['name'], '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.name" />} value={_.get(val, ['name'], '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="URI" value={_.get(val, ['uri'], '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.uri" />} value={_.get(val, ['uri'], '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Username" value={_.get(val, ['username'], '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.username" />} value={_.get(val, ['username'], '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Password" value={_.get(val, ['password'], '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.password" />} value={_.get(val, ['password'], '')} />
         </Col>
         <Col xs={9}>
-          <KeyValue label="Notes" value={_.get(val, ['notes'], '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.notes" />} value={_.get(val, ['notes'], '')} />
         </Col>
         <Col xs={12}>
-          <div className={css.subHeadings}>Statistics</div>
+          <div className={css.subHeadings}><b>{<FormattedMessage id="ui-vendors.interface.statistics" />}</b></div>
         </Col>
         <Col xs={3}>
           {/* label="Available"  */}
-          <KeyValue label="Available">
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.available" />}>
             <BoolToCheckbox name="Available" value={_.get(val, ['available'])} />
           </KeyValue>
         </Col>
         <Col xs={3}>
-          <KeyValue label="Delivery Method" value={_.get(val, ['delivery_method'], '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.deliveryMethod" />} value={_.get(val, ['delivery_method'], '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Statistics Format" value={_.get(val, ['statistics_format'], '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.statisticsFormat" />} value={_.get(val, ['statistics_format'], '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Locally Stored" value={_.get(val, ['locally_stored'], '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.locallyStored" />} value={_.get(val, ['locally_stored'], '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Online Location" value={_.get(val, ['online_location'], '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.onlineLocation" />} value={_.get(val, ['online_location'], '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue label="Statistics Notes" value={_.get(val, ['online_location'], '')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.statisticsNotes" />} value={_.get(val, ['online_location'], '')} />
         </Col>
         {rowCount &&
           <div style={{ width: '100%' }}>
@@ -79,11 +80,11 @@ class AgreementsView extends React.Component {
     } else {
       return (
         <div>
-          <p>-- No interface data available --</p>
+          <p>-- {<FormattedMessage id="ui-vendors.interface.noInterfaceAvail" />} --</p>
         </div>
       );
     }
   }
 }
 
-export default AgreementsView;
+export default InterfaceView;

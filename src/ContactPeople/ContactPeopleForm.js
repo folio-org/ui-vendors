@@ -6,6 +6,7 @@ import { MultiSelection, Select, Row, Col, Button, TextField, Checkbox } from '@
 import { AdditionalAddress, AdditionalEmails, AdditionalPhoneNumbers, AdditionalUrls } from './ContactPeopleFormGroup';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
+import { FormattedMessage } from 'react-intl';
 
 class ContactPeopleForm extends Component {
   static propTypes = {
@@ -65,12 +66,12 @@ class ContactPeopleForm extends Component {
       <Row>
         {fields.length === 0 &&
           <Col xs={12}>
-            <div><em>- Please add contact person -</em></div>
+            <div><em>- {<FormattedMessage id="ui-vendors.contactPeople.pleaseAddContactPerson" />} -</em></div>
           </Col>
         }
         {fields.map(this.renderSubCreateContact)}
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add</Button>
+          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.contactPeople.add" />}</Button>
         </Col>
       </Row>
     );
@@ -83,28 +84,28 @@ class ContactPeopleForm extends Component {
       <Col xs={12} key={index} className={css.panels}>
         <Row>
           <Col xs={12}>
-            <div className={css.subHeadings}>Name</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.name" />}</div>
           </Col>
           <Col xs={12} md={2}>
-            <Field label="Prefix" name={`${elem}.prefix`} id={`${elem}.perfix`} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.contactPeople.prefix" />} name={`${elem}.prefix`} id={`${elem}.perfix`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={5}>
-            <Field label="First Name*" name={`${elem}.first_name`} id={`${elem}.first_name`} validate={[Required]} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.contactPeople.firstNameAst" />} name={`${elem}.first_name`} id={`${elem}.first_name`} validate={[Required]} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={5}>
-            <Field label="Last Name*" name={`${elem}.last_name`} id={`${elem}.last_name`} validate={[Required]} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.contactPeople.lastNameAst" />} name={`${elem}.last_name`} id={`${elem}.last_name`} validate={[Required]} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={2}>
             <div>Status</div>
-            <Field label="Inactive" name={`${elem}.inactive`} id={`${elem}.inactive`} component={Checkbox} inline />
+            <Field label={<FormattedMessage id="ui-vendors.contactPeople.inactive" />} name={`${elem}.inactive`} id={`${elem}.inactive`} component={Checkbox} inline />
           </Col>
           <Col xs={12} md={5}>
-            <Field label="Language" name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
+            <Field label={<FormattedMessage id="ui-vendors.contactPeople.language" />} name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
           </Col>
           <Col xs={12} md={5}>
             <Field
               component={MultiSelection}
-              label="Categories"
+              label={<FormattedMessage id="ui-vendors.contactPeople.categories" />}
               name={`${elem}.categories`}
               style={{ height: '80px' }}
               onBlur={(e) => { e.preventDefault(); }}
@@ -116,7 +117,7 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12}>
             <hr className={css.thinBorder} />
-            <div className={css.subHeadings}>Addresses</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.addesses" />}</div>
           </Col>
           <Col xs={12}>
             <FieldArray
@@ -130,7 +131,7 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12}>
             <hr className={css.thinBorder} />
-            <div className={css.subHeadings}>Phone Numbers</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.phoneNumbers" />}</div>
           </Col>
           <Col xs={12}>
             <FieldArray
@@ -144,7 +145,7 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12}>
             <hr className={css.thinBorder} />
-            <div className={css.subHeadings}>Emails</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.emails" />}</div>
           </Col>
           <Col xs={12}>
             <FieldArray
@@ -158,7 +159,7 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12}>
             <hr className={css.thinBorder} />
-            <div className={css.subHeadings}>URL</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.urls" />}</div>
           </Col>
           <Col xs={12}>
             <FieldArray
@@ -172,7 +173,7 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
             <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-              {`Remove Contact ${indexNum}`}
+              {<FormattedMessage id='ui-vendors.contactPeople.removeContact' />}
             </Button>
           </Col>
           <Col xs={12}>

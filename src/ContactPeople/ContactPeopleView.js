@@ -184,7 +184,7 @@ class ContactPeopleView extends React.Component {
             <Fragment>
               <Col xs={12}>
                 <hr />
-                <div className={css.sub2Headings}>{<FormattedMessage id="ui-vendors.contactPeople.email" />}</div>
+                <div className={css.sub2Headings}>{<FormattedMessage id="ui-vendors.contactPeople.emails" />}</div>
               </Col>
               <Col xs={12}>
                 { addEmails.map(this.getAddEmails) }

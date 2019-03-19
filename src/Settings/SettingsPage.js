@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Settings } from '@folio/stripes/smart-components';
 import CategorySettings from './CategorySettings';
+import { FormattedMessage } from 'react-intl';
 
 class SettingsPage extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class SettingsPage extends Component {
     this.pages = [
       {
         route: 'category',
-        label: 'Categories',
+        label: <FormattedMessage id="ui-vendors.settings.categories" />,
         component: CategorySettings,
         perm: 'settings.vendors.enabled'
       }
@@ -18,7 +19,7 @@ class SettingsPage extends Component {
 
   render() {
     return (
-      <Settings {...this.props} pages={this.pages} paneTitle="Vendor Settings" />
+      <Settings {...this.props} pages={this.pages} paneTitle={<FormattedMessage id="ui-vendors.settings.vendorSettings" />} />
     );
   }
 }

@@ -4,6 +4,7 @@ import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
 import { Required } from '../Utils/Validate';
 import css from './SummaryForm.css';
+import { FormattedMessage } from 'react-intl';
 
 class SummaryForm extends React.Component {
   static propTypes = {
@@ -40,13 +41,13 @@ class SummaryForm extends React.Component {
       <div key={index} className={css.panels}>
         <Row>
           <Col xs={5}>
-            <Field label="Alias*" name={`${elem}.value`} id={`${elem}.value`} validate={[Required]} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.summary.aliasAst" />} name={`${elem}.value`} id={`${elem}.value`} validate={[Required]} component={TextField} fullWidth />
           </Col>
           <Col xs={5}>
-            <Field label="description" name={`${elem}.description`} id={`${elem}.description`} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.summary.description" />} name={`${elem}.description`} id={`${elem}.description`} component={TextField} fullWidth />
           </Col>
           <Col xs={1}>
-            <Button onClick={() => fields.remove(index)} buttonStyle="danger" style={{ marginTop: '23px' }}>Remove</Button>
+            <Button onClick={() => fields.remove(index)} buttonStyle="danger" style={{ marginTop: '23px' }}>{<FormattedMessage id="ui-vendors.summary.remove" />}</Button>
           </Col>
         </Row>
       </div>
@@ -64,16 +65,16 @@ class SummaryForm extends React.Component {
     return (
       <Row>
         <Col xs={12}>
-          <Field label="Name*" name="name" id="name" validate={[Required]} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.summary.nameAst" />} name="name" id="name" validate={[Required]} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={6}>
-          <Field label="Code*" name="code" id="code" validate={[Required]} component={TextField} fullWidth />
-          <Field label="Accounting Code" name="erp_code" id="erp_code" component={TextField} fullWidth />
-          <Field label="Status*" name="vendor_status" id="vendor_status" validate={[Required]} component={Select} fullWidth dataOptions={statusOptions} />
-          <Field label="Default Language" name="language" id="language" component={Select} fullWidth dataOptions={this.props.dropdownLanguages} />
+          <Field label={<FormattedMessage id="ui-vendors.summary.codeAst" />} name="code" id="code" validate={[Required]} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.summary.accountingCode" />} name="erp_code" id="erp_code" component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.summary.vendorStatusAst" />} name="vendor_status" id="vendor_status" validate={[Required]} component={Select} fullWidth dataOptions={statusOptions} />
+          <Field label={<FormattedMessage id="ui-vendors.summary.defaultLanguage" />} name="language" id="language" component={Select} fullWidth dataOptions={this.props.dropdownLanguages} />
         </Col>
         <Col xs={12} md={6}>
-          <Field label="Vendor Description" name="description" id="description" component={TextArea} style={{ width: '100%', height: '139px' }} />
+          <Field label={<FormattedMessage id="ui-vendors.summary.description" />} name="description" id="description" component={TextArea} style={{ width: '100%', height: '139px' }} />
         </Col>
         <Col xs={12}>
           <FieldArray label="Vendor Names" name="aliases" id="aliases" component={this.renderList} />

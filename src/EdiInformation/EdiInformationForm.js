@@ -18,6 +18,7 @@ import {
 import { isURLValid } from '../Utils/Validate';
 import css from './EdiInformationForm.css';
 import TogglePassword from '../Utils/TogglePassword';
+import { FormattedMessage } from 'react-intl';
 
 class EdiInformationForm extends Component {
   static propTypes = {
@@ -60,58 +61,58 @@ class EdiInformationForm extends Component {
               <Col xs={12} md={6}>
                 <Row>
                   <Col xs={12}>
-                    <Field label="Vendor EDI Code" name="edi.vendor_edi_code" id="vendor_edi_code" component={TextField} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.vendorEDICode" />} name="edi.vendor_edi_code" id="vendor_edi_code" component={TextField} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Vendor EDI Code Type" name="edi.vendor_edi_type" id="vendor_edi_type" component={Select} dataOptions={vendorEdiCodeTypeDD} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.vendorEDIType" />} name="edi.vendor_edi_type" id="vendor_edi_type" component={Select} dataOptions={vendorEdiCodeTypeDD} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Library EDI Code" name="edi.lib_edi_code" id="lib_edi_code" component={TextField} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.libraryEDICode" />} name="edi.lib_edi_code" id="lib_edi_code" component={TextField} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Library EDI Type" name="edi.lib_edi_type" id="lib_edi_type" component={Select} dataOptions={libraryEdiCodeTypeDD} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.libraryEDIType" />} name="edi.lib_edi_type" id="lib_edi_type" component={Select} dataOptions={libraryEdiCodeTypeDD} fullWidth />
                   </Col>
                   <Col xs={12} className={css.EDIInfoCheckbox}>
-                    <Field label="Prorate Tax" name="edi.prorate_tax" id="prorate_tax" component={Checkbox} />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.prorateTax" />} name="edi.prorate_tax" id="prorate_tax" component={Checkbox} />
                   </Col>
                   <Col xs={12} className={css.EDIInfoCheckbox}>
-                    <Field label="Prorate Service Fees/Shipping" name="edi.prorate_fees" id="prorate_fees" component={Checkbox} />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.prorateFees" />} name="edi.prorate_fees" id="prorate_fees" component={Checkbox} />
                   </Col>
                 </Row>
               </Col>
               <Col xs={12} md={6}>
                 <Row>
                   <Col xs={12}>
-                    <Field label="EDI Naming Convention" name="edi.edi_naming_convention" id="edi_naming_convention" component={TextField} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.ediNamingConvention" />} name="edi.edi_naming_convention" id="edi_naming_convention" component={TextField} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Send Account Number" name="edi.send_acct_num" id="send_acct_num" component={Checkbox} />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.sendAccountNumber" />} name="edi.send_acct_num" id="send_acct_num" component={Checkbox} />
                   </Col>
                   <Col xs={12}>
-                    <p>What Messages are expected for this Vendor?</p>
-                    <Field label="Order" name="edi.support_order" id="support_order" component={Checkbox} />
-                    <Field label="Invoice" name="edi.support_invoice" id="support_invoice" component={Checkbox} />
+                    <p>{<FormattedMessage id="ui-vendors.edi.whatMssgs" />}</p>
+                    <Field label={<FormattedMessage id="ui-vendors.edi.supportOrder" />} name="edi.support_order" id="support_order" component={Checkbox} />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.supportInvoice" />} name="edi.support_invoice" id="support_invoice" component={Checkbox} />
                   </Col>
                 </Row>
               </Col>
               <Col xs={12}>
-                <Field label="Notes" name="edi.notes" id="edi_notes" component={TextArea} fullWidth />
+                <Field label={<FormattedMessage id="ui-vendors.edi.notes" />} name="edi.notes" id="edi_notes" component={TextArea} fullWidth />
               </Col>
             </Row>
             <br />
           </Accordion>
-          <Accordion label="FTP Details" id="ftpDetailsSection">
+          <Accordion label={<FormattedMessage id="ui-vendors.edi.ftpDetails" />} id="ftpDetailsSection">
             <Row>
               <Col xs={12} md={6}>
                 <Row>
                   <Col xs={12}>
-                    <Field label="FTP Format" name="edi.edi_ftp.ftp_format" id="edi_edit_ftp_format" component={Select} dataOptions={ftpDD} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.editFTP" />} name="edi.edi_ftp.ftp_format" id="edi_edit_ftp_format" component={Select} dataOptions={ftpDD} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Server Address" name="edi.edi_ftp.server_address" id="edi_server_address" type="text" validate={[isURLValid]} component={TextField} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.serverAddress" />} name="edi.edi_ftp.server_address" id="edi_server_address" type="text" validate={[isURLValid]} component={TextField} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Username" name="edi.edi_ftp.username" id="edi_username" type="text" component={TextField} autoComplete="nope" fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.username" />} name="edi.edi_ftp.username" id="edi_username" type="text" component={TextField} autoComplete="nope" fullWidth />
                   </Col>
                   <Col xs={12}>
                     <TogglePassword name="edi.edi_ftp.password" id="edi_password" buttonID="edi_password.button" />
@@ -121,24 +122,24 @@ class EdiInformationForm extends Component {
               <Col xs={12} md={6}>
                 <Row>
                   <Col xs={12}>
-                    <Field label="FTP Transmission Mode" name="edi.edi_ftp.ftp_mode" id="edi_edi_ftp__mode" component={Select} dataOptions={transmissionModeDD} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.ftpMode" />} name="edi.edi_ftp.ftp_mode" id="edi_edi_ftp__mode" component={Select} dataOptions={transmissionModeDD} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="FTP Connection Mode" name="edi.edi_ftp.ftp_conn_mode" id="edi_edi_ftp_conn_mode" component={Select} dataOptions={connectionModeDD} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.ftpConnectionMode" />} name="edi.edi_ftp.ftp_conn_mode" id="edi_edi_ftp_conn_mode" component={Select} dataOptions={connectionModeDD} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="FTP Port" name="edi.edi_ftp.ftp_port" id="edi_edit_ftp_ftp_port" type="text" component={TextField} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.ftpPort" />} name="edi.edi_ftp.ftp_port" id="edi_edit_ftp_ftp_port" type="text" component={TextField} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Order Directory" name="edi.edi_ftp.order_directory" id="edi_order_directory" type="text" component={TextField} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.orderDirectory" />} name="edi.edi_ftp.order_directory" id="edi_order_directory" type="text" component={TextField} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Invoice Directory" name="edi.edi_ftp.invoice_directory" id="edi_invoice_directory" type="text" component={TextField} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.invoiceDirectory" />} name="edi.edi_ftp.invoice_directory" id="edi_invoice_directory" type="text" component={TextField} fullWidth />
                   </Col>
                 </Row>
               </Col>
               <Col xs={12}>
-                <Field label="Notes" name="edi.edi_ftp.notes" id="edi_edi_ftp.notes" component={TextArea} fullWidth />
+                <Field label={<FormattedMessage id="ui-vendors.edi.notes" />} name="edi.edi_ftp.notes" id="edi_edi_ftp.notes" component={TextArea} fullWidth />
               </Col>
             </Row>
           </Accordion>
@@ -147,16 +148,16 @@ class EdiInformationForm extends Component {
               <Col xs={12} md={6}>
                 <Row>
                   <Col xs={12} className={css.EDIInfoCheckbox}>
-                    <Field label="Schedule" name="edi.edi_job.schedule_edi" id="schedule_edi" component={Checkbox} />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.scheduleEDI" />} name="edi.edi_job.schedule_edi" id="schedule_edi" component={Checkbox} />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Date" name="edi.edi_job.date" id="edi_edi_job.date" component={Datepicker} />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.date" />} name="edi.edi_job.date" id="edi_edi_job.date" component={Datepicker} />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Time" name="edi.edi_job.time" id="edi_edi_job.time" placeholder="Select Time" component={Timepicker} timeZone="UTC" />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.time" />} name="edi.edi_job.time" id="edi_edi_job.time" placeholder="Select Time" component={Timepicker} timeZone="UTC" />
                   </Col>
                   <Col xs={12}>
-                    <p className={css.fontSizeSmall}>Weekly:</p>
+                    <p className={css.fontSizeSmall}>{<FormattedMessage id="ui-vendors.edi.weekly" />}</p>
                     <Row>
                       <Col xs={12} md={6} className={css.EDIInfoCheckbox}>
                         <Field label="Monday" name="edi.edi_job.is_monday" id="is_monday" component={Checkbox} inline={false} />
@@ -177,27 +178,27 @@ class EdiInformationForm extends Component {
               <Col xs={12} md={6}>
                 <Row>
                   <Col xs={12}>
-                    <p className={css.fontSizeSmall}>NotificationOptions:</p>
+                    <p className={css.fontSizeSmall}>{<FormattedMessage id="ui-vendors.edi.notificationOptions" />}</p>
                   </Col>
                   <Col xs={12}>
-                    <Field label="Send To" name="edi.edi_job.send_to_emails" id="send_to_emails" placeholder="Enter e-mail address(es)" component={TextField} fullWidth />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.sendToEmails" />} name="edi.edi_job.send_to_emails" id="send_to_emails" placeholder="Enter e-mail address(es)" component={TextField} fullWidth />
                   </Col>
                   <Col xs={12}>
-                    <Field label="All EDI Transactions" name="edi.edi_job.notify_all_edi" id="notify_all_edi" component={Checkbox} />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.notifyAllEDI" />} name="edi.edi_job.notify_all_edi" id="notify_all_edi" component={Checkbox} />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Invoice Only" name="edi.edi_job.notify_invoice_only" id="notify_invoice_only" component={Checkbox} />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.notifyInvoiceOnly" />} name="edi.edi_job.notify_invoice_only" id="notify_invoice_only" component={Checkbox} />
                   </Col>
                   <Col xs={12}>
-                    <Field label="Errors Only" name="edi.edi_job.notify_error_only" id="notify_error_only" component={Checkbox} />
+                    <Field label={<FormattedMessage id="ui-vendors.edi.notifyErrorOnly" />} name="edi.edi_job.notify_error_only" id="notify_error_only" component={Checkbox} />
                   </Col>
                 </Row>
               </Col>
               <Col xs={12}>
-                <Button>Check Now!</Button>
+                <Button>{<FormattedMessage id="ui-vendors.edi.checkNow" />}</Button>
               </Col>
               <Col xs={12}>
-                <Field label="Notes" name="edi.edi_job.scheduling_notes" id="edi_job.scheduling_notes" component={TextArea} fullWidth />
+                <Field label={<FormattedMessage id="ui-vendors.edi.notes" />} name="edi.edi_job.scheduling_notes" id="edi_job.scheduling_notes" component={TextArea} fullWidth />
               </Col>
             </Row>
           </Accordion>

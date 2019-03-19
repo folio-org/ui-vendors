@@ -6,6 +6,7 @@ import { Field, getFormValues } from 'redux-form';
 import { MultiSelection, Col, Select, TextField } from '@folio/stripes/components';
 import css from './css/MultiForms.css';
 import { Required } from '../Utils/Validate';
+import { FormattedMessage } from 'react-intl';
 
 class AddressesMF extends Component {
   static propTypes = {
@@ -179,7 +180,7 @@ class AddressesMF extends Component {
               <Field
                 onChange={this.onInputChange}
                 onClearField={this.onInputClear}
-                label="Address 1"
+                label={<FormattedMessage id="ui-vendors.data.contactTypes.addressLine1" />}
                 name={`${name}.addressLine1`}
                 id={`${name}.addressLine1`}
                 component={TextField}
@@ -198,27 +199,27 @@ class AddressesMF extends Component {
           </TetherComponent>
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Address 2" name={`${name}.addressLine2`} id={`${name}.addressLine2`} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.addressLine2" />} name={`${name}.addressLine2`} id={`${name}.addressLine2`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="City" name={`${name}.city`} id={`${name}.city`} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.city" />} name={`${name}.city`} id={`${name}.city`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Region" name={`${name}.stateRegion`} id={`${name}.stateRegion`} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.stateProviceOrRegion" />} name={`${name}.stateRegion`} id={`${name}.stateRegion`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="ZIP/Postal Code" name={`${name}.zipCode`} id={`${name}.zipCode`} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.zipOrPostalCode" />} name={`${name}.zipCode`} id={`${name}.zipCode`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Country*" name={`${name}.country`} id={`${name}.country`} component={Select} dataOptions={dropdownCountry} validate={[Required]} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.countryAst" />} name={`${name}.country`} id={`${name}.country`} component={Select} dataOptions={dropdownCountry} validate={[Required]} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} dataOptions={dropdownLanguages} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.language" />} name={`${name}.language`} id={`${name}.language`} component={Select} dataOptions={dropdownLanguages} fullWidth />
         </Col>
         <Col xs={12} md={3}>
           <Field
             component={MultiSelection}
-            label="Categories"
+            label={<FormattedMessage id="ui-vendors.data.contactTypes.categories" />}
             name={`${name}.categories`}
             style={{ height: '80px' }}
             onBlur={(e) => { e.preventDefault(); }}

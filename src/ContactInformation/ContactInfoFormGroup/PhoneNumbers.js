@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
 import PhoneNumbersMF from '../../MultiForms/PhoneNumbersMF';
+import { FormattedMessage } from 'react-intl';
 
 class PhoneNumbers extends Component {
   static propTypes = {
@@ -27,7 +28,7 @@ class PhoneNumbers extends Component {
         />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
           <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-            Remove
+            {<FormattedMessage id="ui-vendors.contactInfo.remove" />}
           </Button>
         </Col>
       </Row>
@@ -40,19 +41,19 @@ class PhoneNumbers extends Component {
       <Row>
         { !contactPeopleForm &&
           <Col xs={12}>
-            <div className={css.subHeadings}>Phone Number</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactInfo.phoneNumbers" />}</div>
           </Col>
         }
         {fields.length === 0 &&
           <Col xs={6}>
-            <div><em>- Please add phone number -</em></div>
+            <div><em>- {<FormattedMessage id="ui-vendors.contactInfo.pleaseAddPhoneNumber" />} -</em></div>
           </Col>
         }
         <Col xs={12}>
           {fields.map(this.renderSubPhoneNumbers)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add Phone Number</Button>
+          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.contactInfo.addPhoneNumber" />}</Button>
         </Col>
       </Row>
     );

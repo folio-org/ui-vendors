@@ -6,6 +6,7 @@ import { Row, Col, Button, TextField, TextArea, Select, Checkbox } from '@folio/
 import { isURLValid } from '../Utils/Validate';
 import TogglePassword from '../Utils/TogglePassword';
 import css from './InterfaceForm.css';
+import { FormattedMessage } from 'react-intl';
 
 class InterfaceForm extends Component {
   static propTypes = {
@@ -28,13 +29,13 @@ class InterfaceForm extends Component {
         <Col xs={12}>
           {fields.length === 0 &&
             <Col xs={6}>
-              <div><em>- Please add interface -</em></div>
+              <div><em>- {<FormattedMessage id="ui-vendors.interface.pleaseAddInterface" />} -</em></div>
             </Col>
           }
           {fields.map(this.renderSubForm)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add</Button>
+          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.interface.add" />}</Button>
         </Col>
       </Row>
     );
@@ -49,44 +50,44 @@ class InterfaceForm extends Component {
       <div key={index} className={css.panels}>
         <Row>
           <Col xs={12} md={6}>
-            <Field label="Name" name={`${elem}.name`} id={`${elem}.name`} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.interface.name" />} name={`${elem}.name`} id={`${elem}.name`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={6}>
-            <Field label="URL" name={`${elem}.uri`} id={`${elem}.uri`} type="url" validate={[isURLValid]} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.interface.uri" />} name={`${elem}.uri`} id={`${elem}.uri`} type="url" validate={[isURLValid]} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={6}>
-            <Field label="Username" name={`${elem}.username`} id={`${elem}.username`} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.interface.username" />} name={`${elem}.username`} id={`${elem}.username`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={6}>
             <TogglePassword name={`${elem}.password`} id={`${elem}.password`} buttonID={`${elem}.button`} />
           </Col>
           <Col xs={12}>
-            <Field label="Notes" name={`${elem}.notes`} id={`${elem}.notes`} component={TextArea} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.interface.notes" />} name={`${elem}.notes`} id={`${elem}.notes`} component={TextArea} fullWidth />
           </Col>
           <Col xs={12}>
-            <div className={css.subHeadings}>Statistics</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.interface.statistics" />}</div>
           </Col>
           <Col xs={12} md={6}>
-            <Field label="Available" name={`${elem}.available`} id={`${elem}.available`} component={Checkbox} />
+            <Field label={<FormattedMessage id="ui-vendors.interface.available" />} name={`${elem}.available`} id={`${elem}.available`} component={Checkbox} />
           </Col>
           <Col xs={12} md={6}>
-            <Field label="Delivery Method" name={`${elem}.delivery_method`} id={`${elem}.delivery_method`} component={Select} fullWidth dataOptions={deliveryMethodDD} />
+            <Field label={<FormattedMessage id="ui-vendors.interface.deliveryMethod" />} name={`${elem}.delivery_method`} id={`${elem}.delivery_method`} component={Select} fullWidth dataOptions={deliveryMethodDD} />
           </Col>
           <Col xs={12} md={6}>
-            <Field label="Stattictics Format" name={`${elem}.statistics_format`} id={`${elem}.statistics_format`} component={Select} fullWidth dataOptions={formatDD} />
+            <Field label={<FormattedMessage id="ui-vendors.interface.statisticsFormat" />} name={`${elem}.statistics_format`} id={`${elem}.statistics_format`} component={Select} fullWidth dataOptions={formatDD} />
           </Col>
           <Col xs={12} md={6}>
-            <Field label="Locally Stored" name={`${elem}.locally_stored`} id={`${elem}.locally_stored`} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.interface.locallyStored" />} name={`${elem}.locally_stored`} id={`${elem}.locally_stored`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={6}>
-            <Field label="Online Location" name={`${elem}.online_location`} id={`${elem}.online_location`} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.interface.onlineLocation" />} name={`${elem}.online_location`} id={`${elem}.online_location`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={6}>
-            <Field label="Statistics Notes" name={`${elem}.statistics_notes`} id={`${elem}.statistics_notes`} component={TextArea} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.interface.statisticsNotes" />} name={`${elem}.statistics_notes`} id={`${elem}.statistics_notes`} component={TextArea} fullWidth />
           </Col>
           <Col xs={12} style={{ textAlign: 'right' }}>
             <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-              Remove
+            {<FormattedMessage id="ui-vendors.interface.remove" />}
             </Button>
           </Col>
         </Row>

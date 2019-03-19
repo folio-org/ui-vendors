@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { Button, TextField, Row, Col } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 
 class TogglePassword extends Component {
   static propTypes = {
@@ -28,11 +29,11 @@ class TogglePassword extends Component {
     return (
       <Row>
         <Col xs={10}>
-          <Field label="Password" name={name} id={id} type={this.state.showPassword ? 'text' : 'password'} component={TextField} autoComplete="nope" fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.edit.password" />} name={name} id={id} type={this.state.showPassword ? 'text' : 'password'} component={TextField} autoComplete="nope" fullWidth />
         </Col>
         <Col xs={2} style={{ paddingTop: '20px', marginBottom: '0' }}>
           <Button id={buttonID} onClick={() => this.togglePassword()}>
-            { this.state.showPassword ? 'hide' : 'show' }
+            { this.state.showPassword ? <FormattedMessage id="ui-vendors.edit.hide" /> : <FormattedMessage id="ui-vendors.edit.show" /> }
           </Button>
         </Col>
       </Row>

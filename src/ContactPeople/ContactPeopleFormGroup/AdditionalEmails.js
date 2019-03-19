@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactPeopleForm.css';
 import { EmailsMF } from '../../MultiForms';
+import { FormattedMessage } from 'react-intl';
 
 class AdditionalEmails extends Component {
   static propTypes = {
@@ -26,7 +27,7 @@ class AdditionalEmails extends Component {
         />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
           <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-            Remove
+            {<FormattedMessage id="ui-vendors.contactPeople.remove" />}
           </Button>
         </Col>
       </Row>
@@ -39,19 +40,19 @@ class AdditionalEmails extends Component {
       <Row>
         { !contactPeopleForm &&
           <Col xs={12}>
-            <div className={css.subHeadings}>Email</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.email" />}</div>
           </Col>
         }
         {fields.length === 0 &&
           <Col xs={6}>
-            <div><em>- Please add email -</em></div>
+            <div><em>- {<FormattedMessage id="ui-vendors.contactPeople.pleaseAddEmail" />} -</em></div>
           </Col>
         }
         <Col xs={12}>
           {fields.map(this.renderSub)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add Email</Button>
+          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.contactPeople.addEmail" />}</Button>
         </Col>
       </Row>
     );

@@ -4,6 +4,7 @@ import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
 import { Required } from '../Utils/Validate';
 import css from './AccountsForm.css';
+import { FormattedMessage } from 'react-intl';
 
 class AccountsForm extends Component {
   static propTypes = {
@@ -26,12 +27,12 @@ class AccountsForm extends Component {
       <Row>
         <Col xs={12}>
           {fields.length === 0 &&
-            <div><em>- Please add account -</em></div>
+            <div><em>- {<FormattedMessage id="ui-vendors.accounts.pleaseAddAccount" />} -</em></div>
           }
           {fields.map(this.renderSubForm)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add</Button>
+          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.accounts.add" />}</Button>
         </Col>
       </Row>
     );
@@ -47,19 +48,19 @@ class AccountsForm extends Component {
           <Col xs={12} md={6}>
             <Row>
               <Col xs={12}>
-                <Field label="name*" name={`${elem}.name`} id={`${elem}.name`} validate={[Required]} component={TextField} fullWidth />
+                <Field label={<FormattedMessage id="ui-vendors.accounts.nameAst" />} name={`${elem}.name`} id={`${elem}.name`} validate={[Required]} component={TextField} fullWidth />
               </Col>
               <Col xs={12}>
-                <Field label="Vendor Account Number*" name={`${elem}.account_no`} id={`${elem}.account_no`} validate={[Required]} component={TextField} fullWidth />
+                <Field label={<FormattedMessage id="ui-vendors.accounts.accountNumber" />} name={`${elem}.account_no`} id={`${elem}.account_no`} validate={[Required]} component={TextField} fullWidth />
               </Col>
               <Col xs={12}>
-                <Field label="Description" name={`${elem}.description`} id={`${elem}.description`} component={TextField} fullWidth />
+                <Field label={<FormattedMessage id="ui-vendors.accounts.description" />} name={`${elem}.description`} id={`${elem}.description`} component={TextField} fullWidth />
               </Col>
               <Col xs={12}>
-                <Field label="Acct. Payable Sys. No" name={`${elem}.app_system_no`} id={`${elem}.app_system_no`} component={TextField} fullWidth />
+                <Field label={<FormattedMessage id="ui-vendors.accounts.payable" />} name={`${elem}.app_system_no`} id={`${elem}.app_system_no`} component={TextField} fullWidth />
               </Col>
               <Col xs={12}>
-                <Field label="Payment Method*" name={`${elem}.payment_method`} id={`${elem}.payment_method`} dataOptions={paymentMethodDD} validate={[Required]} component={Select} fullWidth />
+                <Field label={<FormattedMessage id="ui-vendors.accounts.paymentMethodAst" />} name={`${elem}.payment_method`} id={`${elem}.payment_method`} dataOptions={paymentMethodDD} validate={[Required]} component={Select} fullWidth />
               </Col>
             </Row>
           </Col>
