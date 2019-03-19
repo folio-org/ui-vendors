@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import css from '../ContactInfoFormGroup.css';
 import AddressesMF from '../../MultiForms/AddressesMF';
-import { FormattedMessage } from 'react-intl';
 
 class AddressInfo extends Component {
   static propTypes = {
@@ -42,7 +42,7 @@ class AddressInfo extends Component {
         <Col xs={6}>
           <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.data.contactTypes.address" />}</div>
           {fields.length === 0 &&
-            <div><em>- {<FormattedMessage id="ui-vendors.data.contactTypes.noAddressInfo" />} -</em></div>
+            <div><em>{<FormattedMessage id="ui-vendors.data.contactTypes.noAddressInfo" />}</em></div>
           }
         </Col>
         <Col xs={12}>

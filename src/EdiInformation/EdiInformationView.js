@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get, find, isNull, toString } from 'lodash';
+import { FormattedMessage } from 'react-intl';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './EdiInformationView.css';
-import { FormattedMessage } from 'react-intl';
 
 class EdiInformationView extends React.Component {
   static propTypes = {
@@ -216,7 +216,7 @@ class EdiInformationView extends React.Component {
     } else {
       return (
         <div>
-          <p>-- {<FormattedMessage id="ui-vendors.edi.noEdiInfo" />} --</p>
+          <p>{<FormattedMessage id="ui-vendors.edi.noEdiInfo" />}</p>
           <br />
         </div>
       );

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import css from '../ContactInfoFormGroup.css';
 import EmailsMF from '../../MultiForms/EmailsMF';
-import { FormattedMessage } from 'react-intl';
 
 class EmailAddresses extends Component {
   static propTypes = {
@@ -32,7 +32,7 @@ class EmailAddresses extends Component {
         />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
           <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-          {<FormattedMessage id="ui-vendors.contactInfo.remove" />}
+            {<FormattedMessage id="ui-vendors.contactInfo.remove" />}
           </Button>
         </Col>
       </Row>
@@ -48,7 +48,7 @@ class EmailAddresses extends Component {
         </Col>
         {fields.length === 0 &&
           <Col xs={12}>
-            <div><em>- {<FormattedMessage id="ui-vendors.contactInfo.pleaseAddEmail" />} -</em></div>
+            <div><em>{<FormattedMessage id="ui-vendors.contactInfo.pleaseAddEmail" />}</em></div>
           </Col>
         }
         <Col xs={12}>

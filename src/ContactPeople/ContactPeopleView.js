@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { AddressView } from '@folio/stripes/smart-components';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './ContactPeopleView.css';
 import CatIDToLabel from '../Utils/CatIDToLabel';
-import { FormattedMessage } from 'react-intl';
 
 class ContactPeopleView extends React.Component {
   static propTypes = {
@@ -56,7 +56,7 @@ class ContactPeopleView extends React.Component {
       zipCode: <FormattedMessage id="ui-vendors.data.contactTypes.zipOrPostalCode" />,
       country: <FormattedMessage id="ui-vendors.data.contactTypes.country" />,
       categories: <FormattedMessage id="ui-vendors.data.contactTypes.categories" />
-    }
+    };
 
     return (
       <Row key={key}>
@@ -219,7 +219,7 @@ class ContactPeopleView extends React.Component {
     } else {
       return (
         <div>
-          <p>-- {<FormattedMessage id="ui-vendors.contactPeople.noContactAvailable" />} --</p>
+          <p>{<FormattedMessage id="ui-vendors.contactPeople.noContactAvailable" />}</p>
         </div>
       );
     }

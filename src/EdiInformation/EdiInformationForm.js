@@ -15,10 +15,10 @@ import {
   AccordionSet,
   Accordion
 } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import { isURLValid } from '../Utils/Validate';
 import css from './EdiInformationForm.css';
 import TogglePassword from '../Utils/TogglePassword';
-import { FormattedMessage } from 'react-intl';
 
 class EdiInformationForm extends Component {
   static propTypes = {

@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import css from '../ContactInformationView.css';
 import LanguageLookup from '../../Utils/LanguageLookup';
 import CatIDToLabel from '../../Utils/CatIDToLabel';
-import { FormattedMessage } from 'react-intl';
 
 class ContactInformationView extends React.Component {
   static propTypes = {

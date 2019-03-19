@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ControlledVocab } from '@folio/stripes/smart-components';
 import { FormattedMessage } from 'react-intl';
+import { ControlledVocab } from '@folio/stripes/smart-components';
 
 class CategorySettings extends Component {
   static propTypes = {
@@ -17,10 +17,10 @@ class CategorySettings extends Component {
 
   render() {
     const { stripes } = this.props;
-    const columnMapping = { 
-      value: <FormattedMessage id="ui-vendors.settings.name" />, 
+    const columnMapping = {
+      value: <FormattedMessage id="ui-vendors.settings.name" />,
       action: <FormattedMessage id="ui-vendors.settings.action" />
-    }
+    };
 
     return (
       <this.connectedControlledVocab

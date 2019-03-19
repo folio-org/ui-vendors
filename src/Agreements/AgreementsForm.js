@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import { Required, isURLValid } from '../Utils/Validate';
 import css from './AgreementsForm.css';
-import { FormattedMessage } from 'react-intl';
 
 class AgreementsForm extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class AgreementsForm extends Component {
         <Col xs={12}>
           {fields.length === 0 &&
             <Col xs={6}>
-              <div><em>- {<FormattedMessage id="ui-vendors.agreement.pleaseAddAgreements" />} -</em></div>
+              <div><em>{<FormattedMessage id="ui-vendors.agreement.pleaseAddAgreements" />}</em></div>
             </Col>
           }
           {fields.map(this.renderSubForm)}

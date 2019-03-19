@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { MultiColumnList, Row, Col, KeyValue } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import css from './SummaryView.css';
 import LanguageLookup from '../Utils/LanguageLookup';
-import { FormattedMessage } from 'react-intl';
 
 class SummaryView extends React.Component {
   static propTypes = {

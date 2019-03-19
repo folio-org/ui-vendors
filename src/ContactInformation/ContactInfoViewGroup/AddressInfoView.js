@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from '@folio/stripes/components';
 import { AddressView } from '@folio/stripes/smart-components';
+import { FormattedMessage } from 'react-intl';
 import css from '../ContactInformationView.css';
 import CatIDToLabel from '../../Utils/CatIDToLabel';
-import { FormattedMessage } from 'react-intl';
 
 class AddressInfoView extends React.Component {
   static propTypes = {
@@ -40,7 +40,7 @@ class AddressInfoView extends React.Component {
       zipCode: <FormattedMessage id="ui-vendors.data.contactTypes.zipOrPostalCode" />,
       country: <FormattedMessage id="ui-vendors.data.contactTypes.country" />,
       categories: <FormattedMessage id="ui-vendors.data.contactTypes.categories" />
-    }
+    };
 
     return (
       <Row key={key}>

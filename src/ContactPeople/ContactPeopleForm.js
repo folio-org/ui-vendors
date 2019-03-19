@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Select, Row, Col, Button, TextField, Checkbox } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import { AdditionalAddress, AdditionalEmails, AdditionalPhoneNumbers, AdditionalUrls } from './ContactPeopleFormGroup';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';
-import { FormattedMessage } from 'react-intl';
 
 class ContactPeopleForm extends Component {
   static propTypes = {
@@ -66,7 +66,7 @@ class ContactPeopleForm extends Component {
       <Row>
         {fields.length === 0 &&
           <Col xs={12}>
-            <div><em>- {<FormattedMessage id="ui-vendors.contactPeople.pleaseAddContactPerson" />} -</em></div>
+            <div><em>{<FormattedMessage id="ui-vendors.contactPeople.pleaseAddContactPerson" />}</em></div>
           </Col>
         }
         {fields.map(this.renderSubCreateContact)}
@@ -79,7 +79,6 @@ class ContactPeopleForm extends Component {
 
   renderSubCreateContact = (elem, index, fields) => {
     const { dropdownLanguages, dropdownVendorCategories } = this.props;
-    const indexNum = index + 1;
     return (
       <Col xs={12} key={index} className={css.panels}>
         <Row>
@@ -173,7 +172,7 @@ class ContactPeopleForm extends Component {
           </Col>
           <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
             <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-              {<FormattedMessage id='ui-vendors.contactPeople.removeContact' />}
+              {<FormattedMessage id="ui-vendors.contactPeople.removeContact" />}
             </Button>
           </Col>
           <Col xs={12}>

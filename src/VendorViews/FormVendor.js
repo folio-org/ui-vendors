@@ -157,7 +157,8 @@ class FormVendor extends Component {
                   {
                     showDeleteButton &&
                     <Button type="button" buttonStyle="danger" onClick={() => { this.deleteVendor(this.props.initialValues.id); }}>
-                      {<FormattedMessage id="ui-vendors.edit.delete" />} - &nbsp;
+                      {<FormattedMessage id="ui-vendors.edit.delete" />}
+                      &nbsp;
                       <strong><i>{this.props.initialValues.name}</i></strong>
                     </Button>
                   }

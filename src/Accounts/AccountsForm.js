@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
+import { FormattedMessage } from 'react-intl';
 import { Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
 import { Required } from '../Utils/Validate';
 import css from './AccountsForm.css';
-import { FormattedMessage } from 'react-intl';
+
 
 class AccountsForm extends Component {
   static propTypes = {
@@ -27,7 +28,7 @@ class AccountsForm extends Component {
       <Row>
         <Col xs={12}>
           {fields.length === 0 &&
-            <div><em>- {<FormattedMessage id="ui-vendors.accounts.pleaseAddAccount" />} -</em></div>
+            <div><em>{<FormattedMessage id="ui-vendors.accounts.pleaseAddAccount" />}</em></div>
           }
           {fields.map(this.renderSubForm)}
         </Col>

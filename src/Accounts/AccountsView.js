@@ -70,7 +70,7 @@ class AccountsView extends React.Component {
     } else {
       return (
         <div>
-          <p>-- {<FormattedMessage id="ui-vendors.accounts.noAccountsAvail" />} --</p>
+          <p>{<FormattedMessage id="ui-vendors.accounts.noAccountsAvail" />}</p>
         </div>
       );
     }

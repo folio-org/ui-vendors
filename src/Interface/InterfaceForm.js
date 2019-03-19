@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea, Select, Checkbox } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import { isURLValid } from '../Utils/Validate';
 import TogglePassword from '../Utils/TogglePassword';
 import css from './InterfaceForm.css';
-import { FormattedMessage } from 'react-intl';
 
 class InterfaceForm extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ class InterfaceForm extends Component {
         <Col xs={12}>
           {fields.length === 0 &&
             <Col xs={6}>
-              <div><em>- {<FormattedMessage id="ui-vendors.interface.pleaseAddInterface" />} -</em></div>
+              <div><em>{<FormattedMessage id="ui-vendors.interface.pleaseAddInterface" />}</em></div>
             </Col>
           }
           {fields.map(this.renderSubForm)}
@@ -87,7 +87,7 @@ class InterfaceForm extends Component {
           </Col>
           <Col xs={12} style={{ textAlign: 'right' }}>
             <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-            {<FormattedMessage id="ui-vendors.interface.remove" />}
+              {<FormattedMessage id="ui-vendors.interface.remove" />}
             </Button>
           </Col>
         </Row>

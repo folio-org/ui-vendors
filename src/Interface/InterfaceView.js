@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
-import css from './InterfaceView.css';
 import { FormattedMessage } from 'react-intl';
+import css from './InterfaceView.css';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 
 class InterfaceView extends React.Component {
@@ -80,7 +80,7 @@ class InterfaceView extends React.Component {
     } else {
       return (
         <div>
-          <p>-- {<FormattedMessage id="ui-vendors.interface.noInterfaceAvail" />} --</p>
+          <p>{<FormattedMessage id="ui-vendors.interface.noInterfaceAvail" />}</p>
         </div>
       );
     }

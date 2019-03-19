@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
-import css from './AgreementsView.css';
 import { FormattedMessage } from 'react-intl';
+import css from './AgreementsView.css';
 
 class AgreementsView extends React.Component {
   static propTypes = {
@@ -21,7 +21,7 @@ class AgreementsView extends React.Component {
     return (
       <Row key={key}>
         <Col xs={3}>
-    <KeyValue label={<FormattedMessage id="ui-vendors.agreement.name" />} value={_.get(val, 'name')} />
+          <KeyValue label={<FormattedMessage id="ui-vendors.agreement.name" />} value={_.get(val, 'name')} />
         </Col>
         <Col xs={3}>
           <KeyValue label={<FormattedMessage id="ui-vendors.agreement.discount" />} value={discount} />
@@ -53,7 +53,7 @@ class AgreementsView extends React.Component {
     } else {
       return (
         <div>
-          <p>-- {<FormattedMessage id="ui-vendors.agreement.noAgreementsAvailable" />} --</p>
+          <p>{<FormattedMessage id="ui-vendors.agreement.noAgreementsAvailable" />}</p>
         </div>
       );
     }

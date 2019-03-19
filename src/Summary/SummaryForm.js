@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import { Required } from '../Utils/Validate';
 import css from './SummaryForm.css';
-import { FormattedMessage } from 'react-intl';
 
 class SummaryForm extends React.Component {
   static propTypes = {
@@ -21,16 +21,16 @@ class SummaryForm extends React.Component {
     return (
       <Row>
         <Col xs={6}>
-          <div className={css.subHeadings}>Alternative Names</div>
+          <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.summary.alternativeNames" />}</div>
         </Col>
         <Col xs={12}>
           {fields.length === 0 &&
-            <div><em>- Please add alternative names -</em></div>
+            <div><em>{<FormattedMessage id="ui-vendors.summary.pleaseAddAltNames" />}</em></div>
           }
           {fields.map(this.renderSubFields)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add</Button>
+          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.summary.add" />}</Button>
         </Col>
       </Row>
     );

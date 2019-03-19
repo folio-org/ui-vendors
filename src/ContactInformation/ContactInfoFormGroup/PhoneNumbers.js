@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import css from '../ContactInfoFormGroup.css';
 import PhoneNumbersMF from '../../MultiForms/PhoneNumbersMF';
-import { FormattedMessage } from 'react-intl';
 
 class PhoneNumbers extends Component {
   static propTypes = {
@@ -46,7 +46,7 @@ class PhoneNumbers extends Component {
         }
         {fields.length === 0 &&
           <Col xs={6}>
-            <div><em>- {<FormattedMessage id="ui-vendors.contactInfo.pleaseAddPhoneNumber" />} -</em></div>
+            <div><em>{<FormattedMessage id="ui-vendors.contactInfo.pleaseAddPhoneNumber" />}</em></div>
           </Col>
         }
         <Col xs={12}>

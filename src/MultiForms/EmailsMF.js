@@ -4,9 +4,9 @@ import _ from 'lodash';
 import TetherComponent from 'react-tether';
 import { Field, getFormValues } from 'redux-form';
 import { MultiSelection, Col, Select, TextField } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import css from './css/MultiForms.css';
 import { Required } from '../Utils/Validate';
-import { FormattedMessage } from 'react-intl';
 
 class EmailsMF extends Component {
   static propTypes = {
