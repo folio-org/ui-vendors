@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Field, getFormValues } from 'redux-form';
 import { MultiSelection, Select, Checkbox, TextField, AccordionSet, Accordion, Row, Col } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 import css from './VendorInformationForm.css';
 
 class VendorInformationForm extends Component {

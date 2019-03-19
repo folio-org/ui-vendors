@@ -1,8 +1,8 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 import css from './InterfaceView.css';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 

@@ -1,8 +1,8 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Row, Col } from '@folio/stripes/components';
 import { AddressView } from '@folio/stripes/smart-components';
-import { FormattedMessage } from 'react-intl';
 import css from '../ContactInformationView.css';
 import CatIDToLabel from '../../Utils/CatIDToLabel';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 import { Required, isURLValid } from '../Utils/Validate';
 import css from './AgreementsForm.css';
 

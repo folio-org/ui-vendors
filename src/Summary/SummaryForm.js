@@ -1,8 +1,8 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea, Select } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 import { Required } from '../Utils/Validate';
 import css from './SummaryForm.css';
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Field } from 'redux-form';
@@ -15,7 +16,6 @@ import {
   AccordionSet,
   Accordion
 } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 import { isURLValid } from '../Utils/Validate';
 import css from './EdiInformationForm.css';
 import TogglePassword from '../Utils/TogglePassword';

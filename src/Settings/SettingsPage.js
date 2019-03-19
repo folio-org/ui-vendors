@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Settings } from '@folio/stripes/smart-components';
 import { FormattedMessage } from 'react-intl';
+import { Settings } from '@folio/stripes/smart-components';
 import CategorySettings from './CategorySettings';
 
 class SettingsPage extends Component {

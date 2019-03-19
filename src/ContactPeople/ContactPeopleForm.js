@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { MultiSelection, Select, Row, Col, Button, TextField, Checkbox } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 import { AdditionalAddress, AdditionalEmails, AdditionalPhoneNumbers, AdditionalUrls } from './ContactPeopleFormGroup';
 import { Required } from '../Utils/Validate';
 import css from './ContactPeopleForm.css';

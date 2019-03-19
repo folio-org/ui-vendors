@@ -1,7 +1,7 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { FormattedMessage } from 'react-intl';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './VendorInformationView.css';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 import css from '../ContactInfoFormGroup.css';
 import PhoneNumbersMF from '../../MultiForms/PhoneNumbersMF';
 

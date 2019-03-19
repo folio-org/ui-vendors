@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { AddressView } from '@folio/stripes/smart-components';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 import css from './ContactPeopleView.css';
 import CatIDToLabel from '../Utils/CatIDToLabel';

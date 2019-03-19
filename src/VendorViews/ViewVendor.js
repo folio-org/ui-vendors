@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import queryString from 'query-string';
@@ -6,7 +7,6 @@ import queryString from 'query-string';
 import { IfPermission } from '@folio/stripes/core';
 import { Pane, PaneMenu, Row, Col, Icon, IconButton, Layer, AccordionSet, Accordion, ExpandAllButton } from '@folio/stripes/components';
 import { withTags } from '@folio/stripes/smart-components';
-import { FormattedMessage } from 'react-intl';
 // Local Components
 import { SummaryView } from '../Summary';
 import { ContactInformationView } from '../ContactInformation';

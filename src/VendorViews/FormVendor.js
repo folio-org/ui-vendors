@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { getFormSyncErrors } from 'redux-form';
 import { IfPermission } from '@folio/stripes/core';
 import { Button, Row, Col, AccordionSet, Accordion, ExpandAllButton, Icon } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 // Local Components
 import { SummaryForm } from '../Summary';
 import { ContactInformationForm } from '../ContactInformation';

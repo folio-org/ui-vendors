@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { Button, TextField, Row, Col } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 
 class TogglePassword extends Component {
   static propTypes = {
