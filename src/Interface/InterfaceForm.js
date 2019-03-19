@@ -19,11 +19,11 @@ class InterfaceForm extends Component {
 
   constructor(props) {
     super(props);
-    this.renderForm = this.renderForm.bind(this);
-    this.renderSubForm = this.renderSubForm.bind(this);
+    this.renderInterfaceForm = this.renderInterfaceForm.bind(this);
+    this.renderInterfaceSubForm = this.renderInterfaceSubForm.bind(this);
   }
 
-  renderForm = ({ fields }) => {
+  renderInterfaceForm = ({ fields }) => {
     return (
       <Row>
         <Col xs={12}>
@@ -32,7 +32,7 @@ class InterfaceForm extends Component {
               <div><em>{<FormattedMessage id="ui-vendors.interface.pleaseAddInterface" />}</em></div>
             </Col>
           }
-          {fields.map(this.renderSubForm)}
+          {fields.map(this.renderInterfaceSubForm)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
           <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.interface.add" />}</Button>
@@ -41,7 +41,7 @@ class InterfaceForm extends Component {
     );
   }
 
-  renderSubForm = (elem, index, fields) => {
+  renderInterfaceSubForm = (elem, index, fields) => {
     const { parentResources } = this.props;
     const formatDD = (parentResources.dropdown || {}).formatDD || [];
     const deliveryMethodDD = (parentResources.dropdown || {}).deliveryMethodDD || [];
@@ -99,7 +99,7 @@ class InterfaceForm extends Component {
     return (
       <Row>
         <Col xs={12}>
-          <FieldArray label="Interface" name="interfaces" id="interfaces" component={this.renderForm} />
+          <FieldArray label="Interface" name="interfaces" id="interfaces" component={this.renderInterfaceForm} />
           <br />
         </Col>
       </Row>
