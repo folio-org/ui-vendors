@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get, find, isNull, toString } from 'lodash';
+import { get, find, isNull, toString, findIndex } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
@@ -12,8 +12,7 @@ class EdiInformationView extends React.Component {
     parentResources: PropTypes.shape({
       dropdown: PropTypes.shape({
         paymentMethodDD: PropTypes.array.isRequired,
-        vendorEdiCodeTypeDD: PropTypes.object,
-        libraryEdiCodeTypeDD: PropTypes.object
+        ediCodeTypeDD: PropTypes.object
       })
     })
   }
@@ -25,16 +24,19 @@ class EdiInformationView extends React.Component {
   }
 
   getVendorCodeTypeItem(item) {
-    const { parentResources: { dropdown: { vendorEdiCodeTypeDD } } } = this.props;
+    const { parentResources: { dropdown: { ediCodeTypeDD } } } = this.props;
+    debugger;
     if (isNull(item)) return '';
-    const obj = find(vendorEdiCodeTypeDD, { value: item });
+    const obj = find(ediCodeTypeDD, { value: item });
+    if (obj.value === "") return '';
     return obj.label;
   }
 
   getLibraryEdiCodeTypeDD(item) {
-    const { parentResources: { dropdown: { libraryEdiCodeTypeDD } } } = this.props;
+    const { parentResources: { dropdown: { ediCodeTypeDD } } } = this.props;
     if (isNull(item)) return '';
-    const obj = find(libraryEdiCodeTypeDD, { value: item });
+    const obj = find(ediCodeTypeDD, { value: item });
+    if (obj.value === "") return '';
     return obj.label;
   }
 
