@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get, find, isNull, toString, findIndex } from 'lodash';
+import { get, find, isNull, toString } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
@@ -25,10 +25,9 @@ class EdiInformationView extends React.Component {
 
   getVendorCodeTypeItem(item) {
     const { parentResources: { dropdown: { ediCodeTypeDD } } } = this.props;
-    debugger;
     if (isNull(item)) return '';
     const obj = find(ediCodeTypeDD, { value: item });
-    if (obj.value === "") return '';
+    if (obj.value === '') return '';
     return obj.label;
   }
 
@@ -36,7 +35,7 @@ class EdiInformationView extends React.Component {
     const { parentResources: { dropdown: { ediCodeTypeDD } } } = this.props;
     if (isNull(item)) return '';
     const obj = find(ediCodeTypeDD, { value: item });
-    if (obj.value === "") return '';
+    if (obj.value === '') return '';
     return obj.label;
   }
 

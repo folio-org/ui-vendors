@@ -95,7 +95,6 @@ class ViewVendor extends Component {
   }
 
   update(data) {
-    console.log(data);
     // Mutate
     this.props.parentMutator.records.PUT(data).then(() => {
       this.props.onCloseEdit();
