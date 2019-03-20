@@ -41,7 +41,7 @@ class SummaryForm extends React.Component {
       <div key={index} className={css.panels}>
         <Row>
           <Col xs={5}>
-            <Field label={<FormattedMessage id="ui-vendors.summary.aliasAst" />} name={`${elem}.value`} id={`${elem}.value`} validate={[Required]} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.summary.alias" />} name={`${elem}.value`} id={`${elem}.value`} validate={[Required]} component={TextField} fullWidth required />
           </Col>
           <Col xs={5}>
             <Field label={<FormattedMessage id="ui-vendors.summary.description" />} name={`${elem}.description`} id={`${elem}.description`} component={TextField} fullWidth />
@@ -65,12 +65,12 @@ class SummaryForm extends React.Component {
     return (
       <Row>
         <Col xs={12}>
-          <Field label={<FormattedMessage id="ui-vendors.summary.nameAst" />} name="name" id="name" validate={[Required]} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.summary.name" />} name="name" id="name" validate={[Required]} component={TextField} fullWidth required />
         </Col>
         <Col xs={12} md={6}>
-          <Field label={<FormattedMessage id="ui-vendors.summary.codeAst" />} name="code" id="code" validate={[Required]} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.summary.code" />} name="code" id="code" validate={[Required]} component={TextField} fullWidth required />
           <Field label={<FormattedMessage id="ui-vendors.summary.accountingCode" />} name="erp_code" id="erp_code" component={TextField} fullWidth />
-          <Field label={<FormattedMessage id="ui-vendors.summary.vendorStatusAst" />} name="vendor_status" id="vendor_status" validate={[Required]} component={Select} fullWidth dataOptions={statusOptions} />
+          <Field label={<FormattedMessage id="ui-vendors.summary.vendorStatus" />} name="vendor_status" id="vendor_status" validate={[Required]} component={Select} fullWidth dataOptions={statusOptions} required />
           <Field label={<FormattedMessage id="ui-vendors.summary.defaultLanguage" />} name="language" id="language" component={Select} fullWidth dataOptions={this.props.dropdownLanguages} />
         </Col>
         <Col xs={12} md={6}>

@@ -177,12 +177,13 @@ class EmailsMF extends Component {
               <Field
                 onChange={this.onInputChange}
                 onClearField={this.onInputClear}
-                label={<FormattedMessage id="ui-vendors.contactInfo.emailAddressAst" />}
+                label={<FormattedMessage id="ui-vendors.contactInfo.emailAddress" />}
                 name={`${name}.value`}
                 id={`${name}.value`}
                 component={TextField}
                 validate={[Required]}
                 fullWidth
+                required
               />
             </div>
             {

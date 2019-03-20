@@ -175,13 +175,14 @@ class UrlsMF extends Component {
               <Field
                 onChange={this.onInputChange}
                 onClearField={this.onInputClear}
-                label={<FormattedMessage id="ui-vendors.contactInfo.urlAst" />}
+                label={<FormattedMessage id="ui-vendors.contactInfo.url" />}
                 name={`${name}.value`}
                 id={`${name}.value`}
                 component={TextField}
                 validate={[Required, isURLValid]}
                 placeholder="http(s):// or ftp(s)://"
                 fullWidth
+                required
               />
             </div>
             {

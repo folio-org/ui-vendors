@@ -89,10 +89,10 @@ class ContactPeopleForm extends Component {
             <Field label={<FormattedMessage id="ui-vendors.contactPeople.prefix" />} name={`${elem}.prefix`} id={`${elem}.perfix`} component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={5}>
-            <Field label={<FormattedMessage id="ui-vendors.contactPeople.firstNameAst" />} name={`${elem}.first_name`} id={`${elem}.first_name`} validate={[Required]} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.contactPeople.firstName" />} name={`${elem}.first_name`} id={`${elem}.first_name`} validate={[Required]} component={TextField} fullWidth required />
           </Col>
           <Col xs={12} md={5}>
-            <Field label={<FormattedMessage id="ui-vendors.contactPeople.lastNameAst" />} name={`${elem}.last_name`} id={`${elem}.last_name`} validate={[Required]} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.contactPeople.lastName" />} name={`${elem}.last_name`} id={`${elem}.last_name`} validate={[Required]} component={TextField} fullWidth required />
           </Col>
           <Col xs={12} md={2}>
             <div>Status</div>

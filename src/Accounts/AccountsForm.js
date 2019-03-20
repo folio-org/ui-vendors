@@ -49,7 +49,7 @@ class AccountsForm extends Component {
           <Col xs={12} md={6}>
             <Row>
               <Col xs={12}>
-                <Field label={<FormattedMessage id="ui-vendors.accounts.nameAst" />} name={`${elem}.name`} id={`${elem}.name`} validate={[Required]} component={TextField} fullWidth />
+                <Field label={<FormattedMessage id="ui-vendors.accounts.name" />} name={`${elem}.name`} id={`${elem}.name`} validate={[Required]} component={TextField} fullWidth required />
               </Col>
               <Col xs={12}>
                 <Field label={<FormattedMessage id="ui-vendors.accounts.accountNumber" />} name={`${elem}.account_no`} id={`${elem}.account_no`} validate={[Required]} component={TextField} fullWidth />
@@ -61,7 +61,7 @@ class AccountsForm extends Component {
                 <Field label={<FormattedMessage id="ui-vendors.accounts.payable" />} name={`${elem}.app_system_no`} id={`${elem}.app_system_no`} component={TextField} fullWidth />
               </Col>
               <Col xs={12}>
-                <Field label={<FormattedMessage id="ui-vendors.accounts.paymentMethodAst" />} name={`${elem}.payment_method`} id={`${elem}.payment_method`} dataOptions={paymentMethodDD} validate={[Required]} component={Select} fullWidth />
+                <Field label={<FormattedMessage id="ui-vendors.accounts.paymentMethod" />} name={`${elem}.payment_method`} id={`${elem}.payment_method`} dataOptions={paymentMethodDD} validate={[Required]} component={Select} fullWidth required />
               </Col>
             </Row>
           </Col>

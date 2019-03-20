@@ -35,7 +35,7 @@ class AgreementsForm extends Component {
       <div key={index} className={css.panels}>
         <Row key={index}>
           <Col xs={12} md={4}>
-            <Field label={<FormattedMessage id="ui-vendors.agreement.nameAst" />} name={`${elem}.name`} id={`${elem}.name`} validate={[Required]} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.agreement.name" />} name={`${elem}.name`} id={`${elem}.name`} validate={[Required]} component={TextField} fullWidth required />
           </Col>
           <Col xs={12} md={4}>
             <Field label={<FormattedMessage id="ui-vendors.agreement.discountSym" />} name={`${elem}.discount`} id={`${elem}.discount`} type="number" component={TextField} fullWidth />

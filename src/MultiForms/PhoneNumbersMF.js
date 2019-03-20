@@ -181,12 +181,13 @@ class PhoneNumbersMF extends Component {
               <Field
                 onChange={this.onInputChange}
                 onClearField={this.onInputClear}
-                label={<FormattedMessage id="ui-vendors.contactPeople.phoneNumberAst" />}
+                label={<FormattedMessage id="ui-vendors.contactPeople.phoneNumber" />}
                 name={`${name}.phone_number`}
                 id={`${name}.phone_number`}
                 component={TextField}
                 validate={[Required]}
                 fullWidth
+                required
               />
             </div>
             {

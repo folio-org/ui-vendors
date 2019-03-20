@@ -211,7 +211,7 @@ class AddressesMF extends Component {
           <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.zipOrPostalCode" />} name={`${name}.zipCode`} id={`${name}.zipCode`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.countryAst" />} name={`${name}.country`} id={`${name}.country`} component={Select} dataOptions={dropdownCountry} validate={[Required]} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.country" />} name={`${name}.country`} id={`${name}.country`} component={Select} dataOptions={dropdownCountry} validate={[Required]} fullWidth required />
         </Col>
         <Col xs={12} md={3}>
           <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.language" />} name={`${name}.language`} id={`${name}.language`} component={Select} dataOptions={dropdownLanguages} fullWidth />
