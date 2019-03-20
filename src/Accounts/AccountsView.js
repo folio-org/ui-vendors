@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { get } from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import css from './AccountsView.css';
@@ -20,66 +20,34 @@ class AccountsView extends React.Component {
     return (
       <Row key={key}>
         <Col xs={3}>
-          <KeyValue
-            label={<FormattedMessage id="ui-vendors.accounts.name" />}
-            value={_.get(val, 'name')}
-          />
+          <KeyValue label={<FormattedMessage id="ui-vendors.accounts.name" />} value={get(val, 'name')} />
         </Col>
         <Col xs={3}>
-          <KeyValue
-            label={<FormattedMessage
-            id="ui-vendors.accounts.accountNumber" />}
-            value={_.get(val, 'account_no', '')}
-          />
+          <KeyValue label={<FormattedMessage id="ui-vendors.accounts.accountNumber" />} value={get(val, 'account_no', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue
-            label={<FormattedMessage
-            id="ui-vendors.accounts.description" />}
-            value={_.get(val, 'description', '')}
-          />
+          <KeyValue label={<FormattedMessage id="ui-vendors.accounts.description" />} value={get(val, 'description', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue
-            label={<FormattedMessage id="ui-vendors.accounts.payable" />}
-            value={_.get(val, 'app_system_no', '')}
-          />
+          <KeyValue label={<FormattedMessage id="ui-vendors.accounts.payable" />} value={get(val, 'app_system_no', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue
-            label={<FormattedMessage id="ui-vendors.accounts.paymentMethod" />}
-            value={_.get(val, 'payment_method', '')}
-          />
+          <KeyValue label={<FormattedMessage id="ui-vendors.accounts.paymentMethod" />} value={get(val, 'payment_method', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue
-            label={<FormattedMessage id="ui-vendors.accounts.accountStatus" />}
-            value={_.get(val, 'account_status', '')}
-          />
+          <KeyValue label={<FormattedMessage id="ui-vendors.accounts.accountStatus" />} value={get(val, 'account_status', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue
-            label={<FormattedMessage id="ui-vendors.accounts.contactInfo" />}
-            value={_.get(val, 'contact_info', '')}
-          />
+          <KeyValue label={<FormattedMessage id="ui-vendors.accounts.contactInfo" />} value={get(val, 'contact_info', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue
-            label={<FormattedMessage id="ui-vendors.accounts.libraryCode" />}
-            value={_.get(val, 'library_code', '')}
-          />
+          <KeyValue label={<FormattedMessage id="ui-vendors.accounts.libraryCode" />} value={get(val, 'library_code', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue
-            label={<FormattedMessage id="ui-vendors.accounts.libraryEDICode" />}
-            value={_.get(val, 'library_edi_code', '')}
-          />
+          <KeyValue label={<FormattedMessage id="ui-vendors.accounts.libraryEDICode" />} value={get(val, 'library_edi_code', '')} />
         </Col>
         <Col xs={3}>
-          <KeyValue
-            label={<FormattedMessage id="ui-vendors.accounts.notes" />}
-            value={_.get(val, 'notes', '')}
-          />
+          <KeyValue label={<FormattedMessage id="ui-vendors.accounts.notes" />} value={get(val, 'notes', '')} />
         </Col>
         {rowCount &&
           <div style={{ width: '100%' }}>
