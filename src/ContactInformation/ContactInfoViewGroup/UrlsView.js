@@ -18,9 +18,11 @@ class ContactInformationView extends React.Component {
     this.getUrls = this.getUrls.bind(this);
   }
 
-  printKeyValue(label, val, isRequire) {
+  printKeyValue(label, val, colNum, isRequire) {
     return (
-      <KeyValue label={<FormattedMessage id={`ui-vendors.contactInfo.${label}`} />} value={val} required={isRequire} />
+      <Col xs={colNum}>
+        <KeyValue label={<FormattedMessage id={`ui-vendors.contactInfo.${label}`} />} value={val} required={isRequire} />
+      </Col>
     );
   }
 
@@ -32,15 +34,9 @@ class ContactInformationView extends React.Component {
 
     return (
       <Row key={key}>
-        <Col xs={5}>
-          {this.printKeyValue('url', get(val, 'value', ''), false)}
-        </Col>
-        <Col xs={3}>
-          {this.printKeyValue('language', getLanguage, false)}
-        </Col>
-        <Col xs={4}>
-          {this.printKeyValue('categories', categories, false)}
-        </Col>
+        {this.printKeyValue('url', get(val, 'value', ''), 5, false)}
+        {this.printKeyValue('language', getLanguage, 3, false)}
+        {this.printKeyValue('categories', categories, 4, false)}
         {rowCount &&
           <div style={{ width: '100%' }}>
             <hr />
