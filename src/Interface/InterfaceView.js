@@ -20,7 +20,15 @@ class InterfaceView extends React.Component {
     const rowCount = (this.props.initialValues.interfaces.length - 1) !== key;
     return (
       <Row key={key}>
-        <col>inteface</col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.name" />} value={_.get(val, ['name'], '')} />
+        </Col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.uri" />} value={_.get(val, ['uri'], '')} />
+        </Col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.username" />} value={_.get(val, ['username'], '')} />
+        </Col>
       </Row>
     );
   }
