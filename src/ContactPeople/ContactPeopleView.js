@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { get } from 'lodash';
 import { AddressView } from '@folio/stripes/smart-components';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
@@ -61,9 +61,17 @@ class ContactPeopleView extends React.Component {
     return (
       <Row key={key}>
         <Col xs={12}>
-          <AddressView addressObject={newVal} visibleFields={visibleFields} abelMap={labelMap} />
+          <AddressView addressObject={newVal} visibleFields={visibleFields} labelMap={labelMap} />
         </Col>
       </Row>
+    );
+  }
+
+  printKeyValue(label, val, colNum, isRequire) {
+    return (
+      <Col xs={colNum}>
+        <KeyValue label={<FormattedMessage id={`ui-vendors.contactPeople.${label}`} />} value={val} required={isRequire} />
+      </Col>
     );
   }
 
@@ -71,18 +79,10 @@ class ContactPeopleView extends React.Component {
     const categories = CatIDToLabel(val.categories, this.getVendorcategory()) || '';
     return (
       <Row key={key} className={css.rptBlocks}>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.phoneNumber" />} value={_.get(val, 'phone_number', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.type" />} value={_.get(val, 'type', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.language" />} value={_.get(val, 'language', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.categories" />} value={categories} />
-        </Col>
+        {this.printKeyValue('phoneNumber', get(val, ['phone_number'], ''), 3, false)}
+        {this.printKeyValue('type', get(val, ['type'], ''), 3, false)}
+        {this.printKeyValue('language', get(val, ['language'], ''), 3, false)}
+        {this.printKeyValue('categories', categories, 3, false)}
       </Row>
     );
   }
@@ -91,18 +91,10 @@ class ContactPeopleView extends React.Component {
     const categories = CatIDToLabel(val.categories, this.getVendorcategory()) || '';
     return (
       <Row key={key} className={css.rptBlocks}>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.email" />} value={`${_.get(val, 'value', '')}`} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.description" />} value={`${_.get(val, 'description', '')}`} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.language" />} value={`${_.get(val, 'language', '')}`} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.categories" />} value={categories} />
-        </Col>
+        {this.printKeyValue('email', get(val, ['value'], ''), 3, false)}
+        {this.printKeyValue('description', get(val, ['description'], ''), 3, false)}
+        {this.printKeyValue('language', get(val, ['language'], ''), 3, false)}
+        {this.printKeyValue('categories', get(val, ['categories'], ''), 3, false)}
       </Row>
     );
   }
@@ -111,18 +103,10 @@ class ContactPeopleView extends React.Component {
     const categories = CatIDToLabel(val.categories, this.getVendorcategory()) || '';
     return (
       <Row key={key} className={css.rptBlocks}>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.url" />} value={`${_.get(val, 'value', '')}`} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.description" />} value={`${_.get(val, 'description', '')}`} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.language" />} value={`${_.get(val, 'language', '')}`} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.categories" />} value={categories} />
-        </Col>
+        {this.printKeyValue('url', get(val, ['value'], ''), 3, false)}
+        {this.printKeyValue('description', get(val, ['description'], ''), 3, false)}
+        {this.printKeyValue('language', get(val, ['language'], ''), 3, false)}
+        {this.printKeyValue('categories', categories, 3, false)}
       </Row>
     );
   }
@@ -144,20 +128,14 @@ class ContactPeopleView extends React.Component {
     return (
       <div className={css.horizontalLine}>
         <Row key={key}>
-          <Col xs={3}>
-            <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.name" />} value={fullName} />
-          </Col>
+          {this.printKeyValue('name', fullName, 3, false)}
           <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.inactive" />}>
               <BoolToCheckbox name="Status" value={_.get(val, ['inactive'])} />
             </KeyValue>
           </Col>
-          <Col xs={3}>
-            <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.language" />} value={language} />
-          </Col>
-          <Col xs={3}>
-            <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.categories" />} value={this.getCategories(val)} />
-          </Col>
+          {this.printKeyValue('categories', language, 3, false)}
+          {this.printKeyValue('language', this.getCategories(val), 3, false)}
           { addressComplete.length > 0 && (
             <Fragment>
               <Col xs={12}>
