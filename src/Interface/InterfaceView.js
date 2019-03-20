@@ -16,25 +16,23 @@ class InterfaceView extends React.Component {
     this.getInterface = this.getInterface.bind(this);
   }
 
+  printLabelValue(label, val) {
+    return (
+      <Col xs={3}>
+        <KeyValue label={<FormattedMessage id={`ui-vendors.interface.${label}`} />} value={_.get(val, [`${val}`], '')} />
+      </Col>
+    );
+  }
+
   getInterface(val, key) {
     const rowCount = (this.props.initialValues.interfaces.length - 1) !== key;
     return (
       <Row key={key}>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.interface.name" />} value={_.get(val, ['name'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.interface.uri" />} value={_.get(val, ['uri'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.interface.username" />} value={_.get(val, ['username'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.interface.password" />} value={_.get(val, ['password'], '')} />
-        </Col>
-        <Col xs={9}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.interface.notes" />} value={_.get(val, ['notes'], '')} />
-        </Col>
+        {this.printLabelValue('name', 'name')}
+        {this.printLabelValue('uri', 'uri')}
+        {this.printLabelValue('username', 'username')}
+        {this.printLabelValue('password', 'password')}
+        {this.printLabelValue('notes', 'notes')}
         <Col xs={12}>
           <div className={css.subHeadings}><b>{<FormattedMessage id="ui-vendors.interface.statistics" />}</b></div>
         </Col>
@@ -43,21 +41,11 @@ class InterfaceView extends React.Component {
             <BoolToCheckbox name="Available" value={_.get(val, ['available'])} />
           </KeyValue>
         </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.interface.deliveryMethod" />} value={_.get(val, ['delivery_method'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.interface.statisticsFormat" />} value={_.get(val, ['statistics_format'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.interface.locallyStored" />} value={_.get(val, ['locally_stored'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.interface.onlineLocation" />} value={_.get(val, ['online_location'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.interface.statisticsNotes" />} value={_.get(val, ['statistics_notes'], '')} />
-        </Col>
+        {this.printLabelValue('deliveryMethod', 'delivery_method')}
+        {this.printLabelValue('statisticsFormat', 'statistics_format')}
+        {this.printLabelValue('locallyStored', 'locally_stored')}
+        {this.printLabelValue('onlineLocation', 'online_location')}
+        {this.printLabelValue('statisticsNotes', 'statistics_notes')}
         {rowCount &&
           <div style={{ width: '100%' }}>
             <hr />
