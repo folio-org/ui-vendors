@@ -18,6 +18,14 @@ class ContactInformationView extends React.Component {
     this.getPhoneNumbers = this.getPhoneNumbers.bind(this);
   }
 
+  printKeyValue(label, val, isRequire) {
+    return (
+      <Col xs={3}>
+        <KeyValue label={<FormattedMessage id={`ui-vendors.contactInfo.${label}`} />} value={val} required={isRequire} />
+      </Col>
+    );
+  }
+
   getPhoneNumbers(val, key) {
     const { dropdownVendorCategories } = this.props;
     const rowCount = (this.props.dataVal.length - 1) !== key;
@@ -28,18 +36,10 @@ class ContactInformationView extends React.Component {
 
     return (
       <Row key={key}>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.phoneNumber" />} value={phonenumber} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.type" />} value={type} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.language" />} value={getLanguage} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.categories" />} value={categories} />
-        </Col>
+        {this.printKeyValue('phoneNumber', phonenumber, false)}
+        {this.printKeyValue('type', type, false)}
+        {this.printKeyValue('language', getLanguage, false)}
+        {this.printKeyValue('categories', categories, false)}
         {rowCount &&
           <div style={{ width: '100%' }}>
             <hr />

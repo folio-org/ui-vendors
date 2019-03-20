@@ -18,6 +18,12 @@ class ContactInformationView extends React.Component {
     this.getEmail = this.getEmail.bind(this);
   }
 
+  printKeyValue(label, val, isRequire) {
+    return (
+      <KeyValue label={<FormattedMessage id={`ui-vendors.contactInfo.${label}`} />} value={val} required={isRequire} />
+    );
+  }
+
   getEmail(val, key) {
     const { dropdownVendorCategories } = this.props;
     const rowCount = (this.props.dataVal.length - 1) !== key;
@@ -27,13 +33,13 @@ class ContactInformationView extends React.Component {
     return (
       <Row key={key}>
         <Col xs={5}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.email" />} value={`${get(val, 'value', '')}`} />
+          {this.printKeyValue('email', get(val, ['value'], ''), false)}
         </Col>
         <Col xs={3}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.language" />} value={getLanguage} />
+          {this.printKeyValue('language', getLanguage, false)}
         </Col>
         <Col xs={4}>
-          <KeyValue label={<FormattedMessage id="ui-vendors.contactInfo.categories" />} value={categories} />
+          {this.printKeyValue('categories', categories, false)}
         </Col>
         {rowCount &&
           <div style={{ width: '100%' }}>
