@@ -17,7 +17,7 @@ class InterfaceView extends React.Component {
   }
 
   getInterface(val, key) {
-    console.log(val);
+    const rowCount = (this.props.initialValues.interfaces.length - 1) !== key;
     return (
       <Row key={key}>
         <Col xs={3}>
@@ -35,6 +35,14 @@ class InterfaceView extends React.Component {
         <Col xs={9}>
           <KeyValue label={<FormattedMessage id="ui-vendors.interface.notes" />} value={_.get(val, ['notes'], '')} />
         </Col>
+        <Col xs={12}>
+          <div className={css.subHeadings}><b>{<FormattedMessage id="ui-vendors.interface.statistics" />}</b></div>
+        </Col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.available" />}>
+            <BoolToCheckbox name="Available" value={_.get(val, ['available'])} />
+          </KeyValue>
+        </Col>
         <Col xs={3}>
           <KeyValue label={<FormattedMessage id="ui-vendors.interface.deliveryMethod" />} value={_.get(val, ['delivery_method'], '')} />
         </Col>
@@ -47,6 +55,14 @@ class InterfaceView extends React.Component {
         <Col xs={3}>
           <KeyValue label={<FormattedMessage id="ui-vendors.interface.onlineLocation" />} value={_.get(val, ['online_location'], '')} />
         </Col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.statisticsNotes" />} value={_.get(val, ['statistics_notes'], '')} />
+        </Col>
+        {rowCount &&
+          <div style={{ width: '100%' }}>
+            <hr />
+          </div>
+        }
       </Row>
     );
   }
