@@ -35,6 +35,11 @@ class InterfaceView extends React.Component {
         <Col xs={9}>
           <KeyValue label={<FormattedMessage id="ui-vendors.interface.notes" />} value={_.get(val, ['notes'], '')} />
         </Col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.available" />}>
+            <BoolToCheckbox name="Available" value={_.get(val, ['available'])} />
+          </KeyValue>
+        </Col>
       </Row>
     );
   }
