@@ -19,7 +19,7 @@ class InterfaceView extends React.Component {
   printLabelValue(label, val) {
     return (
       <Col xs={3}>
-        <KeyValue label={<FormattedMessage id={`ui-vendors.interface.${label}`} />} value={_.get(val, [`${val}`], '')} />
+        <KeyValue label={<FormattedMessage id={`ui-vendors.interface.${label}`} />} value={val} />
       </Col>
     );
   }
@@ -28,11 +28,11 @@ class InterfaceView extends React.Component {
     const rowCount = (this.props.initialValues.interfaces.length - 1) !== key;
     return (
       <Row key={key}>
-        {this.printLabelValue('name', 'name')}
-        {this.printLabelValue('uri', 'uri')}
-        {this.printLabelValue('username', 'username')}
-        {this.printLabelValue('password', 'password')}
-        {this.printLabelValue('notes', 'notes')}
+        {this.printLabelValue('name', _.get(val, ['name'], ''))}
+        {this.printLabelValue('uri', _.get(val, ['uri'], ''))}
+        {this.printLabelValue('username', _.get(val, ['username'], ''))}
+        {this.printLabelValue('password', _.get(val, ['password'], ''))}
+        {this.printLabelValue('notes', _.get(val, ['notes'], ''))}
         <Col xs={12}>
           <div className={css.subHeadings}><b>{<FormattedMessage id="ui-vendors.interface.statistics" />}</b></div>
         </Col>
@@ -41,11 +41,11 @@ class InterfaceView extends React.Component {
             <BoolToCheckbox name="Available" value={_.get(val, ['available'])} />
           </KeyValue>
         </Col>
-        {this.printLabelValue('deliveryMethod', 'delivery_method')}
-        {this.printLabelValue('statisticsFormat', 'statistics_format')}
-        {this.printLabelValue('locallyStored', 'locally_stored')}
-        {this.printLabelValue('onlineLocation', 'online_location')}
-        {this.printLabelValue('statisticsNotes', 'statistics_notes')}
+        {this.printLabelValue('deliveryMethod', _.get(val, ['delivery_method'], ''))}
+        {this.printLabelValue('statisticsFormat', _.get(val, ['statistics_format'], ''))}
+        {this.printLabelValue('locallyStored', _.get(val, ['locally_stored'], ''))}
+        {this.printLabelValue('onlineLocation', _.get(val, ['online_location'], ''))}
+        {this.printLabelValue('statisticsNotes', _.get(val, ['statistics_notes'], ''))}
         {rowCount &&
           <div style={{ width: '100%' }}>
             <hr />
