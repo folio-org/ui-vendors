@@ -14,7 +14,7 @@ class AdditionalAddress extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  renderSub = (elem, index) => {
+  renderAdditionalAddressSub = (elem, index) => {
     const { fields } = this.props;
     return (
       <Row key={index}>
@@ -49,7 +49,7 @@ class AdditionalAddress extends Component {
           </Col>
         }
         <Col xs={12}>
-          {fields.map(this.renderSub)}
+          {fields.map(this.renderAdditionalAddressSub)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
           <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.contactPeople.addAddress" />}</Button>
