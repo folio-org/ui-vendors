@@ -49,6 +49,9 @@ class InterfaceView extends React.Component {
         <Col xs={3}>
           <KeyValue label={<FormattedMessage id="ui-vendors.interface.locallyStored" />} value={_.get(val, ['locally_stored'], '')} />
         </Col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.onlineLocation" />} value={_.get(val, ['online_location'], '')} />
+        </Col>
       </Row>
     );
   }
