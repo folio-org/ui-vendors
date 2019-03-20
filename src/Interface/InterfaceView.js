@@ -17,7 +17,7 @@ class InterfaceView extends React.Component {
   }
 
   getInterface(val, key) {
-    
+    console.log(val);
     return (
       <Row key={key}>
         <Col xs={3}>
@@ -42,6 +42,18 @@ class InterfaceView extends React.Component {
         </Col>
         <Col xs={3}>
           <KeyValue label={<FormattedMessage id="ui-vendors.interface.deliveryMethod" />} value={_.get(val, ['delivery_method'], '')} />
+        </Col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.statisticsFormat" />} value={_.get(val, ['statistics_format'], '')} />
+        </Col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.locallyStored" />} value={_.get(val, ['locally_stored'], '')} />
+        </Col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.onlineLocation" />} value={_.get(val, ['online_location'], '')} />
+        </Col>
+        <Col xs={3}>
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.statisticsNotes" />} value={_.get(val, ['statistics_notes'], '')} />
         </Col>
       </Row>
     );
