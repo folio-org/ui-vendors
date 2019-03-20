@@ -16,7 +16,6 @@ class AccountsView extends React.Component {
   }
 
   printKeyValue(label, val, isRequire) {
-    const isRequire = isRequire;
     return (
       <Col xs={3}>
         <KeyValue label={<FormattedMessage id={`ui-vendors.accounts.${label}`} />} value={val} required={isRequire} />
