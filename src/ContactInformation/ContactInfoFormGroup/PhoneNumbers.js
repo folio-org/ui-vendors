@@ -19,15 +19,9 @@ class PhoneNumbers extends Component {
 
     return (
       <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
-        <PhoneNumbersMF
-          index={index}
-          fields={fields}
-          name={`${elem}`}
-          id={`${elem}`}
-          {...this.props}
-        />
+        <PhoneNumbersMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button onClick={() => fields.remove(index)} buttonStyle="danger">
+          <Button id="btn-remove-phonenumbers" onClick={() => fields.remove(index)} buttonStyle="danger">
             {<FormattedMessage id="ui-vendors.contactInfo.remove" />}
           </Button>
         </Col>

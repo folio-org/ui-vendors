@@ -19,15 +19,9 @@ class AddressInfo extends Component {
 
     return (
       <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
-        <AddressesMF
-          index={index}
-          fields={fields}
-          name={`${elem}`}
-          id={`${elem}`}
-          {...this.props}
-        />
+        <AddressesMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button onClick={() => fields.remove(index)} buttonStyle="danger">
+          <Button id="btn-remove-address" onClick={() => fields.remove(index)} buttonStyle="danger">
             <FormattedMessage id="ui-vendors.data.contactTypes.remove" />
           </Button>
         </Col>

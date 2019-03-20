@@ -17,15 +17,9 @@ class Url extends Component {
   renderSubUrl = (elem, index, fields) => {
     return (
       <Row key={index} className={css.panels}>
-        <UrlsMF
-          index={index}
-          fields={fields}
-          name={`${elem}`}
-          id={`${elem}`}
-          {...this.props}
-        />
+        <UrlsMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button onClick={() => fields.remove(index)} buttonStyle="danger">
+          <Button id="btn-remove-url" onClick={() => fields.remove(index)} buttonStyle="danger">
             {<FormattedMessage id="ui-vendors.contactInfo.remove" />}
           </Button>
         </Col>

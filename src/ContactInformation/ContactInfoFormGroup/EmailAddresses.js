@@ -23,15 +23,9 @@ class EmailAddresses extends Component {
   renderSubEmailAddresses = (elem, index, fields) => {
     return (
       <Row key={index} className={css.panels}>
-        <EmailsMF
-          index={index}
-          fields={fields}
-          name={`${elem}`}
-          id={`${elem}`}
-          {...this.props}
-        />
+        <EmailsMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
         <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button onClick={() => fields.remove(index)} buttonStyle="danger">
+          <Button id="btn-remove-emailAddress" onClick={() => fields.remove(index)} buttonStyle="danger">
             {<FormattedMessage id="ui-vendors.contactInfo.remove" />}
           </Button>
         </Col>
