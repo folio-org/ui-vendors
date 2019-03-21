@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Field, FieldArray } from 'redux-form';
 import { Row, Col, Button, TextField, TextArea } from '@folio/stripes/components';
 import { Required, isURLValid } from '../Utils/Validate';
@@ -17,13 +18,13 @@ class AgreementsForm extends Component {
         <Col xs={12}>
           {fields.length === 0 &&
             <Col xs={6}>
-              <div><em>- Please add agreements -</em></div>
+              <div><em>{<FormattedMessage id="ui-vendors.agreement.pleaseAddAgreements" />}</em></div>
             </Col>
           }
           {fields.map(this.renderSubForm)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add</Button>
+          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.agreement.add" />}</Button>
         </Col>
       </Row>
     );
@@ -34,20 +35,20 @@ class AgreementsForm extends Component {
       <div key={index} className={css.panels}>
         <Row key={index}>
           <Col xs={12} md={4}>
-            <Field label="Name*" name={`${elem}.name`} id={`${elem}.name`} validate={[Required]} component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.agreement.name" />} name={`${elem}.name`} id={`${elem}.name`} validate={[Required]} component={TextField} fullWidth required />
           </Col>
           <Col xs={12} md={4}>
-            <Field label="Discount %" name={`${elem}.discount`} id={`${elem}.discount`} type="number" component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.agreement.discountSym" />} name={`${elem}.discount`} id={`${elem}.discount`} type="number" component={TextField} fullWidth />
           </Col>
           <Col xs={12} md={4}>
-            <Field label="URL" name={`${elem}.reference_url`} id={`${elem}.reference_url`} validate={[isURLValid]} type="text" component={TextField} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.agreement.referenceUrl" />} name={`${elem}.reference_url`} id={`${elem}.reference_url`} validate={[isURLValid]} type="text" component={TextField} fullWidth />
           </Col>
           <Col xs={12}>
-            <Field label="Notes" name={`${elem}.notes`} id={`${elem}.notes`} component={TextArea} fullWidth />
+            <Field label={<FormattedMessage id="ui-vendors.agreement.notes" />} name={`${elem}.notes`} id={`${elem}.notes`} component={TextArea} fullWidth />
           </Col>
           <Col xs={12} style={{ textAlign: 'right' }}>
             <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-              Remove
+              {<FormattedMessage id="ui-vendors.agreement.remove" />}
             </Button>
           </Col>
         </Row>

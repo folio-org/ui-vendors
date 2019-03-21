@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import TetherComponent from 'react-tether';
 import { Field, getFormValues } from 'redux-form';
-import { MultiSelection, Col, Select, TextField } from '@folio/stripes/components';
+import { Col, Select, TextField } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
+import CategoryDropdown from '../Utils/CategoryDropdown';
 import css from './css/MultiForms.css';
 import { Required } from '../Utils/Validate';
 
 class AddressesMF extends Component {
   static propTypes = {
-    dropdownVendorCategories: PropTypes.arrayOf(PropTypes.object),
     dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
     dropdownCountry: PropTypes.arrayOf(PropTypes.object),
     stripes: PropTypes.shape({
@@ -126,28 +127,6 @@ class AddressesMF extends Component {
   }
   // End Input Actions
 
-  // Multi Select
-  toString = (option) => option;
-  formatter = ({ option }) => {
-    const { dropdownVendorCategories } = this.props;
-    const item = _.find(dropdownVendorCategories, { id: option }) || option;
-    if (!item) return option;
-    return <div>{item.value}</div>;
-  };
-
-  filterItems = (filterText, list) => {
-    const filterRegExp = new RegExp(`^${filterText}`, 'i');
-    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-    return { renderedItems };
-  };
-
-  dataOptions() {
-    const { dropdownVendorCategories } = this.props;
-    if (!dropdownVendorCategories) return [];
-    return dropdownVendorCategories.map(item => item.id) || [];
-  }
-  // End Multi Select
-
   render() {
     const { isOpen } = this.state;
     const {
@@ -176,15 +155,7 @@ class AddressesMF extends Component {
             constraints={constraints}
           >
             <div ref={this.fieldRef} style={{ width:'100%' }}>
-              <Field
-                onChange={this.onInputChange}
-                onClearField={this.onInputClear}
-                label="Address 1"
-                name={`${name}.addressLine1`}
-                id={`${name}.addressLine1`}
-                component={TextField}
-                fullWidth
-              />
+              <Field onChange={this.onInputChange} onClearField={this.onInputClear} label={<FormattedMessage id="ui-vendors.data.contactTypes.addressLine1" />} name={`${name}.addressLine1`} id={`${name}.addressLine1`} component={TextField} fullWidth />
             </div>
             {
               isOpen && (
@@ -198,35 +169,25 @@ class AddressesMF extends Component {
           </TetherComponent>
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Address 2" name={`${name}.addressLine2`} id={`${name}.addressLine2`} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.addressLine2" />} name={`${name}.addressLine2`} id={`${name}.addressLine2`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="City" name={`${name}.city`} id={`${name}.city`} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.city" />} name={`${name}.city`} id={`${name}.city`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Region" name={`${name}.stateRegion`} id={`${name}.stateRegion`} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.stateProviceOrRegion" />} name={`${name}.stateRegion`} id={`${name}.stateRegion`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="ZIP/Postal Code" name={`${name}.zipCode`} id={`${name}.zipCode`} component={TextField} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.zipOrPostalCode" />} name={`${name}.zipCode`} id={`${name}.zipCode`} component={TextField} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Country*" name={`${name}.country`} id={`${name}.country`} component={Select} dataOptions={dropdownCountry} validate={[Required]} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.country" />} name={`${name}.country`} id={`${name}.country`} component={Select} dataOptions={dropdownCountry} validate={[Required]} fullWidth required />
         </Col>
         <Col xs={12} md={3}>
-          <Field label="Default Language" name={`${name}.language`} id={`${name}.language`} component={Select} dataOptions={dropdownLanguages} fullWidth />
+          <Field label={<FormattedMessage id="ui-vendors.data.contactTypes.language" />} name={`${name}.language`} id={`${name}.language`} component={Select} dataOptions={dropdownLanguages} fullWidth />
         </Col>
         <Col xs={12} md={3}>
-          <Field
-            component={MultiSelection}
-            label="Categories"
-            name={`${name}.categories`}
-            style={{ height: '80px' }}
-            onBlur={(e) => { e.preventDefault(); }}
-            dataOptions={this.dataOptions()}
-            itemToString={this.toString}
-            formatter={this.formatter}
-            filter={this.filterItems}
-          />
+          <CategoryDropdown {...this.props} />
         </Col>
       </Fragment>
     );

@@ -1,10 +1,12 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import { Row, Col, KeyValue } from '@folio/stripes/components';
+import { Row, Col } from '@folio/stripes/components';
 import css from '../ContactInformationView.css';
 import LanguageLookup from '../../Utils/LanguageLookup';
 import CatIDToLabel from '../../Utils/CatIDToLabel';
+import { PrintKeyValue } from '../../Utils/PrintKeyValue';
 
 class ContactInformationView extends React.Component {
   static propTypes = {
@@ -19,22 +21,16 @@ class ContactInformationView extends React.Component {
 
   getUrls(val, key) {
     const { dropdownVendorCategories } = this.props;
-    const rowCount = this.props.dataVal.length - 1 !== key;
-    const categories = CatIDToLabel(val.categories, dropdownVendorCategories) || '';
-    const getLanguage = LanguageLookup(get(val, 'language', ''));
+    const rowUrlCount = this.props.dataVal.length - 1 !== key;
+    const getLanguageUrl = LanguageLookup(get(val, 'language', ''));
+    const categoriesUrl = CatIDToLabel(val.categories, dropdownVendorCategories) || '';
 
     return (
       <Row key={key}>
-        <Col xs={5}>
-          <KeyValue label="URL" value={`${get(val, 'value', '')}`} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Language" value={getLanguage} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Categories" value={categories} />
-        </Col>
-        {rowCount &&
+        {PrintKeyValue('ui-vendors.contactInfo.url', get(val, 'value', ''), 5, false)}
+        {PrintKeyValue('ui-vendors.contactInfo.language', getLanguageUrl, 3, false)}
+        {PrintKeyValue('ui-vendors.contactInfo.categories', categoriesUrl, 4, false)}
+        {rowUrlCount &&
           <div style={{ width: '100%' }}>
             <hr />
           </div>
@@ -47,7 +43,7 @@ class ContactInformationView extends React.Component {
     const { dataVal } = this.props;
     return (
       <Col xs={12} className={css.rowHeader}>
-        <div className={css.subHeadings}>URLs</div>
+        <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactInfo.urls" />}</div>
         {dataVal.map(this.getUrls)}
       </Col>
     );

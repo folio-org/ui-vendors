@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { FormattedMessage } from 'react-intl';
 // Folio
 import { SearchAndSort } from '@folio/stripes/smart-components';
 import { filters2cql } from '@folio/stripes/components';
@@ -153,22 +154,16 @@ class Main extends Component {
           },
           { label: 'Code', value: 'code' },
         ],
-        vendorEdiCodeTypeDD: [
-          { 'label': '-- Select --', 'value': '' },
+        ediCodeTypeDD: [
+          { label: '-- Select --', value: '' },
           { label: '31B (US-SAN)', value: '31B/US-SAN' },
           { label: '014 (EAN)', value: '014/EAN' },
-          { label: '091 (Supplier-assigned ID)', value: '091/Supplier-assigned ID' },
-          { label: '092 (Library-assigned ID)', value: '092/Library-assigned ID' },
+          { label: '091 (Supplier-assigned ID)', value: '091/Vendor-assigned' },
+          { label: '092 (Library-assigned ID)', value: '092/Customer-assigned' }
         ],
         libraryEDICodeDD: [
           { label: '-- Select --', value: '' },
           { label: 'Code', value: 'code' },
-        ],
-        libraryEdiCodeTypeDD: [
-          { label: '-- Select --', value: '' },
-          { label: '31B (US-SAN)', value: '31B/US-SAN' },
-          { label: '091 (Vendor-assigned)', value: '091/Vendor-assigned' },
-          { label: '092 (Customer-assigned)', value: '092/Customer-assigned' },
         ],
         ftpDD: [
           { label: '-- Select --', value: '' },
@@ -267,6 +262,12 @@ class Main extends Component {
       'Description': data => _.get(data, ['description'], ''),
       'Vendor Status': data => _.toString(_.get(data, ['vendor_status'], ''))
     };
+    const columnMapping = {
+      'Name': <FormattedMessage id="ui-vendors.main.name" />,
+      'Code': <FormattedMessage id="ui-vendors.main.code" />,
+      'Description': <FormattedMessage id="ui-vendors.main.description" />,
+      'Vendor status': <FormattedMessage id="ui-vendors.main.vendorStatus" />
+    };
 
     return (
       <SearchAndSort
@@ -274,7 +275,8 @@ class Main extends Component {
         objectName="vendors"
         baseRoute={packageInfo.stripes.route}
         filterConfig={filterConfig}
-        visibleColumns={this.props.visibleColumns ? this.props.visibleColumns : ['Name', 'Code', 'Description', 'Vendor Status']}
+        visibleColumns={this.props.visibleColumns ? this.props.visibleColumns : ['Name', 'Code', 'Description', 'Vendor status']}
+        columnMapping={columnMapping}
         resultsFormatter={resultsFormatter}
         viewRecordComponent={ViewVendor}
         onCreate={this.create}

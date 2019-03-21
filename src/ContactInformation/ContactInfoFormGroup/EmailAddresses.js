@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
@@ -17,23 +18,24 @@ class EmailAddresses extends Component {
   constructor(props) {
     super(props);
     this.renderSubEmailAddresses = this.renderSubEmailAddresses.bind(this);
+    this.removeButtonEml = this.removeButtonEml.bind(this);
+  }
+
+  removeButtonEml(fields, index, id, label) {
+    return (
+      <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
+        <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
+          {<FormattedMessage id={label} />}
+        </Button>
+      </Col>
+    );
   }
 
   renderSubEmailAddresses = (elem, index, fields) => {
     return (
       <Row key={index} className={css.panels}>
-        <EmailsMF
-          index={index}
-          fields={fields}
-          name={`${elem}`}
-          id={`${elem}`}
-          {...this.props}
-        />
-        <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-            Remove
-          </Button>
-        </Col>
+        <EmailsMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
+        {this.removeButtonEml(fields, index, 'btn-remove-emailAddress', 'ui-vendors.contactInfo.remove')}
       </Row>
     );
   }
@@ -43,18 +45,18 @@ class EmailAddresses extends Component {
     return (
       <Row>
         <Col xs={12}>
-          <div className={css.subHeadings}>Email Address</div>
+          <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactInfo.emailAddress" />}</div>
         </Col>
         {fields.length === 0 &&
           <Col xs={12}>
-            <div><em>- Please add email -</em></div>
+            <div><em>{<FormattedMessage id="ui-vendors.contactInfo.pleaseAddEmail" />}</em></div>
           </Col>
         }
         <Col xs={12}>
           {fields.map(this.renderSubEmailAddresses)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add Email</Button>
+          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.contactInfo.addEmail" />}</Button>
         </Col>
       </Row>
     );

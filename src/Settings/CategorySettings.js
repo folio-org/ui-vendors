@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { ControlledVocab } from '@folio/stripes/smart-components';
 
 class CategorySettings extends Component {
@@ -16,17 +17,21 @@ class CategorySettings extends Component {
 
   render() {
     const { stripes } = this.props;
+    const columnMapping = {
+      value: <FormattedMessage id="ui-vendors.settings.name" />,
+      action: <FormattedMessage id="ui-vendors.settings.action" />
+    };
 
     return (
       <this.connectedControlledVocab
         stripes={stripes}
         baseUrl="vendor-storage/categories"
         records="categories"
-        label="Categories"
+        label={<FormattedMessage id="ui-vendors.settings.categories" />}
         labelSingular="Category"
         objectLabel="Categories"
         visibleFields={['value']}
-        columnMapping={{ value: 'Name' }}
+        columnMapping={columnMapping}
         hiddenFields={['lastUpdated', 'numberOfObjects']}
         nameKey="categories"
         id="categories"

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
@@ -17,6 +18,14 @@ class ContactInformationView extends React.Component {
     this.getPhoneNumbers = this.getPhoneNumbers.bind(this);
   }
 
+  printKeyValue(label, val, isRequire) {
+    return (
+      <Col xs={3}>
+        <KeyValue label={<FormattedMessage id={`ui-vendors.contactInfo.${label}`} />} value={val} required={isRequire} />
+      </Col>
+    );
+  }
+
   getPhoneNumbers(val, key) {
     const { dropdownVendorCategories } = this.props;
     const rowCount = (this.props.dataVal.length - 1) !== key;
@@ -27,18 +36,10 @@ class ContactInformationView extends React.Component {
 
     return (
       <Row key={key}>
-        <Col xs={3}>
-          <KeyValue label="Phone Number" value={phonenumber} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Type" value={type} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Language" value={getLanguage} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Categories" value={categories} />
-        </Col>
+        {this.printKeyValue('phoneNumber', phonenumber, false)}
+        {this.printKeyValue('type', type, false)}
+        {this.printKeyValue('language', getLanguage, false)}
+        {this.printKeyValue('categories', categories, false)}
         {rowCount &&
           <div style={{ width: '100%' }}>
             <hr />
@@ -52,7 +53,7 @@ class ContactInformationView extends React.Component {
     const { dataVal } = this.props;
     return (
       <Col xs={12} className={css.rowHeader}>
-        <div className={css.subHeadings}>Phone Numbers</div>
+        <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactInfo.phoneNumbers" />}</div>
         { dataVal.map(this.getPhoneNumbers) }
       </Col>
     );

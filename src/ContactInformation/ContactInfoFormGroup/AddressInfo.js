@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
@@ -13,23 +14,27 @@ class AddressInfo extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
+  constructor(props) {
+    super(props);
+    this.removeButtonAdd = this.removeButtonAdd.bind(this);
+  }
+
+  removeButtonAdd(fields, index, id, label) {
+    return (
+      <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
+        <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
+          {<FormattedMessage id={label} />}
+        </Button>
+      </Col>
+    );
+  }
+
   renderSubAddress = (elem, index, fields) => {
     const { contactPeopleForm } = this.props;
-
     return (
       <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
-        <AddressesMF
-          index={index}
-          fields={fields}
-          name={`${elem}`}
-          id={`${elem}`}
-          {...this.props}
-        />
-        <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-            Remove
-          </Button>
-        </Col>
+        <AddressesMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
+        {this.removeButtonAdd(fields, index, 'btn-remove-address', 'ui-vendors.data.contactTypes.remove')}
       </Row>
     );
   }
@@ -39,16 +44,16 @@ class AddressInfo extends Component {
     return (
       <Row>
         <Col xs={6}>
-          <div className={css.subHeadings}>Address Info</div>
+          <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.data.contactTypes.address" />}</div>
           {fields.length === 0 &&
-            <div><em>- Please add address info -</em></div>
+            <div><em>{<FormattedMessage id="ui-vendors.data.contactTypes.noAddressInfo" />}</em></div>
           }
         </Col>
         <Col xs={12}>
           {fields.map(this.renderSubAddress)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add Address</Button>
+          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.data.contactTypes.add" />}</Button>
         </Col>
       </Row>
     );

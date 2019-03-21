@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Row, Col } from '@folio/stripes/components';
 import { AddressView } from '@folio/stripes/smart-components';
@@ -31,10 +32,20 @@ class AddressInfoView extends React.Component {
       'categories'
     ];
 
+    const labelMap = {
+      addressLine1: <FormattedMessage id="ui-vendors.data.contactTypes.addressLine1" />,
+      addressLine2: <FormattedMessage id="ui-vendors.data.contactTypes.addressLine2" />,
+      city: <FormattedMessage id="ui-vendors.data.contactTypes.city" />,
+      stateRegion: <FormattedMessage id="ui-vendors.data.contactTypes.stateProviceOrRegion" />,
+      zipCode: <FormattedMessage id="ui-vendors.data.contactTypes.zipOrPostalCode" />,
+      country: <FormattedMessage id="ui-vendors.data.contactTypes.country" />,
+      categories: <FormattedMessage id="ui-vendors.data.contactTypes.categories" />
+    };
+
     return (
       <Row key={key}>
         <Col xs={12}>
-          <AddressView addressObject={newVal} visibleFields={visibleFields} />
+          <AddressView addressObject={newVal} visibleFields={visibleFields} labelMap={labelMap} />
         </Col>
       </Row>
     );
@@ -44,7 +55,7 @@ class AddressInfoView extends React.Component {
     const { dataVal } = this.props;
     return (
       <Col xs={12} className={css.rowHeader}>
-        <div className={css.subHeadings}>Address</div>
+        <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.data.contactTypes.address" />}</div>
         {dataVal.map(this.getAddress)}
       </Col>
     );

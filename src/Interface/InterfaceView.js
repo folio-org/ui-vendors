@@ -1,11 +1,12 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import css from './InterfaceView.css';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
 
-class AgreementsView extends React.Component {
+class InterfaceView extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object
   }
@@ -15,49 +16,36 @@ class AgreementsView extends React.Component {
     this.getInterface = this.getInterface.bind(this);
   }
 
+  printKeyValue(label, val) {
+    return (
+      <Col xs={3}>
+        <KeyValue label={<FormattedMessage id={`ui-vendors.interface.${label}`} />} value={val} />
+      </Col>
+    );
+  }
+
   getInterface(val, key) {
     const rowCount = (this.props.initialValues.interfaces.length - 1) !== key;
     return (
       <Row key={key}>
-        <Col xs={3}>
-          <KeyValue label="Name" value={_.get(val, ['name'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="URI" value={_.get(val, ['uri'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Username" value={_.get(val, ['username'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Password" value={_.get(val, ['password'], '')} />
-        </Col>
-        <Col xs={9}>
-          <KeyValue label="Notes" value={_.get(val, ['notes'], '')} />
-        </Col>
+        {this.printKeyValue('name', _.get(val, ['name'], ''))}
+        {this.printKeyValue('uri', _.get(val, ['uri'], ''))}
+        {this.printKeyValue('username', _.get(val, ['username'], ''))}
+        {this.printKeyValue('password', _.get(val, ['password'], ''))}
+        {this.printKeyValue('notes', _.get(val, ['notes'], ''))}
         <Col xs={12}>
-          <div className={css.subHeadings}>Statistics</div>
+          <div className={css.subHeadings}><b>{<FormattedMessage id="ui-vendors.interface.statistics" />}</b></div>
         </Col>
         <Col xs={3}>
-          {/* label="Available"  */}
-          <KeyValue label="Available">
+          <KeyValue label={<FormattedMessage id="ui-vendors.interface.available" />}>
             <BoolToCheckbox name="Available" value={_.get(val, ['available'])} />
           </KeyValue>
         </Col>
-        <Col xs={3}>
-          <KeyValue label="Delivery Method" value={_.get(val, ['delivery_method'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Statistics Format" value={_.get(val, ['statistics_format'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Locally Stored" value={_.get(val, ['locally_stored'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Online Location" value={_.get(val, ['online_location'], '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Statistics Notes" value={_.get(val, ['online_location'], '')} />
-        </Col>
+        {this.printKeyValue('deliveryMethod', _.get(val, ['delivery_method'], ''))}
+        {this.printKeyValue('statisticsFormat', _.get(val, ['statistics_format'], ''))}
+        {this.printKeyValue('locallyStored', _.get(val, ['locally_stored'], ''))}
+        {this.printKeyValue('onlineLocation', _.get(val, ['online_location'], ''))}
+        {this.printKeyValue('statisticsNotes', _.get(val, ['statistics_notes'], ''))}
         {rowCount &&
           <div style={{ width: '100%' }}>
             <hr />
@@ -79,11 +67,11 @@ class AgreementsView extends React.Component {
     } else {
       return (
         <div>
-          <p>-- No interface data available --</p>
+          <p>{<FormattedMessage id="ui-vendors.interface.noInterfaceAvail" />}</p>
         </div>
       );
     }
   }
 }
 
-export default AgreementsView;
+export default InterfaceView;

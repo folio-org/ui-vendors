@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactPeopleForm.css';
 import { AddressesMF } from '../../MultiForms';
+import RemoveButton from '../../Utils/RemoveButton';
 
 class AdditionalAddress extends Component {
   static propTypes = {
@@ -13,22 +15,12 @@ class AdditionalAddress extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  renderSub = (elem, index) => {
+  renderAdditionalAddressSub = (elem, index) => {
     const { fields } = this.props;
     return (
       <Row key={index}>
-        <AddressesMF
-          index={index}
-          fields={fields}
-          name={`${elem}`}
-          id={`${elem}`}
-          {...this.props}
-        />
-        <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-            Remove
-          </Button>
-        </Col>
+        <AddressesMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
+        {RemoveButton(fields, index, 'btn-remove-add', 'ui-vendors.contactPeople.remove')}
       </Row>
     );
   }
@@ -39,19 +31,19 @@ class AdditionalAddress extends Component {
       <Row>
         { !contactPeopleForm &&
           <Col xs={12}>
-            <div className={css.subHeadings}>Address</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.addess" />}</div>
           </Col>
         }
         {fields.length === 0 &&
           <Col xs={6}>
-            <div><em>- Please add address -</em></div>
+            <div><em>{<FormattedMessage id="ui-vendors.contactPeople.pleaseAddAddress" />}</em></div>
           </Col>
         }
         <Col xs={12}>
-          {fields.map(this.renderSub)}
+          {fields.map(this.renderAdditionalAddressSub)}
         </Col>
         <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>+ Add Address</Button>
+          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.contactPeople.addAddress" />}</Button>
         </Col>
       </Row>
     );

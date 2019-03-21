@@ -1,9 +1,10 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
-import { Row, Col, KeyValue } from '@folio/stripes/components';
-import BoolToCheckbox from '../Utils/BoolToCheckbox';
+import { get, toString } from 'lodash';
+import { Row, Col } from '@folio/stripes/components';
 import css from './VendorInformationView.css';
+import { PrintKeyValue, PrintBoolToCheckbox } from '../Utils/PrintKeyValue';
 
 class VendorInformationView extends React.Component {
   static propTypes = {
@@ -18,77 +19,37 @@ class VendorInformationView extends React.Component {
     if (dataVal) {
       return (
         <Row className={css.horizontalLine}>
-          <Col xs={3}>
-            <KeyValue label="Payment Method" value={_.get(dataVal, ['payment_method'], '')} />
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Access Provider" value={_.toString(_.get(dataVal, ['access_provider']))}>
-              <BoolToCheckbox name="Access Provider" value={_.get(dataVal, ['access_provider'])} />
-            </KeyValue>
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Governmental" value={_.toString(_.get(dataVal, ['governmental']))}>
-              <BoolToCheckbox name="Governmental" value={_.get(dataVal, ['governmental'])} />
-            </KeyValue>
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Licensor" value={_.toString(_.get(dataVal, ['licensor']))}>
-              <BoolToCheckbox name="Licensor" value={_.get(dataVal, ['licensor'])} />
-            </KeyValue>
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Material Supplier">
-              <BoolToCheckbox name="Material Supplier" value={_.get(dataVal, ['material_supplier'])} />
-            </KeyValue>
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Vendor Currencies" value={vendorCurrencies} />
-          </Col>
+          {PrintBoolToCheckbox('ui-vendors.vendorInfo.paymentMethod', get(dataVal, 'payment_method'), 3, false)}
+          {PrintBoolToCheckbox('ui-vendors.vendorInfo.accessProvider', get(dataVal, 'access_provider'), 3, false)}
+          {PrintBoolToCheckbox('ui-vendors.vendorInfo.governmental', toString(get(dataVal, ['governmental'])), 3, false)}
+          {PrintBoolToCheckbox('ui-vendors.vendorInfo.licensor', toString(get(dataVal, ['licensor'])), 3, false)}
+          {PrintBoolToCheckbox('ui-vendors.vendorInfo.materialSupplier', get(dataVal, ['material_supplier']), 3, false)}
+          {PrintKeyValue('ui-vendors.vendorInfo.vendorCurrencies', vendorCurrencies, 3, false)}
           <Col xs={12}>
             <hr />
           </Col>
-          <Col xs={3}>
-            <KeyValue label="Claiming Interval" value={_.toString(_.get(dataVal, ['claiming_interval']))} />
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Discount Percent" value={_.toString(_.get(dataVal, ['discount_percent']))} />
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Expected Activation Interval" value={_.toString(_.get(dataVal, ['expected_activation_interval']))} />
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Expected Invoice Interval" value={_.toString(_.get(dataVal, ['expected_invoice_interval']))} />
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Expected Receipt Interval" value={_.toString(_.get(dataVal, ['expected_receipt_interval']))} />
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Renewal Activation Interval" value={_.toString(_.get(dataVal, ['renewal_activation_interval']))} />
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Subscription Interval" value={_.toString(_.get(dataVal, ['subscription_interval']))} />
-          </Col>
+          {PrintKeyValue('ui-vendors.vendorInfo.claimingInterval', toString(get(dataVal, ['claiming_interval'])), 3, false)}
+          {PrintKeyValue('ui-vendors.vendorInfo.discountPercent', toString(get(dataVal, ['discount_percent'])), 3, false)}
+          {PrintKeyValue('ui-vendors.vendorInfo.expectedActivationInterval', toString(get(dataVal, ['expected_activation_interval'])), 3, false)}
+          {PrintKeyValue('ui-vendors.vendorInfo.expectedInvoiceInterval', toString(get(dataVal, ['expectedInvoiceInterval'])), 3, false)}
+          {PrintKeyValue('ui-vendors.vendorInfo.expectedReceiptInterval', toString(get(dataVal, ['expected_receipt_interval'])), 3, false)}
+          {PrintKeyValue('ui-vendors.vendorInfo.renewalActivationInterval', toString(get(dataVal, ['renewal_activation_interval'])), 3, false)}
+          {PrintKeyValue('ui-vendors.vendorInfo.subscriptionInterval', toString(get(dataVal, ['subscription_interval'])), 3, false)}
           <Col xs={12}>
             <hr />
           </Col>
           <Col xs={12}>
-            <div className={css.subHeadings}>Tax</div>
+            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.vendorInfo.tax" />}</div>
           </Col>
-          <Col xs={3}>
-            <KeyValue label="Tax ID" value={_.get(dataVal, ['tax_id'], '')} />
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Tax Percentage" value={_.toString(_.get(dataVal, ['tax_percentage']))} />
-          </Col>
-          <Col xs={3}>
-            <KeyValue label="Liable for VAT" value={_.toString(_.get(dataVal, ['liable_for_vat']))} />
-          </Col>
+          {PrintKeyValue('ui-vendors.vendorInfo.taxID', toString(get(dataVal, ['tax_id'])), 3, false)}
+          {PrintKeyValue('ui-vendors.vendorInfo.taxPercentage', toString(get(dataVal, ['tax_percentage'])), 3, false)}
+          {PrintKeyValue('ui-vendors.vendorInfo.liableForVAT', toString(get(dataVal, ['liable_for_vat'])), 3, false)}
         </Row>
       );
     } else {
       return (
         <div>
-          <p>-- No agreements available --</p>
+          <p>{<FormattedMessage id="ui-vendors.vendorInfo.noInformationAvailable" />}</p>
         </div>
       );
     }

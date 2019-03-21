@@ -1,43 +1,46 @@
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
 const Filters = () => {
   return [
     {
-      label: 'Vendor Status',
+      label: <FormattedMessage id="ui-vendors.filterConfig.vendorStatus" />,
       name: 'vendor_status',
       cql: 'vendor_status',
       values: ['Active', 'Inactive', 'Pending']
     },
     {
-      label: 'Address Category',
+      label: <FormattedMessage id="ui-vendors.filterConfig.addressCategory" />,
       name: 'category',
       cql: 'addresses',
       values: ['Accounting', 'Books', 'Customer Service', 'Databases', 'Ebooks', 'Econtent', 'General', 'Journals', 'Licenses', 'Primary', 'Sales', 'Serials', 'Returns', 'Shipments', 'Payments', 'Technical Support', 'Other']
     },
     {
-      label: 'Contact People Category',
+      label: <FormattedMessage id="ui-vendors.filterConfig.contactPeopleCategory" />,
       name: 'category',
       cql: 'contacts',
       values: ['Accounting', 'Books', 'Customer Service', 'Databases', 'Ebooks', 'Econtent', 'General', 'Journals', 'Licenses', 'Primary', 'Sales', 'Serials', 'Returns', 'Shipments', 'Payments', 'Technical Support', 'Other']
     },
     {
-      label: 'Country',
+      label: <FormattedMessage id="ui-vendors.filterConfig.country" />,
       name: 'country',
       cql: 'addresses',
       values: []
     },
     {
-      label: 'Languages',
+      label: <FormattedMessage id="ui-vendors.filterConfig.languages" />,
       name: 'language',
       cql: 'language',
       values: []
     },
     {
-      label: 'Payment Method',
+      label: <FormattedMessage id="ui-vendors.filterConfig.paymentMethod" />,
       name: 'payment_method',
       cql: 'payment_method',
       values: ['Cash', 'Credit Card/P-Card', 'EFT', 'Deposit Account']
     },
     {
-      label: 'Stats Available',
+      label: <FormattedMessage id="ui-vendors.filterConfig.statsAvailable" />,
       name: 'available',
       cql: 'interfaces',
       values: [
@@ -55,7 +58,7 @@ const SearchableIndexes = [
   { label: 'Code', value: 'code', makeQuery: term => `(code="${term}*")` },
   { label: 'Language', value: 'language', makeQuery: term => `(language="${term}*")` },
   { label: 'Alias', value: 'aliases', makeQuery: term => `(aliases="${term}*")` },
-  { label: 'Accounting Code', value: 'erp_code', makeQuery: term => `(erp_code="${term}*")` },
+  { label: 'Accounting code', value: 'erp_code', makeQuery: term => `(erp_code="${term}*")` },
   { label: 'Tax ID', value: 'tax_id', makeQuery: term => `(tax_id="${term}*")` },
   { label: 'Interfaces', value: 'interfaces', makeQuery: term => `(interfaces="${term}*")` }
 ];

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { get } from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import css from './AccountsView.css';
 
 class AccountsView extends React.Component {
@@ -14,40 +15,27 @@ class AccountsView extends React.Component {
     this.getAccounts = this.getAccounts.bind(this);
   }
 
+  printKeyValue(label, val, isRequire) {
+    return (
+      <Col xs={3}>
+        <KeyValue label={<FormattedMessage id={`ui-vendors.accounts.${label}`} />} value={val} required={isRequire} />
+      </Col>
+    );
+  }
+
   getAccounts(val, key) {
     const rowCount = (this.props.initialValues.accounts.length - 1) !== key;
     return (
       <Row key={key}>
-        <Col xs={3}>
-          <KeyValue label="Name" value={_.get(val, 'name')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Account Number" value={_.get(val, 'account_no', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Description" value={_.get(val, 'description', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Acct. payable sys. no." value={_.get(val, 'app_system_no', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Payment  Method" value={_.get(val, 'payment_method', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Account Status" value={_.get(val, 'account_status', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Contact Info" value={_.get(val, 'contact_info', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Library Code" value={_.get(val, 'library_code', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Library EDI Code" value={_.get(val, 'library_edi_code', '')} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Notes" value={_.get(val, 'notes', '')} />
-        </Col>
+        {this.printKeyValue('name', get(val, ['name'], ''), false)}
+        {this.printKeyValue('accountNumber', get(val, ['account_no'], ''), false)}
+        {this.printKeyValue('description', get(val, ['description'], ''), false)}
+        {this.printKeyValue('payable', get(val, ['app_system_no'], ''), false)}
+        {this.printKeyValue('paymentMethod', get(val, ['payment_method'], ''), false)}
+        {this.printKeyValue('contactInfo', get(val, ['contact_info'], ''), false)}
+        {this.printKeyValue('libraryCode', get(val, ['library_code'], ''), false)}
+        {this.printKeyValue('libraryEDICode', get(val, ['library_edi_code'], ''), false)}
+        {this.printKeyValue('notes', get(val, ['notes'], ''), false)}
         {rowCount &&
           <div style={{ width: '100%' }}>
             <hr />
@@ -69,7 +57,7 @@ class AccountsView extends React.Component {
     } else {
       return (
         <div>
-          <p>-- No accounts available --</p>
+          <p>{<FormattedMessage id="ui-vendors.accounts.noAccountsAvail" />}</p>
         </div>
       );
     }

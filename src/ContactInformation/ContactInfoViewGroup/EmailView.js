@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
@@ -17,24 +18,26 @@ class ContactInformationView extends React.Component {
     this.getEmail = this.getEmail.bind(this);
   }
 
+  printKeyValue(label, val, colNum, isRequire) {
+    return (
+      <Col xs={colNum}>
+        <KeyValue label={<FormattedMessage id={`ui-vendors.contactInfo.${label}`} />} value={val} required={isRequire} />
+      </Col>
+    );
+  }
+
   getEmail(val, key) {
     const { dropdownVendorCategories } = this.props;
-    const rowCount = (this.props.dataVal.length - 1) !== key;
-    const categories = CatIDToLabel(val.categories, dropdownVendorCategories) || '';
-    const getLanguage = LanguageLookup(get(val, 'language', ''));
+    const rowEmailCount = (this.props.dataVal.length - 1) !== key;
+    const categoriesEml = CatIDToLabel(val.categories, dropdownVendorCategories) || '';
+    const getLanguageEml = LanguageLookup(get(val, 'language', ''));
 
     return (
       <Row key={key}>
-        <Col xs={5}>
-          <KeyValue label="Email" value={`${get(val, 'value', '')}`} />
-        </Col>
-        <Col xs={3}>
-          <KeyValue label="Language" value={getLanguage} />
-        </Col>
-        <Col xs={4}>
-          <KeyValue label="Categories" value={categories} />
-        </Col>
-        {rowCount &&
+        {this.printKeyValue('email', get(val, ['value'], ''), 5, false)}
+        {this.printKeyValue('language', getLanguageEml, 3, false)}
+        {this.printKeyValue('categories', categoriesEml, 4, false)}
+        {rowEmailCount &&
           <div style={{ width: '100%' }}>
             <hr />
           </div>
@@ -47,7 +50,7 @@ class ContactInformationView extends React.Component {
     const { dataVal } = this.props;
     return (
       <Col xs={12} className={css.rowHeader}>
-        <div className={css.subHeadings}>Email Address</div>
+        <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactInfo.emailAddress" />}</div>
         {dataVal.map(this.getEmail)}
       </Col>
     );
