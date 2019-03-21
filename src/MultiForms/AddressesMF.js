@@ -155,15 +155,7 @@ class AddressesMF extends Component {
             constraints={constraints}
           >
             <div ref={this.fieldRef} style={{ width:'100%' }}>
-              <Field
-                onChange={this.onInputChange}
-                onClearField={this.onInputClear}
-                label={<FormattedMessage id="ui-vendors.data.contactTypes.addressLine1" />}
-                name={`${name}.addressLine1`}
-                id={`${name}.addressLine1`}
-                component={TextField}
-                fullWidth
-              />
+              <Field onChange={this.onInputChange} onClearField={this.onInputClear} label={<FormattedMessage id="ui-vendors.data.contactTypes.addressLine1" />} name={`${name}.addressLine1`} id={`${name}.addressLine1`} component={TextField} fullWidth />
             </div>
             {
               isOpen && (
