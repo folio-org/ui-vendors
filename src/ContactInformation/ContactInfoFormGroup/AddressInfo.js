@@ -16,10 +16,10 @@ class AddressInfo extends Component {
 
   constructor(props) {
     super(props);
-    this.removeButton = this.removeButton.bind(this);
+    this.removeButtonAdd = this.removeButtonAdd.bind(this);
   }
 
-  removeButton(fields, index, id, label) {
+  removeButtonAdd(fields, index, id, label) {
     return (
       <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
         <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
@@ -34,7 +34,7 @@ class AddressInfo extends Component {
     return (
       <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
         <AddressesMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
-        {this.removeButton(fields, index, 'btn-remove-address', 'ui-vendors.data.contactTypes.remove')}
+        {this.removeButtonAdd(fields, index, 'btn-remove-address', 'ui-vendors.data.contactTypes.remove')}
       </Row>
     );
   }

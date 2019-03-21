@@ -18,17 +18,24 @@ class EmailAddresses extends Component {
   constructor(props) {
     super(props);
     this.renderSubEmailAddresses = this.renderSubEmailAddresses.bind(this);
+    this.removeButtonEml = this.removeButtonEml.bind(this);
+  }
+
+  removeButtonEml(fields, index, id, label) {
+    return (
+      <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
+        <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
+          {<FormattedMessage id={label} />}
+        </Button>
+      </Col>
+    );
   }
 
   renderSubEmailAddresses = (elem, index, fields) => {
     return (
       <Row key={index} className={css.panels}>
         <EmailsMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
-        <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button id="btn-remove-emailAddress" onClick={() => fields.remove(index)} buttonStyle="danger">
-            {<FormattedMessage id="ui-vendors.contactInfo.remove" />}
-          </Button>
-        </Col>
+        {this.removeButtonEml(fields, index, 'btn-remove-emailAddress', 'ui-vendors.contactInfo.remove')}
       </Row>
     );
   }

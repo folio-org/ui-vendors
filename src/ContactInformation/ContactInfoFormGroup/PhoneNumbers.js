@@ -16,10 +16,10 @@ class PhoneNumbers extends Component {
 
   constructor(props) {
     super(props);
-    this.removeButton = this.removeButton.bind(this);
+    this.removeButtonPh = this.removeButtonPh.bind(this);
   }
 
-  removeButton(fields, index, id, label) {
+  removeButtonPh(fields, index, id, label) {
     return (
       <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
         <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
@@ -35,7 +35,7 @@ class PhoneNumbers extends Component {
     return (
       <Row key={index} className={!contactPeopleForm ? css.panels : css.panelsChild}>
         <PhoneNumbersMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
-        {this.removeButton(fields, index, 'btn-remove-phonenumbers', 'ui-vendors.contactInfo.remove')}
+        {this.removeButtonPh(fields, index, 'btn-remove-phonenumbers', 'ui-vendors.contactInfo.remove')}
       </Row>
     );
   }

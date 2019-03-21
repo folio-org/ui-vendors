@@ -16,10 +16,10 @@ class Url extends Component {
 
   constructor(props) {
     super(props);
-    this.removeButton = this.removeButton.bind(this);
+    this.removeButtonUrl = this.removeButtonUrl.bind(this);
   }
 
-  removeButton(fields, index, id, label) {
+  removeButtonUrl(fields, index, id, label) {
     return (
       <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
         <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
@@ -33,7 +33,7 @@ class Url extends Component {
     return (
       <Row key={index} className={css.panels}>
         <UrlsMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
-        {this.removeButton(fields, index, 'btn-remove-url', 'ui-vendors.contactInfo.remove')}
+        {this.removeButtonUrl(fields, index, 'btn-remove-url', 'ui-vendors.contactInfo.remove')}
       </Row>
     );
   }
