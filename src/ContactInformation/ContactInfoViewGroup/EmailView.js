@@ -28,16 +28,16 @@ class ContactInformationView extends React.Component {
 
   getEmail(val, key) {
     const { dropdownVendorCategories } = this.props;
-    const rowCount = (this.props.dataVal.length - 1) !== key;
-    const categories = CatIDToLabel(val.categories, dropdownVendorCategories) || '';
-    const getLanguage = LanguageLookup(get(val, 'language', ''));
+    const rowEmailCount = (this.props.dataVal.length - 1) !== key;
+    const categoriesEml = CatIDToLabel(val.categories, dropdownVendorCategories) || '';
+    const getLanguageEml = LanguageLookup(get(val, 'language', ''));
 
     return (
       <Row key={key}>
         {this.printKeyValue('email', get(val, ['value'], ''), 5, false)}
-        {this.printKeyValue('language', getLanguage, 3, false)}
-        {this.printKeyValue('categories', categories, 4, false)}
-        {rowCount &&
+        {this.printKeyValue('language', getLanguageEml, 3, false)}
+        {this.printKeyValue('categories', categoriesEml, 4, false)}
+        {rowEmailCount &&
           <div style={{ width: '100%' }}>
             <hr />
           </div>

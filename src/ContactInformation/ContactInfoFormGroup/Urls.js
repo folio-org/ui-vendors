@@ -14,22 +14,30 @@ class Url extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
+  constructor(props) {
+    super(props);
+    this.removeButton = this.removeButton.bind(this);
+  }
+
+  removeButton(fields, index, id, label) {
+    <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
+      <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
+        {<FormattedMessage id={label} />}
+      </Button>
+    </Col>
+  }
+
   renderSubUrl = (elem, index, fields) => {
     return (
       <Row key={index} className={css.panels}>
         <UrlsMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
-        <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button id="btn-remove-url" onClick={() => fields.remove(index)} buttonStyle="danger">
-            {<FormattedMessage id="ui-vendors.contactInfo.remove" />}
-          </Button>
-        </Col>
+        {this.removeButton(fields, index, 'btn-remove-url', 'ui-vendors.contactInfo.remove')}
       </Row>
     );
   }
 
   render() {
     const { fields } = this.props;
-
     return (
       <Row>
         <Col xs={12}>

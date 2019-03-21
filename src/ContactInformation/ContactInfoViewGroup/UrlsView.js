@@ -28,15 +28,15 @@ class ContactInformationView extends React.Component {
 
   getUrls(val, key) {
     const { dropdownVendorCategories } = this.props;
-    const rowCount = this.props.dataVal.length - 1 !== key;
-    const categories = CatIDToLabel(val.categories, dropdownVendorCategories) || '';
-    const getLanguage = LanguageLookup(get(val, 'language', ''));
+    const rowUrlCount = this.props.dataVal.length - 1 !== key;
+    const getLanguageUrl = LanguageLookup(get(val, 'language', ''));
+    const categoriesUrl = CatIDToLabel(val.categories, dropdownVendorCategories) || '';
 
     return (
       <Row key={key}>
         {this.printKeyValue('url', get(val, 'value', ''), 5, false)}
-        {this.printKeyValue('language', getLanguage, 3, false)}
-        {this.printKeyValue('categories', categories, 4, false)}
+        {this.printKeyValue('language', getLanguageUrl, 3, false)}
+        {this.printKeyValue('categories', categoriesUrl, 4, false)}
         {rowCount &&
           <div style={{ width: '100%' }}>
             <hr />
