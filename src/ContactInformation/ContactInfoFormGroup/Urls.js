@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactInfoFormGroup.css';
 import { UrlsMF } from '../../MultiForms';
+import RemoveButton from '../../Utils/RemoveButton';
 
 class Url extends Component {
   static propTypes = {
@@ -14,26 +15,11 @@ class Url extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  constructor(props) {
-    super(props);
-    this.removeButtonUrl = this.removeButtonUrl.bind(this);
-  }
-
-  removeButtonUrl(fields, index, id, label) {
-    return (
-      <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-        <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
-          {<FormattedMessage id={label} />}
-        </Button>
-      </Col>
-    );
-  }
-
   renderSubUrl = (elem, index, fields) => {
     return (
       <Row key={index} className={css.panels}>
         <UrlsMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
-        {this.removeButtonUrl(fields, index, 'btn-remove-url', 'ui-vendors.contactInfo.remove')}
+        {RemoveButton(fields, index, 'btn-remove-url', 'ui-vendors.contactInfo.remove')}
       </Row>
     );
   }

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactPeopleForm.css';
 import { EmailsMF } from '../../MultiForms';
+import RemoveButton from '../../Utils/RemoveButton';
 
 class AdditionalEmails extends Component {
   static propTypes = {
@@ -14,22 +15,12 @@ class AdditionalEmails extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  removeButtonEml(fields, index, id, label) {
-    return (
-      <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-        <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
-          {<FormattedMessage id={label} />}
-        </Button>
-      </Col>
-    );
-  }
-
   renderSub = (elem, index) => {
     const { fields } = this.props;
     return (
       <Row key={index}>
         <EmailsMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
-        {this.removeButtonEml(fields, index, 'btn-remove-eml', 'ui-vendors.contactPeople.remove')}
+        {RemoveButton(fields, index, 'btn-remove-eml', 'ui-vendors.contactPeople.remove')}
       </Row>
     );
   }

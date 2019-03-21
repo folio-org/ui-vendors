@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Button } from '@folio/stripes/components';
 import css from '../ContactPeopleForm.css';
 import { AddressesMF } from '../../MultiForms';
+import RemoveButton from '../../Utils/RemoveButton';
 
 class AdditionalAddress extends Component {
   static propTypes = {
@@ -14,22 +15,12 @@ class AdditionalAddress extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  removeButtonAdd(fields, index, id, label) {
-    return (
-      <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-        <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
-          {<FormattedMessage id={label} />}
-        </Button>
-      </Col>
-    );
-  }
-
   renderAdditionalAddressSub = (elem, index) => {
     const { fields } = this.props;
     return (
       <Row key={index}>
         <AddressesMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
-        {this.removeButtonAdd(fields, index, 'btn-remove-add', 'ui-vendors.contactPeople.remove')}
+        {RemoveButton(fields, index, 'btn-remove-add', 'ui-vendors.contactPeople.remove')}
       </Row>
     );
   }
