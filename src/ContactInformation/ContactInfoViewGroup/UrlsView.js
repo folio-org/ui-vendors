@@ -37,7 +37,7 @@ class ContactInformationView extends React.Component {
         {this.printKeyValue('url', get(val, 'value', ''), 5, false)}
         {this.printKeyValue('language', getLanguageUrl, 3, false)}
         {this.printKeyValue('categories', categoriesUrl, 4, false)}
-        {rowCount &&
+        {rowUrlCount &&
           <div style={{ width: '100%' }}>
             <hr />
           </div>

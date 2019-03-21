@@ -20,11 +20,13 @@ class Url extends Component {
   }
 
   removeButton(fields, index, id, label) {
-    <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-      <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
-        {<FormattedMessage id={label} />}
-      </Button>
-    </Col>
+    return (
+      <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
+        <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
+          {<FormattedMessage id={label} />}
+        </Button>
+      </Col>
+    );
   }
 
   renderSubUrl = (elem, index, fields) => {

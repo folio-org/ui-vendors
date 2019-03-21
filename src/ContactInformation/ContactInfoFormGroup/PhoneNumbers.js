@@ -18,15 +18,16 @@ class PhoneNumbers extends Component {
     super(props);
     this.removeButton = this.removeButton.bind(this);
   }
-  
+
   removeButton(fields, index, id, label) {
-    render (
+    return (
       <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
         <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
           {<FormattedMessage id={label} />}
         </Button>
       </Col>
-    )}
+    );
+  }
 
   renderSubPhoneNumbers = (elem, index, fields) => {
     const { contactPeopleForm } = this.props;
