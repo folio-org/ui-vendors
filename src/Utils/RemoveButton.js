@@ -10,6 +10,6 @@ const RemoveButton = (fields, index, id, label) => {
       </Button>
     </Col>
   );
-}
+};
 
 export default RemoveButton;
