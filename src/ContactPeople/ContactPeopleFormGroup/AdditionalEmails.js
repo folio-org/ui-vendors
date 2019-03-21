@@ -14,22 +14,22 @@ class AdditionalEmails extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
+  removeButtonEml(fields, index, id, label) {
+    return (
+      <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
+        <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
+          {<FormattedMessage id={label} />}
+        </Button>
+      </Col>
+    );
+  }
+
   renderSub = (elem, index) => {
     const { fields } = this.props;
     return (
       <Row key={index}>
-        <EmailsMF
-          index={index}
-          fields={fields}
-          name={`${elem}`}
-          id={`${elem}`}
-          {...this.props}
-        />
-        <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-            {<FormattedMessage id="ui-vendors.contactPeople.remove" />}
-          </Button>
-        </Col>
+        <EmailsMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
+        {this.removeButtonEml(fields, index, 'btn-remove-eml', 'ui-vendors.contactPeople.remove')}
       </Row>
     );
   }

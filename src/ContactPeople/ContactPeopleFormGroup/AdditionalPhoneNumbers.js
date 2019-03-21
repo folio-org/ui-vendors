@@ -14,22 +14,22 @@ class AdditionalPhoneNumbers extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
+  removeButtonPh(fields, index, id, label) {
+    return (
+      <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
+        <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
+          {<FormattedMessage id={label} />}
+        </Button>
+      </Col>
+    );
+  }
+
   renderSubPhoneNumbers = (elem, index) => {
     const { fields } = this.props;
     return (
       <Row key={index}>
-        <PhoneNumbersMF
-          index={index}
-          fields={fields}
-          name={`${elem}`}
-          id={`${elem}`}
-          {...this.props}
-        />
-        <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-          <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-            {<FormattedMessage id="ui-vendors.contactPeople.remove" />}
-          </Button>
-        </Col>
+        <PhoneNumbersMF index={index} fields={fields} name={`${elem}`} id={`${elem}`} {...this.props} />
+        {this.removeButtonEml(fields, index, 'btn-remove-phoneNumber', 'ui-vendors.contactPeople.remove')}
       </Row>
     );
   }
