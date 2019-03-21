@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
+import { get, isEmpty } from 'lodash';
 import { AddressView } from '@folio/stripes/smart-components';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
@@ -94,7 +94,7 @@ class ContactPeopleView extends React.Component {
         {this.printKeyValue('email', get(val, ['value'], ''), 3, false)}
         {this.printKeyValue('description', get(val, ['description'], ''), 3, false)}
         {this.printKeyValue('language', get(val, ['language'], ''), 3, false)}
-        {this.printKeyValue('categories', get(val, ['categories'], ''), 3, false)}
+        {this.printKeyValue('categories', categories, 3, false)}
       </Row>
     );
   }
@@ -112,18 +112,18 @@ class ContactPeopleView extends React.Component {
   }
 
   getCategories(val) {
-    if (_.isEmpty(val.categories)) return [];
+    if (isEmpty(val.categories)) return [];
     const categories = val.categories.map(item => item.value);
     return categories.join(', ');
   }
 
   getContacts(val, key) {
-    const fullName = `${_.get(val, 'prefix', '')} ${_.get(val, 'first_name', '')} ${_.get(val, 'last_name', '')}`;
-    const language = `${_.get(val, 'language', '')}`;
-    const addressComplete = _.get(val, 'addresses', '');
-    const addPhoneNumbers = _.get(val, 'phone_numbers', '');
-    const addEmails = _.get(val, 'emails', '');
-    const addURLS = _.get(val, 'urls', '');
+    const fullName = `${get(val, 'prefix', '')} ${get(val, 'first_name', '')} ${get(val, 'last_name', '')}`;
+    const language = `${get(val, 'language', '')}`;
+    const addressComplete = get(val, 'addresses', '');
+    const addPhoneNumbers = get(val, 'phone_numbers', '');
+    const addEmails = get(val, 'emails', '');
+    const addURLS = get(val, 'urls', '');
 
     return (
       <div className={css.horizontalLine}>
@@ -131,7 +131,7 @@ class ContactPeopleView extends React.Component {
           {this.printKeyValue('name', fullName, 3, false)}
           <Col xs={3}>
             <KeyValue label={<FormattedMessage id="ui-vendors.contactPeople.inactive" />}>
-              <BoolToCheckbox name="Status" value={_.get(val, ['inactive'])} />
+              <BoolToCheckbox name="Status" value={get(val, ['inactive'])} />
             </KeyValue>
           </Col>
           {this.printKeyValue('categories', language, 3, false)}
