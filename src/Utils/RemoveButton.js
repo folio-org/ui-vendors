@@ -5,7 +5,7 @@ import { Col, Button } from '@folio/stripes/components';
 const RemoveButton = (fields, index, id, label) => {
   return (
     <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-      <Button id={id} onClick={() => fields.remove(index)} buttonStyle="danger">
+      <Button onClick={() => fields.remove(index)} buttonStyle="danger">
         {<FormattedMessage id={label} />}
       </Button>
     </Col>

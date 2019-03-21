@@ -5,7 +5,7 @@ class BoolToCheckbox extends Component {
   static propTypes = {
     name: PropTypes.string,
     value: PropTypes.oneOfType([
-      PropTypes.string,
+      PropTypes.object,
       PropTypes.bool
     ])
   }

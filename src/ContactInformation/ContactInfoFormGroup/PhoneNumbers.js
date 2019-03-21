@@ -15,11 +15,6 @@ class PhoneNumbers extends Component {
     contactPeopleForm: PropTypes.string,
   };
 
-  constructor(props) {
-    super(props);
-    this.removeButtonPh = this.removeButtonPh.bind(this);
-  }
-
   renderSubPhoneNumbers = (elem, index, fields) => {
     const { contactPeopleForm } = this.props;
 
