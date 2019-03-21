@@ -6,7 +6,7 @@ import { Row, Col } from '@folio/stripes/components';
 import css from '../ContactInformationView.css';
 import LanguageLookup from '../../Utils/LanguageLookup';
 import CatIDToLabel from '../../Utils/CatIDToLabel';
-import PrintKeyValue from '../../Utils/PrintKeyValue';
+import { PrintKeyValue } from '../../Utils/PrintKeyValue';
 
 class ContactInformationView extends React.Component {
   static propTypes = {

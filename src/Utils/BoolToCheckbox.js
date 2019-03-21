@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class BoolTocheckbox extends Component {
+class BoolToCheckbox extends Component {
   static propTypes = {
     name: PropTypes.string,
     value: PropTypes.oneOfType([
@@ -19,4 +19,4 @@ class BoolTocheckbox extends Component {
   }
 }
 
-export default BoolTocheckbox;
+export default BoolToCheckbox;
