@@ -69,7 +69,7 @@ class ViewVendor extends Component {
     const resourceData = ((parentResources.records || {}).records || []);
     const selectData = resourceData.length > 0 ? resourceData : this.state.vendorData;
     const vendorData = !_.isEmpty(selectData) ? selectData : [];
-    //  If no ID return nulPl
+    //  If no ID return null
     if (!id) return null;
     // Else check if data matches id
     const data = vendorData.find(u => u.id === id);
