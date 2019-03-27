@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { isEqual } from 'lodash';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 import { Row, Col, List, Button, Icon, TextField } from '@folio/stripes/components';
 import css from './ContactPeopleForm.css';
@@ -20,29 +20,37 @@ class ContactPeopleForm extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      contactArr: []
+    }
     this.renderList = this.renderList.bind(this);
     this.renderItem = this.renderItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
-    // this.renderSubCreateContact = this.renderSubCreateContact.bind(this);
-    this.onChangeSelect = this.onChangeSelect.bind(this);
-    this.selectedValues = this.selectedValues.bind(this);
   }
 
-  onChangeSelect = (e, elem, propertyName) => {
-    const { dispatch, change } = this.props;
-    dispatch(change(`${elem}.${propertyName}`, e));
-  }
-
-  selectedValues = (index, fields, propertyName) => {
-    const { stripes: { store } } = this.props;
+  static getDerivedStateFromProps(props, state) {
+    const { parentMutator, stripes: { store } } = props; 
     const formValues = getFormValues('FormVendor')(store.getState());
-    const currValues = formValues[fields.name][index][propertyName];
-    return currValues;
-  }
+    const contactArr = formValues.contacts;
+    const queryContacts = (arr) => {
+      let newQuery = 'query=(id=null)';
+      debugger;
+      if(arr.length >= 1) {
+        const items = arr.map(item => {
+          return `id="${item}"`;
+        });
+        const biuldQuery = items.join(" or ");
+        newQuery = `query=(${biuldQuery})`;
+      }
+      parentMutator.queryCustom.update({ contactIDs: newQuery });
+    }
 
-  onPhoneStateUpdate(obj) {
-    if (!obj) return false;
-    return this.setState(obj);
+    if (!isEqual(contactArr, state.contactArr)) {
+      debugger;
+      queryContacts(contactArr);
+      return { contactArr };
+    }
+    return null;
   }
 
   removeItem(index) {
@@ -72,7 +80,6 @@ class ContactPeopleForm extends Component {
 
   renderList = ({ fields }) => {
     this.fields = fields;
-    const items = ['Apples', 'Bananas', 'Strawberries', 'Oranges'];
     const itemFormatter = (item, index) => (this.renderItem(item, index));
     const isEmptyMessage = 'No items to show';
     return (
@@ -84,8 +91,8 @@ class ContactPeopleForm extends Component {
     );
   }
 
-
   render() {
+    // console.log(this.queryContacts);
     return (
       <Row>
         <Col xs={12}>
