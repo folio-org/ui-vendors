@@ -3,25 +3,17 @@ import PropTypes from 'prop-types';
 import { isEqual, isEmpty, find, get } from 'lodash';
 import { FieldArray, getFormValues } from 'redux-form';
 import { Row, Col, List, Button, Icon } from '@folio/stripes/components';
-import css from './ContactPeopleForm.css';
 
 class ContactPeopleForm extends Component {
   static propTypes = {
-    dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
-    dropdownCountry: PropTypes.arrayOf(PropTypes.object),
+    parentResources: PropTypes.object,
     stripes: PropTypes.shape({
       store: PropTypes.object
-    }),
-    dispatch: PropTypes.func,
-    change: PropTypes.func,
-    phoneCollection: PropTypes.object
+    })
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      contactArr: []
-    }
     this.listComponent = this.listComponent.bind(this);
     this.listItem = this.listItem.bind(this);
     this.renderData = this.renderData.bind(this);
@@ -34,11 +26,11 @@ class ContactPeopleForm extends Component {
     const contactArr = formValues.contacts;
     const queryContacts = (arr) => {
       let newQuery = 'query=(id=null)';
-      if(arr.length >= 1) {
+      if (arr.length >= 1) {
         const items = arr.map(item => {
           return `id="${item}"`;
         });
-        const biuldQuery = items.join(" or ");
+        const biuldQuery = items.join(' or ');
         newQuery = `query=(${biuldQuery})`;
       }
       return parentMutator.queryCustom.update({ contactIDs: newQuery });
@@ -71,7 +63,7 @@ class ContactPeopleForm extends Component {
 
   listItem(item, index) {
     const valueID = this.fields.get(index);
-    return(
+    return (
       <div>
         <li key={index}>
           {this.renderData(valueID)}
@@ -85,7 +77,6 @@ class ContactPeopleForm extends Component {
             <Icon icon="times-circle" />
           </Button>
         </li>
-        
       </div>
     );
   }

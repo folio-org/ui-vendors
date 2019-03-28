@@ -147,7 +147,7 @@ class Main extends Component {
         },
       }
     },
-    
+
     dropdown: {
       initialValue: {
         paymentMethodDD: [

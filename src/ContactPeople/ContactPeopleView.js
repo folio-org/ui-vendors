@@ -20,9 +20,6 @@ class ContactPeopleView extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      contactArr: []
-    }
     this.getContacts = this.getContacts.bind(this);
     this.renderContacts = this.renderContacts.bind(this);
     this.getCategories = this.getCategories.bind(this);
@@ -37,11 +34,11 @@ class ContactPeopleView extends React.Component {
     const contactArr = initialValues.contacts;
     const queryContacts = (arr) => {
       let newQuery = 'query=(id=null)';
-      if(arr.length >= 1) {
+      if (arr.length >= 1) {
         const items = arr.map(item => {
           return `id="${item}"`;
         });
-        const biuldQuery = items.join(" or ");
+        const biuldQuery = items.join(' or ');
         newQuery = `query=(${biuldQuery})`;
       }
       return parentMutator.queryCustom.update({ contactIDs: newQuery });
@@ -211,7 +208,7 @@ class ContactPeopleView extends React.Component {
     );
   }
 
-  getContacts(){
+  getContacts() {
     const { parentResources } = this.props;
     const data = ((parentResources || {}).contacts || {}).records || [];
     if (data.length === 0) return [];
