@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { isEqual, isEmpty, find, get } from 'lodash';
 import { FieldArray, getFormValues } from 'redux-form';
-import { Row, Col, List, Button, Icon, KeyValue } from '@folio/stripes/components';
+import { Row, Col, List, Button, Icon } from '@folio/stripes/components';
 import css from './ContactPeopleForm.css';
 
 class ContactPeopleForm extends Component {
@@ -56,14 +55,6 @@ class ContactPeopleForm extends Component {
     this.fields.remove(index);
   }
 
-  printKeyValue(label, val, colNum, isRequire) {
-    return (
-      <Col xs={colNum}>
-        <KeyValue label={<FormattedMessage id={`ui-vendors.contactPeople.${label}`} />} value={val} required={isRequire} />
-      </Col>
-    );
-  }
-
   renderData(valueID) {
     const { parentResources } = this.props;
     const contacts = ((parentResources || {}).contacts || {}).records || [];
@@ -113,7 +104,6 @@ class ContactPeopleForm extends Component {
   }
 
   render() {
-    // console.log(this.queryContacts);
     return (
       <Row>
         <Col xs={12}>
