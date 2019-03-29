@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import { get, isEmpty } from 'lodash';
+import { get, isEmpty, isEqual } from 'lodash';
 import { AddressView } from '@folio/stripes/smart-components';
 import { Row, Col, KeyValue } from '@folio/stripes/components';
 import BoolToCheckbox from '../Utils/BoolToCheckbox';
@@ -21,11 +21,34 @@ class ContactPeopleView extends React.Component {
   constructor(props) {
     super(props);
     this.getContacts = this.getContacts.bind(this);
+    this.renderContacts = this.renderContacts.bind(this);
     this.getCategories = this.getCategories.bind(this);
     this.getAddresses = this.getAddresses.bind(this);
     this.getAddPhoneNumbers = this.getAddPhoneNumbers.bind(this);
     this.getAddEmails = this.getAddEmails.bind(this);
     this.getAddUrls = this.getAddUrls.bind(this);
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    const { parentMutator, initialValues } = props;
+    const contactArr = initialValues.contacts;
+    const queryContacts = (arr) => {
+      let newQuery = 'query=(id=null)';
+      if (arr.length >= 1) {
+        const items = arr.map(item => {
+          return `id="${item}"`;
+        });
+        const biuldQuery = items.join(' or ');
+        newQuery = `query=(${biuldQuery})`;
+      }
+      return parentMutator.queryCustom.update({ contactIDs: newQuery });
+    };
+
+    if (!isEqual(contactArr, state.contactArr)) {
+      queryContacts(contactArr);
+      return { contactArr };
+    }
+    return null;
   }
 
   getVendorcategory() {
@@ -117,7 +140,7 @@ class ContactPeopleView extends React.Component {
     return categories.join(', ');
   }
 
-  getContacts(val, key) {
+  renderContacts(val, key) {
     const fullName = `${get(val, 'prefix', '')} ${get(val, 'first_name', '')} ${get(val, 'last_name', '')}`;
     const language = `${get(val, 'language', '')}`;
     const addressComplete = get(val, 'addresses', '');
@@ -185,13 +208,18 @@ class ContactPeopleView extends React.Component {
     );
   }
 
+  getContacts() {
+    const { parentResources } = this.props;
+    const data = ((parentResources || {}).contacts || {}).records || [];
+    if (data.length === 0) return [];
+    return data;
+  }
+
   render() {
-    const { initialValues } = this.props;
-    const dataVal = initialValues.contacts.length >= 1 ? initialValues.contacts : false;
-    if (dataVal) {
+    if (!isEmpty(this.getContacts())) {
       return (
         <div style={{ width: '100%' }}>
-          {dataVal.map(this.getContacts)}
+          {this.getContacts().map(this.renderContacts)}
         </div>
       );
     } else {

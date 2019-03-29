@@ -119,6 +119,7 @@ class Main extends Component {
     queryCustom: {
       initialValue: {
         vendorIDQuery: 'query=(name=null)',
+        contactIDs: 'query=(id=null)',
       }
     },
     vendorID: {
@@ -127,13 +128,26 @@ class Main extends Component {
       path: 'vendor-storage/vendors',
       params: {
         query: (...args) => {
-          // const newData = 'query=(id="d375f933-a093-4348-a594-0c02442946f3*")';
           const newData = `${args[2].queryCustom.vendorIDQuery}`;
           const cql = `${newData} sortby id`;
           return cql;
         },
       }
     },
+    contacts: {
+      type: 'okapi',
+      records: 'contacts',
+      path: 'vendor-storage/contacts',
+      params: {
+        query: (...args) => {
+          // const newData = 'query=(id="d375f933-a093-4348-a594-0c02442946f3*")';
+          const newData = `${args[2].queryCustom.contactIDs}`;
+          const cql = `${newData} sortby id`;
+          return cql;
+        },
+      }
+    },
+
     dropdown: {
       initialValue: {
         paymentMethodDD: [

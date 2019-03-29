@@ -1,185 +1,96 @@
-import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
-import { Field, FieldArray, getFormValues } from 'redux-form';
-import { MultiSelection, Select, Row, Col, Button, TextField, Checkbox } from '@folio/stripes/components';
-import { AdditionalAddress, AdditionalEmails, AdditionalPhoneNumbers, AdditionalUrls } from './ContactPeopleFormGroup';
-import { Required } from '../Utils/Validate';
-import css from './ContactPeopleForm.css';
+import { isEqual, isEmpty, find, get } from 'lodash';
+import { FieldArray, getFormValues } from 'redux-form';
+import { Row, Col, List, Button, Icon } from '@folio/stripes/components';
 
 class ContactPeopleForm extends Component {
   static propTypes = {
-    dropdownLanguages: PropTypes.arrayOf(PropTypes.object),
-    dropdownCountry: PropTypes.arrayOf(PropTypes.object),
+    parentResources: PropTypes.object,
     stripes: PropTypes.shape({
       store: PropTypes.object
-    }),
-    dispatch: PropTypes.func,
-    change: PropTypes.func,
-    phoneCollection: PropTypes.object
+    })
   };
 
   constructor(props) {
     super(props);
-    this.renderCreateContact = this.renderCreateContact.bind(this);
-    this.renderSubCreateContact = this.renderSubCreateContact.bind(this);
-    this.onChangeSelect = this.onChangeSelect.bind(this);
-    this.selectedValues = this.selectedValues.bind(this);
+    this.listComponent = this.listComponent.bind(this);
+    this.listItem = this.listItem.bind(this);
+    this.renderData = this.renderData.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
 
-  onChangeSelect = (e, elem, propertyName) => {
-    const { dispatch, change } = this.props;
-    dispatch(change(`${elem}.${propertyName}`, e));
-  }
-
-  selectedValues = (index, fields, propertyName) => {
-    const { stripes: { store } } = this.props;
+  static getDerivedStateFromProps(props, state) {
+    const { parentMutator, stripes: { store } } = props;
     const formValues = getFormValues('FormVendor')(store.getState());
-    const currValues = formValues[fields.name][index][propertyName];
-    return currValues;
+    const contactArr = formValues.contacts;
+    const queryContacts = (arr) => {
+      let newQuery = 'query=(id=null)';
+      if (arr.length >= 1) {
+        const items = arr.map(item => {
+          return `id="${item}"`;
+        });
+        const buildQuery = items.join(' or ');
+        newQuery = `query=(${buildQuery})`;
+      }
+      return parentMutator.queryCustom.update({ contactIDs: newQuery });
+    };
+
+    if (!isEqual(contactArr, state.contactArr)) {
+      queryContacts(contactArr);
+      return { contactArr };
+    }
+    return null;
   }
 
-  onPhoneStateUpdate(obj) {
-    if (!obj) return false;
-    return this.setState(obj);
+  removeItem(index) {
+    this.fields.remove(index);
   }
 
-  // Multi Select
-  toString = (option) => option;
-  formatter = ({ option }) => {
-    const { dropdownVendorCategories } = this.props;
-    const item = _.find(dropdownVendorCategories, { id: option }) || option;
-    if (!item) return option;
-    return <div>{item.value}</div>;
-  };
-
-  filterItems = (filterText, list) => {
-    const filterRegExp = new RegExp(`^${filterText}`, 'i');
-    const renderedItems = filterText ? list.filter(item => item.search(filterRegExp) !== -1) : list;
-    return { renderedItems };
-  };
-  // End Multi Select
-
-  renderCreateContact = ({ fields }) => {
+  renderData(valueID) {
+    const { parentResources } = this.props;
+    const contacts = ((parentResources || {}).contacts || {}).records || [];
+    if (contacts.length === 0) return null;
+    const item = find(contacts, { id: valueID });
+    if (isEmpty(item)) return null;
+    const fullName = `${get(item, 'prefix', '')} ${get(item, 'first_name', '')} ${get(item, 'last_name', '')}`;
     return (
-      <Row>
-        {fields.length === 0 &&
-          <Col xs={12}>
-            <div><em>{<FormattedMessage id="ui-vendors.contactPeople.pleaseAddContactPerson" />}</em></div>
-          </Col>
-        }
-        {fields.map(this.renderSubCreateContact)}
-        <Col xs={12} style={{ paddingTop: '10px' }}>
-          <Button onClick={() => fields.push({})}>{<FormattedMessage id="ui-vendors.contactPeople.add" />}</Button>
-        </Col>
-      </Row>
+      <Fragment>
+        {fullName}
+      </Fragment>
     );
   }
 
-  renderSubCreateContact = (elem, index, fields) => {
-    const { dropdownLanguages, dropdownVendorCategories } = this.props;
+  listItem(item, index) {
+    const valueID = this.fields.get(index);
     return (
-      <Col xs={12} key={index} className={css.panels}>
-        <Row>
-          <Col xs={12}>
-            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.name" />}</div>
-          </Col>
-          <Col xs={12} md={2}>
-            <Field label={<FormattedMessage id="ui-vendors.contactPeople.prefix" />} name={`${elem}.prefix`} id={`${elem}.perfix`} component={TextField} fullWidth />
-          </Col>
-          <Col xs={12} md={5}>
-            <Field label={<FormattedMessage id="ui-vendors.contactPeople.firstName" />} name={`${elem}.first_name`} id={`${elem}.first_name`} validate={[Required]} component={TextField} fullWidth required />
-          </Col>
-          <Col xs={12} md={5}>
-            <Field label={<FormattedMessage id="ui-vendors.contactPeople.lastName" />} name={`${elem}.last_name`} id={`${elem}.last_name`} validate={[Required]} component={TextField} fullWidth required />
-          </Col>
-          <Col xs={12} md={2}>
-            <div>Status</div>
-            <Field label={<FormattedMessage id="ui-vendors.contactPeople.inactive" />} name={`${elem}.inactive`} id={`${elem}.inactive`} component={Checkbox} inline />
-          </Col>
-          <Col xs={12} md={5}>
-            <Field label={<FormattedMessage id="ui-vendors.contactPeople.language" />} name={`${elem}.language`} id={`${elem}.language`} component={Select} fullWidth dataOptions={dropdownLanguages} />
-          </Col>
-          <Col xs={12} md={5}>
-            <Field
-              component={MultiSelection}
-              label={<FormattedMessage id="ui-vendors.contactPeople.categories" />}
-              name={`${elem}.categories`}
-              style={{ height: '80px' }}
-              onBlur={(e) => { e.preventDefault(); }}
-              dataOptions={dropdownVendorCategories}
-              itemToString={this.toString}
-              formatter={this.formatter}
-              filter={this.filterItems}
-            />
-          </Col>
-          <Col xs={12}>
-            <hr className={css.thinBorder} />
-            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.addesses" />}</div>
-          </Col>
-          <Col xs={12}>
-            <FieldArray
-              label="Addresses"
-              name={`${elem}.addresses`}
-              id={`${elem}.addresses`}
-              component={AdditionalAddress}
-              {...this.props}
-              contactPeopleForm
-            />
-          </Col>
-          <Col xs={12}>
-            <hr className={css.thinBorder} />
-            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.phoneNumbers" />}</div>
-          </Col>
-          <Col xs={12}>
-            <FieldArray
-              label="Phone Numbers"
-              name={`${elem}.phone_numbers`}
-              id={`${elem}.phone_numbers`}
-              component={AdditionalPhoneNumbers}
-              {...this.props}
-              contactPeopleForm
-            />
-          </Col>
-          <Col xs={12}>
-            <hr className={css.thinBorder} />
-            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.emails" />}</div>
-          </Col>
-          <Col xs={12}>
-            <FieldArray
-              label="Additional Email"
-              name={`${elem}.emails`}
-              id={`${elem}.emails`}
-              component={AdditionalEmails}
-              {...this.props}
-              contactPeopleForm
-            />
-          </Col>
-          <Col xs={12}>
-            <hr className={css.thinBorder} />
-            <div className={css.subHeadings}>{<FormattedMessage id="ui-vendors.contactPeople.urls" />}</div>
-          </Col>
-          <Col xs={12}>
-            <FieldArray
-              label="Additional Email"
-              name={`${elem}.urls`}
-              id={`${elem}.urls`}
-              component={AdditionalUrls}
-              {...this.props}
-              contactPeopleForm
-            />
-          </Col>
-          <Col xs={12} md={3} mdOffset={9} style={{ textAlign: 'right' }}>
-            <Button onClick={() => fields.remove(index)} buttonStyle="danger">
-              {<FormattedMessage id="ui-vendors.contactPeople.removeContact" />}
-            </Button>
-          </Col>
-          <Col xs={12}>
-            <hr className={css.thickBorder} />
-          </Col>
-        </Row>
-      </Col>
+      <div key={index}>
+        <li>
+          {this.renderData(valueID)}
+          <Button
+            buttonStyle="fieldControl"
+            align="end"
+            type="button"
+            id={`clickable-remove-button-${index}`}
+            onClick={() => this.removeItem(index)}
+          >
+            <Icon icon="times-circle" />
+          </Button>
+        </li>
+      </div>
+    );
+  }
+
+  listComponent = ({ fields }) => {
+    this.fields = fields;
+    const itemFormatter = (item, index) => (this.listItem(item, index));
+    const isEmptyMessage = 'No items to show';
+    return (
+      <List
+        items={fields}
+        itemFormatter={itemFormatter}
+        isEmptyMessage={isEmptyMessage}
+      />
     );
   }
 
@@ -187,7 +98,7 @@ class ContactPeopleForm extends Component {
     return (
       <Row>
         <Col xs={12}>
-          <FieldArray label="Contacts" name="contacts" id="contacts" component={this.renderCreateContact} />
+          <FieldArray label="Contacts" name="contacts" id="contacts" component={this.listComponent} />
           <br />
         </Col>
       </Row>
