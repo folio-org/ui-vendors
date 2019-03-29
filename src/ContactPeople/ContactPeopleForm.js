@@ -23,7 +23,8 @@ class ContactPeopleForm extends Component {
   static getDerivedStateFromProps(props, state) {
     const { parentMutator, stripes: { store } } = props;
     const formValues = getFormValues('FormVendor')(store.getState());
-    const contactArr = formValues.contacts;
+    const contactArrProp = formValues.contacts;
+    const contactArrState = state && state.contactArrState ? state.contactArrState : [];
     const queryContacts = (arr) => {
       let newQuery = 'query=(id=null)';
       if (arr.length >= 1) {
@@ -36,9 +37,9 @@ class ContactPeopleForm extends Component {
       return parentMutator.queryCustom.update({ contactIDs: newQuery });
     };
 
-    if (!isEqual(contactArr, state.contactArr)) {
-      queryContacts(contactArr);
-      return { contactArr };
+    if (!isEqual(contactArrProp, contactArrState)) {
+      queryContacts(contactArrProp);
+      return { contactArrState: contactArrProp };
     }
     return null;
   }

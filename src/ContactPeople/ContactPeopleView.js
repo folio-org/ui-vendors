@@ -31,7 +31,8 @@ class ContactPeopleView extends React.Component {
 
   static getDerivedStateFromProps(props, state) {
     const { parentMutator, initialValues } = props;
-    const contactArr = initialValues.contacts;
+    const contactArrProp = initialValues.contacts;
+    const contactArrState = state && state.contactArrState ? state.contactArrState : [];
     const queryContacts = (arr) => {
       let newQuery = 'query=(id=null)';
       if (arr.length >= 1) {
@@ -44,9 +45,9 @@ class ContactPeopleView extends React.Component {
       return parentMutator.queryCustom.update({ contactIDs: newQuery });
     };
 
-    if (!isEqual(contactArr, state.contactArr)) {
-      queryContacts(contactArr);
-      return { contactArr };
+    if (!isEqual(contactArrProp, contactArrState)) {
+      queryContacts(contactArrProp);
+      return { contactArrState: contactArrProp };
     }
     return null;
   }
