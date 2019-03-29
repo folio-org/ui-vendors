@@ -30,8 +30,8 @@ class ContactPeopleForm extends Component {
         const items = arr.map(item => {
           return `id="${item}"`;
         });
-        const biuldQuery = items.join(' or ');
-        newQuery = `query=(${biuldQuery})`;
+        const buildQuery = items.join(' or ');
+        newQuery = `query=(${buildQuery})`;
       }
       return parentMutator.queryCustom.update({ contactIDs: newQuery });
     };
@@ -64,8 +64,8 @@ class ContactPeopleForm extends Component {
   listItem(item, index) {
     const valueID = this.fields.get(index);
     return (
-      <div>
-        <li key={index}>
+      <div key={index}>
+        <li>
           {this.renderData(valueID)}
           <Button
             buttonStyle="fieldControl"
