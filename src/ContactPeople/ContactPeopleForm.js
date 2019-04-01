@@ -26,6 +26,7 @@ class ContactPeopleForm extends Component {
     const contactArrProp = formValues.contacts;
     const contactArrState = state && state.contactArrState ? state.contactArrState : [];
     const queryContacts = (arr) => {
+      if (isEmpty(arr)) return false;
       let newQuery = 'query=(id=null)';
       if (arr.length >= 1) {
         const items = arr.map(item => {
